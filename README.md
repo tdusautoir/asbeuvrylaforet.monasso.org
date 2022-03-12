@@ -4,7 +4,7 @@ Projet : Site web / appli de gestion de licenciés d'association
 
 Cela afficherait les cotisations et, selon le cas, les stats ou autres...
 
-## Technologies potentielles : 
+## Technologies potentielles 
 - HTML
 - CSS
 - JS
@@ -15,7 +15,8 @@ Cela afficherait les cotisations et, selon le cas, les stats ou autres...
 
 + API ?
 
-## Réparition des tâches : 
+## Réparition des tâches
 
 Front : Julien, Matthys, Achille
+
 Back : Thibaut, Hugo
