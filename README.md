@@ -1,22 +1,15 @@
-# ProjetAnnuel2ESGI
+## v0.2
 
-Projet : Site web / appli de gestion de licenciés d'association
+- add function.php
+- add php session 
+- add deconnexion button to destroy the session
+- add function to make the page more dynamic
+- add session role to different role
 
-Cela afficherait les cotisations et, selon le cas, les stats ou autres...
+## v0.3
 
-## Technologies potentielles 
-- HTML
-- CSS
-- JS
-- PHP
-- ReactJS
-- C# (?)
-- SQL
-
-+ API ?
-
-## Réparition des tâches
-
-Front : Julien, Matthys, Achille
-
-Back : Thibaut, Hugo
+- add resetpw.php and send-mail-resetpw-php (It just send a token in a table at the moment)
+- add login.php (call by the index.php) to reduce the index.php size
+- add guidv4() to make a unique id (guid v4)
+- modify php session
+- some change to make the code cleaner
