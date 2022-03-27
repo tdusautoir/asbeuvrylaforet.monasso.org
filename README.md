@@ -13,3 +13,8 @@
 - add guidv4() to make a unique id (guid v4)
 - modify php session
 - some change to make the code cleaner
+
+## v0.31
+
+- modify db.php to get exception
+- send a mail with a link-token
