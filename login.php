@@ -25,12 +25,12 @@ if(isset($_POST["submit"])){
                     $rech_licencie->execute();
                     $rech_educ->execute();
 
-                    $res_admin = $rech_admin->fetch(PDO::FETCH_ASSOC);
-                    $res_licencie = $rech_licencie->fetch(PDO::FETCH_ASSOC);
-                    $res_educ = $rech_educ->fetch(PDO::FETCH_ASSOC);
+                    $utilisateur_admin = $rech_admin->fetch(PDO::FETCH_ASSOC);
+                    $utilisateur_educ = $rech_licencie->fetch(PDO::FETCH_ASSOC);
+                    $utilisateur_licencie = $rech_educ->fetch(PDO::FETCH_ASSOC);
 
-                    if($res_admin) {  //res_admin = true donc utilisateur trouvé en tant que admin
-                        $passwordHash = $res_admin['password'];
+                    if($utilisateur_admin) {  //utilisateur_admin = true donc utilisateur trouvé en tant que admin
+                        $passwordHash = $utilisateur_admin['password'];
                         if(password_verify($password, $passwordHash)){ //verifier la correspondance du mot de passe
                             init_php_session();
 
@@ -39,8 +39,8 @@ if(isset($_POST["submit"])){
                         } else { 
                             $_SESSION['alert'] = "Mot de passe incorrect";
                         }
-                    } else if ($res_educ) {  //res_educ = true donc utilisateur trouvé en tant que educateur
-                        $passwordHash = $res_educ['password'];
+                    } else if ($utilisateur_licencie) {  //utilisateur_licencie = true donc utilisateur trouvé en tant que educateur
+                        $passwordHash = $utilisateur_licencie['password'];
                         if(password_verify($password, $passwordHash)){ //verifier la correspondance du mot de passe
                             init_php_session();
 
@@ -49,8 +49,8 @@ if(isset($_POST["submit"])){
                         } else {
                             $_SESSION['alert'] = "Mot de passe incorrect";
                         }
-                    } else if ($res_licencie) { //res_licencie = true donc utilisateur trouvé en tant que educateur
-                        $passwordHash = $res_licencie['password'];
+                    } else if ($utilisateur_educ) { //utilisateur_educ = true donc utilisateur trouvé en tant que educateur
+                        $passwordHash = $utilisateur_educ['password'];
                         if(password_verify($password, $passwordHash)){ //verifier la correspondance du mot de passe
                             init_php_session();
 
