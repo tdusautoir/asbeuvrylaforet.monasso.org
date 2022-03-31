@@ -18,3 +18,9 @@
 
 - modify db.php to get exception
 - send a mail with a link-token
+
+## v0.4
+
+- send a beautiful email with the link-token 
+- verify the periodity of the token (available for 10 minutes)
+- changing and reset password is available and is working (only with admin for the moment)
