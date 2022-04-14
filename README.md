@@ -24,8 +24,12 @@
 - send a beautiful email with the link-token 
 - verify the periodity of the token (available for 10 minutes)
 - changing and reset password is available and is working (only with admin for the moment)
+- add header.php
 
 ## v0.5 
 
 - add flash message 
 - manage php errors with flash message
+
+
+
