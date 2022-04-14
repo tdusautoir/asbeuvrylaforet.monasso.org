@@ -5,6 +5,5 @@
     <link rel="icon" type="image/png" href="../public/images/logo-asb.png"/>
 	<link rel="stylesheet" href="../public/css/_variables.css">
 	<link rel="stylesheet" href="../public/css/global.css">
-    <link rel="stylesheet" href="../public/css/login.css">
 	<script type="text/javascript" src="../public/js/jquery-3.6.0.min.js"></script>
 </head>
