@@ -25,51 +25,66 @@ if(isset($_POST["submit"])){
                     $rech_licencie->execute();
                     $rech_educ->execute();
 
-                    $res_admin = $rech_admin->fetch(PDO::FETCH_ASSOC);
-                    $res_licencie = $rech_licencie->fetch(PDO::FETCH_ASSOC);
-                    $res_educ = $rech_educ->fetch(PDO::FETCH_ASSOC);
+                    $utilisateur_admin = $rech_admin->fetch(PDO::FETCH_ASSOC);
+                    $utilisateur_educ = $rech_licencie->fetch(PDO::FETCH_ASSOC);
+                    $utilisateur_licencie = $rech_educ->fetch(PDO::FETCH_ASSOC);
 
-                    if($res_admin) {  //res_admin = true donc utilisateur trouvé en tant que admin
-                        $passwordHash = $res_admin['password'];
+                    if($utilisateur_admin) {  //utilisateur_admin = true donc utilisateur trouvé en tant que admin
+                        $passwordHash = $utilisateur_admin['password'];
                         if(password_verify($password, $passwordHash)){ //verifier la correspondance du mot de passe
                             init_php_session();
 
                             $_SESSION['usermail'] = $usermail;
                             $_SESSION['role'] = 3;
                         } else { 
-                            $_SESSION['alert'] = "Mot de passe incorrect";
+                            create_flash_message(ERROR_PSWD, 'Mot de passe invalide', FLASH_ERROR); //Mot de passe invalide
+                            header("location: index.php");
+                            exit;
                         }
-                    } else if ($res_educ) {  //res_educ = true donc utilisateur trouvé en tant que educateur
-                        $passwordHash = $res_educ['password'];
+                    } else if ($utilisateur_licencie) {  //utilisateur_licencie = true donc utilisateur trouvé en tant que educateur
+                        $passwordHash = $utilisateur_licencie['password'];
                         if(password_verify($password, $passwordHash)){ //verifier la correspondance du mot de passe
                             init_php_session();
 
                             $_SESSION['usermail'] = $usermail;
                             $_SESSION['role'] = 2;
                         } else {
-                            $_SESSION['alert'] = "Mot de passe incorrect";
+                            create_flash_message(ERROR_PSWD, 'Mot de passe invalide', FLASH_ERROR); //Mot de passe invalide
+                            header("location: index.php");
+                            exit;
                         }
-                    } else if ($res_licencie) { //res_licencie = true donc utilisateur trouvé en tant que educateur
-                        $passwordHash = $res_licencie['password'];
+                    } else if ($utilisateur_educ) { //utilisateur_educ = true donc utilisateur trouvé en tant que educateur
+                        $passwordHash = $utilisateur_educ['password'];
                         if(password_verify($password, $passwordHash)){ //verifier la correspondance du mot de passe
                             init_php_session();
 
                             $_SESSION['usermail'] = $usermail;
                             $_SESSION['role'] = 1;
                         } else { 
-                            $_SESSION['alert'] = "Mot de passe incorrect";
+                            create_flash_message(ERROR_PSWD, 'Mot de passe invalide', FLASH_ERROR); //Mot de passe invalide
+                            header("location: index.php");
+                            exit;
                         }
                     } else { //Aucun itilisateur trouvé dans la base de données
-                            $_SESSION['alert'] = "Identifiants invalides";
+                        create_flash_message(ERROR_MAIL, 'Identifiants invalides', FLASH_ERROR); //Identifiants invalides
+                        header("location: index.php");
+                        exit;
+
                     }
                 } else {
-                    $_SESSION['alert'] = "Veuillez rentrer une adresse email valide";
+                    create_flash_message(ERROR_MAIL, 'Email non valide', FLASH_ERROR); //Email non valide
+                    header("location: index.php");
+                    exit;
                 }
             } else {
-                $_SESSION['alert'] = "Veuillez remplir votre mot de passe";
+                create_flash_message(ERROR_PSWD, 'Saisissez votre mot de passe', FLASH_ERROR); //Mot de passe non spécifié
+                header("location: index.php");
+                exit;
             } 
         } else {
-            $_SESSION['alert'] = "Veuillez remplir votre email";
+            create_flash_message(ERROR_MAIL, 'Saisissez votre email', FLASH_ERROR);  //email non spécifié
+            header("location: index.php");
+            exit;
         }
  }
 

@@ -1,9 +1,9 @@
 <?php
 
+session_start();
+
 require_once("db.php");
 require_once("function.php");
-
-$error_msg = '';
 
 if(isset($_POST["submit"])){
     if (!empty($_POST["email"]) && isset($_POST["email"])){
@@ -28,8 +28,7 @@ if(isset($_POST["submit"])){
             $utilisateur_educ = $rech_educ->fetch(PDO::FETCH_ASSOC);
 
             if($utilisateur_admin) {  //utilsateur_admin = true donc utilisateur trouvé en tant que admin
-
-                $error_msg = "Identifiants trouvé en admin";
+                
                 $token = guidv4();
 
                 $insert_token = $db->prepare("UPDATE admin SET date_cr_token = NOW(), pw_recup_token = ? WHERE usermail = ? ");
@@ -255,27 +254,35 @@ if(isset($_POST["submit"])){
                     $send_succ = mail($to, $subject, $mailContent, implode("\r\n", $headers));
                     
                     if($send_succ){
-                        $error_msg = "Mail envoyé";
+                        create_flash_message('send_success', 'Le mail a bien été envoyé', FLASH_SUCCESS); //Mail envoyé
+                        header("location: resetpw.php"); 
+                        exit;
                     } else {
-                        $error_msg = "erreur envoie mail";
+                        create_flash_message('send_error', 'Oops, une erreur est survenue, veuillez réessayer.', FLASH_WARNING); //Erreur envoie mail
+                        header("location: resetpw.php"); 
+                        exit;
                     }
                 } else {
-                    $error_msg = "erreur";
+                    create_flash_message('send_error', 'Oops, une erreur est survenue, veuillez réessayer.', FLASH_WARNING); //Erreur envoie mail
+                    header("location: resetpw.php"); 
+                    exit;
                 }
 
             } else if ($utilisateur_educ) {  //i = true donc utilisateur trouvé en tant que educateur
-                $error_msg = "Identifiants trouvé en educ";
+                //
             } else if ($utilisateur_licencie) { //i = true donc utilisateur trouvé en tant que educateur
-                $error_msg = "Identifiants trouvé en licencie";
+                //
             } else { //Aucun itilisateur trouvé dans la base de données
-                $error_msg = "Identifiants introuvables";
+                //
             }
         } else {
-            $error_msg = "Veuillez rentrer une adresse email valide";
+            create_flash_message(ERROR_MAIL, 'Votre email est invalide', FLASH_ERROR); //email non valide
+            header("location: resetpw.php");
+            exit;
         } 
     } else {
-        $error_msg = "Veuillez remplir votre email";
+        create_flash_message(ERROR_MAIL, 'Saisissez votre email', FLASH_ERROR); //email non spécifié
+        header("location: resetpw.php");
+        exit;
     }
 }
-
-echo $error_msg;
