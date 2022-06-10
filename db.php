@@ -1,7 +1,7 @@
 <?php
 
 $hostname = 'localhost';
-$database = 'dbs5827508';
+$database = 'projectannuel';
 $username = 'root';
 $password = 'root';
 
