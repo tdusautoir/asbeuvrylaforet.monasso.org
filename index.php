@@ -62,9 +62,6 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
           </a>
         </div>
         <div class="separator"></div>
-        <div class="deconnect">
-          <a href="index.php?action=logout" class="deco-button">Deconnexion</a>
-        </div>
         <div class="li-admin">
           <h2>
             Dernier(e)s liscencié(e)s ajouté(e)s :
@@ -86,6 +83,9 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
           <?php else : ?>
             <p> Aucun licencié n'a encore été crée </p>
           <?php endif; ?>
+        </div>
+        <div class="deconnect">
+          <a href="index.php?action=logout" class="deco-button">Deconnexion</a>
         </div>
       </div>
     </div>
