@@ -37,11 +37,13 @@ function isset_flash_message_by_name(string $name): bool //check if flash messag
 
 function isset_flash_message_by_type(string $type): bool //check if flash message is isset by his type
 {
-    foreach ($_SESSION[FLASH] as $key => $value) {  //parcours les flashs messages
-        if ($value['type'] == $type) {
-            return true;
-        } else {
-            return false;
+    if (isset($_SESSION[FLASH])) {
+        foreach ($_SESSION[FLASH] as $key => $value) {  //parcours les flashs messages
+            if ($value['type'] == $type) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
     return false;
@@ -65,15 +67,17 @@ function display_flash_message_by_name(string $name): void
 
 function display_flash_message_by_type(string $type): void
 { //display a flash messaye by his type
-    foreach ($_SESSION[FLASH] as $key => $value) {  //parcours les flashs messages
-        if ($value['type'] == $type) {
-            $flash_message = $value['message']; // get message from the session
+    if (isset($_SESSION[FLASH])) {
+        foreach ($_SESSION[FLASH] as $key => $value) {  //parcours les flashs messages
+            if ($value['type'] == $type) {
+                $flash_message = $value['message']; // get message from the session
 
-            // delete the flash message
-            unset($_SESSION[FLASH][$key]);
+                // delete the flash message
+                unset($_SESSION[FLASH][$key]);
 
-            // display the flash message
-            echo $flash_message;
+                // display the flash message
+                echo $flash_message;
+            }
         }
     }
 }

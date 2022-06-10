@@ -1,7 +1,21 @@
 * {
     margin: 0;
     padding: 0;
+} 
+
+.welcome-admin{
+    margin-top: 20px;
 }
+
+.welcome-admin h1{
+    font-size: 25px;
+}
+
+.welcome-admin p{
+    font-size: 20px;
+    padding: 0;
+}
+
 /* cases */
 .admin-panel {
     display: flex;
@@ -67,4 +81,13 @@
 .deconnect a:hover {
     letter-spacing: 1px;
     background-color: #000000;
+}
+
+@media screen and (max-width:800px){
+    .welcome-admin h1 {
+        font-size: 20px;
+    }
+    .welcome-admin p{
+        font-size: 15px;
+    }
 }

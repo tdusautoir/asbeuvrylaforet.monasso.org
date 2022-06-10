@@ -22,9 +22,11 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
     <?php include('header.php'); ?>
     <div class="container">
       <div class="container-content">
-        <h1 style="margin-top: 20px;">Bonjour <?= htmlspecialchars($_SESSION['prenom']); ?>,
-          <p>Tu es sur l'espace d'administration</p>
-        </h1>
+        <div class="welcome-admin">
+          <h1>Bonjour <?= htmlspecialchars($_SESSION['prenom']); ?>,
+            <p>Tu es sur l'espace d'administration</p>
+          </h1>
+        </div>
         <div class="admin-panel">
           <a>
             <img src="https://image.shutterstock.com/image-illustration/plus-sign-icon-element-web-260nw-1098707264.jpg" />
