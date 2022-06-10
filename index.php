@@ -70,7 +70,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             Dernier(e)s liscencié(e)s ajouté(e)s :
           </h2>
           <?php
-          $req = $db->prepare("SELECT * FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie ORDER BY dateN LIMIT 10;"); //Derniers licenciés ajoutés classé par date croissant et limités à 10. 
+          $req = $db->prepare("SELECT * FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie ORDER BY dateN ASC LIMIT 10"); //Derniers licenciés ajoutés classé par date croissant et limités à 10. 
           $req->execute();
           $rowCount = $req->rowCount();
           if ($rowCount > 0) : //si on trouve des licenciés ajoutés on affiche la liste de la requete.
