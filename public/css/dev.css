@@ -23,6 +23,6 @@
 .li-admin p span:first-child {
     text-decoration: underline;
 }
-.li-admin p span:last-child {
+.li-admin p span:not(:first-child) {
     color: #289a37;
 }
