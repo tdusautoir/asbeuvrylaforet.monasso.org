@@ -5,15 +5,15 @@ session_start();
 require_once("db.php");
 require_once("function.php");
 
-if(isset($_POST["submit"])){
-    if (!empty($_POST["email"]) && isset($_POST["email"])){
-        if(filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)){
+if (isset($_POST["submit"])) {
+    if (!empty($_POST["email"]) && isset($_POST["email"])) {
+        if (filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
 
             $usermail = $_POST["email"];
 
-            $rech_admin = $db->prepare("SELECT * FROM admin WHERE usermail = ? "); //recherche les utilisateurs dans la table admin correspondant au usermail entrée 
-            $rech_licencie = $db->prepare("SELECT * FROM educ WHERE usermail = ? "); //recherche les utilisateurs dans la table educ correspondant au usermail entrée 
-            $rech_educ = $db->prepare("SELECT * FROM licencie WHERE usermail = ? "); //recherche les utilisateurs dans la table licencie correspondant au usermail entrée 
+            $rech_admin = $db->prepare("SELECT * FROM admin WHERE mail = ? "); //recherche les utilisateurs dans la table admin correspondant au mail entrée 
+            $rech_licencie = $db->prepare("SELECT * FROM educ WHERE mail = ? "); //recherche les utilisateurs dans la table educ correspondant au mail entrée 
+            $rech_educ = $db->prepare("SELECT * FROM licencie WHERE mail = ? "); //recherche les utilisateurs dans la table licencie correspondant au mail entrée 
 
             $rech_admin->bindValue(1, $usermail);
             $rech_licencie->bindValue(1, $usermail);
@@ -27,19 +27,19 @@ if(isset($_POST["submit"])){
             $utilisateur_licencie = $rech_licencie->fetch(PDO::FETCH_ASSOC);
             $utilisateur_educ = $rech_educ->fetch(PDO::FETCH_ASSOC);
 
-            if($utilisateur_admin) {  //utilsateur_admin = true donc utilisateur trouvé en tant que admin
-                
+            if ($utilisateur_admin) {  //utilsateur_admin = true donc utilisateur trouvé en tant que admin
+
                 $token = guidv4();
 
-                $insert_token = $db->prepare("UPDATE admin SET date_cr_token = NOW(), pw_recup_token = ? WHERE usermail = ? ");
+                $insert_token = $db->prepare("UPDATE admin SET date_cr_token = NOW(), pw_recup_token = ? WHERE mail = ? ");
 
                 $insert_token->bindValue(1, $token);
                 $insert_token->bindValue(2, $usermail);
 
                 $success = $insert_token->execute();
-                
-                if($success){
-                    $link = "https://www.dev-asbeuvrylaforet.monasso.org/backdev/?token=".$token;
+
+                if ($success) {
+                    $link = "https://www.dev-asbeuvrylaforet.monasso.org/backdev/?token=" . $token;
                     $to = $usermail;
                     $subject = 'Reinitialisation de votre mot de passe';
                     $mailContent = "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
@@ -250,38 +250,40 @@ if(isset($_POST["submit"])){
 
                     $headers[] = 'MIME-Version: 1.0';
                     $headers[] =  "Content-type: text/html; charset=UTF-8";
-                    
+
                     $send_succ = mail($to, $subject, $mailContent, implode("\r\n", $headers));
-                    
-                    if($send_succ){
-                        create_flash_message('send_success', 'Le mail a bien été envoyé', FLASH_SUCCESS); //Mail envoyé
-                        header("location: resetpw.php"); 
+
+                    if ($send_succ) {
+                        create_flash_message('send_success', 'Le mail a bien été envoyé.', FLASH_SUCCESS); //Mail envoyé
+                        header("location: resetpw.php");
                         exit;
                     } else {
                         create_flash_message('send_error', 'Oops, une erreur est survenue, veuillez réessayer.', FLASH_WARNING); //Erreur envoie mail
-                        header("location: resetpw.php"); 
+                        header("location: resetpw.php");
                         exit;
                     }
                 } else {
                     create_flash_message('send_error', 'Oops, une erreur est survenue, veuillez réessayer.', FLASH_WARNING); //Erreur envoie mail
-                    header("location: resetpw.php"); 
+                    header("location: resetpw.php");
                     exit;
                 }
 
-            } else if ($utilisateur_educ) {  //i = true donc utilisateur trouvé en tant que educateur
-                //
-            } else if ($utilisateur_licencie) { //i = true donc utilisateur trouvé en tant que educateur
-                //
+                // } else if ($utilisateur_educ) {  //i = true donc utilisateur trouvé en tant que educateur
+                //     //
+                // } else if ($utilisateur_licencie) { //i = true donc utilisateur trouvé en tant que educateur
+                //     //
             } else { //Aucun itilisateur trouvé dans la base de données
-                //
+                create_flash_message(ERROR_MAIL, 'Identifiants invalides', FLASH_ERROR); //identifiants invalides
+                header("location: resetpw.php"); //token=$token
+                exit;
             }
         } else {
-            create_flash_message(ERROR_MAIL, 'Votre email est invalide', FLASH_ERROR); //email non valide
+            create_flash_message(ERROR_MAIL, 'Votre email est invalide.', FLASH_ERROR); //email non valide
             header("location: resetpw.php");
             exit;
-        } 
+        }
     } else {
-        create_flash_message(ERROR_MAIL, 'Saisissez votre email', FLASH_ERROR); //email non spécifié
+        create_flash_message(ERROR_MAIL, 'Saisissez votre adresse e-mail.', FLASH_ERROR); //email non spécifié
         header("location: resetpw.php");
         exit;
     }

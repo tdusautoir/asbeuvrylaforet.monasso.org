@@ -1,0 +1,30 @@
+.li-admin h2 {
+    font-size: 16px;
+}
+.li-admin ul {
+    padding: 1em 2em;
+    list-style: none;
+    font-weight: 700;
+    font-size: 13px;
+}
+.li-admin li::before {
+    content: "";
+    background: #D20001;
+    /* background: #4787a6;
+    background: #279936; */
+    border-radius: 100%;
+    width: 10px;
+    height: 10px;
+    margin-right: 10px;
+    align-self: center;
+    display: inline-block;
+}
+.li-admin li {
+    display: flex;
+}
+.li-admin p span:first-child {
+    text-decoration: underline;
+}
+.li-admin p span:last-child {
+    color: #289a37;
+}
