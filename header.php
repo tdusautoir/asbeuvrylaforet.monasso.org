@@ -20,7 +20,7 @@
 					<a href="#">Licenciés</a>
 				</li>
 				<li>
-					<a href="#">Éducation</a>
+					<a href="#">Éducateurs</a>
 				</li>
 				<li>
 					<a href="#">Statistiques</a>
