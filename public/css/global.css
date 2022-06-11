@@ -12,9 +12,6 @@ nav {
 li {
 	display: inline;
 }
-p {
-	margin: 20px 0;
-}
 #logo {
 	width: 75px;
 	height: 75px;
@@ -39,6 +36,7 @@ header.menu-container{
 	height: 75px;
 }
 .container-content{
+	padding: 0 20px;
 	max-width: 1440px;
 	width: 100%;
 	margin: 0 auto;
@@ -273,11 +271,11 @@ a:visited {
 		left: 0;
 		transition: left .4s ease;
 	}
-	li{
+	nav li{
 		padding-bottom: 25px;
 		text-align: center;
 	}
-	li:not(:last-child){
+	nav li:not(:last-child){
 		margin: 0;
 	}
 }

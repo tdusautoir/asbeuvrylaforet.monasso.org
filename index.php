@@ -29,35 +29,35 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
         </div>
         <div class="admin-panel">
           <a>
-            <img src="https://image.shutterstock.com/image-illustration/plus-sign-icon-element-web-260nw-1098707264.jpg" />
+            <i class="fa fa-plus"></i> 
             <p>Ajouter un &eacute;ducateur</p>
           </a>
           <a>
-            <img src="https://image.shutterstock.com/image-vector/add-user-iconsaveavatar-vector-illustration-260nw-1894423480.jpg" />
+            <i class="fa fa-user-plus"></i> 
             <p>Ajouter un licenci&eacute;</p>
           </a>
           <a>
-            <img src="https://image.shutterstock.com/image-vector/vector-line-icon-stat-260nw-2050503608.jpg" />
+            <i class="fa fa-user-plus"></i> 
             <p>Statistiques de la saison</p>
           </a>
           <a>
-            <img src="https://image.shutterstock.com/image-vector/settings-gears-flat-icon-apps-260nw-1908713974.jpg" />
+            <i class="fa fa-cogs"></i> 
             <p>Mon compte</p>
           </a>
           <a>
-            <img src="https://image.shutterstock.com/image-vector/profil-account-icon-simple-logo-260nw-1368469286.jpg" />
+            <i class="fa fa-user"></i> 
             <p>Gestion des &eacute;ducateurs</p>
           </a>
           <a>
-            <img src="https://image.shutterstock.com/image-vector/people-talking-line-icon-group-260nw-1359171593.jpg" />
+            <i class="fa fa-users"></i> 
             <p>Gestion des licenci&eacute;s</p>
           </a>
           <a>
-            <img src="https://image.shutterstock.com/image-vector/euro-symbol-icon-vector-isolated-260nw-1736791196.jpg" />
+            <i class="fa fa-euro-sign"></i> 
             <p>Suivi des cotisations</p>
           </a>
           <a>
-            <img src="https://image.shutterstock.com/image-vector/best-pdf-document-icon-vector-260nw-1670462920.jpg" />
+            <i class="fa fa-file-invoice"></i> 
             <p>G&eacute;n&eacute;rer une attestation</p>
           </a>
         </div>

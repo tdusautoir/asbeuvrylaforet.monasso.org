@@ -19,6 +19,7 @@
 }
 .li-admin li {
     display: flex;
+    margin-top: 5px;
 }
 .li-admin p span:first-child {
     text-decoration: underline;

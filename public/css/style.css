@@ -13,6 +13,7 @@
 
 .welcome-admin p{
     font-size: 20px;
+    margin-top: 10px;
     padding: 0;
 }
 
@@ -24,37 +25,34 @@
     flex-wrap: wrap;
 }
 .admin-panel a {
-    border: none;
+    display: flex;
+    width: 250px;
+    height: 250px;
     background-color: #ffffff;
     text-decoration: none;
     text-align: center;
     color: black;
-    padding-left: 2px;
     border-radius: 10px;
     box-shadow: 3px 3px 40px #f3f3f3, -3px -3px 30px #ffffff;
     margin: 2.5%;
     transition: 0.3s;
     cursor: pointer;
-    padding: 0;
-    font-size: 12;
-    letter-spacing: 0;
-    text-transform: none;
+    font-size: 16px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .admin-panel a:hover {
     box-shadow: 3px 3px 30px #d6d6d6, -3px -3px 30px #ffffff;
 }
-.admin-panel a img {
-    width: 65%;
+.admin-panel a i {
+    font-size: 100px;
+    font-weight: 200;
 }
 .admin-panel a p {
     font-family: "Montserrat", sans-serif;
-    font-size: 80%;
-    margin: 0;
-    margin-top: 5px;
-    padding-bottom: 25px;
-}
-.admin-panel > * {
-    width: 20%;
+    font-size: 15px;
+    margin-top: 20px;
 }
 /* bouton de deconnexion */
 .deconnect {
