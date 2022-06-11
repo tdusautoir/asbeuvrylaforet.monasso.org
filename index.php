@@ -62,7 +62,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             <p>G&eacute;n&eacute;rer une attestation</p>
           </a>
         </div>
-        <div class="separator"></div>
+        <div class="admin-panel-separator"></div>
         <div class="li-admin">
           <h2>
             Derniers liscenciés ajoutés :
