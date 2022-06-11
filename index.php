@@ -27,6 +27,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             <p>Tu es sur l'espace d'administration</p>
           </h1>
         </div>
+        <div class="welcome-separator"></div>
         <div class="admin-panel">
           <a>
             <i class="fa fa-plus"></i> 
