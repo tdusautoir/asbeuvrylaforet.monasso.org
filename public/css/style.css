@@ -51,7 +51,7 @@
 }
 .admin-panel a p {
     font-family: "Montserrat", sans-serif;
-    font-size: 15px;
+    font-size: 16px;
     margin-top: 20px;
 }
 /* bouton de deconnexion */
@@ -59,6 +59,7 @@
     display: flex;
     justify-content: center;
     padding-bottom: 30px;
+    width: 100%;
 }
 .deconnect a {
     color: #ffffff !important;
