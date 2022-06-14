@@ -2,6 +2,7 @@
 :root {
   --mainColor: #289a37;
   --secondaryColor: black;
+  --errorColor: #d20000;
 }
 
 /*font family*/
@@ -56,15 +57,15 @@
 }
 
 .fa-bar-chart:before {
-  content: "\f080"
+  content: "\f080";
 }
 
 .fa-pencil:before {
-  content: "\f040"
+  content: "\f040";
 }
 
 .fa-trash:before {
-  content: "\f1f8"
+  content: "\f1f8";
 }
 
 .fa-bars:before {
