@@ -15,7 +15,7 @@ if (isset($_POST["submit"])) {
     $mail_licencie = $_POST["mail-licencie"];
     $categorie_licencie = $_POST["categorie-licencie"];
     $sexe_licencie = $_POST["sexe-licencie"];
-    $current_user = $_SESSION["prenom"];
+    $current_user = $_SESSION["prenom"] . " " . strtoupper($_SESSION["nom"]);
     $req = $db->prepare("INSERT INTO licencie (prenom, nom, sexe, dateN, mail, idCategorie, USRCRE) VALUES (?, ?, ?, ?, ?, ?, ?);");
     $req->bindValue(1, $prenom_licencie, PDO::PARAM_STR);
     $req->bindValue(2, $nom_licencie, PDO::PARAM_STR);
