@@ -39,7 +39,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 <?php while ($LIC = $req->fetch(PDO::FETCH_ASSOC)) : ?>
                   <li>
                     <p><?= $LIC["nomCategorie"] ?> - <span><?= $LIC["prenom"] . " " . strtoupper($LIC["nom"]) ?></span>
-                      <?php if (isset($LIC["USRCRE"])) : ?>par <span><?= ($LIC["USRCRE"]) ?> </span></p> <?php endif; ?>
+                      <?php if (isset($LIC["USRCRE"])) : ?>par <span><?= $LIC["USRCRE"]; ?> </span></p> <?php endif; ?>
                   </li>
                 <?php endwhile; ?>
               </ul>
