@@ -46,6 +46,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             <?php else : ?>
               <p> Aucun licencié n'a encore été crée </p>
             <?php endif; ?>
+            <div class="add-panel-separator"></div>
           </div>
           <div class="add-panel">
             <h1>
@@ -53,8 +54,8 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             </h1>
             <form action="./functions/licencie-add.php" method="POST">
               <div class="form-add">
-                <input type="text" class="nom-licencie" placeholder="Nom" name="nom-licencie" required="required">
-                <input type="text" class="prenom-licencie" placeholder="Prénom" name="prenom-licencie" required="required">
+                <input type="text" class="nom-licencie" placeholder="Nom" name="nom-licencie" maxlength="20" required="required">
+                <input type="text" class="prenom-licencie" placeholder="Prénom" name="prenom-licencie" maxlength="15" required="required">
               </div>
               <div class="form-add">
                 <label for="photo-licencie">
@@ -85,7 +86,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 </select>
               </div>
               <div class="mail-form-add">
-                <input type="mail" class="mail-licencie" name="mail-licencie" placeholder="Adresse mail" required="required">
+                <input type="mail" class="mail-licencie" name="mail-licencie" placeholder="Adresse mail" maxlength="40" required="required">
               </div>
               <div class="form-add">
                 <input type="submit" value="Ajouter" name="submit" class="bouton-ajouter">

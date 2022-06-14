@@ -1,3 +1,6 @@
+.li-admin {
+    flex-basis: 50%;
+}
 .li-admin h2 {
     font-size: 25px;
 }
@@ -27,13 +30,21 @@
 .li-admin p span:not(:first-child) {
     color: #289a37;
 }
+.add-panel-separator {
+    content: '';
+    background: var(--mainColor);
+    width: 50px;
+    height: 8px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
 .add-panel {
-    flex-grow: 50%;
+    flex-basis: 50%;
     background: white;
     box-shadow: 3px 3px 30px #d6d6d6, -3px -3px 30px #ffffff;
     border-radius: 20px;
     content: '';
-    width: 50%;
     height: auto;
 }
 .add-panel h1 {
