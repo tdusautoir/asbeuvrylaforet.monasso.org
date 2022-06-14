@@ -39,7 +39,7 @@ if (isset($_POST["submit"])) {
                 $success = $insert_token->execute();
 
                 if ($success) {
-                    $link = "https://www.dev-asbeuvrylaforet.monasso.org/backdev/?token=" . $token;
+                    $link = "https://www.dev-asbeuvrylaforet.monasso.org/resetpw.php?token=" . $token;
                     $to = $usermail;
                     $subject = 'Reinitialisation de votre mot de passe';
                     $mailContent = "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>

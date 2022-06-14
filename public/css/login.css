@@ -91,14 +91,14 @@ input#password {
 }
 .form_field_error_password{
     text-align: left;
-    color: #d20000;
+    color: var(--errorColor);
     font-size: 12px;
     margin-top: 6px;
     display: none;
 }
 .form_field_error_mail{
     text-align: left;
-    color: #d20000;
+    color: var(--errorColor);
     font-size: 12px;
     margin-top: 6px;
     display: none;

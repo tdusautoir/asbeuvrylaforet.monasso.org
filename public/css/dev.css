@@ -147,7 +147,6 @@
 }
 
 .add-container {
-    flex-grow: 50%;
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
@@ -155,9 +154,19 @@
 }
 
 .add-success {
-    background-color: #ffffff3b;
+    background-color: rgba(40, 154, 55, 0.11);
     color: var(--mainColor);
     border: 1px solid var(--mainColor);
+    padding: 12px 20px;
+    margin-top: 20px;
+    border-radius: 4px;
+    font-size: 20px;
+}
+
+.add-error{
+    background-color: rgba(210, 0, 0, 0.11);
+    color: var(--errorColor);
+    border: 1px solid var(--errorColor);
     padding: 12px 20px;
     margin-top: 20px;
     border-radius: 4px;

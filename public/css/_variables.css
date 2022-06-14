@@ -2,6 +2,7 @@
 :root{
 --mainColor: #289a37;
 --secondaryColor: black;
+--errorColor: #d20000;
 }
 /*font family*/
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
