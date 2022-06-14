@@ -17,7 +17,7 @@ if ($currentpath['basename'] === "index.php" || $currentpath['filename'] === "in
 <header class="menu-container">
 	<div class="menu-content">
 		<div class="logo">
-			<a href="https://www.dev-asbeuvrylaforet.monasso.org">
+			<a href="../">
 				<img id="logo" src="./public/images/logo-asb.svg" alt="A.S. BEUVRY LA FORÊT" title="A.S. BEUVRY LA FORÊT">
 			</a>
 		</div>
