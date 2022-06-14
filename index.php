@@ -31,7 +31,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             <i class="fa fa-plus"></i>
             <p>Ajouter un &eacute;ducateur</p>
           </a>
-          <a href="./add.php">
+          <a href="./add-licencie.php">
             <i class="fa fa-user-plus"></i>
             <p>Ajouter un licenci&eacute;</p>
           </a>
