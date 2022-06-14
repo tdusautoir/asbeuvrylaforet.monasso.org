@@ -7,6 +7,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
   clean_php_session();
   header("location: index.php");
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -20,6 +21,9 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
     <?php include('./components/header.php'); ?>
     <div class="container">
       <div class="container-content">
+        <?php if (isset_flash_message_by_name("add_success")) : ?>
+          <p class="add-success"><?php display_flash_message_by_name("add_success"); ?></p>
+        <?php endif; ?>
         <div class="add-container">
           <div class="li-admin">
             <h2>
@@ -47,10 +51,10 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             <h1>
               Ajouter un licencié
             </h1>
-            <form action="">
+            <form action="./functions/licencie-add.php" method="POST">
               <div class="form-add">
-                <input type="text" class="nom-licencie" placeholder="Nom" required="required">
-                <input type="text" class="prenom-licencie" placeholder="Prénom" required="required">
+                <input type="text" class="nom-licencie" placeholder="Nom" name="nom-licencie" required="required">
+                <input type="text" class="prenom-licencie" placeholder="Prénom" name="prenom-licencie" required="required">
               </div>
               <div class="form-add">
                 <label for="photo-licencie">
@@ -58,14 +62,21 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                   <input id="photo-licencie" type="file" accept="image/png, image/jpeg" required="required" />
                   <span id="nom-photo-licencie"></span>
                 </label>
-                <input type="date">
+                <input type="date" name="dateN-licencie">
               </div>
               <div class="form-add">
-                <select name="groupe-licencie" id="groupe-licencie" required="required">
+                <select name="categorie-licencie" id="categorie-licencie" required="required">
                   <option value="" disabled selected>Catégorie</option>
-                  <option value="U10">U10</option>
-                  <option value="U11">U11</option>
-                  <option value="U12">U12</option>
+                  <?php
+                  $req_category = $db->query("SELECT idCategorie, nomCategorie FROM categorie");
+                  while ($category = $req_category->fetch()) :
+                    if (isset($category)) :
+                  ?>
+                      <option value="<?= $category["idCategorie"] ?>"><?= $category["nomCategorie"] ?></option>
+                  <?php
+                    endif;
+                  endwhile;
+                  ?>
                 </select>
                 <select name="sexe-licencie" id="sexe-licencie" required="required">
                   <option value="" disabled selected>Sexe</option>
@@ -74,10 +85,10 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 </select>
               </div>
               <div class="mail-form-add">
-                <input type="mail" class="mail-licencie" placeholder="Adresse mail" required="required">
+                <input type="mail" class="mail-licencie" name="mail-licencie" placeholder="Adresse mail" required="required">
               </div>
               <div class="form-add">
-                <input type="submit" value="Ajouter" class="bouton-ajouter">
+                <input type="submit" value="Ajouter" name="submit" class="bouton-ajouter">
               </div>
             </form>
           </div>

@@ -26,7 +26,7 @@ endif;
     <!-- Fin bouton RETOUR -->
     <?php if (!isset($_GET["token"]) || empty($_GET["token"])) : ?>
         <section class="formulaire_login">
-            <form method="POST" action="resetpw-sendmail.php" class="form_container">
+            <form method="POST" action="./functions/resetpw-sendmail.php" class="form_container">
                 <div class="form_content">
                     <div class="logo_association"><img draggable="false" src="./public/images/logo-asb.svg" alt=""></div>
                     <h1>Réinitialisation du mot de passe</h1>
@@ -46,7 +46,7 @@ endif;
         </section>
     <?php else : ?>
         <section class="formulaire_login">
-            <form method="POST" action="resetpw-changepw.php" class="form_container">
+            <form method="POST" action="./functions/resetpw-changepw.php" class="form_container">
                 <div class="form_content">
                     <div class="logo_association"><img draggable="false" src="./public/images/logo-asb.svg" alt=""></div>
                     <div class="mail">
