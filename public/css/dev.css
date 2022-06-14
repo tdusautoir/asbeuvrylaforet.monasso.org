@@ -163,7 +163,7 @@
     font-size: 20px;
 }
 
-.add-error{
+.add-error {
     background-color: rgba(210, 0, 0, 0.11);
     color: var(--errorColor);
     border: 1px solid var(--errorColor);
@@ -295,4 +295,22 @@ th:nth-child(9) {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+}
+
+tbody td a i {
+    color: #242424;
+}
+
+tbody td .fa-pencil:hover {
+    color: #575555;
+    -webkit-transition: all 300ms ease 0ms;
+    -o-transition: all 300ms ease 0ms;
+    transition: all 300ms ease 0ms;
+}
+
+tbody td .fa-trash:hover {
+    color: var(--errorColor);
+    -webkit-transition: all 300ms ease 0ms;
+    -o-transition: all 300ms ease 0ms;
+    transition: all 300ms ease 0ms;
 }
