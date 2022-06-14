@@ -25,7 +25,7 @@ if (isset($_POST["submit"])) {
     $req->bindValue(7, $current_user, PDO::PARAM_STR);
     $result = $req->execute();
 
-    if (!$result) {
+    if ($result) {
         header("location: ../add-licencie.php");
         create_flash_message("add_success", "Licencié ajouté", FLASH_SUCCESS);
     } else {
