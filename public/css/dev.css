@@ -28,16 +28,13 @@
     color: #289a37;
 }
 .add-panel {
-    float: right;
-    display: block;
+    flex-grow: 50%;
     background: white;
     box-shadow: 3px 3px 30px #d6d6d6, -3px -3px 30px #ffffff;
     border-radius: 20px;
     content: '';
     width: 50%;
-    height: 627px;
-    margin-top: 20px;
-    margin-bottom: 60px;
+    height: auto;
 }
 .add-panel h1 {
     margin: 20px 0;
@@ -116,4 +113,17 @@
 .mail-form-add {
     display: flex;
     justify-content: center;
+}
+.add-container {
+    flex-grow: 50%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
+.add-container .li-admin h2 {
+    font-size: 26px;
+}
+.add-container .li-admin li {
+    font-size: 18px;
 }

@@ -31,7 +31,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             <i class="fa fa-plus"></i>
             <p>Ajouter un &eacute;ducateur</p>
           </a>
-          <a href="add.php">
+          <a href="./add.php">
             <i class="fa fa-user-plus"></i>
             <p>Ajouter un licenci&eacute;</p>
           </a>
@@ -84,7 +84,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
           <?php endif; ?>
         </div>
         <div class="deconnect">
-          <a href="index.php?action=logout" class="deco-button">Deconnexion</a>
+          <a href="index.php?action=logout">Deconnexion</a>
         </div>
       </div>
     </div>

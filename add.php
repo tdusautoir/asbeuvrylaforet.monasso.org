@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require("../function.php");
+require("./function.php");
 
 if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "logout") {
   clean_php_session();
@@ -20,45 +20,69 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
     <?php include('./components/header.php'); ?>
     <div class="container">
       <div class="container-content">
-        <div class="add-panel">
-          <h1>
-            Ajouter un licencié
-          </h1>
-          <form action="">
-            <div class="form-add">
-              <input type="text" class="nom-licencie" placeholder="Nom" required="required">
-              <input type="text" class="prenom-licencie" placeholder="Prénom" required="required">
-            </div>
-            <div class="form-add">
-              <label for="photo-licencie">
-                Photo du licencié
-                <input id="photo-licencie" type="file" accept="image/png, image/jpeg" required="required" />
-                <span id="nom-photo-licencie"></span>
-              </label>
-              <input type="date">
-            </div>
-            <div class="form-add">
-              <select name="groupe-licencie" id="groupe-licencie" required="required">
-                <option value="" disabled selected>Catégorie</option>
-                <option value="U10">U10</option>
-                <option value="U11">U11</option>
-                <option value="U12">U12</option>
-              </select>
-              <select name="sexe-licencie" id="sexe-licencie" required="required">
-                <option value="" disabled selected>Sexe</option>
-                <option value="m">Homme</option>
-                <option value="f">Femme</option>
-              </select>
-            </div>
-            <div class="mail-form-add">
-              <input type="mail" class="mail-licencie" placeholder="Adresse mail" required="required">
-            </div>
-            <div class="form-add">
-              <input type="submit" value="Ajouter" class="bouton-ajouter">
-            </div>
-          </form>
+        <div class="add-container">
+          <div class="li-admin">
+            <h2>
+              Derniers liscenciés ajoutés :
+            </h2>
+            <?php
+            $req = $db->prepare("SELECT categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.USRCRE  FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie ORDER BY licencie.DCRE DESC LIMIT 10"); //Derniers licenciés ajoutés classé par date croissant et limités à 10. 
+            $req->execute();
+            $rowCount = $req->rowCount();
+            if ($rowCount > 0) : //si on trouve des licenciés ajoutés on affiche la liste de la requete.
+            ?>
+              <ul>
+                <?php while ($LIC = $req->fetch(PDO::FETCH_ASSOC)) : ?>
+                  <li>
+                    <p><?= $LIC["nomCategorie"] ?> - <span><?= $LIC["prenom"] . " " . strtoupper($LIC["nom"]) ?></span>
+                      <?php if (isset($LIC["USRCRE"])) : ?>par <span><?= ($LIC["USRCRE"]) ?> </span></p> <?php endif; ?>
+                  </li>
+                <?php endwhile; ?>
+              </ul>
+            <?php else : ?>
+              <p> Aucun licencié n'a encore été crée </p>
+            <?php endif; ?>
+          </div>
+          <div class="add-panel">
+            <h1>
+              Ajouter un licencié
+            </h1>
+            <form action="">
+              <div class="form-add">
+                <input type="text" class="nom-licencie" placeholder="Nom" required="required">
+                <input type="text" class="prenom-licencie" placeholder="Prénom" required="required">
+              </div>
+              <div class="form-add">
+                <label for="photo-licencie">
+                  Photo du licencié
+                  <input id="photo-licencie" type="file" accept="image/png, image/jpeg" required="required" />
+                  <span id="nom-photo-licencie"></span>
+                </label>
+                <input type="date">
+              </div>
+              <div class="form-add">
+                <select name="groupe-licencie" id="groupe-licencie" required="required">
+                  <option value="" disabled selected>Catégorie</option>
+                  <option value="U10">U10</option>
+                  <option value="U11">U11</option>
+                  <option value="U12">U12</option>
+                </select>
+                <select name="sexe-licencie" id="sexe-licencie" required="required">
+                  <option value="" disabled selected>Sexe</option>
+                  <option value="m">Homme</option>
+                  <option value="f">Femme</option>
+                </select>
+              </div>
+              <div class="mail-form-add">
+                <input type="mail" class="mail-licencie" placeholder="Adresse mail" required="required">
+              </div>
+              <div class="form-add">
+                <input type="submit" value="Ajouter" class="bouton-ajouter">
+              </div>
+            </form>
+          </div>
         </div>
-        <div class="deconnect">
+        <div class="return deconnect">
           <a href="index.php">Retour</a>
         </div>
       </div>

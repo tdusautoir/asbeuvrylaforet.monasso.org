@@ -90,4 +90,11 @@
     .welcome-admin p{
         font-size: 15px;
     }
+	.add-panel {
+		width: 100%;
+        margin-bottom: 30px;
+	}
+    .add-container {
+        flex-direction: column-reverse;
+    }
 }

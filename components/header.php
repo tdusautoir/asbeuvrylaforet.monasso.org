@@ -14,7 +14,7 @@
 		<nav class="nav-menu">
 			<ul class="menu">
 				<li>
-					<a href="#"><i class="fas fa-home"></i></a>
+					<a href="../index.php"><i class="fas fa-home"></i></a>
 				</li>
 				<li>
 					<a href="#">Licenciés</a>
