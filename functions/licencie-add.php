@@ -8,7 +8,6 @@ require_once("../db.php");
 date_default_timezone_set("Europe/Paris");
 
 if (isset($_POST["submit"])) {
-    dump($_POST);
     $nom_licencie = $_POST["nom-licencie"];
     $prenom_licencie = $_POST["prenom-licencie"];
     $dateN_licencie = $_POST["dateN-licencie"];
