@@ -1,3 +1,19 @@
+<?php
+$currentpath = pathinfo($_SERVER['SCRIPT_NAME']);
+
+if ($currentpath['basename'] === "index.php" || $currentpath['filename'] === "index") {
+	$link_active[0] = true;
+} else if ($currentpath['basename'] === "page.php" || $currentpath['filename'] === "page") {
+	$link_active[1] = true;
+} else if ($currentpath['basename'] === "page.php" || $currentpath['filename'] === "page") {
+	$link_active[2] = true;
+} else if ($currentpath['basename'] === "page.php" || $currentpath['filename'] === "page") {
+	$link_active[3] = true;
+} else if ($currentpath['basename'] === "page.php" || $currentpath['filename'] === "page") {
+	$link_active[4] = true;
+}
+
+?>
 <header class="menu-container">
 	<div class="menu-content">
 		<div class="logo">
@@ -13,19 +29,19 @@
 		</div>
 		<nav class="nav-menu">
 			<ul class="menu">
-				<li>
-					<a href="../index.php"><i class="fas fa-home"></i></a>
+				<li <?php if (isset($link_active[0])) : ?>class="active" <?php endif; ?>>
+					<a href="./index.php"><i class="fas fa-home"></i></a>
 				</li>
-				<li>
+				<li <?php if (isset($link_active[1])) : ?>class="active" <?php endif; ?>>
 					<a href="#">Licenciés</a>
 				</li>
-				<li>
+				<li <?php if (isset($link_active[2])) : ?>class="active" <?php endif; ?>>
 					<a href="#">Éducateurs</a>
 				</li>
-				<li>
+				<li <?php if (isset($link_active[3])) : ?>class="active" <?php endif; ?>>
 					<a href="#">Statistiques</a>
 				</li>
-				<li>
+				<li <?php if (isset($link_active[4])) : ?>class="active" <?php endif; ?>>
 					<a href="#">Suivi des cotisations</a>
 				</li>
 			</ul>

@@ -64,6 +64,9 @@ nav li:hover::after {
     width: 100%;
     transition: width .3s;
 }
+nav li.active::after{
+	width: 100%;
+}
 a:link {
 	text-decoration: none;
 	color: inherit;
