@@ -45,6 +45,8 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                         <th>Adresse mail</th>
                                         <th>Création</th>
                                         <th>Cotisation</th>
+                                        <th></th>
+                                        <th></th>
                                     </tr>
                                 </thead>
 
@@ -71,6 +73,16 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                             </td>
                                             <td>
 
+                                            </td>
+                                            <td>
+                                                <a href="">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                     <?php endwhile; ?>

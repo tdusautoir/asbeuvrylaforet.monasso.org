@@ -36,7 +36,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             <p>Ajouter un licenci&eacute;</p>
           </a>
           <a>
-            <!-- <i class="fa fa-bar-chart"></i>  -->
+            <i class="fa fa-bar-chart"></i>
             <p>Statistiques de la saison</p>
           </a>
           <a>

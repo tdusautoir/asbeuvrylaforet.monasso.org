@@ -235,6 +235,21 @@ th:nth-child(6) {
     width: 15%;
 }
 
+td:nth-child(7),
+th:nth-child(7) {
+    width: 14%;
+}
+
+td:nth-child(8),
+th:nth-child(8) {
+    width: 2%;
+}
+
+td:nth-child(9),
+th:nth-child(9) {
+    width: 2%;
+}
+
 .row-hidden {
     display: none;
 }
