@@ -1,15 +1,18 @@
 .li-admin {
     flex-basis: 50%;
 }
+
 .li-admin h2 {
     font-size: 25px;
 }
+
 .li-admin ul {
     padding: 1em 2em;
     list-style: none;
     font-weight: 700;
     font-size: 18px;
 }
+
 .li-admin li::before {
     content: "";
     background: #D20001;
@@ -20,16 +23,20 @@
     align-self: center;
     display: inline-block;
 }
+
 .li-admin li {
     display: flex;
     margin-top: 5px;
 }
+
 .li-admin p span:first-child {
     text-decoration: underline;
 }
+
 .li-admin p span:not(:first-child) {
     color: #289a37;
 }
+
 .add-panel-separator {
     content: '';
     background: var(--mainColor);
@@ -39,6 +46,7 @@
     margin-bottom: 10px;
     margin-top: 10px;
 }
+
 .add-panel {
     flex-basis: 50%;
     background: white;
@@ -47,17 +55,21 @@
     content: '';
     height: auto;
 }
+
 .add-panel h1 {
     margin: 20px 0;
     text-align: center;
 }
+
 .form-add input {
     width: 40%;
     margin: 30px 5%;
 }
+
 .form-add input#photo-licencie {
     display: none;
 }
+
 .form-add label {
     width: 40%;
     cursor: pointer;
@@ -68,9 +80,10 @@
     padding: 15px;
     font-size: 16px;
     outline: none;
-    color:#8A7575;
+    color: #8A7575;
     margin: 30px 5%;
 }
+
 .form-add select {
     width: 40%;
     cursor: pointer;
@@ -81,16 +94,18 @@
     padding: 15px;
     font-size: 16px;
     outline: none;
-    color:#8A7575;
+    color: #8A7575;
     margin: 30px 5%;
 }
+
 /* .form-add select#groupe-licencie option:checked {
     background-color: var(--mainColor);
     color:white;
 } */
-#nom-photo-licencie{
+#nom-photo-licencie {
     color: var(--mainColor);
 }
+
 .form-add input.bouton-ajouter {
     width: auto;
     cursor: pointer;
@@ -107,24 +122,30 @@
     -o-transition: all 300ms ease 0ms;
     transition: all 300ms ease 0ms;
 }
+
 .form-add input.bouton-ajouter:hover {
     background-color: #000000;
 }
+
 .form-add input {
-    color:#8A7575;
+    color: #8A7575;
 }
+
 .form-add {
     display: flex;
     justify-content: center;
 }
+
 .mail-form-add input {
     width: 100%;
     margin: 30px 5%;
 }
+
 .mail-form-add {
     display: flex;
     justify-content: center;
 }
+
 .add-container {
     flex-grow: 50%;
     display: flex;
@@ -132,7 +153,8 @@
     margin-top: 20px;
     margin-bottom: 60px;
 }
-.add-success{
+
+.add-success {
     background-color: #ffffff3b;
     color: var(--mainColor);
     border: 1px solid var(--mainColor);
@@ -140,4 +162,113 @@
     margin-top: 20px;
     border-radius: 4px;
     font-size: 20px;
+}
+
+.li-container {
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    margin: 30px 0 60px 0;
+}
+
+table th,
+td {
+    padding: 15px;
+    text-align: left;
+}
+
+thead {
+    background-color: var(--mainColor);
+    color: white;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+tbody {
+    display: table-header-group;
+    overflow: auto;
+    width: 100%;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #dbdbdb;
+}
+
+td,
+th {
+    display: inline-block;
+}
+
+
+td:nth-child(1),
+th:nth-child(1) {
+    min-width: 12%;
+}
+
+td:nth-child(2),
+th:nth-child(2) {
+    min-width: 10%;
+}
+
+td:nth-child(3),
+th:nth-child(3) {
+    width: 10%;
+}
+
+td:nth-child(4),
+th:nth-child(4) {
+    width: 12%;
+}
+
+td:nth-child(5),
+th:nth-child(5) {
+    width: 22%;
+}
+
+td:nth-child(6),
+th:nth-child(6) {
+    width: 15%;
+}
+
+.row-hidden {
+    display: none;
+}
+
+.pagination-div li a {
+    display: flex;
+    width: 30px;
+    height: 30px;
+    background-color: var(--mainColor);
+    color: white;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    font-weight: 700;
+    -webkit-transition: all 300ms ease 0ms;
+    -o-transition: all 300ms ease 0ms;
+    transition: all 300ms ease 0ms;
+}
+
+.pagination-div {
+    margin-top: 15px;
+}
+
+.pagination-div li:not(:last-child) {
+    margin-right: 15px;
+}
+
+.pagination-div li a:hover {
+    letter-spacing: 1px;
+    background-color: black;
+}
+
+.pagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
 }

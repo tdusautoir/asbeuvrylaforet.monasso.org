@@ -27,7 +27,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
         <div class="add-container">
           <div class="li-admin">
             <h2>
-              Derniers liscenciés ajoutés :
+              Derniers licenciés ajoutés :
             </h2>
             <?php
             $req = $db->prepare("SELECT categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.USRCRE  FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie ORDER BY licencie.DCRE DESC LIMIT 10"); //Derniers licenciés ajoutés classé par date croissant et limités à 10. 

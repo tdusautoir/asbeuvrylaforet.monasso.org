@@ -1,17 +1,17 @@
 * {
     margin: 0;
     padding: 0;
-} 
+}
 
-.welcome-admin{
+.welcome-admin {
     margin-top: 20px;
 }
 
-.welcome-admin h1{
+.welcome-admin h1 {
     font-size: 25px;
 }
 
-.welcome-admin p{
+.welcome-admin p {
     font-size: 20px;
     margin-top: 10px;
     padding: 0;
@@ -24,6 +24,7 @@
     justify-content: center;
     flex-wrap: wrap;
 }
+
 .admin-panel a {
     display: flex;
     width: 250px;
@@ -42,18 +43,22 @@
     justify-content: center;
     align-items: center;
 }
+
 .admin-panel a:hover {
     box-shadow: 3px 3px 30px #d6d6d6, -3px -3px 30px #ffffff;
 }
+
 .admin-panel a i {
     font-size: 100px;
     font-weight: 200;
 }
+
 .admin-panel a p {
     font-family: "Montserrat", sans-serif;
     font-size: 16px;
     margin-top: 20px;
 }
+
 /* bouton de deconnexion */
 .deconnect {
     display: flex;
@@ -61,6 +66,7 @@
     padding-bottom: 30px;
     width: 100%;
 }
+
 .deconnect a {
     color: #ffffff !important;
     border: none;
@@ -78,26 +84,33 @@
     -o-transition: all 300ms ease 0ms;
     transition: all 300ms ease 0ms;
 }
+
 .deconnect a:hover {
     letter-spacing: 1px;
     background-color: #000000;
 }
 
-@media screen and (max-width:800px){
+@media screen and (max-width:800px) {
     .welcome-admin h1 {
         font-size: 20px;
     }
-    .welcome-admin p{
+
+    .welcome-admin p {
         font-size: 15px;
     }
-	.add-panel {
-		width: 100%;
+
+    .add-panel {
+        width: 100%;
         margin-bottom: 30px;
         box-shadow: none;
-	}
-    .add-panel input, .add-panel label, .add-panel select {
+    }
+
+    .add-panel input,
+    .add-panel label,
+    .add-panel select {
         font-size: 13px;
-	}
+    }
+
     .add-container {
         flex-direction: column-reverse;
     }
