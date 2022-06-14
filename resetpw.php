@@ -2,8 +2,8 @@
 
 session_start();
 
-require_once("function.php");
-require_once("db.php");
+require_once("./function.php");
+require_once("./db.php");
 
 date_default_timezone_set("Europe/Paris");
 
@@ -13,12 +13,11 @@ endif;
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
-    <?php require("head.php"); ?>
+    <?php require("./components/head.php"); ?>
     <title>Rénitialiser votre mot de passe - A.S. BEUVRY LA FORÊT</title>
-    <link rel="stylesheet" href="./public/css/login.css">
 </head>
 
 <body>

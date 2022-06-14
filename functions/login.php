@@ -2,8 +2,8 @@
 
 session_start();
 
-require_once "./db.php";
-require_once "./function.php";
+require_once "../db.php";
+require_once "../function.php";
 
 if (isset($_POST["submit"])) {
     if (!empty($_POST["email"]) && isset($_POST["email"])) {
@@ -39,7 +39,7 @@ if (isset($_POST["submit"])) {
                             "Mot de passe invalide.",
                             FLASH_ERROR
                         ); //Mot de passe invalide
-                        header("location: index.php");
+                        header("location: ../index.php");
                         exit();
                     }
                 } else { //si personne trouvé en tant qu'admin --> recherche educateur
@@ -63,7 +63,7 @@ if (isset($_POST["submit"])) {
                                 "Mot de passe invalide.",
                                 FLASH_ERROR
                             ); //Mot de passe invalide
-                            header("location: index.php");
+                            header("location: ../index.php");
                             exit();
                         }
                     } else {
@@ -73,7 +73,7 @@ if (isset($_POST["submit"])) {
                             "Identifiants invalides.",
                             FLASH_ERROR
                         ); //Identifiants invalides
-                        header("location: index.php");
+                        header("location: ../index.php");
                         exit();
                     }
                 }
@@ -83,7 +83,7 @@ if (isset($_POST["submit"])) {
                     "Email non valide.",
                     FLASH_ERROR
                 ); //Email non valide
-                header("location: index.php");
+                header("location: ../index.php");
                 exit();
             }
         } else {
@@ -92,7 +92,7 @@ if (isset($_POST["submit"])) {
                 "Saisissez votre mot de passe.",
                 FLASH_ERROR
             ); //Mot de passe non spécifié
-            header("location: index.php");
+            header("location: ../index.php");
             exit();
         }
     } else {
@@ -101,9 +101,9 @@ if (isset($_POST["submit"])) {
             "Saisissez votre adresse e-mail.",
             FLASH_ERROR
         ); //email non spécifié
-        header("location: index.php");
+        header("location: ../index.php");
         exit();
     }
 }
 
-header("location: index.php");
+header("location: ../index.php");

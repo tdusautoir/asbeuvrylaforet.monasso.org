@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require("./function.php");
+require("../function.php");
 
 if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "logout") {
   clean_php_session();
@@ -11,32 +11,29 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
 <!DOCTYPE html>
 <html lang="fr">
 
-<head> <?php require("head.php"); ?>
-  <link rel="stylesheet" href="./public/css/login.css">
-  <link rel="stylesheet" href="./public/css/style.css">
-  <link rel="stylesheet" href="./public/css/dev.css">
+<head> <?php require("./components/head.php"); ?>
   <title>Espace Ajout Licencié - A.S. BEUVRY LA FORÊT</title>
 </head>
 
 <body>
   <?php if (is_logged()) : ?>
-    <?php include('header.php'); ?>
+    <?php include('./components/header.php'); ?>
     <div class="container">
       <div class="container-content">
         <div class="add-panel">
-            <h1>
-                Ajouter un licencié
-            </h1>
-            <form action="">
+          <h1>
+            Ajouter un licencié
+          </h1>
+          <form action="">
             <div class="form-add">
-                <input type="text" class="nom-licencie" placeholder="Nom" required="required">
-                <input type="text" class="prenom-licencie" placeholder="Prénom" required="required">
+              <input type="text" class="nom-licencie" placeholder="Nom" required="required">
+              <input type="text" class="prenom-licencie" placeholder="Prénom" required="required">
             </div>
             <div class="form-add">
               <label for="photo-licencie">
                 Photo du licencié
-              <input id="photo-licencie" type="file" accept="image/png, image/jpeg" required="required"/>
-              <span id="nom-photo-licencie"></span>
+                <input id="photo-licencie" type="file" accept="image/png, image/jpeg" required="required" />
+                <span id="nom-photo-licencie"></span>
               </label>
               <input type="date">
             </div>
@@ -54,12 +51,12 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
               </select>
             </div>
             <div class="mail-form-add">
-                <input type="mail" class="mail-licencie" placeholder="Adresse mail" required="required">
+              <input type="mail" class="mail-licencie" placeholder="Adresse mail" required="required">
             </div>
             <div class="form-add">
               <input type="submit" value="Ajouter" class="bouton-ajouter">
             </div>
-            </form>
+          </form>
         </div>
         <div class="deconnect">
           <a href="index.php">Retour</a>
@@ -68,16 +65,16 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
     </div>
     <script>
       let input = document.getElementById("photo-licencie");
-        let imageName = document.getElementById("nom-photo-licencie")
+      let imageName = document.getElementById("nom-photo-licencie")
 
-        input.addEventListener("change", ()=>{
-            let inputImage = document.querySelector("input[type=file]").files[0];
+      input.addEventListener("change", () => {
+        let inputImage = document.querySelector("input[type=file]").files[0];
 
-            imageName.innerText = inputImage.name;
-        })
+        imageName.innerText = inputImage.name;
+      })
     </script>
   <?php else : ?> <section class="formulaire_login">
-      <form method="POST" action="login.php" class="form_container">
+      <form method="POST" action="./functions/login.php" class="form_container">
         <div class="form_content">
           <div class="logo_association">
             <img draggable="false" src="./public/images/logo-asb.svg" alt="">

@@ -2,8 +2,8 @@
 
 session_start();
 
-require_once("db.php");
-require_once("function.php");
+require_once("../db.php");
+require_once("../function.php");
 
 if (isset($_POST["submit"])) {
     if (!empty($_POST["email"]) && isset($_POST["email"])) {
@@ -255,16 +255,16 @@ if (isset($_POST["submit"])) {
 
                     if ($send_succ) {
                         create_flash_message('send_success', 'Le mail a bien été envoyé.', FLASH_SUCCESS); //Mail envoyé
-                        header("location: resetpw.php");
+                        header("location: ../resetpw.php");
                         exit;
                     } else {
                         create_flash_message('send_error', 'Oops, une erreur est survenue, veuillez réessayer.', FLASH_WARNING); //Erreur envoie mail
-                        header("location: resetpw.php");
+                        header("location: ../resetpw.php");
                         exit;
                     }
                 } else {
                     create_flash_message('send_error', 'Oops, une erreur est survenue, veuillez réessayer.', FLASH_WARNING); //Erreur envoie mail
-                    header("location: resetpw.php");
+                    header("location: ../resetpw.php");
                     exit;
                 }
 
@@ -274,17 +274,17 @@ if (isset($_POST["submit"])) {
                 //     //
             } else { //Aucun itilisateur trouvé dans la base de données
                 create_flash_message(ERROR_MAIL, 'Identifiants invalides', FLASH_ERROR); //identifiants invalides
-                header("location: resetpw.php"); //token=$token
+                header("location: ../resetpw.php"); //token=$token
                 exit;
             }
         } else {
             create_flash_message(ERROR_MAIL, 'Votre email est invalide.', FLASH_ERROR); //email non valide
-            header("location: resetpw.php");
+            header("location: ../resetpw.php");
             exit;
         }
     } else {
         create_flash_message(ERROR_MAIL, 'Saisissez votre adresse e-mail.', FLASH_ERROR); //email non spécifié
-        header("location: resetpw.php");
+        header("location: ../resetpw.php");
         exit;
     }
 }

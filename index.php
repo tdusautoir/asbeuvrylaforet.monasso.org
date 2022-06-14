@@ -11,15 +11,13 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
 <!DOCTYPE html>
 <html lang="fr">
 
-<head> <?php require("head.php"); ?>
-  <link rel="stylesheet" href="./public/css/login.css">
-  <link rel="stylesheet" href="./public/css/style.css">
+<head> <?php require("./components/head.php"); ?>
   <title>Espace Admin - A.S. BEUVRY LA FORÊT</title>
 </head>
 
 <body>
   <?php if (is_logged()) : ?>
-    <?php include('header.php'); ?>
+    <?php include('./components/header.php'); ?>
     <div class="container">
       <div class="container-content">
         <div class="welcome-admin">
@@ -30,11 +28,11 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
         <div class="welcome-separator"></div>
         <div class="admin-panel">
           <a>
-            <i class="fa fa-plus"></i> 
+            <i class="fa fa-plus"></i>
             <p>Ajouter un &eacute;ducateur</p>
           </a>
           <a href="add.php">
-            <i class="fa fa-user-plus"></i> 
+            <i class="fa fa-user-plus"></i>
             <p>Ajouter un licenci&eacute;</p>
           </a>
           <a>
@@ -42,23 +40,23 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             <p>Statistiques de la saison</p>
           </a>
           <a>
-            <i class="fa fa-cogs"></i> 
+            <i class="fa fa-cogs"></i>
             <p>Mon compte</p>
           </a>
           <a>
-            <i class="fa fa-user"></i> 
+            <i class="fa fa-user"></i>
             <p>Gestion des &eacute;ducateurs</p>
           </a>
           <a>
-            <i class="fa fa-users"></i> 
+            <i class="fa fa-users"></i>
             <p>Gestion des licenci&eacute;s</p>
           </a>
           <a>
-            <i class="fa fa-euro-sign"></i> 
+            <i class="fa fa-euro-sign"></i>
             <p>Suivi des cotisations</p>
           </a>
           <a>
-            <i class="fa fa-file-invoice"></i> 
+            <i class="fa fa-file-invoice"></i>
             <p>G&eacute;n&eacute;rer une attestation</p>
           </a>
         </div>
@@ -91,7 +89,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
       </div>
     </div>
   <?php else : ?> <section class="formulaire_login">
-      <form method="POST" action="login.php" class="form_container">
+      <form method="POST" action="./functions/login.php" class="form_container">
         <div class="form_content">
           <div class="logo_association">
             <img draggable="false" src="./public/images/logo-asb.svg" alt="">
