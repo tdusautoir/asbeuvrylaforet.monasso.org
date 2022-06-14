@@ -34,24 +34,86 @@
     box-shadow: 3px 3px 30px #d6d6d6, -3px -3px 30px #ffffff;
     border-radius: 20px;
     content: '';
-    width: 715px;
+    width: 50%;
     height: 627px;
     margin-top: 20px;
-    margin-bottom: 28px;
+    margin-bottom: 60px;
 }
 .add-panel h1 {
-    margin-top: 20px;
+    margin: 20px 0;
     text-align: center;
 }
-.welcome-add{
-    float: left;
-    margin-top: 20px;
+.form-add input {
+    width: 40%;
+    margin: 30px 5%;
 }
-.welcome-add h1{
-    font-size: 25px;
+.form-add input#photo-licencie {
+    display: none;
 }
-.welcome-add p{
-    font-size: 20px;
-    margin-top: 10px;
-    padding: 0;
+.form-add label {
+    width: 40%;
+    cursor: pointer;
+    background: #fff;
+    color: #1a1a1a;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+    padding: 15px;
+    font-size: 16px;
+    outline: none;
+    color:#8A7575;
+    margin: 30px 5%;
+}
+.form-add select {
+    width: 40%;
+    cursor: pointer;
+    background: #fff;
+    color: #1a1a1a;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+    padding: 15px;
+    font-size: 16px;
+    outline: none;
+    color:#8A7575;
+    margin: 30px 5%;
+}
+/* .form-add select#groupe-licencie option:checked {
+    background-color: var(--mainColor);
+    color:white;
+} */
+#nom-photo-licencie{
+    color: var(--mainColor);
+}
+.form-add input.bouton-ajouter {
+    width: auto;
+    cursor: pointer;
+    color: #ffffff !important;
+    border: none;
+    border-radius: 98px;
+    cursor: pointer;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: var(--mainColor);
+    -webkit-transition: all 300ms ease 0ms;
+    -o-transition: all 300ms ease 0ms;
+    transition: all 300ms ease 0ms;
+}
+.form-add input.bouton-ajouter:hover {
+    background-color: #000000;
+}
+.form-add input {
+    color:#8A7575;
+}
+.form-add {
+    display: flex;
+    justify-content: center;
+}
+.mail-form-add input {
+    width: 100%;
+    margin: 30px 5%;
+}
+.mail-form-add {
+    display: flex;
+    justify-content: center;
 }

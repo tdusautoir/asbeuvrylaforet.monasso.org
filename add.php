@@ -14,8 +14,8 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
 <head> <?php require("head.php"); ?>
   <link rel="stylesheet" href="./public/css/login.css">
   <link rel="stylesheet" href="./public/css/style.css">
-  <link rel="stylesheet" href="dev.css">
-  <title>Espace Admin - A.S. BEUVRY LA FORÊT</title>
+  <link rel="stylesheet" href="./public/css/dev.css">
+  <title>Espace Ajout Licencié - A.S. BEUVRY LA FORÊT</title>
 </head>
 
 <body>
@@ -27,16 +27,55 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             <h1>
                 Ajouter un licencié
             </h1>
-            <div class="mail-add">
-                <!-- <input type="text" class="Nom">
-                <input type="text" class="Prenom"> -->
+            <form action="">
+            <div class="form-add">
+                <input type="text" class="nom-licencie" placeholder="Nom" required="required">
+                <input type="text" class="prenom-licencie" placeholder="Prénom" required="required">
             </div>
+            <div class="form-add">
+              <label for="photo-licencie">
+                Photo du licencié
+              <input id="photo-licencie" type="file" accept="image/png, image/jpeg" required="required"/>
+              <span id="nom-photo-licencie"></span>
+              </label>
+              <input type="date">
+            </div>
+            <div class="form-add">
+              <select name="groupe-licencie" id="groupe-licencie" required="required">
+                <option value="" disabled selected>Catégorie</option>
+                <option value="U10">U10</option>
+                <option value="U11">U11</option>
+                <option value="U12">U12</option>
+              </select>
+              <select name="sexe-licencie" id="sexe-licencie" required="required">
+                <option value="" disabled selected>Sexe</option>
+                <option value="m">Homme</option>
+                <option value="f">Femme</option>
+              </select>
+            </div>
+            <div class="mail-form-add">
+                <input type="mail" class="mail-licencie" placeholder="Adresse mail" required="required">
+            </div>
+            <div class="form-add">
+              <input type="submit" value="Ajouter" class="bouton-ajouter">
+            </div>
+            </form>
         </div>
         <div class="deconnect">
-          <a href="index.php" class="deco-button">Retour</a>
+          <a href="index.php">Retour</a>
         </div>
       </div>
     </div>
+    <script>
+      let input = document.getElementById("photo-licencie");
+        let imageName = document.getElementById("nom-photo-licencie")
+
+        input.addEventListener("change", ()=>{
+            let inputImage = document.querySelector("input[type=file]").files[0];
+
+            imageName.innerText = inputImage.name;
+        })
+    </script>
   <?php else : ?> <section class="formulaire_login">
       <form method="POST" action="login.php" class="form_container">
         <div class="form_content">
@@ -66,7 +105,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
           </div>
       </form>
     </section>
-    <script src="./public/js/login.js" type="text/javascript" async></script> <?php endif; ?>
+    <script src="./public/js/login.js" type="text/javascript" async></script><?php endif; ?>
 </body>
 
 </html>

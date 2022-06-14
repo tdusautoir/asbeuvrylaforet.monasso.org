@@ -111,3 +111,4 @@
 				$(".form_field_error_mail").hide();
 			}
 		});
+		
