@@ -80,7 +80,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
               <?php endwhile; ?>
             </ul>
           <?php else : ?>
-            <p> Aucun licencié n'a encore été crée </p>
+            <p> Aucun licencié n'a encore été créé </p>
           <?php endif; ?>
         </div>
         <div class="deconnect">

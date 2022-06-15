@@ -46,19 +46,9 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 <?php endwhile; ?>
               </ul>
             <?php else : ?>
-              <p> Aucun licencié n'a encore été crée </p>
+              <p> Aucun licencié n'a encore été créé </p>
             <?php endif; ?>
             <div class="add-panel-separator"></div>
-            <div class="add-short-panel">
-              <a href="./licencies.php">
-                <i class="fa fa-users"></i>
-                <p>Gestion des licenci&eacute;s</p>
-              </a>
-              <a>
-                <i class="fa fa-euro-sign"></i>
-                <p>Suivi des cotisations</p>
-              </a>
-            </div>
           </div>
           <div class="add-panel">
             <h1>
