@@ -75,7 +75,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                   <input id="photo-licencie" type="file" accept="image/png, image/jpeg" required="required" />
                   <span id="nom-photo-licencie"></span>
                 </label>
-                <input type="text" placeholder="Date de naissance" name="dateN-licencie" onfocus='(this.type="date")' onblur='(this.type="text")'>
+                <input type="date" placeholder="Date de naissance" name="dateN-licencie">
               </div>
               <div class="form-add">
                 <select name="categorie-licencie" id="categorie-licencie" required="required">
