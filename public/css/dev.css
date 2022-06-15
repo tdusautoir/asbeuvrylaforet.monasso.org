@@ -152,10 +152,10 @@ tbody td .fa-trash:hover {
     transform: translate(-50%, -50%);
     background: white;
     width: 300px;
-    height: 125px;
+    height: 110px;
     /* display: flex; */
     display: none;
-    box-shadow: 0 0 7px rgb(0 0 0 / 60%);
+    box-shadow: 0 0 10px rgb(0 0 0 / 44%);
     border-radius: 10px;
     text-align: center;
     flex-direction: column;
@@ -163,11 +163,12 @@ tbody td .fa-trash:hover {
 }
 
 #Modal p {
-    font-size: 18px;
     font-weight: 700;
+    text-transform: uppercase;
 }
 
 #Modal a {
+    width: 80px;
     margin: 0 10px;
     padding: 10px;
     color: #ffffff !important;
