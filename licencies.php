@@ -21,10 +21,10 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
         <?php include('./components/header.php'); ?>
         <div class="container">
             <div class="container-content">
-                <?php if (isset_flash_message_by_name("add_success")) : ?>
-                    <div class="add-success"><?php display_flash_message_by_name("add_success"); ?></div>
-                <?php elseif (isset_flash_message_by_name("add_error")) : ?>
-                    <div class="add-error"><?php display_flash_message_by_name("add_error"); ?></div>
+                <?php if (isset_flash_message_by_name("delete_success")) : ?>
+                    <div class="add-success"><?php display_flash_message_by_name("delete_success"); ?></div>
+                <?php elseif (isset_flash_message_by_name("delete_error")) : ?>
+                    <div class="add-error"><?php display_flash_message_by_name("delete_error"); ?></div>
                 <?php endif; ?>
                 <div class="li-container">
                     <div class="li-li-admin">
@@ -32,7 +32,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                             Liste des licenciés :
                         </h2>
                         <?php
-                        $req = $db->prepare("SELECT licencie.idLicencie, categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.dateN, licencie.mail, licencie.USRCRE FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie ORDER BY licencie.DCRE DESC"); //Derniers licenciés ajoutés classé par date croissant et limités à 10. 
+                        $req = $db->prepare("SELECT licencie.idLicencie, categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.dateN, licencie.mail, licencie.USRCRE FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.COSU = 0 ORDER BY licencie.DCRE DESC;"); //Derniers licenciés ajoutés classé par date croissant et limités à 10. 
                         $req->execute();
                         $rowCount = $req->rowCount();
                         if ($rowCount > 0) : //si on trouve des licenciés ajoutés on affiche la liste de la requete.
