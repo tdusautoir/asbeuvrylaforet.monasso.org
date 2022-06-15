@@ -62,7 +62,7 @@
 }
 
 .form-add input {
-    width: 40%;
+    min-width: 40%;
     margin: 30px 5%;
 }
 
@@ -71,7 +71,7 @@
 }
 
 .form-add label {
-    width: 40%;
+    min-width: 40%;
     cursor: pointer;
     background: #fff;
     color: #1a1a1a;
@@ -313,4 +313,45 @@ tbody td .fa-trash:hover {
     -webkit-transition: all 300ms ease 0ms;
     -o-transition: all 300ms ease 0ms;
     transition: all 300ms ease 0ms;
+}
+
+.add-short-panel {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.add-short-panel a {
+    display: flex;
+    width: 150px;
+    height: 150px;
+    background-color: #ffffff;
+    text-decoration: none;
+    text-align: center;
+    color: black;
+    border-radius: 10px;
+    box-shadow: 3px 3px 40px #f3f3f3, -3px -3px 30px #ffffff;
+    margin: 2.5%;
+    transition: 0.3s;
+    cursor: pointer;
+    font-size: 16px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-short-panel a:hover {
+    box-shadow: 3px 3px 30px #d6d6d6, -3px -3px 30px #ffffff;
+}
+
+.add-short-panel a i {
+    font-size: 50px;
+    font-weight: 200;
+}
+
+.add-short-panel a p {
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    margin-top: 20px;
 }
