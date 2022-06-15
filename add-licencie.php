@@ -56,19 +56,19 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             </h1>
             <form action="./functions/licencie-add.php" method="POST">
               <div class="form-add">
-                <input type="text" class="nom-licencie" placeholder="Nom" name="nom-licencie" maxlength="20" required="required">
-                <input type="text" class="prenom-licencie" placeholder="Prénom" name="prenom-licencie" maxlength="15" required="required">
+                <input type="text" class="nom-licencie" placeholder="Nom" name="nom-licencie" maxlength="20">
+                <input type="text" class="prenom-licencie" placeholder="Prénom" name="prenom-licencie" maxlength="15">
               </div>
               <div class="form-add">
                 <label for="photo-licencie">
                   Photo du licencié
-                  <input id="photo-licencie" type="file" accept="image/png, image/jpeg" required="required" />
+                  <input id="photo-licencie" type="file" accept="image/png, image/jpeg" />
                   <span id="nom-photo-licencie"></span>
                 </label>
                 <input type="date" placeholder="Date de naissance" name="dateN-licencie">
               </div>
               <div class="form-add">
-                <select name="categorie-licencie" id="categorie-licencie" required="required">
+                <select name="categorie-licencie" id="categorie-licencie">
                   <option value="" disabled selected>Catégorie</option>
                   <?php
                   $req_category = $db->query("SELECT idCategorie, nomCategorie FROM categorie");
@@ -81,14 +81,14 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                   endwhile;
                   ?>
                 </select>
-                <select name="sexe-licencie" id="sexe-licencie" required="required">
+                <select name="sexe-licencie" id="sexe-licencie">
                   <option value="" disabled selected>Sexe</option>
                   <option value="m">Homme</option>
                   <option value="f">Femme</option>
                 </select>
               </div>
               <div class="mail-form-add">
-                <input type="mail" class="mail-licencie" name="mail-licencie" placeholder="Adresse mail" maxlength="40" required="required">
+                <input type="mail" class="mail-licencie" name="mail-licencie" placeholder="Adresse mail" maxlength="40">
               </div>
               <div class="form-add">
                 <input type="submit" value="Ajouter" name="submit" class="bouton-ajouter">

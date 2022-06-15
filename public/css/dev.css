@@ -34,6 +34,7 @@ tbody tr:nth-child(even) {
 
 td,
 th {
+    overflow-x: hidden;
     display: inline-block;
 }
 
@@ -187,4 +188,119 @@ tbody td .fa-trash:hover {
 
 #Modal .modal-button {
     display: flex;
+}
+
+/* 
+--------------------------------------------------
+--------------------PAGE MODIF--------------------
+-------------------------------------------------- 
+*/
+
+.modif-li-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
+
+/* -----Page d'ajout Liste----- */
+
+.modif-li-panel {
+    padding: 20px;
+    width: 50%;
+    background: white;
+    box-shadow: 3px 3px 30px #d6d6d6, -3px -3px 30px #ffffff;
+    border-radius: 20px;
+    height: auto;
+}
+
+.modif-li-panel h1 {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.modif-li-panel-separator {
+    content: '';
+    background: var(--mainColor);
+    width: 50px;
+    height: 8px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+/* -----Page d'ajout Formulaire */
+
+.form-modif-li {
+    display: flex;
+    justify-content: center;
+}
+
+.form-modif-li input {
+    min-width: 40%;
+    margin: 30px 5%;
+    color: #8A7575;
+}
+
+.form-modif-li input#photo-licencie {
+    display: none;
+}
+
+.form-modif-li label {
+    min-width: 40%;
+    cursor: pointer;
+    background: #fff;
+    color: #1a1a1a;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+    padding: 15px;
+    font-size: 16px;
+    outline: none;
+    color: #8A7575;
+    margin: 30px 5%;
+}
+
+#nom-photo-licencie {
+    color: var(--mainColor);
+}
+
+.form-modif-li select {
+    width: 40%;
+    cursor: pointer;
+    background: #fff;
+    color: #1a1a1a;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+    padding: 15px;
+    font-size: 16px;
+    outline: none;
+    color: #8A7575;
+    margin: 30px 5%;
+}
+
+.mail-form-modif-li {
+    display: flex;
+    justify-content: center;
+}
+
+.mail-form-modif-li input {
+    width: 100%;
+    margin: 30px 5%;
+}
+
+.form-modif-li input.bouton-ajouter {
+    width: auto;
+    color: #ffffff !important;
+    border: none;
+    border-radius: 200px;
+    cursor: pointer;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: var(--mainColor);
+    transition: all 300ms ease 0ms;
+    margin: 0;
+}
+
+.form-modif-li input.bouton-ajouter:hover {
+    background-color: #000000;
 }

@@ -78,7 +78,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
 
                                                 </td>
                                                 <td>
-                                                    <a href="">
+                                                    <a href="./modif-licencie.php">
                                                         <i class="fa fa-pencil"></i>
                                                     </a>
                                                 </td>
