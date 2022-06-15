@@ -37,59 +37,61 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                         $rowCount = $req->rowCount();
                         if ($rowCount > 0) : //si on trouve des licenciés ajoutés on affiche la liste de la requete.
                         ?>
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Catégorie</th>
-                                        <th>Nom</th>
-                                        <th>Prénom</th>
-                                        <th>Naissance</th>
-                                        <th>Adresse mail</th>
-                                        <th>Création</th>
-                                        <th>Cotisation</th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <?php while ($LIC = $req->fetch(PDO::FETCH_ASSOC)) : ?>
+                            <div class="licencie-tab">
+                                <table class="table table-striped">
+                                    <thead>
                                         <tr>
-                                            <td>
-                                                <?= $LIC["nomCategorie"] ?>
-                                            </td>
-                                            <td>
-                                                <?= $LIC["nom"] ?>
-                                            </td>
-                                            <td>
-                                                <?= $LIC["prenom"] ?>
-                                            </td>
-                                            <td>
-                                                <?= $LIC["dateN"] ?>
-                                            </td>
-                                            <td>
-                                                <?= $LIC["mail"] ?>
-                                            </td>
-                                            <td>
-                                                <?= $LIC["USRCRE"] ?>
-                                            </td>
-                                            <td>
-
-                                            </td>
-                                            <td>
-                                                <a href="">
-                                                    <i class="fa fa-pencil"></i>
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <a href="./functions/licencie-delete.php?idLicencie=<?= $LIC["idLicencie"] ?>">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
-                                            </td>
+                                            <th>Catégorie</th>
+                                            <th>Nom</th>
+                                            <th>Prénom</th>
+                                            <th>Naissance</th>
+                                            <th>Adresse mail</th>
+                                            <th>Création</th>
+                                            <th>Cotisation</th>
+                                            <th></th>
+                                            <th></th>
                                         </tr>
-                                    <?php endwhile; ?>
-                                </tbody>
-                            </table>
+                                    </thead>
+
+                                    <tbody>
+                                        <?php while ($LIC = $req->fetch(PDO::FETCH_ASSOC)) : ?>
+                                            <tr>
+                                                <td>
+                                                    <?= $LIC["nomCategorie"] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $LIC["nom"] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $LIC["prenom"] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $LIC["dateN"] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $LIC["mail"] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $LIC["USRCRE"] ?>
+                                                </td>
+                                                <td>
+
+                                                </td>
+                                                <td>
+                                                    <a href="">
+                                                        <i class="fa fa-pencil"></i>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a href="./functions/licencie-delete.php?idLicencie=<?= $LIC["idLicencie"] ?>">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php endwhile; ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         <?php else : ?>
                             <p> Aucun licencié n'a encore été crée </p>
                         <?php endif; ?>

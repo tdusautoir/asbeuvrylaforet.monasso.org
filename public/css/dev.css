@@ -1,185 +1,9 @@
-.li-admin {
-    flex-basis: 50%;
-}
-
-.li-admin h2 {
-    font-size: 25px;
-}
-
-.li-admin ul {
-    padding: 1em 2em;
-    list-style: none;
-    font-weight: 700;
-    font-size: 18px;
-}
-
-.li-admin li::before {
-    content: "";
-    background: #D20001;
-    border-radius: 100%;
-    width: 10px;
-    height: 10px;
-    margin-right: 10px;
-    align-self: center;
-    display: inline-block;
-}
-
-.li-admin li {
-    display: flex;
-    margin-top: 5px;
-}
-
-.li-admin p span:first-child {
-    text-decoration: underline;
-}
-
-.li-admin p span:not(:first-child) {
-    color: #289a37;
-}
-
-.add-panel-separator {
-    content: '';
-    background: var(--mainColor);
-    width: 50px;
-    height: 8px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    margin-top: 10px;
-}
-
-.add-panel {
-    flex-basis: 50%;
-    background: white;
-    box-shadow: 3px 3px 30px #d6d6d6, -3px -3px 30px #ffffff;
-    border-radius: 20px;
-    content: '';
-    height: auto;
-}
-
-.add-panel h1 {
-    margin: 20px 0;
-    text-align: center;
-}
-
-.form-add input {
-    width: 40%;
-    margin: 30px 5%;
-}
-
-.form-add input#photo-licencie {
-    display: none;
-}
-
-.form-add label {
-    width: 40%;
-    cursor: pointer;
-    background: #fff;
-    color: #1a1a1a;
-    border: 1px solid #e6e6e6;
-    border-radius: 4px;
-    padding: 15px;
-    font-size: 16px;
-    outline: none;
-    color: #8A7575;
-    margin: 30px 5%;
-}
-
-.form-add select {
-    width: 40%;
-    cursor: pointer;
-    background: #fff;
-    color: #1a1a1a;
-    border: 1px solid #e6e6e6;
-    border-radius: 4px;
-    padding: 15px;
-    font-size: 16px;
-    outline: none;
-    color: #8A7575;
-    margin: 30px 5%;
-}
-
-/* .form-add select#groupe-licencie option:checked {
-    background-color: var(--mainColor);
-    color:white;
-} */
-#nom-photo-licencie {
-    color: var(--mainColor);
-}
-
-.form-add input.bouton-ajouter {
-    width: auto;
-    cursor: pointer;
-    color: #ffffff !important;
-    border: none;
-    border-radius: 98px;
-    cursor: pointer;
-    padding: 16px;
-    font-size: 16px;
-    font-weight: 700;
-    text-transform: uppercase;
-    background-color: var(--mainColor);
-    -webkit-transition: all 300ms ease 0ms;
-    -o-transition: all 300ms ease 0ms;
-    transition: all 300ms ease 0ms;
-}
-
-.form-add input.bouton-ajouter:hover {
-    background-color: #000000;
-}
-
-.form-add input {
-    color: #8A7575;
-}
-
-.form-add {
-    display: flex;
-    justify-content: center;
-}
-
-.mail-form-add input {
-    width: 100%;
-    margin: 30px 5%;
-}
-
-.mail-form-add {
-    display: flex;
-    justify-content: center;
-}
-
-.add-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    margin-bottom: 60px;
-}
-
-.add-success {
-    background-color: rgba(40, 154, 55, 0.11);
-    color: var(--mainColor);
-    border: 1px solid var(--mainColor);
-    padding: 12px 20px;
-    margin-top: 20px;
-    border-radius: 4px;
-    font-size: 20px;
-}
-
-.add-error {
-    background-color: rgba(210, 0, 0, 0.11);
-    color: var(--errorColor);
-    border: 1px solid var(--errorColor);
-    padding: 12px 20px;
-    margin-top: 20px;
-    border-radius: 4px;
-    font-size: 20px;
-}
-
 .li-container {
-    margin-top: 20px;
-    margin-bottom: 60px;
+    padding: 30px 0;
 }
 
 table {
-    width: 100%;
+    width: 1400px;
     table-layout: fixed;
     border-collapse: collapse;
     margin: 30px 0 60px 0;
@@ -213,50 +37,49 @@ th {
     display: inline-block;
 }
 
-
 td:nth-child(1),
 th:nth-child(1) {
-    min-width: 12%;
+    min-width: 12%
 }
 
 td:nth-child(2),
 th:nth-child(2) {
-    min-width: 10%;
+    min-width: 10%
 }
 
 td:nth-child(3),
 th:nth-child(3) {
-    width: 10%;
+    width: 10%
 }
 
 td:nth-child(4),
 th:nth-child(4) {
-    width: 12%;
+    width: 12%
 }
 
 td:nth-child(5),
 th:nth-child(5) {
-    width: 22%;
+    width: 22%
 }
 
 td:nth-child(6),
 th:nth-child(6) {
-    width: 15%;
+    width: 15%
 }
 
 td:nth-child(7),
 th:nth-child(7) {
-    width: 14%;
+    width: 14%
 }
 
 td:nth-child(8),
 th:nth-child(8) {
-    width: 2%;
+    width: 2%
 }
 
 td:nth-child(9),
 th:nth-child(9) {
-    width: 2%;
+    width: 2%
 }
 
 .row-hidden {
@@ -313,4 +136,8 @@ tbody td .fa-trash:hover {
     -webkit-transition: all 300ms ease 0ms;
     -o-transition: all 300ms ease 0ms;
     transition: all 300ms ease 0ms;
+}
+
+.licencie-tab {
+    overflow-x: auto;
 }

@@ -49,6 +49,16 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
               <p> Aucun licencié n'a encore été crée </p>
             <?php endif; ?>
             <div class="add-panel-separator"></div>
+            <div class="add-short-panel">
+              <a href="./licencies.php">
+                <i class="fa fa-users"></i>
+                <p>Gestion des licenci&eacute;s</p>
+              </a>
+              <a>
+                <i class="fa fa-euro-sign"></i>
+                <p>Suivi des cotisations</p>
+              </a>
+            </div>
           </div>
           <div class="add-panel">
             <h1>
@@ -65,7 +75,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                   <input id="photo-licencie" type="file" accept="image/png, image/jpeg" required="required" />
                   <span id="nom-photo-licencie"></span>
                 </label>
-                <input type="date" name="dateN-licencie">
+                <input type="date" placeholder="Date de naissance" name="dateN-licencie">
               </div>
               <div class="form-add">
                 <select name="categorie-licencie" id="categorie-licencie" required="required">

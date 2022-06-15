@@ -8,5 +8,6 @@
     <link rel="stylesheet" href="./public/css/dev.css">
     <link rel="stylesheet" href="./public/css/style.css">
     <link rel="stylesheet" href="./public/css/login.css">
+    <link rel="stylesheet" href="./public/css/responsive.css">
     <script type="text/javascript" src="./public/js/jquery-3.6.0.min.js"></script>
 </head>
