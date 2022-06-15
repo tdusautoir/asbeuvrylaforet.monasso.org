@@ -83,11 +83,18 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a href="./functions/licencie-delete.php?idLicencie=<?= $LIC["idLicencie"] ?>">
+                                                    <a href="#" onClick="print();">
                                                         <i class="fa fa-trash"></i>
                                                     </a>
                                                 </td>
                                             </tr>
+                                            <div id="Modal">
+                                                <p>Confirmez la suppression</p>
+                                                <div class="modal-button">
+                                                    <a href="./functions/licencie-delete.php?idLicencie=<?= $LIC["idLicencie"] ?>">Oui</a>
+                                                    <a href=" #" onClick="erase();">Non</a>
+                                                </div>
+                                            </div>
                                         <?php endwhile; ?>
                                     </tbody>
                                 </table>
@@ -184,6 +191,15 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
 
                     totalCounter++;
                 });
+            }
+        </script>
+        <script>
+            function print() {
+                document.getElementById("Modal").style.display = "flex";
+            }
+
+            function erase() {
+                document.getElementById("Modal").style.display = "none";
             }
         </script>
         <?php else : require "./components/logged.php"; ?><?php endif; ?>
