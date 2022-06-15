@@ -179,7 +179,7 @@
 }
 
 table {
-    width: 100%;
+    width: 1400px;
     table-layout: fixed;
     border-collapse: collapse;
     margin: 30px 0 60px 0;
@@ -354,4 +354,8 @@ tbody td .fa-trash:hover {
     font-family: "Montserrat", sans-serif;
     font-size: 16px;
     margin-top: 20px;
+}
+
+.licencie-tab {
+    overflow-x: auto;
 }
