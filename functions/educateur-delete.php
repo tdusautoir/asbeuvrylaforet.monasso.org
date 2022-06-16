@@ -9,8 +9,8 @@ require_once("../db.php");
 if (isset($_GET["idEduc"]) && !empty($_GET["idEduc"])) {
     $idEduc = $_GET["idEduc"];
     if (filter_var($idEduc, FILTER_VALIDATE_INT)) {
-        $info = $db->prepare("SELECT Educ.nom, Educ.prenom FROM educ WHERE Educ.idEduc = $idEduc");
-        $req = $db->prepare("BEGIN; UPDATE Educ SET Educ.COSU = 1 WHERE Educ.idEduc = ?; COMMIT;");
+        $info = $db->prepare("SELECT educ.nom, educ.prenom FROM educ WHERE educ.idEduc = $idEduc");
+        $req = $db->prepare("BEGIN; UPDATE educ SET educ.COSU = 1 WHERE educ.idEduc = ?; COMMIT;");
         $req->bindValue(1, $idEduc, PDO::PARAM_INT);
         $info->execute();
         $result = $req->execute();
