@@ -41,6 +41,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
+                                            <th>Catégorie</th>
                                             <th>Nom</th>
                                             <th>Prénom</th>
                                             <th>Adresse mail</th>
@@ -53,6 +54,9 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                     <tbody>
                                         <?php while ($EDUC = $req->fetch(PDO::FETCH_ASSOC)) : ?>
                                             <tr>
+                                                <td>
+
+                                                </td>
                                                 <td>
                                                     <?= $EDUC["nom"] ?>
                                                 </td>

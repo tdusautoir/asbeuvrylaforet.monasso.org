@@ -77,12 +77,12 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                 <td>
 
                                                 </td>
-                                                <td>
+                                                <td class="action-btns btns-1">
                                                     <a href="./modif-licencie.php">
                                                         <i class="fa fa-pencil"></i>
                                                     </a>
                                                 </td>
-                                                <td>
+                                                <td class="action-btns btns-2">
                                                     <a href="#" onclick="displayModal('Modal-<?= $LIC['idLicencie']; ?>')">
                                                         <i class=" fa fa-trash"></i>
                                                     </a>
