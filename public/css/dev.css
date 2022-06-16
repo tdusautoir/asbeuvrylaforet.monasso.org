@@ -146,17 +146,16 @@
 .Modal {
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
+    padding: 18px;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background: white;
     width: 300px;
-    height: 110px;
-    /* display: flex; */
+    height: 145px;
     display: none;
-    box-shadow: 0 0 10px rgb(0 0 0 / 44%);
+    border: 5px solid var(--mainColor);
     border-radius: 10px;
     text-align: center;
     flex-direction: column;
