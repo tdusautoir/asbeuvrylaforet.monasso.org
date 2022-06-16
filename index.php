@@ -81,7 +81,8 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             </ul>
           <?php else : ?>
             <p> Aucun licencié n'a encore été créé </p>
-          <?php endif; ?>
+          <?php endif;
+          $req->closeCursor(); ?>
         </div>
         <div class="deconnect">
           <a href="index.php?action=logout">Deconnexion</a>

@@ -32,7 +32,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
               Derniers licenciés ajoutés :
             </h2>
             <?php
-            $req = $db->prepare("CALL PRC_TENLIC()");//Derniers licenciés ajoutés classé par date croissant et limités à 10. 
+            $req = $db->prepare("CALL PRC_TENLIC()"); //Derniers licenciés ajoutés classé par date croissant et limités à 10. 
             $req->execute();
             $rowCount = $req->rowCount();
             if ($rowCount > 0) : //si on trouve des licenciés ajoutés on affiche la liste de la requete.
@@ -47,7 +47,8 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
               </ul>
             <?php else : ?>
               <p> Aucun licencié n'a encore été créé </p>
-            <?php endif; ?>
+            <?php endif;
+            $req->closeCursor(); ?>
             <div class="add-panel-separator"></div>
           </div>
           <div class="add-panel">
@@ -79,6 +80,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                   <?php
                     endif;
                   endwhile;
+                  $req_category->closeCursor();
                   ?>
                 </select>
                 <select name="sexe-licencie" id="sexe-licencie">
