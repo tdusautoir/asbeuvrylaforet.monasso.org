@@ -32,7 +32,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
               Derniers licenciés ajoutés :
             </h2>
             <?php
-            $req = $db->prepare("CALL PRC_TENLIC()");//Derniers licenciés ajoutés classé par date croissant et limités à 10. 
+            $req = $db->prepare("CALL PRC_TENLIC()"); //Derniers licenciés ajoutés classé par date croissant et limités à 10. 
             $req->execute();
             $rowCount = $req->rowCount();
             if ($rowCount > 0) : //si on trouve des licenciés ajoutés on affiche la liste de la requete.
