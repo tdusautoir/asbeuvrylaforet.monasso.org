@@ -32,7 +32,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                             Liste des éducateurs :
                         </h2>
                         <?php
-                        $req = $db->prepare("SELECT licencie.idLicencie, categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.dateN, licencie.mail, licencie.USRCRE FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.COSU = 0 ORDER BY licencie.DCRE DESC;"); //Derniers licenciés ajoutés classé par date croissant et limités à 10. 
+                        $req = $db->prepare("SELECT educ.idEduc, educ.prenom, educ.nom, educ.mail, educ.USRCRE FROM educ WHERE educ.COSU = 0 "); //Derniers licenciés ajoutés classé par date croissant et limités à 10. 
                         $req->execute();
                         $rowCount = $req->rowCount();
                         if ($rowCount > 0) : //si on trouve des licenciés ajoutés on affiche la liste de la requete.
@@ -51,19 +51,19 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                     </thead>
 
                                     <tbody>
-                                        <?php while ($LIC = $req->fetch(PDO::FETCH_ASSOC)) : ?>
+                                        <?php while ($EDUC = $req->fetch(PDO::FETCH_ASSOC)) : ?>
                                             <tr>
                                                 <td>
-                                                    <?= $LIC["nom"] ?>
+                                                    <?= $EDUC["nom"] ?>
                                                 </td>
                                                 <td>
-                                                    <?= $LIC["prenom"] ?>
+                                                    <?= $EDUC["prenom"] ?>
                                                 </td>
                                                 <td>
-                                                    <?= $LIC["mail"] ?>
+                                                    <?= $EDUC["mail"] ?>
                                                 </td>
                                                 <td>
-                                                    <?= $LIC["USRCRE"] ?>
+                                                    <?= $EDUC["USRCRE"] ?>
                                                 </td>
                                                 <td>
                                                     <a href="./modif-licencie.php">
@@ -71,16 +71,16 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a href="#" onClick="print();">
-                                                        <i class="fa fa-trash"></i>
+                                                    <a href="#" onclick="displayModal('Modal-<?= $EDUC['idEduc']; ?>')">
+                                                        <i class=" fa fa-trash"></i>
                                                     </a>
                                                 </td>
                                             </tr>
-                                            <div id="Modal">
+                                            <div id="Modal-<?= $EDUC["idEduc"]; ?>" class="Modal">
                                                 <p>Confirmez la suppression</p>
                                                 <div class="modal-button">
-                                                    <a href="./functions/licencie-delete.php?idLicencie=<?= $LIC["idLicencie"] ?>">Oui</a>
-                                                    <a href=" #" onClick="erase();">Non</a>
+                                                    <a href="./functions/educateur-delete.php?idEduc=<?= $EDUC["idEduc"] ?>">Oui</a>
+                                                    <a href=" #" onClick="erase('Modal-<?= $EDUC['idEduc']; ?>');">Non</a>
                                                 </div>
                                             </div>
                                         <?php endwhile; ?>
@@ -182,12 +182,12 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             }
         </script>
         <script>
-            function print() {
-                document.getElementById("Modal").style.display = "flex";
+            function displayModal(idModal) {
+                document.getElementById(idModal).style.display = "flex";
             }
 
-            function erase() {
-                document.getElementById("Modal").style.display = "none";
+            function erase(idModal) {
+                document.getElementById(idModal).style.display = "none";
             }
         </script>
         <?php else : require "./components/logged.php"; ?><?php endif; ?>
