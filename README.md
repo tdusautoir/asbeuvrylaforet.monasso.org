@@ -33,8 +33,8 @@
 
 ## v0.6
 
-- gestion et affichage des licencies
-- gestion et affichage des éducateurs
+- members display and management
+- coachs display and management
 
 
 
