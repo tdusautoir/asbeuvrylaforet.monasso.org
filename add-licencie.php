@@ -47,7 +47,8 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
               </ul>
             <?php else : ?>
               <p> Aucun licencié n'a encore été créé </p>
-            <?php endif; ?>
+            <?php endif;
+            $req->closeCursor(); ?>
             <div class="add-panel-separator"></div>
           </div>
           <div class="add-panel">
@@ -79,6 +80,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                   <?php
                     endif;
                   endwhile;
+                  $req_category->closeCursor();
                   ?>
                 </select>
                 <select name="sexe-licencie" id="sexe-licencie">

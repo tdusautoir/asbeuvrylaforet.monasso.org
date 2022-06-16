@@ -56,7 +56,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                     <?php
                                         endif;
                                     endwhile;
-                                    ?>
+                                    $req_category->closeCursor(); ?>
                                 </select>
                                 <select name="sexe-licencie" id="sexe-licencie">
                                     <option value="" disabled selected>Sexe</option>
