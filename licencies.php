@@ -102,7 +102,8 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                         <?php else : ?>
                             <p> Aucun licencié n'a encore été créé </p>
                         <?php endif;
-                        $req->closeCursor(); ?>
+                        $req->closeCursor(); // Ferme le curseur, permettant à la requête d'être de nouveau exécutée 
+                        ?>
                     </div>
                     <div class="return deconnect">
                         <a href="index.php">Retour</a>
