@@ -62,7 +62,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
               </div>
               <div class="form-add">
                 <label for="photo-licencie">
-                  <i class="fa fa-picture-o"></i> Photo du licencié
+                  <i class="fa fa-picture-o"></i> Photo
                   <input id="photo-licencie" type="file" accept="image/png, image/jpeg" />
                   <span id="nom-photo-licencie"></span>
                 </label>

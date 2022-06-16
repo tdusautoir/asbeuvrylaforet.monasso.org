@@ -27,7 +27,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
         </div>
         <div class="welcome-separator"></div>
         <div class="admin-panel">
-          <a>
+          <a href="./add-educateur.php">
             <i class="fa fa-plus"></i>
             <p>Ajouter un &eacute;ducateur</p>
           </a>
