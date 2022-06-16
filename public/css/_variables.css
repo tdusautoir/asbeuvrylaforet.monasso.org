@@ -56,8 +56,12 @@
   content: "\f570";
 }
 
-.fa-picture-o:before {
-  content: "\f03e"
+.fa-check:before {
+  content: "\f00c";
+}
+
+.fa-times:before {
+  content: "\f00d"
 }
 
 .fa-bar-chart:before {
