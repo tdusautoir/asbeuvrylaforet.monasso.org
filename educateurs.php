@@ -44,7 +44,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                             <th>Nom</th>
                                             <th>Prénom</th>
                                             <th>Adresse mail</th>
-                                            <th>Création</th>
+                                            <th>Catégorie</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
@@ -63,7 +63,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                     <?= $EDUC["mail"] ?>
                                                 </td>
                                                 <td>
-                                                    <?= $EDUC["USRCRE"] ?>
+                                                    <?= $EDUC["nomCategorie"] ?>
                                                 </td>
                                                 <td>
                                                     <a href="./modif-licencie.php">
@@ -89,7 +89,8 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                             </div>
                         <?php else : ?>
                             <p> Aucun educateur n'a encore été créé </p>
-                        <?php endif; ?>
+                        <?php endif;
+                        $req->closeCursor(); ?>
                     </div>
                     <div class="return deconnect">
                         <a href="index.php">Retour</a>
