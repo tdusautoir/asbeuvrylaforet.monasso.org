@@ -357,26 +357,31 @@
 
 .educateur-tab td:nth-child(2),
 .educateur-tab th:nth-child(2) {
-    min-width: 25%
+    min-width: 20%
 }
 
 .educateur-tab td:nth-child(3),
 .educateur-tab th:nth-child(3) {
-    width: 25%;
+    width: 20%;
 }
 
 .educateur-tab td:nth-child(4),
 .educateur-tab th:nth-child(4) {
-    width: 25%;
+    width: 20%;
 }
 
 .educateur-tab td:nth-child(5),
 .educateur-tab th:nth-child(5) {
-    width: 2%;
+    width: 15%;
 }
 
 .educateur-tab td:nth-child(6),
 .educateur-tab th:nth-child(6) {
+    width: 2%;
+}
+
+.educateur-tab td:nth-child(7),
+.educateur-tab th:nth-child(7) {
     width: 2%;
 }
 
