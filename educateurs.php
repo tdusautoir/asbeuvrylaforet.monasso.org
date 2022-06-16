@@ -83,7 +83,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                             <div id="Modal-<?= $EDUC["idEduc"]; ?>" class="Modal">
                                                 <p>Confirmez la suppression</p>
                                                 <div class="modal-button">
-                                                    <a href="./functions/educateur-delete.php?idEduc=<?= $EDUC["idEduc"] ?>">Oui</a>
+                                                    <a href="./functions/educ-delete.php?idEduc=<?= $EDUC["idEduc"] ?>">Oui</a>
                                                     <a href=" #" onClick="erase('Modal-<?= $EDUC['idEduc']; ?>');">Non</a>
                                                 </div>
                                             </div>
