@@ -43,7 +43,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             <i class="fa fa-cogs"></i>
             <p>Mon compte</p>
           </a>
-          <a>
+          <a href="./educateurs.php">
             <i class="fa fa-user"></i>
             <p>Gestion des &eacute;ducateurs</p>
           </a>

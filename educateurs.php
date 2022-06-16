@@ -26,10 +26,10 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 <?php elseif (isset_flash_message_by_name("delete_error")) : ?>
                     <div class="add-error"><?php display_flash_message_by_name("delete_error"); ?></div>
                 <?php endif; ?>
-                <div class="li-container">
-                    <div class="li-li-admin">
+                <div class="edu-container">
+                    <div class="edu-li-admin">
                         <h2>
-                            Liste des licenciés :
+                            Liste des éducateurs :
                         </h2>
                         <?php
                         $req = $db->prepare("SELECT licencie.idLicencie, categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.dateN, licencie.mail, licencie.USRCRE FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.COSU = 0 ORDER BY licencie.DCRE DESC;"); //Derniers licenciés ajoutés classé par date croissant et limités à 10. 
@@ -37,17 +37,14 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                         $rowCount = $req->rowCount();
                         if ($rowCount > 0) : //si on trouve des licenciés ajoutés on affiche la liste de la requete.
                         ?>
-                            <div class="licencie-tab">
+                            <div class="educateur-tab">
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Catégorie</th>
                                             <th>Nom</th>
                                             <th>Prénom</th>
-                                            <th>Naissance</th>
                                             <th>Adresse mail</th>
                                             <th>Création</th>
-                                            <th>Cotisation</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
@@ -57,25 +54,16 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                         <?php while ($LIC = $req->fetch(PDO::FETCH_ASSOC)) : ?>
                                             <tr>
                                                 <td>
-                                                    <?= $LIC["nomCategorie"] ?>
-                                                </td>
-                                                <td>
                                                     <?= $LIC["nom"] ?>
                                                 </td>
                                                 <td>
                                                     <?= $LIC["prenom"] ?>
                                                 </td>
                                                 <td>
-                                                    <?= $LIC["dateN"] ?>
-                                                </td>
-                                                <td>
                                                     <?= $LIC["mail"] ?>
                                                 </td>
                                                 <td>
                                                     <?= $LIC["USRCRE"] ?>
-                                                </td>
-                                                <td>
-
                                                 </td>
                                                 <td>
                                                     <a href="./modif-licencie.php">

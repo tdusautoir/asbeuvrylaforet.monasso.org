@@ -2,84 +2,84 @@
     padding: 30px 0;
 }
 
-table {
+.licencie-tab table {
     width: 1400px;
     table-layout: fixed;
     border-collapse: collapse;
     margin: 30px 0 60px 0;
 }
 
-table th,
-td {
+.licencie-tab table th,
+.licencie-tab td {
     padding: 15px;
     text-align: left;
 }
 
-thead {
+.licencie-tab thead {
     background-color: var(--mainColor);
     color: white;
     text-transform: uppercase;
     font-size: 20px;
 }
 
-tbody {
+.licencie-tab tbody {
     display: table-header-group;
     overflow: auto;
     width: 100%;
 }
 
-tbody tr:nth-child(even) {
+.licencie-tab tbody tr:nth-child(even) {
     background-color: #dbdbdb;
 }
 
-td,
-th {
+.licencie-tab td,
+.licencie-tab th {
     overflow-x: hidden;
     display: inline-block;
 }
 
-td:nth-child(1),
-th:nth-child(1) {
+.licencie-tab td:nth-child(1),
+.licencie-tab th:nth-child(1) {
     min-width: 12%;
 }
 
-td:nth-child(2),
-th:nth-child(2) {
+.licencie-tab td:nth-child(2),
+.licencie-tab th:nth-child(2) {
     min-width: 10%
 }
 
-td:nth-child(3),
-th:nth-child(3) {
+.licencie-tab td:nth-child(3),
+.licencie-tab th:nth-child(3) {
     width: 10%;
 }
 
-td:nth-child(4),
-th:nth-child(4) {
+.licencie-tab td:nth-child(4),
+.licencie-tab th:nth-child(4) {
     width: 12%;
 }
 
-td:nth-child(5),
-th:nth-child(5) {
+.licencie-tab td:nth-child(5),
+.licencie-tab th:nth-child(5) {
     width: 22%;
 }
 
-td:nth-child(6),
-th:nth-child(6) {
+.licencie-tab td:nth-child(6),
+.licencie-tab th:nth-child(6) {
     width: 15%;
 }
 
-td:nth-child(7),
-th:nth-child(7) {
+.licencie-tab td:nth-child(7),
+.licencie-tab th:nth-child(7) {
     width: 14%;
 }
 
-td:nth-child(8),
-th:nth-child(8) {
+.licencie-tab td:nth-child(8),
+.licencie-tab th:nth-child(8) {
     width: 2%;
 }
 
-td:nth-child(9),
-th:nth-child(9) {
+.licencie-tab td:nth-child(9),
+.licencie-tab th:nth-child(9) {
     width: 2%;
 }
 
@@ -121,18 +121,18 @@ th:nth-child(9) {
     justify-content: flex-end;
 }
 
-tbody td a i {
+.licencie-tab tbody td a i {
     color: #242424;
 }
 
-tbody td .fa-pencil:hover {
+.licencie-tab tbody td .fa-pencil:hover {
     color: #575555;
     -webkit-transition: all 300ms ease 0ms;
     -o-transition: all 300ms ease 0ms;
     transition: all 300ms ease 0ms;
 }
 
-tbody td .fa-trash:hover {
+.licencie-tab tbody td .fa-trash:hover {
     color: var(--errorColor);
     -webkit-transition: all 300ms ease 0ms;
     -o-transition: all 300ms ease 0ms;
@@ -303,4 +303,102 @@ tbody td .fa-trash:hover {
 
 .form-modif-li input.bouton-ajouter:hover {
     background-color: #000000;
+}
+
+/* 
+--------------------------------------------------
+--------------------PAGE EDUCS--------------------
+-------------------------------------------------- 
+*/
+
+.li-container {
+    padding: 30px 0;
+}
+
+.educateur-tab table {
+    width: 1400px;
+    table-layout: fixed;
+    border-collapse: collapse;
+    margin: 30px 0 60px 0;
+}
+
+.educateur-tab table th,
+.educateur-tab td {
+    padding: 15px;
+    text-align: left;
+}
+
+.educateur-tab thead {
+    background-color: var(--mainColor);
+    color: white;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+.educateur-tab tbody {
+    display: table-header-group;
+    overflow: auto;
+    width: 100%;
+}
+
+.educateur-tab tbody tr:nth-child(even) {
+    background-color: #dbdbdb;
+}
+
+.educateur-tab td,
+.educateur-tab th {
+    overflow-x: hidden;
+    display: inline-block;
+}
+
+.educateur-tab td:nth-child(1),
+.educateur-tab th:nth-child(1) {
+    min-width: 20%;
+}
+
+.educateur-tab td:nth-child(2),
+.educateur-tab th:nth-child(2) {
+    min-width: 25%
+}
+
+.educateur-tab td:nth-child(3),
+.educateur-tab th:nth-child(3) {
+    width: 25%;
+}
+
+.educateur-tab td:nth-child(4),
+.educateur-tab th:nth-child(4) {
+    width: 25%;
+}
+
+.educateur-tab td:nth-child(5),
+.educateur-tab th:nth-child(5) {
+    width: 2%;
+}
+
+.educateur-tab td:nth-child(6),
+.educateur-tab th:nth-child(6) {
+    width: 2%;
+}
+
+.educateur-tab tbody td a i {
+    color: #242424;
+}
+
+.educateur-tab tbody td .fa-pencil:hover {
+    color: #575555;
+    -webkit-transition: all 300ms ease 0ms;
+    -o-transition: all 300ms ease 0ms;
+    transition: all 300ms ease 0ms;
+}
+
+.educateur-tab tbody td .fa-trash:hover {
+    color: var(--errorColor);
+    -webkit-transition: all 300ms ease 0ms;
+    -o-transition: all 300ms ease 0ms;
+    transition: all 300ms ease 0ms;
+}
+
+.educateur-tab {
+    overflow-x: auto;
 }
