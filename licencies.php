@@ -91,8 +91,8 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                             <div id="Modal-<?= $LIC["idLicencie"]; ?>" class="Modal">
                                                 <p>Confirmez la suppression</p>
                                                 <div class="modal-button">
-                                                    <a href="./functions/licencie-delete.php?idLicencie=<?= $LIC["idLicencie"] ?>">Oui</a>
-                                                    <a href=" #" onClick="erase('Modal-<?= $LIC['idLicencie']; ?>');">Non</a>
+                                                    <a href="./functions/licencie-delete.php?idLicencie=<?= $LIC["idLicencie"] ?>"><i class="fa fa-check"></i></a>
+                                                    <a href=" #" onClick="erase('Modal-<?= $LIC['idLicencie']; ?>');"><i class="fa fa-times"></i></a>
                                                 </div>
                                             </div>
                                         <?php endwhile; ?>
