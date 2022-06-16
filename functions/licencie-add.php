@@ -15,8 +15,8 @@ if (is_logged()) {
                     if (isset($_POST["categorie-licencie"]) && !empty($_POST["categorie-licencie"])) {
                         if (isset($_POST["sexe-licencie"]) && !empty($_POST["sexe-licencie"])) {
                             if (isset($_POST["mail-licencie"]) && !empty($_POST["mail-licencie"]) && filter_var($_POST["mail-licencie"], FILTER_VALIDATE_EMAIL)) {
-                                $nom_licencie = $_POST["nom-licencie"];
-                                $prenom_licencie = $_POST["prenom-licencie"];
+                                $nom_licencie = strtoupper($_POST["nom-licencie"]);
+                                $prenom_licencie = ucfirst($_POST["prenom-licencie"]);
                                 $dateN_licencie = $_POST["dateN-licencie"];
                                 $mail_licencie = $_POST["mail-licencie"];
                                 $categorie_licencie = $_POST["categorie-licencie"];

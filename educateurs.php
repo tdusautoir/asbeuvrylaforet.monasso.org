@@ -54,10 +54,10 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                         <?php while ($EDUC = $req->fetch(PDO::FETCH_ASSOC)) : ?>
                                             <tr>
                                                 <td>
-                                                    <?= $EDUC["nom"] ?>
+                                                    <?= strtoupper($EDUC["nom"]) ?>
                                                 </td>
                                                 <td>
-                                                    <?= $EDUC["prenom"] ?>
+                                                    <?= ucfirst($EDUC["prenom"]) ?>
                                                 </td>
                                                 <td>
                                                     <?= $EDUC["mail"] ?>
