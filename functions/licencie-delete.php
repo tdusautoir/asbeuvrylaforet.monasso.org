@@ -13,6 +13,7 @@ if (isset($_GET["idLicencie"]) && !empty($_GET["idLicencie"])) {
         $req = $db->prepare("BEGIN; UPDATE licencie SET licencie.COSU = 1 WHERE licencie.idLicencie = ?; UPDATE cotis SET cotis.COSU = 1 WHERE cotis.idLicencie = ?; COMMIT;");
         $req->bindValue(1, $idLicencie, PDO::PARAM_INT);
         $req->bindValue(2, $idLicencie, PDO::PARAM_INT);
+        $info->execute();
         $result = $req->execute();
         $getinfo = $info->fetch(PDO::FETCH_ASSOC);
         $firstname_licencie = $getinfo["prenom"];
