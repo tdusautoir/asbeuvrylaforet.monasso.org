@@ -64,6 +64,10 @@
   content: "\f00d"
 }
 
+.fa-picture-o:before {
+  content: "\f03e"
+}
+
 .fa-bar-chart:before {
   content: "\f080";
 }
