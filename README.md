@@ -31,5 +31,10 @@
 - add flash message 
 - manage php errors with flash message
 
+## v0.6
+
+- gestion et affichage des licencies
+- gestion et affichage des éducateurs
+
 
 
