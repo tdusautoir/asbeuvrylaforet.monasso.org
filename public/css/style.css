@@ -235,6 +235,7 @@
 }
 
 .mail-form-add input {
+    color: #8A7575;
     width: 100%;
     margin: 30px 5%;
 }
