@@ -22,7 +22,7 @@ if (is_logged()) {
                                 $categorie_educ = $_POST["categorie-educ"];
                                 $sexe_educ = $_POST["sexe-educ"];
                                 $current_user = $_SESSION["prenom"] . " " . strtoupper($_SESSION["nom"]);
-                                $req = $db->prepare("INSERT INTO educ (prenom, nom, password, dateN, mail, idCategorie, USRCRE) VALUES (?, ?, ?, ?, ?, ?, ?);");
+                                $req = $db->prepare("INSERT INTO educ (prenom, nom, mail, password, dateN,  idCategorie, USRCRE) VALUES (?, ?, ?, ?, ?, ?, ?);");
                                 $req->bindValue(1, $prenom_educ, PDO::PARAM_STR);
                                 $req->bindValue(2, $nom_educ, PDO::PARAM_STR);
                                 $req->bindValue(3, $sexe_educ, PDO::PARAM_STR);
