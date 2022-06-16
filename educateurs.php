@@ -32,7 +32,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                             Liste des éducateurs :
                         </h2>
                         <?php
-                        $req = $db->prepare("SELECT educ.idEduc, educ.prenom, educ.nom, educ.mail, educ.USRCRE FROM educ WHERE educ.COSU = 0 "); //Derniers licenciés ajoutés classé par date croissant et limités à 10. 
+                        $req = $db->prepare("CALL PRC_LSTEDU"); //Liste des éducateurs 
                         $req->execute();
                         $rowCount = $req->rowCount();
                         if ($rowCount > 0) : //si on trouve des educateurs ajoutés on affiche la liste de la requete.
