@@ -31,5 +31,10 @@
 - add flash message 
 - manage php errors with flash message
 
+## v0.6
+
+- members display and management
+- coachs display and management
+
 
 

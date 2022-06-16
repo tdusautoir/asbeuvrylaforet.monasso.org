@@ -32,7 +32,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                             Liste des éducateurs :
                         </h2>
                         <?php
-                        $req = $db->prepare("SELECT educ.idEduc, educ.prenom, educ.nom, educ.mail, educ.USRCRE FROM educ WHERE educ.COSU = 0 "); //Derniers licenciés ajoutés classé par date croissant et limités à 10. 
+                        $req = $db->prepare("CALL PRC_LSTEDU"); //Liste des éducateurs 
                         $req->execute();
                         $rowCount = $req->rowCount();
                         if ($rowCount > 0) : //si on trouve des educateurs ajoutés on affiche la liste de la requete.
@@ -45,7 +45,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                             <th>Nom</th>
                                             <th>Prénom</th>
                                             <th>Adresse mail</th>
-                                            <th>Création</th>
+                                            <th>Catégorie</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
@@ -67,7 +67,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                     <?= $EDUC["mail"] ?>
                                                 </td>
                                                 <td>
-                                                    <?= $EDUC["USRCRE"] ?>
+                                                    <?= $EDUC["nomCategorie"] ?>
                                                 </td>
                                                 <td>
                                                     <a href="./modif-licencie.php">
@@ -93,7 +93,8 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                             </div>
                         <?php else : ?>
                             <p> Aucun educateur n'a encore été créé </p>
-                        <?php endif; ?>
+                        <?php endif;
+                        $req->closeCursor(); ?>
                     </div>
                     <div class="return deconnect">
                         <a href="index.php">Retour</a>
