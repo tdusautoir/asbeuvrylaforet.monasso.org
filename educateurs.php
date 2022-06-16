@@ -35,7 +35,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                         $req = $db->prepare("SELECT educ.idEduc, educ.prenom, educ.nom, educ.mail, educ.USRCRE FROM educ WHERE educ.COSU = 0 "); //Derniers licenciés ajoutés classé par date croissant et limités à 10. 
                         $req->execute();
                         $rowCount = $req->rowCount();
-                        if ($rowCount > 0) : //si on trouve des licenciés ajoutés on affiche la liste de la requete.
+                        if ($rowCount > 0) : //si on trouve des educateurs ajoutés on affiche la liste de la requete.
                         ?>
                             <div class="educateur-tab">
                                 <table class="table table-striped">
@@ -88,7 +88,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                 </table>
                             </div>
                         <?php else : ?>
-                            <p> Aucun licencié n'a encore été créé </p>
+                            <p> Aucun educateur n'a encore été créé </p>
                         <?php endif; ?>
                     </div>
                     <div class="return deconnect">
