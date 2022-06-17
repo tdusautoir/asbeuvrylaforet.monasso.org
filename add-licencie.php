@@ -27,8 +27,6 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
   }
 }
 
-dump($_SESSION);
-
 ?>
 <!DOCTYPE html>
 <html lang="fr">
