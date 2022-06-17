@@ -32,6 +32,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                             Derniers éducateurs ajoutés :
                         </h2>
                         <?php
+                        //TODO : Procédure
                         $req = $db->prepare("SELECT educ.idEduc, educ.prenom, educ.nom, educ.mail, educ.USRCRE FROM educ WHERE educ.COSU = 0 "); //Derniers licenciés ajoutés classé par date croissant et limités à 10. 
                         $req->execute();
                         $rowCount = $req->rowCount();
@@ -65,29 +66,51 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                             </div>
                             <div class="form-add">
                                 <input type="password" class="password-licencie" name="password-educ" placeholder="Mot de passe" maxlength="40">
-
-                                <select name="categorie-educ" id="categorie-licencie" multiple>
-                                    <option value="" disabled selected>Catégorie</option>
-                                    <?php
-                                    $req_category = $db->query("SELECT idCategorie, nomCategorie FROM categorie");
-                                    while ($category = $req_category->fetch()) :
-                                        if (isset($category)) :
-                                    ?>
-                                            <option value="<?= $category["idCategorie"] ?>"><?= $category["nomCategorie"] ?></option>
-                                    <?php
-                                        endif;
-                                    endwhile;
-                                    $req_category->closeCursor();
-                                    ?>
-                                </select>
                             </div>
                             <div class="mail-form-add">
                                 <input type="mail" class="mail-licencie" name="mail-educ" placeholder="Adresse mail" maxlength="40">
                             </div>
                             <div class="form-add">
+                                <table class="mul-selec-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Catégorie</th>
+                                            <th>Attribution</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                            $req = $db->prepare("CALL PRC_LSTCAT"); //Liste des catégories
+                                            $req->execute();
+                                            $rowCount = $req->rowCount();
+                                            if ($rowCount > 0) :
+                                                $rows = $req->fetchAll(PDO::FETCH_ASSOC);
+                                                $req->closeCursor();
+
+                                                foreach($rows as $CAT) :                                        
+                                        ?>
+                                                <tr>
+                                                    <td><?= $CAT["nomCategorie"] ?></td>
+                                                    <td>
+                                                        <input type="checkbox" id="table-cb" name="<?= $CAT["nomCategorie"]?>-cb">
+                                                    </td>
+                                                </tr>
+                                        <?php
+                                            endforeach; else :
+                                        ?>
+                                            <tr>
+                                                <td>Aucune catégorie disponible</td>
+                                            </tr>
+                                        <?php
+                                            endif;
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="form-add">
                                 <label style="padding: 0; cursor: default; display:flex; justify-content: center; border: none; min-width:0;" for="check-resp-hide ">
                                     Responsable
-                                    <input id="check-resp" type="checkbox">
+                                    <input id="check-resp" type="checkbox" name="resp-educ">
                                 </label>
                                 <input id="check-resp-hide" type="checkbox">
                             </div>
