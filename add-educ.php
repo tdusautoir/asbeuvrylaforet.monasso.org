@@ -33,10 +33,10 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                         </h2>
                         <?php
                         //TODO : Procédure
-                        $req = $db->prepare("SELECT educ.idEduc, educ.prenom, educ.nom, educ.mail, educ.USRCRE FROM educ WHERE educ.COSU = 0 "); //Derniers licenciés ajoutés classé par date croissant et limités à 10. 
+                        $req = $db->prepare("CALL PRC_TENEDUC()"); //Derniers educateurs ajoutés classé par date croissant et limités à 10. 
                         $req->execute();
                         $rowCount = $req->rowCount();
-                        if ($rowCount > 0) : //si on trouve des licenciés ajoutés on affiche la liste de la requete.
+                        if ($rowCount > 0) : //si on trouve des educateurs ajoutés on affiche la liste de la requete.
                         ?>
                             <ul>
                                 <?php while ($LIC = $req->fetch(PDO::FETCH_ASSOC)) : ?>
@@ -80,29 +80,30 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $req = $db->prepare("CALL PRC_LSTCAT"); //Liste des catégories
-                                            $req->execute();
-                                            $rowCount = $req->rowCount();
-                                            if ($rowCount > 0) :
-                                                $rows = $req->fetchAll(PDO::FETCH_ASSOC);
-                                                $req->closeCursor();
+                                        $req = $db->prepare("CALL PRC_LSTCAT"); //Liste des catégories
+                                        $req->execute();
+                                        $rowCount = $req->rowCount();
+                                        if ($rowCount > 0) :
+                                            $rows = $req->fetchAll(PDO::FETCH_ASSOC);
+                                            $req->closeCursor();
 
-                                                foreach($rows as $CAT) :                                        
+                                            foreach ($rows as $CAT) :
                                         ?>
                                                 <tr>
                                                     <td><?= $CAT["nomCategorie"] ?></td>
                                                     <td>
-                                                        <input type="checkbox" id="table-cb" name="<?= $CAT["nomCategorie"]?>-cb">
+                                                        <input type="checkbox" id="table-cb" name="<?= $CAT["nomCategorie"] ?>-cb">
                                                     </td>
                                                 </tr>
-                                        <?php
-                                            endforeach; else :
-                                        ?>
+                                            <?php
+                                            endforeach;
+                                        else :
+                                            ?>
                                             <tr>
                                                 <td>Aucune catégorie disponible</td>
                                             </tr>
                                         <?php
-                                            endif;
+                                        endif;
                                         ?>
                                     </tbody>
                                 </table>
