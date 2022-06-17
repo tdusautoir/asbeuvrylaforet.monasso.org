@@ -65,7 +65,8 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                             </div>
                             <div class="form-add">
                                 <input type="password" class="password-licencie" name="password-educ" placeholder="Mot de passe" maxlength="40">
-                                <select name="categorie-educ" id="categorie-licencie">
+
+                                <select name="categorie-educ" id="categorie-licencie" multiple>
                                     <option value="" disabled selected>Catégorie</option>
                                     <?php
                                     $req_category = $db->query("SELECT idCategorie, nomCategorie FROM categorie");
@@ -82,6 +83,13 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                             </div>
                             <div class="mail-form-add">
                                 <input type="mail" class="mail-licencie" name="mail-educ" placeholder="Adresse mail" maxlength="40">
+                            </div>
+                            <div class="form-add">
+                                <label style="padding: 0; cursor: default; display:flex; justify-content: center; border: none; min-width:0;" for="check-resp-hide ">
+                                    Responsable
+                                    <input id="check-resp" type="checkbox">
+                                </label>
+                                <input id="check-resp-hide" type="checkbox">
                             </div>
                             <div class="form-add">
                                 <input type="submit" value="Ajouter" name="submit-add" class="bouton-ajouter">
@@ -103,6 +111,20 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
 
                 imageName.innerText = inputImage.name;
             })
+        </script>
+        <script>
+            var expanded = false;
+
+            function showCheckboxes() {
+                var checkboxes = document.getElementById("checkboxes");
+                if (!expanded) {
+                    checkboxes.style.display = "block";
+                    expanded = true;
+                } else {
+                    checkboxes.style.display = "none";
+                    expanded = false;
+                }
+            }
         </script>
         <?php else : require "./components/logged.php"; ?><?php endif; ?>
 </body>

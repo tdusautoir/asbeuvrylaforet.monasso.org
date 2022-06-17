@@ -68,6 +68,10 @@
   content: "\f03e"
 }
 
+.fa-lock:before {
+  content: "\f023";
+}
+
 .fa-bar-chart:before {
   content: "\f080";
 }
