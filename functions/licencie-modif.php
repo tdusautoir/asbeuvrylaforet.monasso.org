@@ -38,7 +38,7 @@ if (is_logged()) {
 
                                     if ($result) {
                                         header("location: ../licencies.php");
-                                        create_flash_message("modif_success", "Licencié modifié", FLASH_SUCCESS);
+                                        create_flash_message("modif_success", "Licencié « $nom_licencie $prenom_licencie » a bien été modifié.", FLASH_SUCCESS);
                                         exit();
                                     } else {
                                         header("location: ../licencies.php");
@@ -52,36 +52,36 @@ if (is_logged()) {
                                 }
                             } else {
                                 header("location: ../licencies.php");
-                                create_flash_message("form_id_error", "Veuillez remplir tous les champs", FLASH_ERROR);
+                                create_flash_message("form_id_error", "Veuillez remplir tous les champs.", FLASH_ERROR);
                                 exit();
                             }
                         } else {
                             header("location: ../licencies.php");
-                            create_flash_message("form_sexe_error", "Veuillez remplir tous les champs", FLASH_ERROR);
+                            create_flash_message("form_sexe_error", "Veuillez remplir tous les champs.", FLASH_ERROR);
                             exit();
                         }
                     } else {
                         header("location: ../licencies.php");
-                        create_flash_message("form_categorie_error", "Veuillez remplir tous les champs", FLASH_ERROR);
+                        create_flash_message("form_categorie_error", "Veuillez remplir tous les champs.", FLASH_ERROR);
                         exit();
                     }
                 } else {
                     header("location: ../licencies.php");
-                    create_flash_message("form_dateN_error", "Veuillez remplir tous les champs", FLASH_ERROR);
+                    create_flash_message("form_dateN_error", "Veuillez remplir tous les champs.", FLASH_ERROR);
                     exit();
                 }
             } else {
                 header("location: ../licencies.php");
-                create_flash_message("form_firstname_error", "Veuillez remplir tous les champs", FLASH_ERROR);
+                create_flash_message("form_firstname_error", "Veuillez remplir tous les champs.", FLASH_ERROR);
                 exit();
             }
         } else {
             header("location: ../licencies.php");
-            create_flash_message("form_lastname_error", "Veuillez remplir tous les champs", FLASH_ERROR);
+            create_flash_message("form_lastname_error", "Veuillez remplir tous les champs.", FLASH_ERROR);
             exit();
         }
     } else {
-        header("location: ../modif-licencie.php");
+        header("location: ../licencies.php");
         create_flash_message("modif_error", "Une erreur est survenue, Veuillez réessayer.", FLASH_ERROR);
         exit();
     }

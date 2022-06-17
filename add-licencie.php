@@ -8,6 +8,27 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
   header("location: index.php");
 }
 
+//gestion des erreurs
+if (isset_flash_message_by_type(FLASH_ERROR)) {
+  if (isset_flash_message_by_name("form_lastname_error")) {
+    $form_lastname_error = true;
+  } else if (isset_flash_message_by_name("form_firstname_error")) {
+    $form_firstname_error = true;
+  } else if (isset_flash_message_by_name("form_picture_error")) {
+    $form_picture_error = true;
+  } else if (isset_flash_message_by_name("form_dateN_error")) {
+    $form_dateN_error = true;
+  } else if (isset_flash_message_by_name("form_categorie_error")) {
+    $form_categorie_error = true;
+  } else if (isset_flash_message_by_name("form_sexe_error")) {
+    $form_sexe_error = true;
+  } else if (isset_flash_message_by_name("form_mail_error")) {
+    $form_mail_error = true;
+  }
+}
+
+dump($_SESSION);
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -57,40 +78,44 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             </h1>
             <form action="./functions/licencie-add.php" method="POST">
               <div class="form-add">
-                <input type="text" class="nom-licencie" placeholder="Nom" name="nom-licencie" maxlength="20">
-                <input type="text" class="prenom-licencie" placeholder="Prénom" name="prenom-licencie" maxlength="15">
+                <input value="<?php display_info_form("nom-licencie"); ?>" type="text" class="nom-licencie" placeholder="Nom" name="nom-licencie" maxlength="20" <?php if (isset($form_lastname_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
+                <input value="<?php display_info_form("prenom-licencie"); ?>" type="text" class="prenom-licencie" placeholder="Prénom" name="prenom-licencie" maxlength="15" <?php if (isset($form_firstname_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
               </div>
               <div class="form-add">
                 <label for="photo-licencie">
                   <i class="fa fa-picture-o"></i> Photo
-                  <input id="photo-licencie" type="file" accept="image/png, image/jpeg" />
-                  <span id="nom-photo-licencie"></span>
+                  <input value="<?php if (isset_info_form("photo-licencie")) {
+                                  display_info_form("photo-licencie");
+                                } ?>" id="photo-licencie" type="file" accept="image/png, image/jpeg" name="photo-licencie" <?php if (isset($form_picture_error)) : ?>style="border: 1px solid red;" <?php endif; ?> />
+                  <span id="nom-photo-licencie"><?php if (isset_info_form("photo-licencie")) {
+                                                  display_info_form("photo-licencie");
+                                                } ?></span>
                 </label>
-                <input type="date" placeholder="Date de naissance" name="dateN-licencie">
+                <input value="<?php display_info_form("dateN-licencie"); ?>" type="date" placeholder="Date de naissance" name="dateN-licencie" <?php if (isset($form_dateN_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
               </div>
               <div class="form-add">
-                <select name="categorie-licencie" id="categorie-licencie">
-                  <option value="" disabled selected>Catégorie</option>
+                <select name="categorie-licencie" id="categorie-licencie" <?php if (isset($form_categorie_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
+                  <option value="" disabled <?php if (!isset_info_form("categorie-licencie")) : ?> selected <?php endif; ?>selected>Catégorie</option>
                   <?php
                   $req_category = $db->query("SELECT idCategorie, nomCategorie FROM categorie");
                   while ($category = $req_category->fetch()) :
                     if (isset($category)) :
                   ?>
-                      <option value="<?= $category["idCategorie"] ?>"><?= $category["nomCategorie"] ?></option>
+                      <option value="<?= $category["idCategorie"] ?>" <?php if (isset_info_form("categorie-licencie")) : ?> selected <?php endif; ?>><?= $category["nomCategorie"] ?></option>
                   <?php
                     endif;
                   endwhile;
                   $req_category->closeCursor();
                   ?>
                 </select>
-                <select name="sexe-licencie" id="sexe-licencie">
-                  <option value="" disabled selected>Sexe</option>
-                  <option value="m">Homme</option>
+                <select name="sexe-licencie" id="sexe-licencie" <?php if (isset($form_sexe_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
+                  <option value="" disabled <?php if (!isset_info_form("sexe-licencie")) : ?> selected <?php endif; ?>>Sexe</option>
+                  <option value="m" <?php if (isset_info_form("sexe-licencie")) : ?> selected <?php endif; ?>>Homme</option>
                   <option value="f">Femme</option>
                 </select>
               </div>
               <div class="mail-form-add">
-                <input type="mail" class="mail-licencie" name="mail-licencie" placeholder="Adresse mail" maxlength="40">
+                <input type="mail" class="mail-licencie" name="mail-licencie" placeholder="Adresse mail" maxlength="40" <?php if (isset($form_mail_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
               </div>
               <div class="form-add">
                 <input type="submit" value="Ajouter" name="submit-add" class="bouton-ajouter">
@@ -103,6 +128,10 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
         </div>
       </div>
     </div>
+    <?php
+    //if there is form info, delete it
+    unset_info_form();
+    ?>
     <script>
       let input = document.getElementById("photo-licencie");
       let imageName = document.getElementById("nom-photo-licencie")

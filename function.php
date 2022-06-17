@@ -3,6 +3,7 @@
 require_once "db.php";
 
 const FLASH = 'FLASH_MESSAGES';
+const FORM = 'FORM_INFO';
 
 //flash type
 const FLASH_ERROR = 'error';
@@ -49,6 +50,30 @@ function isset_flash_message_by_type(string $type): bool //check if flash messag
     return false;
 }
 
+function delete_flash_message_by_name(string $name): bool //check if flash message is isset by his name
+{
+    if (isset($_SESSION[FLASH][$name])) {
+        unset($_SESSION[FLASH][$name]);
+    } else {
+        return false;
+    }
+}
+
+
+function delete_flash_message_by_type(string $type): bool //check if flash message is isset by his type
+{
+    if (isset($_SESSION[FLASH])) {
+        foreach ($_SESSION[FLASH] as $key => $value) {  //parcours les flashs messages
+            if ($value['type'] == $type) {
+                unset($_SESSION[FLASH][$key]);
+            } else {
+                return false;
+            }
+        }
+    }
+    return false;
+}
+
 function display_flash_message_by_name(string $name): void
 { //display a flash message by his name
     if (!isset($_SESSION[FLASH][$name])) {
@@ -79,6 +104,54 @@ function display_flash_message_by_type(string $type): void
                 echo $flash_message;
             }
         }
+    }
+}
+
+
+function isset_form()
+{
+    if (isset($_SESSION[FORM])) {
+        return true;
+    }
+    return false;
+}
+
+function add_info_form(string $info_type, string $value): void
+{
+    if (!isset($_SESSION[FORM][$info_type])) {
+        unset($_SESSION[FORM][$info_type]);
+    }
+
+    // add the info to the session
+    $_SESSION[FORM][$info_type] = $value;
+}
+
+function isset_info_form(string $info_type)
+{
+    if (isset($_SESSION[FORM][$info_type])) {
+        return true;
+    }
+    return false;
+}
+
+function display_info_form(string $info_type)
+{
+    //display a flash message by his type
+    if (!isset($_SESSION[FORM][$info_type])) {
+        return;
+    }
+
+    // get info from the session
+    $form_info = $_SESSION[FORM][$info_type];
+
+    // display the info form
+    echo $form_info;
+}
+
+function unset_info_form()
+{
+    if (isset($_SESSION[FORM])) {
+        unset($_SESSION[FORM]);
     }
 }
 

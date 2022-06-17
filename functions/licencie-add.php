@@ -7,7 +7,35 @@ require_once("../db.php");
 
 date_default_timezone_set("Europe/Paris");
 
+//verification si l'utilisateur est connecté
 if (is_logged()) {
+
+    //recup info from formulaire to display it if there is an error
+    if (isset($_POST["submit-add"])) {
+        if (isset($_POST["nom-licencie"]) && !empty($_POST["nom-licencie"])) {
+            add_info_form("nom-licencie", $_POST["nom-licencie"]);
+        }
+        if (isset($_POST["prenom-licencie"]) && !empty($_POST["prenom-licencie"])) {
+            add_info_form("prenom-licencie", $_POST["prenom-licencie"]);
+        }
+        if (isset($_POST["dateN-licencie"]) && !empty($_POST["dateN-licencie"])) {
+            add_info_form("dateN-licencie", $_POST["dateN-licencie"]);
+        }
+        if (isset($_POST["photo-licencie"]) && !empty($_POST["photo-licencie"])) {
+            add_info_form("photo-licencie", $_POST["photo-licencie"]);
+        }
+        if (isset($_POST["categorie-licencie"]) && !empty($_POST["categorie-licencie"])) {
+            add_info_form("categorie-licencie", $_POST["categorie-licencie"]);
+        }
+        if (isset($_POST["sexe-licencie"]) && !empty($_POST["sexe-licencie"])) {
+            add_info_form("sexe-licencie", $_POST["sexe-licencie"]);
+        }
+        if (isset($_POST["mail-licencie"]) && !empty($_POST["mail-licencie"]) && filter_var($_POST["mail-licencie"], FILTER_VALIDATE_EMAIL)) {
+            add_info_form("mail-licencie", $_POST["mail-licencie"]);
+        }
+    }
+
+    //verification to add on database
     if (isset($_POST["submit-add"])) {
         if (isset($_POST["nom-licencie"]) && !empty($_POST["nom-licencie"])) {
             if (isset($_POST["prenom-licencie"]) && !empty($_POST["prenom-licencie"])) {
@@ -34,7 +62,7 @@ if (is_logged()) {
 
                                 if ($result) {
                                     header("location: ../add-licencie.php");
-                                    create_flash_message("add_success", "Licencié ajouté", FLASH_SUCCESS);
+                                    create_flash_message("add_success", "Licencié ajouté.", FLASH_SUCCESS);
                                     exit();
                                 } else {
                                     header("location: ../add-licencie.php");
@@ -48,27 +76,27 @@ if (is_logged()) {
                             }
                         } else {
                             header("location: ../add-licencie.php");
-                            create_flash_message("form_sexe_error", "Veuillez remplir tous les champs", FLASH_ERROR);
+                            create_flash_message("form_sexe_error", "Veuillez remplir tous les champs.", FLASH_ERROR);
                             exit();
                         }
                     } else {
                         header("location: ../add-licencie.php");
-                        create_flash_message("form_categorie_error", "Veuillez remplir tous les champs", FLASH_ERROR);
+                        create_flash_message("form_categorie_error", "Veuillez remplir tous les champs.", FLASH_ERROR);
                         exit();
                     }
                 } else {
                     header("location: ../add-licencie.php");
-                    create_flash_message("form_dateN_error", "Veuillez remplir tous les champs", FLASH_ERROR);
+                    create_flash_message("form_dateN_error", "Veuillez remplir tous les champs.", FLASH_ERROR);
                     exit();
                 }
             } else {
                 header("location: ../add-licencie.php");
-                create_flash_message("form_firstname_error", "Veuillez remplir tous les champs", FLASH_ERROR);
+                create_flash_message("form_firstname_error", "Veuillez remplir tous les champs.", FLASH_ERROR);
                 exit();
             }
         } else {
             header("location: ../add-licencie.php");
-            create_flash_message("form_lastname_error", "Veuillez remplir tous les champs", FLASH_ERROR);
+            create_flash_message("form_lastname_error", "Veuillez remplir tous les champs.", FLASH_ERROR);
             exit();
         }
     } else {

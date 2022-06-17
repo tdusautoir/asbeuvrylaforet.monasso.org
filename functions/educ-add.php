@@ -29,7 +29,7 @@ if (is_logged()) {
 
                         if ($result) {
                             header("location: ../add-educ.php");
-                            create_flash_message("add_success", "Educateur ajouté", FLASH_SUCCESS);
+                            create_flash_message("add_success", "Educateur ajouté.", FLASH_SUCCESS);
                             exit();
                         } else {
                             header("location: ../add-educ.php");
@@ -43,17 +43,17 @@ if (is_logged()) {
                     }
                 } else {
                     header("location: ../add-educ.php");
-                    create_flash_message("form_password_error", "Veuillez remplir tous les champs", FLASH_ERROR);
+                    create_flash_message("form_password_error", "Veuillez remplir tous les champs.", FLASH_ERROR);
                     exit();
                 }
             } else {
                 header("location: ../add-educ.php");
-                create_flash_message("form_firstname_error", "Veuillez remplir tous les champs", FLASH_ERROR);
+                create_flash_message("form_firstname_error", "Veuillez remplir tous les champs.", FLASH_ERROR);
                 exit();
             }
         } else {
             header("location: ../add-educ.php");
-            create_flash_message("form_lastname_error", "Veuillez remplir tous les champs", FLASH_ERROR);
+            create_flash_message("form_lastname_error", "Veuillez remplir tous les champs.", FLASH_ERROR);
             exit();
         }
     } else {
