@@ -41,7 +41,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Catégorie</th>
+                                            <th></th>
                                             <th>Nom</th>
                                             <th>Prénom</th>
                                             <th>Naissance</th>
@@ -77,6 +77,11 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                 <td>
 
                                                 </td>
+                                                <td>
+                                                    <a href="#" onclick="displayModal('Modal-photo-<?= $LIC['idLicencie']; ?>')">
+                                                        <i class=" fa fa-picture-o"></i>
+                                                    </a>
+                                                </td>
                                                 <td class="action-btns btns-1">
                                                     <a href="./modif-licencie.php?idLicencie=<?= $LIC["idLicencie"] ?>">
                                                         <i class="fa fa-pencil"></i>
@@ -94,6 +99,12 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                     <a href="./functions/licencie-delete.php?idLicencie=<?= $LIC["idLicencie"] ?>"><i class="fa fa-check"></i></a>
                                                     <a href=" #" onClick="erase('Modal-<?= $LIC['idLicencie']; ?>');"><i class="fa fa-times"></i></a>
                                                 </div>
+                                            </div>
+                                            <div id="Modal-photo-<?= $LIC["idLicencie"]; ?>" class="Modal-photo">
+                                                <a href="#" onclick="erase('Modal-photo-<?= $LIC['idLicencie']; ?>')">
+                                                    <i class=" fa fa-times"></i>
+                                                </a>
+                                                <img src="./unknown.png" alt="">
                                             </div>
                                         <?php endwhile; ?>
                                     </tbody>
