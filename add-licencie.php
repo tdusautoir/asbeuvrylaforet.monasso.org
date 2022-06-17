@@ -93,7 +93,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 <input type="mail" class="mail-licencie" name="mail-licencie" placeholder="Adresse mail" maxlength="40">
               </div>
               <div class="form-add">
-                <input type="submit" value="Ajouter" name="submit" class="bouton-ajouter">
+                <input type="submit" value="Ajouter" name="submit-add" class="bouton-ajouter">
               </div>
             </form>
           </div>

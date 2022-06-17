@@ -31,6 +31,9 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             $mail_licencie = $getinfo["mail"];
             $sexe_licencie = $getinfo["sexe"];
             $category_licencie = $getinfo["nomCategorie"];
+        } else {
+            header("location: licencies.php");
+            exit();
         } ?>
         <div class="container">
             <div class="container-content">
@@ -44,7 +47,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                         <h1>
                             Modifier un licencié
                         </h1>
-                        <form action="#" method="POST">
+                        <form action="./functions/licencie-modif.php" method="POST">
                             <div class="form-modif-li">
                                 <input value="<?= $lastname_licencie ?>" type="text" class="nom-licencie" placeholder="" name="nom-licencie" maxlength="20">
                                 <input value="<?= $firstname_licencie ?>" type="text" class="prenom-licencie" placeholder="" name="prenom-licencie" maxlength="15">
@@ -79,8 +82,10 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                             <div class="mail-form-modif-li">
                                 <input value="<?= $mail_licencie ?>" type="mail" class="mail-licencie" name="mail-licencie" placeholder="" maxlength="40">
                             </div>
+                            <input type="hidden" name="idLicencie" value="<?php if (isset($idLicencie)) : echo $idLicencie;
+                                                                            endif; ?>">
                             <div class="form-modif-li">
-                                <input type="submit" value="Enregistrer" name="submit" class="bouton-ajouter">
+                                <input type="submit" value="Enregistrer" name="submit-modif" class="bouton-ajouter">
                             </div>
                         </form>
                     </div>

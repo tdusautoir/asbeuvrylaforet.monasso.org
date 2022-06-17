@@ -8,7 +8,7 @@ require_once("../db.php");
 date_default_timezone_set("Europe/Paris");
 
 if (is_logged()) {
-    if (isset($_POST["submit"])) {
+    if (isset($_POST["submit-add"])) {
         if (isset($_POST["nom-licencie"]) && !empty($_POST["nom-licencie"])) {
             if (isset($_POST["prenom-licencie"]) && !empty($_POST["prenom-licencie"])) {
                 if (isset($_POST["dateN-licencie"]) && !empty($_POST["dateN-licencie"])) {
