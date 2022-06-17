@@ -111,6 +111,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                 </table>
                             </div>
                         <?php else : ?>
+                            <br>
                             <p> Aucun licencié n'a encore été créé </p>
                         <?php endif;
                         $req->closeCursor(); // Ferme le curseur, permettant à la requête d'être de nouveau exécutée 

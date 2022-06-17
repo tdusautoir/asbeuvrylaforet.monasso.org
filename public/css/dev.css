@@ -462,9 +462,10 @@ tbody tr:hover {
 
 .educateur-tab tbody td .fa-pencil:hover {
     color: #575555;
-    -webkit-transition: all 300ms ease 0ms;
-    -o-transition: all 300ms ease 0ms;
-    transition: all 300ms ease 0ms;
+}
+
+.educateur-tab tbody td .fa-picutre-o:hover {
+    color: #575555 !important;
 }
 
 .educateur-tab tbody td .fa-trash:hover {
