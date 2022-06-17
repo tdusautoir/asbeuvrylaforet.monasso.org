@@ -40,11 +40,7 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
     <?php include('./components/header.php'); ?>
     <div class="container">
       <div class="container-content">
-        <?php if (isset_flash_message_by_type(FLASH_SUCCESS)) : ?>
-          <div class="add-success"><?php display_flash_message_by_type(FLASH_SUCCESS); ?></div>
-        <?php elseif (isset_flash_message_by_type(FLASH_ERROR)) : ?>
-          <div class="add-error"><?php display_flash_message_by_type(FLASH_ERROR); ?></div>
-        <?php endif; ?>
+        <?php include "./components/display_error.php"; ?>
         <div class="add-container">
           <div class="li-admin">
             <h2>
@@ -80,11 +76,11 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
                 <input value="<?php display_info_form("prenom-licencie"); ?>" type="text" class="prenom-licencie" placeholder="Prénom" name="prenom-licencie" maxlength="15" <?php if (isset($form_firstname_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
               </div>
               <div class="form-add">
-                <label for="photo-licencie">
+                <label for="photo-licencie" <?php if (isset($form_picture_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
                   <i class="fa fa-picture-o"></i> Photo
                   <input value="<?php if (isset_info_form("photo-licencie")) {
                                   display_info_form("photo-licencie");
-                                } ?>" id="photo-licencie" type="file" accept="image/png, image/jpeg" name="photo-licencie" <?php if (isset($form_picture_error)) : ?>style="border: 1px solid red;" <?php endif; ?> />
+                                } ?>" id="photo-licencie" type="file" accept="image/png, image/jpeg" name="photo-licencie" />
                   <span id="nom-photo-licencie"><?php if (isset_info_form("photo-licencie")) {
                                                   display_info_form("photo-licencie");
                                                 } ?></span>
@@ -113,7 +109,7 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
                 </select>
               </div>
               <div class="mail-form-add">
-                <input type="mail" class="mail-licencie" name="mail-licencie" placeholder="Adresse mail" maxlength="40" <?php if (isset($form_mail_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
+                <input value="<?php display_info_form("mail-licencie") ?>" type="mail" class="mail-licencie" name="mail-licencie" placeholder="Adresse mail" maxlength="40" <?php if (isset($form_mail_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
               </div>
               <div class="form-add">
                 <input type="submit" value="Ajouter" name="submit-add" class="bouton-ajouter">

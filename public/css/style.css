@@ -259,7 +259,7 @@
 
 /* -----Page d'ajout Message prévention */
 
-.add-success {
+div.success {
     background-color: rgba(40, 154, 55, 0.11);
     color: var(--mainColor);
     border: 1px solid var(--mainColor);
@@ -269,7 +269,7 @@
     font-size: 20px;
 }
 
-.add-error {
+div.error {
     background-color: rgba(210, 0, 0, 0.11);
     color: var(--errorColor);
     border: 1px solid var(--errorColor);

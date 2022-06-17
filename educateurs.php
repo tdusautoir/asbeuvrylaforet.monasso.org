@@ -21,11 +21,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
         <?php include('./components/header.php'); ?>
         <div class="container">
             <div class="container-content">
-                <?php if (isset_flash_message_by_name("delete_success")) : ?>
-                    <div class="add-success"><?php display_flash_message_by_name("delete_success"); ?></div>
-                <?php elseif (isset_flash_message_by_name("delete_error")) : ?>
-                    <div class="add-error"><?php display_flash_message_by_name("delete_error"); ?></div>
-                <?php endif; ?>
+                <?php include "./components/display_error.php"; ?>
                 <div class="edu-container">
                     <div class="edu-li-admin">
                         <h2>
