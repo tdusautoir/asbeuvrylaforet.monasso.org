@@ -52,11 +52,11 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
 
                                     <tbody>
                                         <?php
-                                            //Tout récupérer et stocker les lignes dans un array puis le parcourir
-                                            //nous permettant d'appeler une procédure pour chaque ligne du tableau
-                                            $rows = $req->fetchAll(PDO::FETCH_ASSOC);
-                                            $req->closeCursor();
-                                            foreach ($rows as $EDUC) :
+                                        //Tout récupérer et stocker les lignes dans un array puis le parcourir
+                                        //nous permettant d'appeler une procédure pour chaque ligne du tableau
+                                        $rows = $req->fetchAll(PDO::FETCH_ASSOC);
+                                        $req->closeCursor();
+                                        foreach ($rows as $EDUC) :
                                         ?>
                                             <tr>
                                                 <td>
@@ -69,35 +69,33 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                     <?= $EDUC["mail"] ?>
                                                 </td>
                                                 <td>
-                                                    <?php   
+                                                    <?php
 
-                                                        $educId = $EDUC["idEduc"];
-                                                        $educCat = "";                                                   
-                                                        $reqCat = $db->prepare("CALL PRC_GETEDUCAT($educId)"); //Liste des catégories d'un éducateur
-                                                        $reqCat->execute();
-                                                        $catRowCount = $reqCat->rowCount();
+                                                    $educId = $EDUC["idEduc"];
+                                                    $educCat = "";
+                                                    $reqCat = $db->prepare("CALL PRC_GETEDUCAT($educId)"); //Liste des catégories d'un éducateur
+                                                    $reqCat->execute();
+                                                    $catRowCount = $reqCat->rowCount();
 
-                                                        if($catRowCount > 0){                                                        
-                                                            $row = 1;
+                                                    if ($catRowCount > 0) {
+                                                        $row = 1;
 
-                                                            $catRows = $reqCat->fetchAll(PDO::FETCH_ASSOC);
-                                                            $reqCat->closeCursor();
-                                                            foreach($catRows as $CAT){
-                                                                if($row == 1){                                                            
-                                                                    $educCat = $CAT["nomCategorie"];
-                                                                    $row++;
-                                                                }
-                                                                else{
-                                                                    //Concaténation dans une chaîne de toutes les catégories 
-                                                                    $educCat = $educCat.", ".$CAT["nomCategorie"];
-                                                                }
-                                                            }                                                                                                                     
-                                                        }  
-                                                        else{
-                                                            $educCat = "Aucune catégorie attribuée";
-                                                        }                                                                                                                                                               
-                                                    ?> 
-                                                    
+                                                        $catRows = $reqCat->fetchAll(PDO::FETCH_ASSOC);
+                                                        $reqCat->closeCursor();
+                                                        foreach ($catRows as $CAT) {
+                                                            if ($row == 1) {
+                                                                $educCat = $CAT["nomCategorie"];
+                                                                $row++;
+                                                            } else {
+                                                                //Concaténation dans une chaîne de toutes les catégories 
+                                                                $educCat = $educCat . ", " . $CAT["nomCategorie"];
+                                                            }
+                                                        }
+                                                    } else {
+                                                        $educCat = "Aucune catégorie attribuée";
+                                                    }
+                                                    ?>
+
                                                     <?= $educCat ?>
 
                                                 </td>
@@ -125,7 +123,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                             </div>
                         <?php else : ?>
                             <p> Aucun educateur n'a encore été créé </p>
-                        <?php endif;                        
+                        <?php endif;
                         ?>
                     </div>
                     <div class="return deconnect">

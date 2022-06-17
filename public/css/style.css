@@ -278,3 +278,25 @@
     border-radius: 4px;
     font-size: 20px;
 }
+
+.mul-selec-table-form {
+    width: 588px;
+    table-layout: fixed;
+    border-collapse: collapse;
+    margin: 30px;
+}
+
+.mul-selec-table-form td:nth-child(1),
+.mul-selec-table-form th:nth-child(1) {
+    min-width: 80% !important;
+}
+
+.mul-selec-table-form td:nth-child(2),
+.mul-selec-table-form th:nth-child(2) {
+    min-width: 20% !important;
+    text-align: end;
+}
+
+.test-hill {
+    overflow-x: auto;
+}

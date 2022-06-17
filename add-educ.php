@@ -71,15 +71,16 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                 <input type="mail" class="mail-licencie" name="mail-educ" placeholder="Adresse mail" maxlength="40">
                             </div>
                             <div class="form-add">
-                                <table class="mul-selec-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Catégorie</th>
-                                            <th>Attribution</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
+                                <div class="mul-selec-table-tab">
+                                    <table class="mul-selec-table mul-selec-table-form">
+                                        <thead>
+                                            <tr>
+                                                <th>Catégorie</th>
+                                                <th>Attribution</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
                                             $req = $db->prepare("CALL PRC_LSTCAT"); //Liste des catégories
                                             $req->execute();
                                             $rowCount = $req->rowCount();
@@ -87,25 +88,27 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                 $rows = $req->fetchAll(PDO::FETCH_ASSOC);
                                                 $req->closeCursor();
 
-                                                foreach($rows as $CAT) :                                        
-                                        ?>
+                                                foreach ($rows as $CAT) :
+                                            ?>
+                                                    <tr>
+                                                        <td><?= $CAT["nomCategorie"] ?></td>
+                                                        <td>
+                                                            <input type="checkbox" id="table-cb" name="<?= $CAT["nomCategorie"] ?>-cb">
+                                                        </td>
+                                                    </tr>
+                                                <?php
+                                                endforeach;
+                                            else :
+                                                ?>
                                                 <tr>
-                                                    <td><?= $CAT["nomCategorie"] ?></td>
-                                                    <td>
-                                                        <input type="checkbox" id="table-cb" name="<?= $CAT["nomCategorie"]?>-cb">
-                                                    </td>
+                                                    <td>Aucune catégorie disponible</td>
                                                 </tr>
-                                        <?php
-                                            endforeach; else :
-                                        ?>
-                                            <tr>
-                                                <td>Aucune catégorie disponible</td>
-                                            </tr>
-                                        <?php
+                                            <?php
                                             endif;
-                                        ?>
-                                    </tbody>
-                                </table>
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                             <div class="form-add">
                                 <label style="padding: 0; cursor: default; display:flex; justify-content: center; border: none; min-width:0;" for="check-resp-hide ">
