@@ -35,10 +35,10 @@ if ($currentpath['basename'] === "index.php" || $currentpath['filename'] === "in
 					<a href="./index.php"><i class="fas fa-home"></i></a>
 				</li>
 				<li <?php if (isset($link_active[1])) : ?>class="active" <?php endif; ?>>
-					<a href="#">Licenciés</a>
+					<a href="./licencies.php">Licenciés</a>
 				</li>
 				<li <?php if (isset($link_active[2])) : ?>class="active" <?php endif; ?>>
-					<a href="#">Éducateurs</a>
+					<a href="./educateurs.php">Éducateurs</a>
 				</li>
 				<li <?php if (isset($link_active[3])) : ?>class="active" <?php endif; ?>>
 					<a href="#">Statistiques</a>

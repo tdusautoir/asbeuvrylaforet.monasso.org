@@ -66,7 +66,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                     <?= $EDUC["nomCategorie"] ?>
                                                 </td>
                                                 <td class="action-btns btns-1">
-                                                    <a href="./modif-licencie.php">
+                                                    <a href="">
                                                         <i class="fa fa-pencil"></i>
                                                     </a>
                                                 </td>
