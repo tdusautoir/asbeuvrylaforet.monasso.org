@@ -469,6 +469,10 @@ tbody tr:hover {
     color: #242424;
 }
 
+td i.fa.fa-picture-o:hover {
+    color: #575555;
+}
+
 .educateur-tab tbody td .fa-pencil:hover {
     color: #575555;
 }
