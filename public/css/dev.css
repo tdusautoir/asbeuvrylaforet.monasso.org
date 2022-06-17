@@ -40,7 +40,7 @@
 
 .licencie-tab td:nth-child(1),
 .licencie-tab th:nth-child(1) {
-    min-width: 12%;
+    min-width: 4%;
 }
 
 .licencie-tab td:nth-child(2),
@@ -60,7 +60,7 @@
 
 .licencie-tab td:nth-child(5),
 .licencie-tab th:nth-child(5) {
-    width: 22%;
+    width: 24%;
 }
 
 .licencie-tab td:nth-child(6),
@@ -75,7 +75,7 @@
 
 .licencie-tab td:nth-child(8),
 .licencie-tab th:nth-child(8) {
-    width: 2%;
+    width: 4%;
 }
 
 .licencie-tab td:nth-child(9),
@@ -83,8 +83,13 @@
     width: 2%;
 }
 
+.licencie-tab td:nth-child(10),
+.licencie-tab th:nth-child(10) {
+    width: 2%;
+}
+
 tbody tr:hover {
-    background-color: rgb(206, 214, 223);
+    background-color: rgb(206, 214, 223) !important;
 }
 
 .row-hidden {
@@ -205,6 +210,43 @@ tbody tr:hover {
     display: flex;
 }
 
+.Modal-photo {
+    z-index: 100;
+    padding: 18px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    width: auto;
+    height: auto;
+    display: none;
+    box-shadow: 0px 0px 10px 2px rgb(0 0 0 / 10%);
+    border-radius: 10px;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.Modal-photo a {
+    font-size: 20px;
+    display: flex;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: all 300ms ease 0ms;
+}
+
+.Modal-photo a:hover {
+    color: #8A7575;
+}
+
+.Modal-photo img {
+    margin-top: 10px;
+    max-width: 400px;
+    max-height: 500px;
+}
+
 /* 
 --------------------------------------------------
 --------------------PAGE MODIF--------------------
@@ -254,7 +296,7 @@ tbody tr:hover {
 .form-modif-li input {
     min-width: 40%;
     margin: 30px 5%;
-    color: #8A7575;
+    color: black;
 }
 
 .form-modif-li input#photo-licencie {
@@ -265,13 +307,12 @@ tbody tr:hover {
     min-width: 40%;
     cursor: pointer;
     background: #fff;
-    color: #1a1a1a;
+    color: #8A7575;
     border: 1px solid #e6e6e6;
     border-radius: 4px;
     padding: 15px;
     font-size: 16px;
     outline: none;
-    color: #8A7575;
     margin: 30px 5%;
 }
 
@@ -301,7 +342,7 @@ tbody tr:hover {
 .mail-form-modif-li input {
     width: 100%;
     margin: 30px 5%;
-    color: #8A7575
+    color: black;
 }
 
 .form-modif-li input.bouton-ajouter {
@@ -327,6 +368,15 @@ tbody tr:hover {
 }
 
 .form-add input#check-resp {
+    margin: 0;
+    min-width: 0;
+    margin: 0 20px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.form-add input#table-cb {
     margin: 0;
     min-width: 0;
     margin: 0 20px;
@@ -421,9 +471,10 @@ tbody tr:hover {
 
 .educateur-tab tbody td .fa-pencil:hover {
     color: #575555;
-    -webkit-transition: all 300ms ease 0ms;
-    -o-transition: all 300ms ease 0ms;
-    transition: all 300ms ease 0ms;
+}
+
+.educateur-tab tbody td .fa-picutre-o:hover {
+    color: #575555 !important;
 }
 
 .educateur-tab tbody td .fa-trash:hover {
@@ -434,5 +485,99 @@ tbody tr:hover {
 }
 
 .educateur-tab {
+    overflow-x: auto;
+}
+
+/* 
+--------------------------------------------------
+-------------SELEC CATEGORIE(S)-------------------
+-------------------------------------------------- 
+*/
+
+.mul-selec-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    margin: 30px 0 60px 0;
+}
+
+.mul-selec-table th,
+.mul-selec-table td {
+    padding: 15px;
+    text-align: left;
+}
+
+.mul-selec-table thead {
+    background-color: var(--mainColor);
+    color: white;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.mul-selec-table tbody {
+    display: table-header-group;
+    overflow: auto;
+    width: 100%;
+}
+
+.mul-selec-table tbody tr:nth-child(even) {
+    background-color: #dbdbdb;
+}
+
+.mul-selec-table td,
+.mul-selec-table th {
+    overflow-x: hidden;
+    display: inline-block;
+}
+
+.mul-selec-table td:nth-child(1),
+.mul-selec-table th:nth-child(1) {
+    min-width: 20%;
+}
+
+.mul-selec-table td:nth-child(2),
+.mul-selec-table th:nth-child(2) {
+    min-width: 25%
+}
+
+.mul-selec-table td:nth-child(3),
+.mul-selec-table th:nth-child(3) {
+    width: 25%;
+}
+
+.mul-selec-table td:nth-child(4),
+.mul-selec-table th:nth-child(4) {
+    width: 25%;
+}
+
+.mul-selec-table td:nth-child(5),
+.mul-selec-table th:nth-child(5) {
+    width: 2%;
+}
+
+.mul-selec-table td:nth-child(6),
+.mul-selec-table th:nth-child(6) {
+    width: 2%;
+}
+
+.mul-selec-table tbody td a i {
+    color: #242424;
+}
+
+.mul-selec-table tbody td .fa-pencil:hover {
+    color: #575555;
+    -webkit-transition: all 300ms ease 0ms;
+    -o-transition: all 300ms ease 0ms;
+    transition: all 300ms ease 0ms;
+}
+
+.mul-selec-table tbody td .fa-trash:hover {
+    color: var(--errorColor);
+    -webkit-transition: all 300ms ease 0ms;
+    -o-transition: all 300ms ease 0ms;
+    transition: all 300ms ease 0ms;
+}
+
+.mul-selec-table {
     overflow-x: auto;
 }

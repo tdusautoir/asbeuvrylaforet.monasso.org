@@ -91,7 +91,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                     </div>
                 </div>
                 <div class="return deconnect">
-                    <a href="licencies.php">Retour</a>
+                    <a href="licencies.php">Annuler</a>
                 </div>
             </div>
         </div>
