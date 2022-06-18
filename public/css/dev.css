@@ -1,0 +1,57 @@
+/* Tableau de catégories */
+
+#cate-educ {
+    display: none;
+    flex-direction: column;
+}
+
+#cate-educ p {
+    min-width: 0;
+    padding: 0;
+    margin: 0;
+    margin-right: 20px;
+    color: #8A7575;
+}
+
+#cate-educ input {
+    min-width: 0;
+    padding: 0;
+    margin: 0;
+    width: 20px;
+    height: 20px;
+}
+
+.list-cate-div {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.list-cate-div div {
+    margin: 5px 0;
+}
+
+.list-cate-div .responsable {
+    margin: 20px 0;
+}
+
+.list-cate-div .cate-check {
+    display: flex;
+    /* align-items: center; */
+    justify-content: space-around;
+}
+
+.responsable label {
+    margin: 0 !important;
+    padding: 0 !important;
+    cursor: default !important;
+    justify-content: center !important;
+    border: none !important;
+    min-width: 0 !important;
+    margin-right: 20px !important;
+}
+
+.responsable {
+    display: flex;
+    align-items: center;
+}

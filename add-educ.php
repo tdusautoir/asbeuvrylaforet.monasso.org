@@ -62,56 +62,43 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                             </div>
                             <div class="form-add">
                                 <input type="password" class="password-licencie" name="password-educ" placeholder="Mot de passe" maxlength="40">
+                                <label for="" style="display:flex; justify-content: space-between;" onclick="displayModal('cate-educ')">Catégories <i class="fa fa-angle-down"></i></label>
                             </div>
                             <div class="mail-form-add">
                                 <input type="mail" class="mail-licencie" name="mail-educ" placeholder="Adresse mail" maxlength="40">
                             </div>
-                            <div class="form-add">
-                                <div class="mul-selec-table-tab">
-                                    <table class="mul-selec-table mul-selec-table-form">
-                                        <thead>
-                                            <tr>
-                                                <th>Catégorie</th>
-                                                <th>Attribution</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            $req = $db->prepare("CALL PRC_LSTCAT"); //Liste des catégories
-                                            $req->execute();
-                                            $rowCount = $req->rowCount();
-                                            if ($rowCount > 0) :
-                                                $rows = $req->fetchAll(PDO::FETCH_ASSOC);
-                                                $req->closeCursor();
+                            <div class="form-add list-cate-div">
 
-                                                foreach ($rows as $CAT) :
-                                            ?>
-                                                    <tr>
-                                                        <td><?= $CAT["nomCategorie"] ?></td>
-                                                        <td>
-                                                            <input type="checkbox" id="table-cb" name="<?= $CAT["nomCategorie"] ?>-cb">
-                                                        </td>
-                                                    </tr>
-                                                <?php
-                                                endforeach;
-                                            else :
-                                                ?>
-                                                <tr>
-                                                    <td>Aucune catégorie disponible</td>
-                                                </tr>
-                                            <?php
-                                            endif;
-                                            ?>
-                                        </tbody>
-                                    </table>
+                                <div class="cate-lign" id="cate-educ">
+                                    <?php
+                                    $req = $db->prepare("CALL PRC_LSTCAT"); //Liste des catégories
+                                    $req->execute();
+                                    $rowCount = $req->rowCount();
+                                    if ($rowCount > 0) :
+                                        $rows = $req->fetchAll(PDO::FETCH_ASSOC);
+                                        $req->closeCursor();
+                                        foreach ($rows as $CAT) :
+                                    ?>
+                                            <div class="cate-check">
+                                                <p style="cursor: default; border: none;"><?= $CAT["nomCategorie"] ?></p>
+                                                <input type="checkbox" name="<?= $CAT["nomCategorie"] ?>-cb">
+                                            </div>
+
+                                        <?php
+                                        endforeach;
+                                    else :
+                                        ?>
+                                        <span>Aucune catégorie disponible</span>
+                                    <?php
+                                    endif;
+                                    ?>
                                 </div>
-                            </div>
-                            <div class="form-add">
-                                <label style="padding: 0; cursor: default; display:flex; justify-content: center; border: none; min-width:0;" for="check-resp-hide ">
-                                    Responsable
-                                    <input id="check-resp" type="checkbox" name="resp-educ">
-                                </label>
-                                <input id="check-resp-hide" type="checkbox">
+                                <div class="responsable">
+                                    <label for="check-resp">
+                                        Responsable
+                                    </label>
+                                    <input id="check-resp" type="checkbox" style="margin:0;">
+                                </div>
                             </div>
                             <div class="form-add">
                                 <input type="submit" value="Ajouter" name="submit-add" class="bouton-ajouter">
@@ -135,17 +122,12 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             })
         </script>
         <script>
-            var expanded = false;
+            function displayModal(idModal) {
+                document.getElementById(idModal).style.display = "flex";
+            }
 
-            function showCheckboxes() {
-                var checkboxes = document.getElementById("checkboxes");
-                if (!expanded) {
-                    checkboxes.style.display = "block";
-                    expanded = true;
-                } else {
-                    checkboxes.style.display = "none";
-                    expanded = false;
-                }
+            function erase(idModal) {
+                document.getElementById(idModal).style.display = "none";
             }
         </script>
         <?php else : require "./components/logged.php"; ?><?php endif; ?>

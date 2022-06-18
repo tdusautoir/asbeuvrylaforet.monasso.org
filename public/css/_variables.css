@@ -84,6 +84,11 @@
   content: "\f1f8";
 }
 
+.fa-angle-down:before {
+  content: "\f107";
+  font-weight: 300;
+}
+
 .fa-bars:before {
   content: "\f0c9";
 }
