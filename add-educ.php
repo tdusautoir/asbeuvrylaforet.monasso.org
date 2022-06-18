@@ -51,7 +51,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                         $req->closeCursor(); ?>
                         <div class="add-panel-separator"></div>
                     </div>
-                    <div class="add-panel">
+                    <div class="add-panel" id="fade-in">
                         <h1>
                             Ajouter un éducateur
                         </h1>
@@ -62,13 +62,10 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                             </div>
                             <div class="form-add">
                                 <input type="password" class="password-licencie" name="password-educ" placeholder="Mot de passe" maxlength="40">
-                                <label for="" style="display:flex; justify-content: space-between;" onclick="displayModal('cate-educ')">Catégories <i class="fa fa-angle-down"></i></label>
+                                <label for="" style="display:flex; justify-content: space-between;" onclick="displayModal('cate-educ-div')">Catégories <i class="fa fa-angle-down"></i></label>
                             </div>
-                            <div class="mail-form-add">
-                                <input type="mail" class="mail-licencie" name="mail-educ" placeholder="Adresse mail" maxlength="40">
-                            </div>
-                            <div class="form-add list-cate-div">
-
+                            <div class="form-add list-cate-div" id="cate-educ-div">
+                                <div class="spacer-form"></div>
                                 <div class="cate-lign" id="cate-educ">
                                     <?php
                                     $req = $db->prepare("CALL PRC_LSTCAT"); //Liste des catégories
@@ -93,6 +90,11 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                     endif;
                                     ?>
                                 </div>
+                            </div>
+                            <div class="mail-form-add">
+                                <input type="mail" class="mail-licencie" name="mail-educ" placeholder="Adresse mail" maxlength="40">
+                            </div>
+                            <div class="form-add list-cate-div">
                                 <div class="responsable">
                                     <label for="check-resp">
                                         Responsable
