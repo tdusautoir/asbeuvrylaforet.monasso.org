@@ -1,8 +1,16 @@
 /* Tableau de catégories */
 
-#cate-educ {
+#cate-educ-div {
     display: none;
+}
+
+#cate-educ {
+    display: list-item;
+    overflow-y: auto;
+    max-height: 100px;
+    margin: 10px 5%;
     flex-direction: column;
+    margin-top: 0;
 }
 
 #cate-educ p {
@@ -19,26 +27,52 @@
     margin: 0;
     width: 20px;
     height: 20px;
+    cursor: pointer;
 }
+
+.cate-check {
+    margin-bottom: 5px;
+    justify-content: space-between;
+    display: flex;
+}
+
+.cate-check:hover {
+    background: rgb(236, 236, 236);
+}
+
 
 .list-cate-div {
     align-items: center;
     display: flex;
-    flex-direction: column;
-}
-
-.list-cate-div div {
-    margin: 5px 0;
+    flex-direction: row;
 }
 
 .list-cate-div .responsable {
     margin: 20px 0;
 }
 
-.list-cate-div .cate-check {
+.list-cate-div .spacer-form {
+    margin: 10px 5%;
+    content: '';
+    width: 100%;
+    font-size: 16px;
+    outline: none;
+    min-width: 40%;
     display: flex;
     /* align-items: center; */
     justify-content: space-around;
+    margin-top: 0;
+}
+
+.list-cate-div .cate-lign {
+    width: 100%;
+    font-size: 16px;
+    outline: none;
+    min-width: 40%;
+    display: flex;
+    /* align-items: center; */
+    justify-content: space-around;
+    flex-direction: row;
 }
 
 .responsable label {

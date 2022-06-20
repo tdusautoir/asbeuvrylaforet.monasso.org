@@ -1,26 +1,26 @@
 @media screen and (max-width:1438px) {
-    td.action-btns.btns-1{
+    td.action-btns.btns-1 {
         position: absolute;
         background-color: white;
         z-index: 2;
         right: 66px;
         height: 50px;
-        width: 30px!important;
-        padding: 15px!important;
-        box-shadow: -22px 0px 30px -8px rgba(0,0,0,0.18);
+        width: 50px !important;
+        padding: 15px !important;
+        box-shadow: -22px 0px 30px -8px rgba(0, 0, 0, 0.18);
     }
 
-    td.action-btns.btns-2{
+    td.action-btns.btns-2 {
         position: absolute;
         background-color: white;
         z-index: 1;
         right: 18px;
         height: 50px;
-        width: 50px!important;
-        padding: 15px!important;
+        width: 50px !important;
+        padding: 15px !important;
     }
 
-    .pagination{
+    .pagination {
         position: absolute;
         right: 22px;
     }

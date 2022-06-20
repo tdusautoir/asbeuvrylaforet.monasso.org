@@ -370,12 +370,12 @@ div.error {
 
 .licencie-tab td:nth-child(4),
 .licencie-tab th:nth-child(4) {
-    width: 12%;
+    width: 13%;
 }
 
 .licencie-tab td:nth-child(5),
 .licencie-tab th:nth-child(5) {
-    width: 24%;
+    width: 22%;
 }
 
 .licencie-tab td:nth-child(6),
@@ -385,12 +385,12 @@ div.error {
 
 .licencie-tab td:nth-child(7),
 .licencie-tab th:nth-child(7) {
-    width: 14%;
+    width: 15%;
 }
 
 .licencie-tab td:nth-child(8),
 .licencie-tab th:nth-child(8) {
-    width: 4%;
+    width: 2%;
 }
 
 .licencie-tab td:nth-child(9),
@@ -405,6 +405,10 @@ div.error {
 
 tbody tr:hover {
     background-color: rgb(206, 214, 223) !important;
+}
+
+.action-btns {
+    width: 50px !important;
 }
 
 /* Pagination */
@@ -739,12 +743,12 @@ tbody tr:hover {
 
 .educateur-tab td:nth-child(2),
 .educateur-tab th:nth-child(2) {
-    min-width: 25%
+    min-width: 23%
 }
 
 .educateur-tab td:nth-child(3),
 .educateur-tab th:nth-child(3) {
-    width: 25%;
+    width: 24%;
 }
 
 .educateur-tab td:nth-child(4),
