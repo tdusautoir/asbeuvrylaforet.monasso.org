@@ -62,7 +62,8 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                     <?= ucfirst($LIC["prenom"]) ?>
                                                 </td>
                                                 <td>
-                                                    <?= $LIC["dateN"] ?>
+                                                    <?= strftime('%d-%m-%Y', strtotime($LIC["dateN"])); //Y-m-d format to d-m-Y format 
+                                                    ?>
                                                 </td>
                                                 <td>
                                                     <?= $LIC["mail"] ?>

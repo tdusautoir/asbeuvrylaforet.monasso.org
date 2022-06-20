@@ -70,7 +70,7 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
             <h1>
               Ajouter un licencié
             </h1>
-            <form action="./functions/licencie-add.php" method="POST">
+            <form action="./functions/licencie-add.php" method="POST" enctype="multipart/form-data">
               <div class="form-add">
                 <input value="<?php display_info_form("nom-licencie"); ?>" type="text" class="nom-licencie" placeholder="Nom" name="nom-licencie" maxlength="20" <?php if (isset($form_lastname_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
                 <input value="<?php display_info_form("prenom-licencie"); ?>" type="text" class="prenom-licencie" placeholder="Prénom" name="prenom-licencie" maxlength="15" <?php if (isset($form_firstname_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
@@ -78,12 +78,8 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
               <div class="form-add">
                 <label for="photo-licencie" <?php if (isset($form_picture_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
                   <i class="fa fa-picture-o"></i> Photo
-                  <input value="<?php if (isset_info_form("photo-licencie")) {
-                                  display_info_form("photo-licencie");
-                                } ?>" id="photo-licencie" type="file" accept="image/png, image/jpeg" name="photo-licencie" />
-                  <span id="nom-photo-licencie"><?php if (isset_info_form("photo-licencie")) {
-                                                  display_info_form("photo-licencie");
-                                                } ?></span>
+                  <input value="<?php display_info_form("photo-licencie"); ?>" id="photo-licencie" type="file" accept="image/png, image/jpeg" name="photo-licencie" />
+                  <span id="nom-photo-licencie"><?php display_info_form("photo-licencie"); ?></span>
                 </label>
                 <input value="<?php display_info_form("dateN-licencie"); ?>" type="date" placeholder="Date de naissance" name="dateN-licencie" <?php if (isset($form_dateN_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
               </div>

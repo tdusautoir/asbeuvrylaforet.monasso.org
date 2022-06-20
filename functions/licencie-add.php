@@ -7,6 +7,9 @@ require_once("../db.php");
 
 date_default_timezone_set("Europe/Paris");
 
+dump($_FILES);
+exit();
+
 //verification si l'utilisateur est connecté
 if (is_logged()) {
 
@@ -35,15 +38,17 @@ if (is_logged()) {
         }
     }
 
-    //verification to add on database
+    //verification before add on database
     if (isset($_POST["submit-add"])) {
         if (isset($_POST["nom-licencie"]) && !empty($_POST["nom-licencie"])) {
             if (isset($_POST["prenom-licencie"]) && !empty($_POST["prenom-licencie"])) {
                 if (isset($_POST["photo-licencie"]) && !empty($_POST["photo-licencie"])) {
-                    if (isset($_POST["dateN-licencie"]) && !empty($_POST["dateN-licencie"])) {
+                    if (isset($_POST["dateN-licencie"]) && !empty($_POST["dateN-licencie"]) && validateDate($_POST["dateN-licencie"], "Y-m-d")) {
                         if (isset($_POST["categorie-licencie"]) && !empty($_POST["categorie-licencie"])) {
                             if (isset($_POST["sexe-licencie"]) && !empty($_POST["sexe-licencie"])) {
                                 if (isset($_POST["mail-licencie"]) && !empty($_POST["mail-licencie"]) && filter_var($_POST["mail-licencie"], FILTER_VALIDATE_EMAIL)) {
+
+                                    //recup info from $_POST
                                     $nom_licencie = strtoupper($_POST["nom-licencie"]);
                                     $prenom_licencie = ucfirst($_POST["prenom-licencie"]);
                                     $dateN_licencie = $_POST["dateN-licencie"];
@@ -51,6 +56,8 @@ if (is_logged()) {
                                     $categorie_licencie = $_POST["categorie-licencie"];
                                     $sexe_licencie = $_POST["sexe-licencie"];
                                     $current_user = $_SESSION["prenom"] . " " . strtoupper($_SESSION["nom"]);
+
+                                    //add a licencie on database
                                     $req = $db->prepare("INSERT INTO licencie (prenom, nom, sexe, dateN, mail, idCategorie, USRCRE) VALUES (?, ?, ?, ?, ?, ?, ?);");
                                     $req->bindValue(1, $prenom_licencie, PDO::PARAM_STR);
                                     $req->bindValue(2, $nom_licencie, PDO::PARAM_STR);
@@ -88,7 +95,7 @@ if (is_logged()) {
                         }
                     } else {
                         header("location: ../add-licencie.php");
-                        create_flash_message("form_dateN_error", "Veuillez remplir tous les champs.", FLASH_ERROR);
+                        create_flash_message("form_dateN_error", "Veuillez remplir une date valide.", FLASH_ERROR);
                         exit();
                     }
                 } else {

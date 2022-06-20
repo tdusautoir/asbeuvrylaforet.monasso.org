@@ -108,7 +108,7 @@ function display_flash_message_by_type(string $type): void
 }
 
 
-function isset_form()
+function isset_form(): bool
 {
     if (isset($_SESSION[FORM])) {
         return true;
@@ -126,7 +126,7 @@ function add_info_form(string $info_type, string $value): void
     $_SESSION[FORM][$info_type] = $value;
 }
 
-function isset_info_form(string $info_type)
+function isset_info_form(string $info_type): bool
 {
     if (isset($_SESSION[FORM][$info_type])) {
         return true;
@@ -134,7 +134,7 @@ function isset_info_form(string $info_type)
     return false;
 }
 
-function display_info_form(string $info_type)
+function display_info_form(string $info_type): void
 {
     //display a flash message by his type
     if (!isset($_SESSION[FORM][$info_type])) {
@@ -148,11 +148,13 @@ function display_info_form(string $info_type)
     echo $form_info;
 }
 
-function unset_info_form()
+function unset_info_form(): bool
 {
     if (isset($_SESSION[FORM])) {
         unset($_SESSION[FORM]);
+        return true;
     }
+    return false;
 }
 
 function init_php_session(): bool
@@ -214,9 +216,15 @@ function guidv4($data = null)
     return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
 }
 
-function dump($arg)
+function dump($arg) //function for debug
 {
     echo "<pre>";
     var_dump($arg);
     echo "</pre>";
+}
+
+function validateDate($date, $format = 'Y-m-d H:i:s') //check if date is valide
+{
+    $d = DateTime::createFromFormat($format, $date);
+    return $d && $d->format($format) == $date;
 }
