@@ -84,24 +84,11 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                     </a>
                                                 </td>
                                                 <td class="action-btns btns-2">
-                                                    <a href="#" onclick="displayModal('Modal-<?= $LIC['idLicencie']; ?>')">
+                                                    <a href="#" onclick="displayModal('<?= $LIC['idLicencie']; ?>')">
                                                         <i class=" fa fa-trash"></i>
                                                     </a>
                                                 </td>
                                             </tr>
-                                            <div id="Modal-<?= $LIC["idLicencie"]; ?>" class="Modal">
-                                                <p>Confirmez la suppression</p>
-                                                <div class="modal-button">
-                                                    <a href="./functions/licencie-delete.php?idLicencie=<?= $LIC["idLicencie"] ?>"><i class="fa fa-check"></i></a>
-                                                    <a href=" #" onClick="erase('Modal-<?= $LIC['idLicencie']; ?>');"><i class="fa fa-times"></i></a>
-                                                </div>
-                                            </div>
-                                            <div id="Modal-photo-<?= $LIC["idLicencie"]; ?>" class="Modal-photo">
-                                                <a href="#" onclick="erase('Modal-photo-<?= $LIC['idLicencie']; ?>')">
-                                                    <i class=" fa fa-times"></i>
-                                                </a>
-                                                <img src="./unknown.png" alt="">
-                                            </div>
                                         <?php endwhile; ?>
                                     </tbody>
                                 </table>
@@ -116,6 +103,15 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                     <div class="return deconnect">
                         <a href="index.php">Retour</a>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div id="Modal">
+            <div class="Modal-content" id="Modal-content">
+                <p>Confirmez la suppression</p>
+                <div class="modal-button">
+                    <a id="valid-btn"><i class="fa fa-check"></i></a>
+                    <a id="erase-btn"><i class="fa fa-times"></i></a>
                 </div>
             </div>
         </div>
@@ -204,12 +200,35 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             }
         </script>
         <script>
-            function displayModal(idModal) {
-                document.getElementById(idModal).style.display = "flex";
+            function displayModal(idLicencie) {
+                let Modal = document.getElementById("Modal");
+                let ModalContent = document.getElementById("Modal-content");
+                let validBtn = document.getElementById("valid-btn");
+                let eraseBtn = document.getElementById("erase-btn");
+
+                document.body.style.overflow = "hidden";
+                Modal.style.display = "block";
+                ModalContent.style.display = "flex";
+                validBtn.setAttribute("href", "./functions/licencie-delete.php?idLicencie=" + idLicencie);
+                eraseBtn.setAttribute("onClick", "erase()");
             }
 
-            function erase(idModal) {
-                document.getElementById(idModal).style.display = "none";
+            function erase() {
+                document.body.style.overflow = "visible";
+                document.getElementById("Modal").style.display = "none";
+            }
+
+            var modal = document.getElementsByClassName('Modal');
+
+            // When the user clicks anywhere outside of the modal, close it
+            for (let i = 0; i < window.length; i++) {
+                window[i].onclick = function(event) {
+                    if (event.target == modal) {
+                        document.getElementsByClassName('modal')[i].style.display =
+                            "none";
+                        document.body.classList.remove('overflowHidden');
+                    }
+                }
             }
         </script>
         <?php else : require "./components/logged.php"; ?><?php endif; ?>
