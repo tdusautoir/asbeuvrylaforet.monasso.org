@@ -58,6 +58,27 @@
         margin-bottom: 30px;
         box-shadow: none;
     }
+
+    .account-panel {
+        flex-direction: column;
+    }
+
+    .account-li {
+        width: 100%;
+    }
+
+    .account-li-content {
+        width: 100%;
+        border-radius: 0 0 10px 10px;
+    }
+
+    .account-container .account-li li:first-child {
+        border-radius: 10px 10px 0 0;
+    }
+
+    .account-container .account-li li:last-child {
+        border-radius: 0 0 0 0;
+    }
 }
 
 @media screen and (max-width:800px) {

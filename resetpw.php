@@ -17,7 +17,7 @@ endif;
 
 <head>
     <?php require("./components/head.php"); ?>
-    <title>Rénitialiser votre mot de passe - A.S. BEUVRY LA FORÊT</title>
+    <title>Rénitialisez votre mot de passe - A.S. BEUVRY LA FORÊT</title>
 </head>
 
 <body>

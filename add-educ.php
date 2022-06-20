@@ -13,7 +13,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
 <html lang="fr">
 
 <head> <?php require("./components/head.php"); ?>
-    <title>Espace Ajout éducateurs - A.S. BEUVRY LA FORÊT</title>
+    <title>Ajout d'éducateurs - A.S. BEUVRY LA FORÊT</title>
 </head>
 
 <body>

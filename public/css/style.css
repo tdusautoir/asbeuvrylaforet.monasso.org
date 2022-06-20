@@ -605,7 +605,7 @@ tbody tr:hover {
 .form-modif-li input {
     min-width: 40%;
     margin: 30px 5%;
-    color: black;
+    color: #8A7575;
 }
 
 .form-modif-li input#photo-licencie {
@@ -633,7 +633,7 @@ tbody tr:hover {
     width: 40%;
     cursor: pointer;
     background: #fff;
-    color: #1a1a1a;
+    color: #8A7575;
     border: 1px solid #e6e6e6;
     border-radius: 4px;
     padding: 15px;
@@ -651,7 +651,7 @@ tbody tr:hover {
 .mail-form-modif-li input {
     width: 100%;
     margin: 30px 5%;
-    color: black;
+    color: #8A7575;
 }
 
 .form-modif-li input.bouton-ajouter {

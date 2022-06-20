@@ -13,7 +13,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
 <html lang="fr">
 
 <head> <?php require("./components/head.php"); ?>
-    <title>Espace Gestion des licenciés - A.S. BEUVRY LA FORÊT</title>
+    <title>Licenciés - A.S. BEUVRY LA FORÊT</title>
 </head>
 
 <body>
@@ -227,6 +227,13 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                         document.getElementsByClassName('modal')[i].style.display =
                             "none";
                         document.body.classList.remove('overflowHidden');
+                    }
+                }
+            }
+            for (let i = 0; i < window.length; i++) {
+                window[i].onclick = function(event) {
+                    if (event.target == modal) {
+                        document.getElementsByClassName('modal')[i].style.display = "none";
                     }
                 }
             }
