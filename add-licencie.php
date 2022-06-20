@@ -32,7 +32,7 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
 <html lang="fr">
 
 <head> <?php require("./components/head.php"); ?>
-  <title>Espace Ajout Licencié - A.S. BEUVRY LA FORÊT</title>
+  <title>Ajout de licenciés - A.S. BEUVRY LA FORÊT</title>
 </head>
 
 <body>

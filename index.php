@@ -39,7 +39,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             <i class="fa fa-bar-chart"></i>
             <p>Statistiques de la saison</p>
           </a>
-          <a>
+          <a href="./compte.php?idLicencie=<?= $LIC["idLicencie"] ?>">
             <i class="fa fa-cogs"></i>
             <p>Mon compte</p>
           </a>

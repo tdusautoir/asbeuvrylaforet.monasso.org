@@ -14,7 +14,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
 <html lang="fr">
 
 <head> <?php require("./components/head.php"); ?>
-    <title>Espace Modification Licencié - A.S. BEUVRY LA FORÊT</title>
+    <title>Modification de licencié - A.S. BEUVRY LA FORÊT</title>
 </head>
 
 <body>
