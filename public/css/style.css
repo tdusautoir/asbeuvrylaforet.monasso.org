@@ -355,12 +355,12 @@ div.error {
 
 .licencie-tab td:nth-child(1),
 .licencie-tab th:nth-child(1) {
-    min-width: 5%;
+    width: 5%;
 }
 
 .licencie-tab td:nth-child(2),
 .licencie-tab th:nth-child(2) {
-    min-width: 10%
+    width: 10%
 }
 
 .licencie-tab td:nth-child(3),
@@ -738,12 +738,12 @@ tbody tr:hover {
 
 .educateur-tab td:nth-child(1),
 .educateur-tab th:nth-child(1) {
-    min-width: 20%;
+    width: 20%;
 }
 
 .educateur-tab td:nth-child(2),
 .educateur-tab th:nth-child(2) {
-    min-width: 23%
+    width: 23%
 }
 
 .educateur-tab td:nth-child(3),

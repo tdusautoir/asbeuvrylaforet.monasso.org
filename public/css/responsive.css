@@ -1,5 +1,6 @@
 @media screen and (max-width:1438px) {
     td.action-btns.btns-1 {
+        text-align: center;
         position: absolute;
         background-color: white;
         z-index: 2;
@@ -7,10 +8,11 @@
         height: 50px;
         width: 50px !important;
         padding: 15px !important;
-        box-shadow: -22px 0px 30px -8px rgba(0, 0, 0, 0.18);
+        box-shadow: -45px 0px 30px -15px rgb(0 0 0 / 18%);
     }
 
     td.action-btns.btns-2 {
+        text-align: center;
         position: absolute;
         background-color: white;
         z-index: 1;
