@@ -375,7 +375,7 @@ div.error {
 
 .licencie-tab td:nth-child(5),
 .licencie-tab th:nth-child(5) {
-    width: 24%;
+    width: 22%;
 }
 
 .licencie-tab td:nth-child(6),
@@ -405,6 +405,10 @@ div.error {
 
 tbody tr:hover {
     background-color: rgb(206, 214, 223) !important;
+}
+
+.action-btns {
+    width: 50px !important;
 }
 
 /* Pagination */
