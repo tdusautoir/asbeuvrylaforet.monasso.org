@@ -93,7 +93,6 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                     ?>
 
                                                     <?= $educCat ?>
-
                                                 </td>
                                                 <td class="action-btns btns-1">
                                                     <a href="">
@@ -101,18 +100,11 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                     </a>
                                                 </td>
                                                 <td class="action-btns btns-2">
-                                                    <a href="#" onclick="displayModal('Modal-<?= $EDUC['idEduc']; ?>')">
+                                                    <a href="#" onclick="displayModalDelete('<?= $EDUC['idEduc']; ?>')">
                                                         <i class=" fa fa-trash"></i>
                                                     </a>
                                                 </td>
                                             </tr>
-                                            <div id="Modal-<?= $EDUC["idEduc"]; ?>" class="Modal">
-                                                <p>Confirmez la suppression</p>
-                                                <div class="modal-button">
-                                                    <a href="./functions/educ-delete.php?idEduc=<?= $EDUC["idEduc"] ?>"><i class="fa fa-check"></i></a>
-                                                    <a href=" #" onClick="erase('Modal-<?= $EDUC['idEduc']; ?>');"><i class="fa fa-times"></i></a>
-                                                </div>
-                                            </div>
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
@@ -125,6 +117,15 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                     <div class="return deconnect">
                         <a href="index.php">Retour</a>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div id="Modal">
+            <div class="Modal-delete" id="Modal-delete">
+                <p>Confirmez la suppression</p>
+                <div class="modal-button">
+                    <a id="valid-btn"><i class="fa fa-check"></i></a>
+                    <a id="erase-btn" onclick="erase()"><i class="fa fa-times"></i></a>
                 </div>
             </div>
         </div>
@@ -213,12 +214,21 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             }
         </script>
         <script>
-            function displayModal(idModal) {
-                document.getElementById(idModal).style.display = "flex";
+            function displayModalDelete(idEduc) {
+                let Modal = document.getElementById("Modal");
+                let ModalDelete = document.getElementById("Modal-delete");
+                let validBtn = document.getElementById("valid-btn");
+
+                document.body.style.overflow = "hidden";
+                Modal.style.display = "block";
+                ModalDelete.style.display = "flex";
+                validBtn.setAttribute("href", "./functions/educ-delete.php?idEduc=" + idEduc);
             }
 
-            function erase(idModal) {
-                document.getElementById(idModal).style.display = "none";
+            function erase() {
+                document.body.style.overflow = "visible";
+                document.getElementById("Modal").style.display = "none";
+                document.getElementById("Modal-delete").style.display = "none";
             }
         </script>
         <?php else : require "./components/logged.php"; ?><?php endif; ?>

@@ -74,9 +74,16 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                 <td>
                                                 </td>
                                                 <td class="action-btns">
-                                                    <a href="#" onclick="displayModal('Modal-photo-<?= $LIC['idLicencie']; ?>')">
-                                                        <i class=" fa fa-picture-o"></i>
-                                                    </a>
+                                                    <?php $getPhoto = $db->prepare("SELECT licencie.idPhoto, photo.imgPath FROM licencie INNER JOIN photo ON licencie.idPhoto = photo.idPhoto WHERE licencie.idLicencie = ?");
+                                                    $getPhoto->bindValue(1, $LIC['idLicencie']);
+                                                    $getPhoto->execute();
+                                                    if ($getPhoto->rowCount() > 0) :
+                                                        $result_getPhoto = $getPhoto->fetch(PDO::FETCH_ASSOC);
+                                                        $imgPath = $result_getPhoto["imgPath"]; ?>
+                                                        <a href="#" onclick="displayModalPhoto('<?= $imgPath ?>')">
+                                                            <i class=" fa fa-picture-o"></i>
+                                                        </a>
+                                                    <?php endif; ?>
                                                 </td>
                                                 <td class="action-btns btns-1">
                                                     <a href="./modif-licencie.php?idLicencie=<?= $LIC["idLicencie"] ?>">
@@ -84,7 +91,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                     </a>
                                                 </td>
                                                 <td class="action-btns btns-2">
-                                                    <a href="#" onclick="displayModal('<?= $LIC['idLicencie']; ?>')">
+                                                    <a href="#" onclick="displayModalDelete('<?= $LIC['idLicencie']; ?>')">
                                                         <i class=" fa fa-trash"></i>
                                                     </a>
                                                 </td>
@@ -107,11 +114,17 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             </div>
         </div>
         <div id="Modal">
-            <div class="Modal-content" id="Modal-content">
+            <div id="Modal-photo" class="Modal-photo">
+                <a href="#" onclick="erase()">
+                    <i class="fa fa-times"></i>
+                </a>
+                <img id="img-licencie" alt="image de licencie">
+            </div>
+            <div class="Modal-delete" id="Modal-delete">
                 <p>Confirmez la suppression</p>
                 <div class="modal-button">
                     <a id="valid-btn"><i class="fa fa-check"></i></a>
-                    <a id="erase-btn"><i class="fa fa-times"></i></a>
+                    <a id="erase-btn" onclick="erase()"><i class="fa fa-times"></i></a>
                 </div>
             </div>
         </div>
@@ -200,22 +213,34 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             }
         </script>
         <script>
-            function displayModal(idLicencie) {
+            function displayModalDelete(idLicencie) {
                 let Modal = document.getElementById("Modal");
-                let ModalContent = document.getElementById("Modal-content");
+                let ModalDelete = document.getElementById("Modal-delete");
                 let validBtn = document.getElementById("valid-btn");
-                let eraseBtn = document.getElementById("erase-btn");
 
                 document.body.style.overflow = "hidden";
                 Modal.style.display = "block";
-                ModalContent.style.display = "flex";
+                ModalDelete.style.display = "flex";
                 validBtn.setAttribute("href", "./functions/licencie-delete.php?idLicencie=" + idLicencie);
-                eraseBtn.setAttribute("onClick", "erase()");
+            }
+
+            function displayModalPhoto(imgPath) {
+
+                let Modal = document.getElementById("Modal");
+                let ModalPhoto = document.getElementById("Modal-photo");
+                let imgLicencie = document.getElementById("img-licencie");
+
+                imgLicencie.setAttribute("src", imgPath);
+                document.body.style.overflow = "hidden";
+                Modal.style.display = "block";
+                ModalPhoto.style.display = "flex";
             }
 
             function erase() {
                 document.body.style.overflow = "visible";
                 document.getElementById("Modal").style.display = "none";
+                document.getElementById("Modal-delete").style.display = "none";
+                document.getElementById("Modal-photo").style.display = "none";
             }
 
             var modal = document.getElementsByClassName('Modal');

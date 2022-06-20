@@ -465,7 +465,7 @@ tbody tr:hover {
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-.Modal-content{
+.Modal-delete{
     z-index: 100;
     justify-content: space-between;
     align-items: center;
@@ -485,13 +485,13 @@ tbody tr:hover {
     align-items: center;
 }
 
-.Modal-content p {
+.Modal-delete p {
     margin: 10px 0;
     font-weight: 700;
     text-transform: uppercase;
 }
 
-.Modal-content a {
+.Modal-delete a {
     font-size: 20px;
     display: flex;
     width: 30px;
@@ -506,15 +506,15 @@ tbody tr:hover {
     align-items: center;
 }
 
-.Modal-content a:hover {
+.Modal-delete a:hover {
     color: green;
 }
 
-.Modal-content a:last-child:hover {
+.Modal-delete a:last-child:hover {
     color: var(--errorColor);
 }
 
-.Modal-content .modal-button {
+.Modal-delete .modal-button {
     display: flex;
 }
 

@@ -58,7 +58,7 @@ if (is_logged()) {
                                             //file is inferior to 2 mo
                                             $uploadfile = $_FILES['photo-licencie']['tmp_name'];
                                             $sourceProperties = getimagesize($uploadfile);
-                                            $newFileName = ucfirst(mb_strtolower($nom_licencie)) . "_" . mb_strtolower($prenom_licencie) . "_" . date("Ymd"); //filename = Nom_prenom_date
+                                            $newFileName = mb_strtolower($nom_licencie) . "_" . mb_strtolower($prenom_licencie) . "_" . date("Ymd"); //filename = Nom_prenom_date
                                             $uploaddir = dirname(__FILE__) . "/../public/profiles/";
                                             $ext = pathinfo($_FILES['photo-licencie']['name'], PATHINFO_EXTENSION); //get extension
                                             $image_width = $sourceProperties[0]; //get image width
@@ -111,15 +111,40 @@ if (is_logged()) {
                                         exit();
                                     }
 
+                                    //add photo on database
+                                    $imgPath = "./public/profiles/" . $newFileName . "_resize." . $ext;
+                                    $addPhoto = $db->prepare("INSERT INTO photo (imgPath, USRCRE) VALUES (?, ?);");
+                                    $addPhoto->bindValue(1, $imgPath);
+                                    $addPhoto->bindValue(2, $current_user, PDO::PARAM_STR);
+                                    $result_add = $addPhoto->execute();
+
+                                    if (!$result_add) {
+                                        header("location: ../add-licencie.php");
+                                        create_flash_message("add_photo_error", "Une erreur est survenue, veuillez réessayer.", FLASH_SUCCESS);
+                                        exit();
+                                    }
+
+                                    //get the last idPhoto
+                                    $getLastPhotoId = $db->prepare("SELECT photo.idPhoto FROM photo ORDER BY photo.idPhoto DESC LIMIT 1");
+                                    $getLastPhotoId->execute();
+                                    if (!$getLastPhotoId) {
+                                        header("location: ../add-licencie.php");
+                                        create_flash_message("get_photo_id_error", "Une erreur est survenue, veuillez réessayer.", FLASH_SUCCESS);
+                                        exit();
+                                    }
+                                    $result_getLastId = $getLastPhotoId->fetch();
+                                    $PhotoId = $result_getLastId["idPhoto"];
+
                                     //add a licencie on database
-                                    $req = $db->prepare("INSERT INTO licencie (prenom, nom, sexe, dateN, mail, idCategorie, USRCRE) VALUES (?, ?, ?, ?, ?, ?, ?);");
+                                    $req = $db->prepare("INSERT INTO licencie (prenom, nom, sexe, dateN, mail, idCategorie, idPhoto, USRCRE) VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
                                     $req->bindValue(1, $prenom_licencie, PDO::PARAM_STR);
                                     $req->bindValue(2, $nom_licencie, PDO::PARAM_STR);
                                     $req->bindValue(3, $sexe_licencie, PDO::PARAM_STR);
                                     $req->bindValue(4, $dateN_licencie, PDO::PARAM_STR);
                                     $req->bindValue(5, $mail_licencie, PDO::PARAM_STR);
                                     $req->bindValue(6, $categorie_licencie, PDO::PARAM_INT);
-                                    $req->bindValue(7, $current_user, PDO::PARAM_STR);
+                                    $req->bindValue(7, $PhotoId, PDO::PARAM_STR);
+                                    $req->bindValue(8, $current_user, PDO::PARAM_STR);
                                     $result = $req->execute();
 
                                     if ($result) {
