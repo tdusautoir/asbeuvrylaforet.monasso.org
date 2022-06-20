@@ -73,7 +73,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                 <td>
 
                                                 </td>
-                                                <td>
+                                                <td class="action-btns">
                                                     <a href="#" onclick="displayModal('Modal-photo-<?= $LIC['idLicencie']; ?>')">
                                                         <i class=" fa fa-picture-o"></i>
                                                     </a>
