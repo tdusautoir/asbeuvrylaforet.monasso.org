@@ -89,7 +89,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                     </a>
                                                 </td>
                                             </tr>
-                                            <div id="Modal-<?= $LIC["idLicencie"]; ?>" class="Modal">
+                                            <div id="Modal-<?= $LIC["idLicencie"]; ?>" class="Modal modal">
                                                 <p>Confirmez la suppression</p>
                                                 <div class="modal-button">
                                                     <a href="./functions/licencie-delete.php?idLicencie=<?= $LIC["idLicencie"] ?>"><i class="fa fa-check"></i></a>
@@ -204,12 +204,21 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             }
         </script>
         <script>
+            var modal = document.getElementById('modal');
+
             function displayModal(idModal) {
                 document.getElementById(idModal).style.display = "flex";
             }
 
             function erase(idModal) {
                 document.getElementById(idModal).style.display = "none";
+            }
+            for (let i = 0; i < window.length; i++) {
+                window[i].onclick = function(event) {
+                    if (event.target == modal) {
+                        document.getElementsByClassName('modal')[i].style.display = "none";
+                    }
+                }
             }
         </script>
         <?php else : require "./components/logged.php"; ?><?php endif; ?>

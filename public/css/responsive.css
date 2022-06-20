@@ -69,10 +69,15 @@
 
     .account-li-content {
         width: 100%;
+        border-radius: 0 0 10px 10px;
     }
 
-    .account-container .account-li li {
-        border-right: 3px solid #ededed;
+    .account-container .account-li li:first-child {
+        border-radius: 10px 10px 0 0;
+    }
+
+    .account-container .account-li li:last-child {
+        border-radius: 0 0 0 0;
     }
 }
 

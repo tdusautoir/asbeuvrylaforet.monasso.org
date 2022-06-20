@@ -118,6 +118,7 @@
     height: auto;
     padding: 20px;
     background-color: #ededed;
+    border-radius: 0 10px 10px 0;
 }
 
 .account-container .account-li li {
@@ -128,26 +129,22 @@
     text-transform: uppercase;
     font-size: 20px;
     font-weight: 700;
-    border-bottom: 3px solid #ededed;
-    border-left: 3px solid #ededed;
     transition: all 300ms ease 0ms;
 }
 
 .account-container .account-li li:first-child {
     background: var(--mainColor);
     color: white;
-    border-top: 3px solid #ededed;
+    border-radius: 10px 0 0 0;
 }
 
-/* 
-.account-container .account-li li:not(:last-child) {
-    border-bottom: 2px solid #ededed;
-
-} */
+.account-container .account-li li:last-child {
+    border-radius: 0 0 0 10px;
+}
 
 .account-container .account-li li:hover {
     cursor: pointer;
-    background-color: var(--mainColor) !important;
+    background-color: #21802e !important;
     color: white !important;
 }
 
