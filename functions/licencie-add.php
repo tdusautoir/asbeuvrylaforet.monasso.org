@@ -51,7 +51,6 @@ if (is_logged()) {
                                     $sexe_licencie = $_POST["sexe-licencie"];
                                     $current_user = $_SESSION["prenom"] . " " . strtoupper($_SESSION["nom"]);
 
-
                                     //upload picture from $_FILES
                                     if (is_uploaded_file($_FILES['photo-licencie']['tmp_name'])) {
                                         //file is valid
@@ -60,7 +59,7 @@ if (is_logged()) {
                                             $uploadfile = $_FILES['photo-licencie']['tmp_name'];
                                             $sourceProperties = getimagesize($uploadfile);
                                             $newFileName = ucfirst(mb_strtolower($nom_licencie)) . "_" . mb_strtolower($prenom_licencie) . "_" . date("Ymd"); //filename = Nom_prenom_date
-                                            $uploaddir = "/Applications/MAMP/htdocs/git/ProjetAnnuel2ESGI/public/profiles/";
+                                            $uploaddir = dirname(__FILE__) . "/../public/profiles/";
                                             $ext = pathinfo($_FILES['photo-licencie']['name'], PATHINFO_EXTENSION); //get extension
                                             $image_width = $sourceProperties[0]; //get image width
                                             $image_height = $sourceProperties[1]; //get image height
@@ -91,7 +90,6 @@ if (is_logged()) {
                                                 default:
                                                     header("location: ../add-licencie.php");
                                                     create_flash_message("form_picture_error", "Le type de votre image doit être jpeg ou png.", FLASH_ERROR);
-                                                    exit();
                                                     exit();
                                                     break;
                                             }
