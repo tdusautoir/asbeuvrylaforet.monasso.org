@@ -743,12 +743,12 @@ tbody tr:hover {
 
 .educateur-tab td:nth-child(2),
 .educateur-tab th:nth-child(2) {
-    min-width: 25%
+    min-width: 23%
 }
 
 .educateur-tab td:nth-child(3),
 .educateur-tab th:nth-child(3) {
-    width: 25%;
+    width: 24%;
 }
 
 .educateur-tab td:nth-child(4),
