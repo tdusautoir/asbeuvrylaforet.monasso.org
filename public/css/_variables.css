@@ -44,6 +44,14 @@
   content: "\f007";
 }
 
+.fa-info:before {
+  content: "\f129";
+}
+
+.fa-globe:before {
+  content: "\f0ac";
+}
+
 .fa-users:before {
   content: "\f0c0";
 }

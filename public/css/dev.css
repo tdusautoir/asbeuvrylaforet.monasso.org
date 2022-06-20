@@ -118,7 +118,7 @@
     height: auto;
     padding: 20px;
     background-color: #ededed;
-    border-radius: 0 10px 10px 0;
+    border-radius: 0 10px 10px 10px;
 }
 
 .account-container .account-li li {

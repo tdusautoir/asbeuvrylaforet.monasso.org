@@ -67,17 +67,27 @@
         width: 100%;
     }
 
+    .account-li ul {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
+
+    .account-li li {
+        width: 50%;
+    }
+
     .account-li-content {
         width: 100%;
         border-radius: 0 0 10px 10px;
     }
 
     .account-container .account-li li:first-child {
-        border-radius: 10px 10px 0 0;
+        border-radius: 10px 0 0 0;
     }
 
     .account-container .account-li li:last-child {
-        border-radius: 0 0 0 0;
+        border-radius: 0 10px 0 0;
     }
 }
 
@@ -101,9 +111,19 @@
     .modif-li-panel select {
         font-size: 13px;
     }
+
+    .account-li li {
+        font-size: 15px !important;
+    }
 }
 
 /* -----Téléphone----- */
+
+@media screen and (min-width:500px) {
+    .account-li li i {
+        display: none;
+    }
+}
 
 @media screen and (max-width:500px) {
     .li-admin h2 {
@@ -112,5 +132,19 @@
 
     .li-admin li p {
         font-size: 12px;
+    }
+
+    .account-li li {
+        text-align: center;
+    }
+
+    .account-li li i {
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .account-li li p {
+        display: none;
     }
 }
