@@ -23,6 +23,7 @@ li {
 }
 
 header.menu-container {
+	z-index: 5000;
 	background-color: white;
 	box-shadow: 0 0 7px rgb(0 0 0 / 44%);
 	display: flex;

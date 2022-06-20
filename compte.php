@@ -19,23 +19,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
 
 <body>
     <?php if (is_logged()) : ?>
-        <?php include('./components/header.php');
-        // if (isset($_GET["idLicencie"]) && !empty($_GET["idLicencie"])) {
-        //     $idLicencie = $_GET["idLicencie"];
-        //     $info = $db->prepare("SELECT licencie.nom, licencie.prenom, licencie.dateN, licencie.mail, licencie.sexe, categorie.nomCategorie FROM licencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.idLicencie = $idLicencie");
-        //     $info->execute();
-        //     $getinfo = $info->fetch(PDO::FETCH_ASSOC);
-        //     $firstname_licencie = $getinfo["prenom"];
-        //     $lastname_licencie = $getinfo["nom"];
-        //     $dateN_licencie = $getinfo["dateN"];
-        //     $mail_licencie = $getinfo["mail"];
-        //     $sexe_licencie = $getinfo["sexe"];
-        //     $category_licencie = $getinfo["nomCategorie"];
-        // } else {
-        //     header("location: index.php");
-        //     exit();
-        // } 
-        ?>
+        <?php include('./components/header.php'); ?>
         <div class="container">
             <div class="container-content">
                 <?php include "./components/display_error.php"; ?>
@@ -57,7 +41,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                         <div class="account-li-content">
                             <div id="account-infos">
                                 <h1>Mes informations : </h1>
-                                <input type="text" value="<?= $lastname_licencie ?>">
+                                <input type="text">
                             </div>
                             <div id="account-droits">
                                 <h1>Mes droits : </h1>
