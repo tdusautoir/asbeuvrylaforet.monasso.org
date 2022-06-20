@@ -78,14 +78,14 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
               <div class="form-add">
                 <label for="photo-licencie" <?php if (isset($form_picture_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
                   <i class="fa fa-picture-o"></i> Photo
-                  <input value="<?php display_info_form("photo-licencie"); ?>" id="photo-licencie" type="file" accept="image/png, image/jpeg" name="photo-licencie" />
-                  <span id="nom-photo-licencie"><?php display_info_form("photo-licencie"); ?></span>
+                  <input id="photo-licencie" type="file" accept="image/png, image/jpeg" name="photo-licencie" />
+                  <span id="nom-photo-licencie"></span>
                 </label>
                 <input value="<?php display_info_form("dateN-licencie"); ?>" type="date" placeholder="Date de naissance" name="dateN-licencie" <?php if (isset($form_dateN_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
               </div>
               <div class="form-add">
                 <select name="categorie-licencie" id="categorie-licencie" <?php if (isset($form_categorie_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
-                  <option value="" disabled <?php if (!isset_info_form("categorie-licencie")) : ?> selected <?php endif; ?>selected>Catégorie</option>
+                  <option value="" disabled <?php if (!isset_info_form("categorie-licencie")) : ?> selected <?php endif; ?>>Catégorie</option>
                   <?php
                   $req_category = $db->query("SELECT idCategorie, nomCategorie FROM categorie");
                   while ($category = $req_category->fetch()) :

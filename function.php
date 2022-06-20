@@ -228,3 +228,12 @@ function validateDate($date, $format = 'Y-m-d H:i:s') //check if date is valide
     $d = DateTime::createFromFormat($format, $date);
     return $d && $d->format($format) == $date;
 }
+
+function imageResize($newImageWidth, $newImageHeight, $imageSrc, $imageWidth, $imageHeight)
+{
+    $newImageLayer = imagecreatetruecolor($newImageWidth, $newImageHeight);
+
+    imagecopyresampled($newImageLayer, $imageSrc, 0, 0, 0, 0, $newImageWidth, $newImageHeight, $imageWidth, $imageHeight);
+
+    return $newImageLayer;
+}
