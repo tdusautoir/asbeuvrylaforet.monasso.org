@@ -72,8 +72,8 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
             </h1>
             <form action="./functions/licencie-add.php" method="POST" enctype="multipart/form-data">
               <div class="form-add">
-                <input value="<?php display_info_form("nom-licencie"); ?>" type="text" class="nom-licencie" placeholder="Nom" name="nom-licencie" maxlength="20" <?php if (isset($form_lastname_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
-                <input value="<?php display_info_form("prenom-licencie"); ?>" type="text" class="prenom-licencie" placeholder="Prénom" name="prenom-licencie" maxlength="15" <?php if (isset($form_firstname_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
+                <input value="<?php display_info_form("nom-licencie"); ?>" type="text" class="nom-licencie" placeholder="Nom" name="nom-licencie" maxlength="20" onkeyup="javascript:nospaces(this)" onkeydown="javascript:nospaces(this)" <?php if (isset($form_lastname_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
+                <input value="<?php display_info_form("prenom-licencie"); ?>" type="text" class="prenom-licencie" placeholder="Prénom" name="prenom-licencie" maxlength="15" onkeyup="javascript:nospaces(this)" onkeydown="javascript:nospaces(this)" <?php if (isset($form_firstname_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
               </div>
               <div class="form-add">
                 <label for="photo-licencie" <?php if (isset($form_picture_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
@@ -131,6 +131,12 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
 
         imageName.innerText = inputImage.name;
       })
+    </script>
+    <script type="text/javascript">
+      function nospaces(input) {
+        input.value = input.value.replace(" ", "");
+        return true;
+      }
     </script>
     <?php else : require "./components/logged.php"; ?><?php endif; ?>
 </body>

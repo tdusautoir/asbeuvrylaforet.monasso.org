@@ -57,8 +57,8 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                         </h1>
                         <form action="./functions/educ-add.php" method="POST">
                             <div class="form-add">
-                                <input type="text" class="nom-licencie" placeholder="Nom" name="nom-educ" maxlength="20">
-                                <input type="text" class="prenom-licencie" placeholder="Prénom" name="prenom-educ" maxlength="15">
+                                <input type="text" class="nom-licencie" placeholder="Nom" name="nom-educ" maxlength="20" onkeyup="javascript:nospaces(this)" onkeydown="javascript:nospaces(this)">
+                                <input type="text" class="prenom-licencie" placeholder="Prénom" name="prenom-educ" maxlength="15" onkeyup="javascript:nospaces(this)" onkeydown="javascript:nospaces(this)">
                             </div>
                             <div class="form-add">
                                 <input type="password" class="password-licencie" name="password-educ" placeholder="Mot de passe" maxlength="40">
@@ -130,6 +130,12 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
 
             function erase(idModal) {
                 document.getElementById(idModal).style.display = "none";
+            }
+        </script>
+        <script type="text/javascript">
+            function nospaces(input) {
+                input.value = input.value.replace(" ", "");
+                return true;
             }
         </script>
         <?php else : require "./components/logged.php"; ?><?php endif; ?>
