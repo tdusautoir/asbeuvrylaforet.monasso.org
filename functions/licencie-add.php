@@ -101,7 +101,7 @@ if (is_logged()) {
                                         } else {
                                             //file size is too big
                                             header("location: ../add-licencie.php");
-                                            create_flash_message("form_picture_error", "Votre photo doit être inférieur à 2 mo.", FLASH_ERROR);
+                                            create_flash_message("form_picture_error", "La photo doit être inférieure à 2Mo.", FLASH_ERROR);
                                             exit();
                                         }
                                     } else {

@@ -465,7 +465,7 @@ tbody tr:hover {
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-.Modal-delete{
+.Modal-delete {
     z-index: 100;
     justify-content: space-between;
     align-items: center;
