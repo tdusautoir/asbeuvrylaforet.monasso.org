@@ -27,15 +27,14 @@ if (is_logged()) {
                         $req->bindValue(4, $password_educ_hash, PDO::PARAM_STR);
 
                         //Resp?
-                        if(isset($_POST["resp-educ"])){
+                        if (isset($_POST["resp-educ"])) {
                             $req->bindValue(5, 1, PDO::PARAM_INT);
-                        }
-                        else{
+                        } else {
                             $req->bindValue(5, 0, PDO::PARAM_INT);
                         }
 
                         $req->bindValue(6, $current_user, PDO::PARAM_STR);
-                        $result = $req->execute();                      
+                        $result = $req->execute();
                         $req->closeCursor();
 
                         //Récup dernier id d'educ ajouté
@@ -55,7 +54,7 @@ if (is_logged()) {
 
                         foreach ($rows as $cat) {
                             $nom = $cat["nomCategorie"];
-                            if(isset($_POST["$nom-cb"])){
+                            if (isset($_POST["$nom-cb"])) {
                                 $reqLnk = $db->prepare("CALL PRC_CRECATLNK(?,?)");
                                 $reqLnk->bindValue(1, $cat["idCategorie"], PDO::PARAM_INT);
                                 $reqLnk->bindValue(2, $educId, PDO::PARAM_INT);
@@ -88,14 +87,12 @@ if (is_logged()) {
                 create_flash_message("form_firstname_error", "Veuillez remplir tous les champs.", FLASH_ERROR);
                 exit();
             }
-        } 
-        else {
+        } else {
             header("location: ../add-educ.php");
             create_flash_message("form_lastname_error", "Veuillez remplir tous les champs.", FLASH_ERROR);
             exit();
-        }        
-    } 
-    else {
+        }
+    } else {
         header("location: ../add-educ.php");
         create_flash_message("add_error", "Une erreur est survenue, Veuillez réessayer.", FLASH_ERROR);
         exit();
