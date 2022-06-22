@@ -243,10 +243,16 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 ModalPhoto.style.display = "none";
             }
 
+            //When the user pressed escape close the modal
+            document.onkeydown = function(e) {
+                if (e.key === "Escape" || e.key === "Esc") {
+                    erase();
+                }
+            }
+
             // When the user clicks anywhere outside of the modal content, close it
             Modal.addEventListener("click", function(event) {
-                // console.log(event.target);
-                if (event.target != imgLicencie || event.target != ModalDelete) {
+                if (event.target != imgLicencie && event.target != ModalDelete) {
                     erase();
                 }
             })
