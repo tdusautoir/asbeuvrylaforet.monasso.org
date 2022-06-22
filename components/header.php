@@ -3,7 +3,7 @@ $currentpath = pathinfo($_SERVER['SCRIPT_NAME']);
 
 if ($currentpath['basename'] === "index.php" || $currentpath['filename'] === "index") {
 	$link_active[0] = true;
-} else if ($currentpath['basename'] === "page.php" || $currentpath['filename'] === "page") {
+} else if ($currentpath['basename'] === "licencies.php" || $currentpath['filename'] === "licencies") {
 	$link_active[1] = true;
 } else if ($currentpath['basename'] === "page.php" || $currentpath['filename'] === "page") {
 	$link_active[2] = true;
