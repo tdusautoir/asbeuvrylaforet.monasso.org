@@ -214,9 +214,10 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             }
         </script>
         <script>
+            let Modal = document.getElementById("Modal");
+            let ModalDelete = document.getElementById("Modal-delete");
+
             function displayModalDelete(idEduc) {
-                let Modal = document.getElementById("Modal");
-                let ModalDelete = document.getElementById("Modal-delete");
                 let validBtn = document.getElementById("valid-btn");
 
                 document.body.style.overflow = "hidden";
@@ -230,6 +231,20 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 document.getElementById("Modal").style.display = "none";
                 document.getElementById("Modal-delete").style.display = "none";
             }
+
+            //When the user pressed escape close the modal
+            document.onkeydown = function(e) {
+                if (e.key === "Escape" || e.key === "Esc") {
+                    erase();
+                }
+            }
+
+            // When the user clicks anywhere outside of the modal content, close it
+            Modal.addEventListener("click", function(event) {
+                if (event.target != ModalDelete) {
+                    erase();
+                }
+            })
         </script>
         <?php else : require "./components/logged.php"; ?><?php endif; ?>
 </body>
