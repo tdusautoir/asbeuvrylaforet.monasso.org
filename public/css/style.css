@@ -521,40 +521,54 @@ tbody tr:hover {
 /* Pop-up photo */
 
 .Modal-photo {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
     z-index: 100;
-    padding: 18px;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: white;
-    width: auto;
-    height: auto;
     display: none;
-    box-shadow: 0px 0px 10px 2px rgb(0 0 0 / 10%);
-    border-radius: 10px;
-    flex-direction: column;
-    align-items: flex-end;
 }
 
-.Modal-photo a {
+.Modal-image {
+    padding: 18px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-photo-icon-close {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modal-photo-icon-close i {
+    margin: 20px;
+    width: 20px;
+    height: 20px;
     font-size: 20px;
+    color: white;
     display: flex;
     border: none;
     cursor: pointer;
     font-weight: 700;
     text-transform: uppercase;
-    transition: all 300ms ease 0ms;
+    transition: all 100ms ease 0ms;
 }
 
-.Modal-photo a:hover {
-    color: #8A7575;
+.modal-photo-icon-close i:hover {
+    color: rgb(236, 236, 236);
 }
 
-.Modal-photo img {
-    margin-top: 10px;
-    max-width: 400px;
+.Modal-image img {
+    max-width: 500px;
     max-height: 500px;
+    box-shadow: 0px 0px 10px 2px rgb(0 0 0 / 10%);
 }
 
 /* 

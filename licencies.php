@@ -115,10 +115,12 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
         </div>
         <div id="Modal">
             <div id="Modal-photo" class="Modal-photo">
-                <a href="#" onclick="erase()">
-                    <i class="fa fa-times"></i>
-                </a>
-                <img id="img-licencie" alt="image de licencie">
+                <div class="modal-photo-icon-close">
+                    <i class="fa fa-times" onclick="erase()"></i>
+                </div>
+                <div class="Modal-image">
+                    <img id="img-licencie" alt="image de licencie">
+                </div>
             </div>
             <div class="Modal-delete" id="Modal-delete">
                 <p>Confirmez la suppression</p>
