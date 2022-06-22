@@ -28,7 +28,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                             Liste des licenciés :
                         </h2>
                         <?php
-                        $req = $db->prepare("SELECT licencie.idLicencie, categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.dateN, licencie.mail, licencie.USRCRE FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.COSU = 0 ORDER BY licencie.DCRE DESC;"); //Derniers licenciés ajoutés classé par date croissant et limités à 10. 
+                        $req = $db->prepare("SELECT licencie.idLicencie, categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.dateN, licencie.mail, licencie.USRCRE FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.COSU = 0 ORDER BY licencie.DCRE DESC;"); //licenciés de la bdd classé par date croissant 
                         $req->execute();
                         $rowCount = $req->rowCount();
                         if ($rowCount > 0) : //si on trouve des licenciés ajoutés on affiche la liste de la requete.
@@ -215,9 +215,12 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             }
         </script>
         <script>
+            let Modal = document.getElementById("Modal")
+            let ModalDelete = document.getElementById("Modal-delete");
+            let ModalPhoto = document.getElementById("Modal-photo");
+            let imgLicencie = document.getElementById("img-licencie");
+
             function displayModalDelete(idLicencie) {
-                let Modal = document.getElementById("Modal");
-                let ModalDelete = document.getElementById("Modal-delete");
                 let validBtn = document.getElementById("valid-btn");
 
                 document.body.style.overflow = "hidden";
@@ -227,11 +230,6 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             }
 
             function displayModalPhoto(imgPath) {
-
-                let Modal = document.getElementById("Modal");
-                let ModalPhoto = document.getElementById("Modal-photo");
-                let imgLicencie = document.getElementById("img-licencie");
-
                 imgLicencie.setAttribute("src", imgPath);
                 document.body.style.overflow = "hidden";
                 Modal.style.display = "block";
@@ -240,30 +238,18 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
 
             function erase() {
                 document.body.style.overflow = "visible";
-                document.getElementById("Modal").style.display = "none";
-                document.getElementById("Modal-delete").style.display = "none";
-                document.getElementById("Modal-photo").style.display = "none";
+                Modal.style.display = "none";
+                ModalDelete.style.display = "none";
+                ModalPhoto.style.display = "none";
             }
 
-            var modal = document.getElementsByClassName('Modal');
-
-            // When the user clicks anywhere outside of the modal, close it
-            for (let i = 0; i < window.length; i++) {
-                window[i].onclick = function(event) {
-                    if (event.target == modal) {
-                        document.getElementsByClassName('modal')[i].style.display =
-                            "none";
-                        document.body.classList.remove('overflowHidden');
-                    }
+            // When the user clicks anywhere outside of the modal content, close it
+            Modal.addEventListener("click", function(event) {
+                // console.log(event.target);
+                if (event.target != imgLicencie || event.target != ModalDelete) {
+                    erase();
                 }
-            }
-            for (let i = 0; i < window.length; i++) {
-                window[i].onclick = function(event) {
-                    if (event.target == modal) {
-                        document.getElementsByClassName('modal')[i].style.display = "none";
-                    }
-                }
-            }
+            })
         </script>
         <?php else : require "./components/logged.php"; ?><?php endif; ?>
 </body>
