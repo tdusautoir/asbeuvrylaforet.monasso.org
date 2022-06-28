@@ -8,6 +8,20 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
     header("location: index.php");
 }
 
+//gestion des erreurs
+if (isset_flash_message_by_type(FLASH_ERROR)) {
+    if (isset_flash_message_by_name("form_lastname_error")) {
+        $form_lastname_error = true;
+    } else if (isset_flash_message_by_name("form_firstname_error")) {
+        $form_firstname_error = true;
+    } else if (isset_flash_message_by_name("form_password_error")) {
+        $form_password_error = true;
+    } else if (isset_flash_message_by_name("form_mail_error")) {
+        $form_mail_error = true;
+    }
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -57,11 +71,11 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                         </h1>
                         <form action="./functions/educ-add.php" method="POST">
                             <div class="form-add">
-                                <input type="text" class="nom-licencie" placeholder="Nom" name="nom-educ" maxlength="20" onkeyup="javascript:nospaces(this)" onkeydown="javascript:nospaces(this)">
-                                <input type="text" class="prenom-licencie" placeholder="Prénom" name="prenom-educ" maxlength="15" onkeyup="javascript:nospaces(this)" onkeydown="javascript:nospaces(this)">
+                                <input value="<?php display_info_form("nom-educ"); ?>" type="text" class="nom-licencie" placeholder="Nom" name="nom-educ" maxlength="20" onkeyup="javascript:nospaces(this)" onkeydown="javascript:nospaces(this)" <?php if (isset($form_lastname_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
+                                <input value="<?php display_info_form("prenom-educ"); ?>" type="text" class="prenom-licencie" placeholder="Prénom" name="prenom-educ" maxlength="15" onkeyup="javascript:nospaces(this)" onkeydown="javascript:nospaces(this)" <?php if (isset($form_firstname_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
                             </div>
                             <div class="form-add">
-                                <input type="password" class="password-licencie" name="password-educ" placeholder="Mot de passe" maxlength="40">
+                                <input value="<?php display_info_form("password-educ"); ?>" type="password" class="password-licencie" name="password-educ" placeholder="Mot de passe" maxlength="40" <?php if (isset($form_password_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
                                 <label for="" style="display:flex; justify-content: space-between; align-items: center;" onclick="displayModal('cate-educ-div')">Catégories <i class="fa fa-angle-down"></i></label>
                             </div>
                             <div class="form-add list-cate-div" id="cate-educ-div">
@@ -74,13 +88,11 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                     if ($rowCount > 0) :
                                         $rows = $req->fetchAll(PDO::FETCH_ASSOC);
                                         $req->closeCursor();
-                                        foreach ($rows as $CAT) :
-                                    ?>
+                                        foreach ($rows as $CAT) : ?>
                                             <div class="cate-check">
                                                 <p style="cursor: default; border: none;"><?= $CAT["nomCategorie"] ?></p>
-                                                <input type="checkbox" name="<?= $CAT["nomCategorie"] ?>-cb">
+                                                <input type="checkbox" name="<?= $CAT["nomCategorie"] ?>-cb" <?php if (isset_info_form($CAT["nomCategorie"] . "-cb")) : ?> checked <?php endif; ?>>
                                             </div>
-
                                         <?php
                                         endforeach;
                                     else :
@@ -92,7 +104,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                 </div>
                             </div>
                             <div class="mail-form-add">
-                                <input type="mail" class="mail-licencie" name="mail-educ" placeholder="Adresse mail" maxlength="40">
+                                <input value="<?php display_info_form("mail-educ"); ?>" type="mail" class="mail-licencie" name="mail-educ" placeholder="Adresse mail" maxlength="40" <?php if (isset($form_mail_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
                             </div>
                             <div class="form-add list-cate-div">
                                 <div class="responsable">
@@ -113,16 +125,10 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 </div>
             </div>
         </div>
-        <script>
-            let input = document.getElementById("photo-licencie");
-            let imageName = document.getElementById("nom-photo-licencie")
-
-            input.addEventListener("change", () => {
-                let inputImage = document.querySelector("input[type=file]").files[0];
-
-                imageName.innerText = inputImage.name;
-            })
-        </script>
+        <?php
+        //if there is form info, delete it
+        unset_info_form();
+        ?>
         <script>
             function displayModal(idModal) {
                 document.getElementById(idModal).style.display = "flex";
@@ -138,7 +144,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 return true;
             }
         </script>
-        <?php else : require "./components/logged.php"; ?><?php endif; ?>
+        <?php else : require "./components/form_login.php"; ?><?php endif; ?>
 </body>
 
 </html>

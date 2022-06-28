@@ -237,3 +237,8 @@ function imageResize($newImageWidth, $newImageHeight, $imageSrc, $imageWidth, $i
 
     return $newImageLayer;
 }
+
+function isInteger($input) // "23" return true, 23 return true, 23.4 return false
+{
+    return (ctype_digit(strval($input)));
+}

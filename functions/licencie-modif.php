@@ -16,8 +16,8 @@ if (is_logged()) {
                         if (isset($_POST["sexe-licencie"]) && !empty($_POST["sexe-licencie"])) {
                             if (isset($_POST["idLicencie"]) && !empty($_POST["idLicencie"])) {
                                 if (isset($_POST["mail-licencie"]) && !empty($_POST["mail-licencie"]) && filter_var($_POST["mail-licencie"], FILTER_VALIDATE_EMAIL)) {
-                                    $nom_licencie = strtoupper($_POST["nom-licencie"]);
-                                    $prenom_licencie = ucfirst($_POST["prenom-licencie"]);
+                                    $nom_licencie = strtoupper(htmlspecialchars($_POST["nom-licencie"]));
+                                    $prenom_licencie = ucfirst(htmlspecialchars($_POST["prenom-licencie"]));
                                     $dateN_licencie = $_POST["dateN-licencie"];
                                     $mail_licencie = $_POST["mail-licencie"];
                                     $categorie_licencie = $_POST["categorie-licencie"];
@@ -25,16 +25,27 @@ if (is_logged()) {
                                     $current_user = $_SESSION["prenom"] . " " . strtoupper($_SESSION["nom"]);
                                     $current_date = date("Y-m-d H:i:s");
                                     $idLicencie = $_POST["idLicencie"];
-                                    $req = $db->prepare("UPDATE licencie SET prenom = :prenom, nom = :nom, sexe = :sexe, dateN = :dateN, mail = :mail, idCategorie = :idCategorie, DMAJ = :DMAJ WHERE idLicencie = :idLicencie");
-                                    $req->bindValue("prenom", $prenom_licencie, PDO::PARAM_STR);
-                                    $req->bindValue("nom", $nom_licencie, PDO::PARAM_STR);
-                                    $req->bindValue("sexe", $sexe_licencie, PDO::PARAM_STR);
-                                    $req->bindValue("dateN", $dateN_licencie, PDO::PARAM_STR);
-                                    $req->bindValue("mail", $mail_licencie, PDO::PARAM_STR);
-                                    $req->bindValue("idCategorie", $categorie_licencie, PDO::PARAM_INT);
-                                    $req->bindValue("DMAJ", $current_date);
-                                    $req->bindValue("idLicencie", $idLicencie);
-                                    $result = $req->execute();
+
+                                    //search and check if the licencie is in bdd and not deleted
+                                    $rech_licencie = $db->prepare("SELECT idLicencie FROM licencie WHERE idLicencie = ? AND COSU = 0");
+                                    $rech_licencie->bindValue(1, $idLicencie);
+                                    $rech_licencie->execute();
+                                    if ($rech_licencie->rowCount() > 0) { //licencie is not bdd or is deleted
+                                        $req = $db->prepare("UPDATE licencie SET prenom = :prenom, nom = :nom, sexe = :sexe, dateN = :dateN, mail = :mail, idCategorie = :idCategorie, DMAJ = :DMAJ WHERE idLicencie = :idLicencie");
+                                        $req->bindValue("prenom", $prenom_licencie, PDO::PARAM_STR);
+                                        $req->bindValue("nom", $nom_licencie, PDO::PARAM_STR);
+                                        $req->bindValue("sexe", $sexe_licencie, PDO::PARAM_STR);
+                                        $req->bindValue("dateN", $dateN_licencie, PDO::PARAM_STR);
+                                        $req->bindValue("mail", $mail_licencie, PDO::PARAM_STR);
+                                        $req->bindValue("idCategorie", $categorie_licencie, PDO::PARAM_INT);
+                                        $req->bindValue("DMAJ", $current_date);
+                                        $req->bindValue("idLicencie", $idLicencie);
+                                        $result = $req->execute();
+                                    } else { //licencie is not bdd or is deleted
+                                        header("location: ../licencies.php");
+                                        create_flash_message("not_found", "Licencié introuvable.", FLASH_ERROR);
+                                        exit();
+                                    }
 
                                     if ($result) {
                                         header("location: ../licencies.php");
@@ -52,7 +63,7 @@ if (is_logged()) {
                                 }
                             } else {
                                 header("location: ../licencies.php");
-                                create_flash_message("form_id_error", "Veuillez remplir tous les champs.", FLASH_ERROR);
+                                create_flash_message("form_id_error", "Une erreur est survenue, Veuillez réessayer.", FLASH_ERROR);
                                 exit();
                             }
                         } else {

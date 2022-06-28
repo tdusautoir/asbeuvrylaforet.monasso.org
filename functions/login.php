@@ -29,6 +29,7 @@ if (isset($_POST["submit"])) {
                         //verifier la correspondance du mot de passe
                         init_php_session();
 
+                        $_SESSION["id"] = $utilisateur_admin["idAdmin"];
                         $_SESSION["usermail"] = $utilisateur_admin["mail"];
                         $_SESSION["prenom"] = $utilisateur_admin["prenom"];
                         $_SESSION["nom"] = $utilisateur_admin["nom"];

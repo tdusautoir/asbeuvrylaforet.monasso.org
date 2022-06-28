@@ -257,7 +257,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 }
             })
         </script>
-        <?php else : require "./components/logged.php"; ?><?php endif; ?>
+        <?php else : require "./components/form_login.php"; ?><?php endif; ?>
 </body>
 
 </html>
