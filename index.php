@@ -20,17 +20,24 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
     <?php include('./components/header.php'); ?>
     <div class="container">
       <div class="container-content">
+        <?php include "./components/display_error.php"; ?>
         <div class="welcome-admin">
           <h1>Bonjour <?= htmlspecialchars($_SESSION['prenom']); ?>,
-            <p>Tu es sur l'espace d'administration</p>
+            <?php if (is_admin()) : ?>
+              <p>Tu es sur l'espace d'administration</p>
+            <?php else : ?>
+              <p>Tu es sur l'espace éducateur</p>
+            <?php endif; ?>
           </h1>
         </div>
         <div class="welcome-separator"></div>
         <div class="admin-panel">
-          <a href="./add-educ.php">
-            <i class="fa fa-plus"></i>
-            <p>Ajouter un &eacute;ducateur</p>
-          </a>
+          <?php if (is_admin()) : ?>
+            <a href="./add-educ.php">
+              <i class="fa fa-plus"></i>
+              <p>Ajouter un &eacute;ducateur</p>
+            </a>
+          <?php endif; ?>
           <a href="./add-licencie.php">
             <i class="fa fa-user-plus"></i>
             <p>Ajouter un licenci&eacute;</p>
@@ -43,10 +50,12 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             <i class="fa fa-cogs"></i>
             <p>Mon compte</p>
           </a>
-          <a href="./educateurs.php">
-            <i class="fa fa-user"></i>
-            <p>Gestion des &eacute;ducateurs</p>
-          </a>
+          <?php if (is_admin()) : ?>
+            <a href="./educateurs.php">
+              <i class="fa fa-user"></i>
+              <p>Gestion des &eacute;ducateurs</p>
+            </a>
+          <?php endif; ?>
           <a href="./licencies.php">
             <i class="fa fa-users"></i>
             <p>Gestion des licenci&eacute;s</p>

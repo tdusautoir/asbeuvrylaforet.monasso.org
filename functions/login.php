@@ -56,6 +56,9 @@ if (isset($_POST["submit"])) {
                             //verifier la correspondance du mot de passe
                             init_php_session();
 
+                            $_SESSION["id"] = $utilisateur_educ["idEduc"];
+                            $_SESSION["usermail"] = $utilisateur_educ["mail"];
+                            $_SESSION["prenom"] = $utilisateur_educ["prenom"];
                             $_SESSION["usermail"] = $usermail;
                             $_SESSION["role"] = 2;
                         } else {

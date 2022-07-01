@@ -71,7 +71,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                 <input value="<?= $firstname_educ ?>" type="text" class="prenom-licencie" placeholder="" name="prenom-educ" maxlength="15">
                             </div>
                             <div class="form-modif-li">
-                                <input type="password" class="password-licencie" name="password-educ" placeholder="Ancien mot de passe" maxlength="40">
+                                <input type="password" class="password-licencie" name="password-educ" placeholder="••••••••" maxlength="40">
                                 <label for="" style="display:flex; justify-content: space-between; align-items: center;" onclick="displayModal('cate-educ-div')">Catégories <i class="fa fa-angle-down"></i></label>
                             </div>
                             <div class="form-modif-li list-cate-div" id="cate-educ-div">
