@@ -57,7 +57,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
               <p>Gestion des &eacute;ducateurs</p>
             </a>
           <?php endif; ?>
-          <a href="./licencies.php">
+          <a href="./licencies.php">p
             <i class="fa fa-users"></i>
             <p>Gestion des licenci&eacute;s</p>
           </a>
@@ -72,86 +72,84 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
         </div>
         <div class="admin-panel-separator"></div>
         <section class="panel-down">
-            <div class="li-admin">
-              <h2>
-                Derniers licenciés ajoutés :
-              </h2>
-              <?php
-              $req = $db->prepare("CALL PRC_TENLIC()");
-              $req->execute();
-              $rowCount = $req->rowCount();
-              if ($rowCount > 0) : //si on trouve des licenciés ajoutés on affiche la liste de la requete.
-              ?>
-                <ul>
-                  <?php while ($LIC = $req->fetch(PDO::FETCH_ASSOC)) : ?>
-                    <li>
-                      <p><?= $LIC["nomCategorie"] ?> - <span><?= $LIC["prenom"] . " " . strtoupper($LIC["nom"]) ?></span>
-                        <?php if (isset($LIC["USRCRE"])) : ?>par <span><?= ($LIC["USRCRE"]) ?> </span></p> <?php endif; ?>
-                    </li>
-                  <?php endwhile; ?>
-                </ul>
-              <?php else : ?>
-                <p> Aucun licencié n'a encore été créé </p>
-              <?php endif;
-              $req->closeCursor(); ?>
-            </div>
-            <div class="chartJS">
-              <h2>Aperçu du suivi des cotisations :</h2>
-              <div>
+          <div class="li-admin">
+            <h2>
+              Derniers licenciés ajoutés :
+            </h2>
+            <?php
+            $req = $db->prepare("CALL PRC_TENLIC()");
+            $req->execute();
+            $rowCount = $req->rowCount();
+            if ($rowCount > 0) : //si on trouve des licenciés ajoutés on affiche la liste de la requete.
+            ?>
+              <ul>
+                <?php while ($LIC = $req->fetch(PDO::FETCH_ASSOC)) : ?>
+                  <li>
+                    <p><?= $LIC["nomCategorie"] ?> - <span><?= $LIC["prenom"] . " " . strtoupper($LIC["nom"]) ?></span>
+                      <?php if (isset($LIC["USRCRE"])) : ?>par <span><?= ($LIC["USRCRE"]) ?> </span></p> <?php endif; ?>
+                  </li>
+                <?php endwhile; ?>
+              </ul>
+            <?php else : ?>
+              <p> Aucun licencié n'a encore été créé </p>
+            <?php endif;
+            $req->closeCursor(); ?>
+          </div>
+          <div class="chartJS">
+            <h2>Aperçu du suivi des cotisations :</h2>
+            <div>
               <canvas id="myChart" width="975" height="160"></canvas>
-              </div>
             </div>
-          </section>
+          </div>
+        </section>
         <div class="deconnect">
           <a href="index.php?action=logout">Deconnexion</a>
         </div>
 
         <script>
-        $(document).ready(function () {
+          $(document).ready(function() {
             (Chart.defaults.font.size = 14),
-            (Chart.defaults.font.family = "Roboto");
+            (Chart.defaults.font.family = "Montserrat");
             const F = document.getElementById("myChart").getContext("2d");
-              new Chart(F, {
-                  type: "pie",
-                  data: {
-                      labels: ["Cotisations reçues", "Cotisations non reçues", "Cotisations encaissées"],
-                      datasets: [
-                          {
-                              tooltip: {    
-                                  callbacks: {
-                                      label: function (e) {
-                                          let t = e.label;
-                                          return t || (t = ""), t + " : " + (e.formattedValue + "%");
-                                      },
-                                  },
-                              },
-                              label: "Aperçu du suivi des cotisations",
-                              data: [100, 50, 30],
-                              backgroundColor: ["rgba(97, 186, 200, 1)", "rgba(208, 16, 58, 1)", "rgba(81, 190, 132, 1)"],
-                              borderColor: ["rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)"],
-                              borderWidth: 3,
-                              hoverOffset: 20,
-                              hoverBorderWidth: 0,
-                          },
-                      ],
+            new Chart(F, {
+              type: "pie",
+              data: {
+                labels: ["Cotisations reçues", "Cotisations non reçues", "Cotisations encaissées"],
+                datasets: [{
+                  tooltip: {
+                    callbacks: {
+                      label: function(e) {
+                        let t = e.label;
+                        return t || (t = ""), t + " : " + (e.formattedValue + "%");
+                      },
+                    },
                   },
-                  options: { 
-                    // responsive: !0,
-                    // maintainAspectRatio: !1,
-                    layout: {
-                      padding: 50
-                    }, 
-                    plugins: {
-                      legend: {
-                        position: "bottom",
-                        labels: {
-                          padding: 30
-                        }
-                      }
+                  label: "Aperçu du suivi des cotisations",
+                  data: [100, 50, 30],
+                  backgroundColor: ["rgba(97, 186, 200, 1)", "rgba(208, 16, 58, 1)", "rgba(81, 190, 132, 1)"],
+                  borderColor: ["rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)"],
+                  borderWidth: 3,
+                  hoverOffset: 20,
+                  hoverBorderWidth: 0,
+                }, ],
+              },
+              options: {
+                // responsive: !0,
+                // maintainAspectRatio: !1,
+                layout: {
+                  padding: 50
+                },
+                plugins: {
+                  legend: {
+                    position: "bottom",
+                    labels: {
+                      padding: 30
                     }
-                  },
-              });
-        });
+                  }
+                }
+              },
+            });
+          });
         </script>
       </div>
     </div>

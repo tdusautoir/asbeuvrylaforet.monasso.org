@@ -1,4 +1,8 @@
 <?php
+
+require_once("./db.php");
+require_once("./function.php");
+
 $currentpath = pathinfo($_SERVER['SCRIPT_NAME']);
 
 if ($currentpath['basename'] === "index.php" || $currentpath['filename'] === "index") {
@@ -13,12 +17,15 @@ if ($currentpath['basename'] === "index.php" || $currentpath['filename'] === "in
 	$link_active[4] = true;
 }
 
+$logo = $db->query("SELECT logoPath FROM settings ORDER BY id DESC LIMIT 1;");
+$get_logo = $logo->fetch(PDO::FETCH_ASSOC);
+
 ?>
 <header class="menu-container">
 	<div class="menu-content">
 		<div class="logo">
 			<a href="../">
-				<img id="logo" src="./public/images/logo-asb.svg" alt="A.S. BEUVRY LA FORÊT" title="A.S. BEUVRY LA FORÊT">
+				<img id="logo" src="<?= $get_logo["logoPath"] ?>" alt=" A.S. BEUVRY LA FORÊT" title="A.S. BEUVRY LA FORÊT">
 			</a>
 		</div>
 		<div class="menu-mob">
@@ -37,9 +44,11 @@ if ($currentpath['basename'] === "index.php" || $currentpath['filename'] === "in
 				<li <?php if (isset($link_active[1])) : ?>class="active" <?php endif; ?>>
 					<a href="./licencies.php">Licenciés</a>
 				</li>
-				<li <?php if (isset($link_active[2])) : ?>class="active" <?php endif; ?>>
-					<a href="./educateurs.php">Éducateurs</a>
-				</li>
+				<?php if (is_admin()) : ?>
+					<li <?php if (isset($link_active[2])) : ?>class="active" <?php endif; ?>>
+						<a href="./educateurs.php">Éducateurs</a>
+					</li>
+				<?php endif; ?>
 				<li <?php if (isset($link_active[3])) : ?>class="active" <?php endif; ?>>
 					<a href="#">Statistiques</a>
 				</li>

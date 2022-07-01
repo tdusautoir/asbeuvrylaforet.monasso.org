@@ -13,7 +13,7 @@ if (isset($_POST["submit"])) {
                 $password = $_POST["password"];
 
                 $rech_admin = $db->prepare(
-                    "SELECT * FROM admin WHERE mail = ? "
+                    "SELECT * FROM admin WHERE mail = ? AND COSU = 0"
                 ); //recherche les utilisateurs dans la table admin correspondant au mail entrée
 
                 $rech_admin->bindValue(1, $usermail);
@@ -45,7 +45,7 @@ if (isset($_POST["submit"])) {
                     }
                 } else { //si personne trouvé en tant qu'admin --> recherche educateur
                     $rech_educ = $db->prepare(
-                        "SELECT * FROM educ WHERE mail = ? "
+                        "SELECT * FROM educ WHERE mail = ? AND COSU = 0"
                     ); //recherche les utilisateurs dans la table educ correspondant au mail entrée
                     $rech_educ->bindValue(1, $usermail);
                     $rech_educ->execute();

@@ -44,10 +44,70 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                         <div class="account-li-content">
                             <div id="account-infos">
                                 <h1>Mes informations : </h1>
-                                <p>Prenom : <?= $_SESSION["prenom"] ?></p>
+                                <?php if (is_admin()) : ?>
+                                    <?php $account_info = $db->prepare("SELECT prenom, nom, mail, DCRE FROM admin WHERE idAdmin = ?;");
+                                    $account_info->bindValue(1, $_SESSION["id"]);
+                                    $account_info->execute();
+
+                                    if ($account_info->rowCount() > 0) :
+                                        $get_account_info = $account_info->fetch(PDO::FETCH_ASSOC); ?>
+
+                                        <p>Nom : <?= $get_account_info["prenom"] ?></p>
+                                        <p>Prenom : <?= $get_account_info["nom"] ?></p>
+                                        <p>Mail : <?= $get_account_info["mail"] ?></p>
+                                        <p>Date de création : <?= $get_account_info["DCRE"] ?></p>
+
+                                    <?php endif; ?>
+                                <?php elseif (is_educ()) : ?>
+                                    <?php $account_info = $db->prepare("SELECT prenom, nom, mail, responsable, DCRE FROM educ WHERE idEduc = ?;");
+                                    $account_info->bindValue(1, $_SESSION["id"]);
+                                    $account_info->execute();
+
+                                    if ($account_info->rowCount() > 0) :
+                                        $get_account_info = $account_info->fetch(PDO::FETCH_ASSOC); ?>
+
+                                        <p>Nom : <?= $get_account_info["prenom"] ?></p>
+                                        <p>Prenom : <?= $get_account_info["nom"] ?></p>
+                                        <p>Mail : <?= $get_account_info["mail"] ?></p>
+
+                                        <?php $account_categorie = $db->prepare("SELECT nomCategorie FROM categorie INNER JOIN categorieeduc ON categorie.idCategorie = categorieeduc.idCategorie WHERE idEduc = ?; ");
+                                        $account_categorie->bindValue(1, $_SESSION["id"]);
+                                        $account_categorie->execute();
+
+                                        if ($account_categorie->rowCount() > 0) : ?>
+                                            <p> Categorie :
+                                                <?php $get_account_categorie = $account_categorie->fetchAll(PDO::FETCH_ASSOC);
+                                                foreach ($get_account_categorie as $categorie) :
+                                                    if (end($get_account_categorie)["nomCategorie"] == $categorie["nomCategorie"]) :
+                                                        echo $categorie["nomCategorie"];
+                                                    else :
+                                                        echo $categorie["nomCategorie"];
+                                                        echo ", ";
+                                                    endif;
+                                                endforeach
+                                                ?>
+                                            </p>
+                                        <?php else : ?>
+                                            <p>Categorie : Aucune catégorie</p>
+                                        <?php endif; ?>
+                                        <p>Responsable : <?php if ($get_account_info["responsable"] == 1) {
+                                                                echo "oui";
+                                                            } else {
+                                                                echo "non";
+                                                            } ?></p>
+                                        <p>Date de création : <?php echo $output = date('d-m-Y', strtotime($get_account_info["DCRE"])); ?></p>
+
+                                    <?php endif; ?>
+                                <?php endif; ?>
                             </div>
                             <div id="account-settings">
                                 <h1>Configurez le site : </h1>
+                                <?php $settings = $db->query("SELECT color, logoPath FROM settings ORDER BY id DESC LIMIT 1");
+                                $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
+                                if ($settings) : ?>
+                                    <p>Image : <img src="<?= $get_settings["logoPath"] ?>" class="img"></p>
+                                    <p>Couleur : <span class="color"></span></p>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>

@@ -143,11 +143,11 @@
     border-radius: 0 0 0 10px;
 }
 
-.account-container .account-li li:hover {
+/* .account-container .account-li li:hover {
     cursor: pointer;
     background-color: #21802e !important;
     color: white !important;
-}
+} */
 
 #account-infos {
     display: flex;
@@ -187,4 +187,17 @@
     padding: 15px;
     font-size: 16px;
     outline: none;
+}
+
+#account-settings .color{
+    display: inline-block;
+    border: 1px solid black;
+    width: 20px;
+    height: 20px;
+    background-color: var(--mainColor);
+}
+
+#account-settings .img{
+    width: 75px;
+    height: 75px;
 }
