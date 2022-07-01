@@ -57,7 +57,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
               <p>Gestion des &eacute;ducateurs</p>
             </a>
           <?php endif; ?>
-          <a href="./licencies.php">p
+          <a href="./licencies.php">
             <i class="fa fa-users"></i>
             <p>Gestion des licenci&eacute;s</p>
           </a>
