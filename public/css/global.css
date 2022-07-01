@@ -416,21 +416,21 @@ button.reverse:hover {
 /* MESSAGES D'ERREURS OU DE SUCCES */
 
 div.success {
-    background-color: rgba(40, 154, 55, 0.11);
-    color: var(--mainColor);
-    border: 1px solid var(--mainColor);
-    padding: 12px 20px;
-    margin-top: 20px;
-    border-radius: 4px;
-    font-size: 20px;
+	background-color: rgba(40, 154, 55, 0.11);
+	color: var(--mainColor);
+	border: 1px solid var(--mainColor);
+	padding: 12px 20px;
+	margin-top: 20px;
+	border-radius: 4px;
+	font-size: 20px;
 }
 
 div.error {
-    background-color: rgba(210, 0, 0, 0.11);
-    color: var(--errorColor);
-    border: 1px solid var(--errorColor);
-    padding: 12px 20px;
-    margin-top: 20px;
-    border-radius: 4px;
-    font-size: 20px;
+	background-color: rgba(210, 0, 0, 0.11);
+	color: var(--errorColor);
+	border: 1px solid var(--errorColor);
+	padding: 12px 20px;
+	margin-top: 20px;
+	border-radius: 4px;
+	font-size: 20px;
 }

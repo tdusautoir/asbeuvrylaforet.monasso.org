@@ -107,7 +107,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                             <div class="mail-form-modif-li">
                                 <input value="<?= $mail_educ ?>" type="mail" class="mail-licencie" name="mail-educ" placeholder="" maxlength="40">
                             </div>
-                            <div class="form-modif-li">
+                            <div class="form-add form-modif-li list-cate-div">
                                 <div class="responsable">
                                     <label for="check-resp">
                                         Responsable
