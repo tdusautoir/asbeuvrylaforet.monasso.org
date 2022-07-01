@@ -48,8 +48,8 @@
   content: "\f129";
 }
 
-.fa-globe:before {
-  content: "\f0ac";
+.fa-cog:before {
+  content: "\f013"
 }
 
 .fa-users:before {

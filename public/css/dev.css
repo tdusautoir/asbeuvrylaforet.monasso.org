@@ -106,6 +106,7 @@
     flex-direction: row;
     margin: 50px 0;
     border-radius: 100px;
+    width: 100%;
 }
 
 .account-li {
