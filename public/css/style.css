@@ -113,9 +113,13 @@
 }
 
 /* -----Page d'administration Liste----- */
-
+section.panel-down{
+    display: flex;
+    flex-direction: row-reverse;
+    margin-bottom: 30px;
+}
 .li-admin {
-    flex-basis: 50%;
+    width: 50%;
 }
 
 .li-admin h2 {
@@ -153,6 +157,30 @@
     color: #289a37;
 }
 
+div.chartJS{
+    width: 50%;
+}
+.chartJS > div{
+    max-width: 550px;
+    margin: 0 auto; 
+}
+
+@media screen and (max-width:747px) {
+    .li-admin{
+        width: 100%;
+    }
+    div.chartJS{
+        width: 100%;
+    }
+    section.panel-down{
+        flex-direction: column-reverse;
+    }
+}
+@media screen and (max-width:500px) {
+    .chartJS h2 {
+        font-size: 16px;
+    }
+}
 /* 
 --------------------------------------------------
 --------------------PAGE ADDLI--------------------
