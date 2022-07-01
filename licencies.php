@@ -55,10 +55,10 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                 <td>
                                                     <?= $LIC["nomCategorie"] ?>
                                                 </td>
-                                                <td>
+                                                <td title=<?= strtoupper($LIC["nom"]) ?>>
                                                     <?= strtoupper($LIC["nom"]) ?>
                                                 </td>
-                                                <td>
+                                                <td title=<?= ucfirst($LIC["prenom"]) ?>>
                                                     <?= ucfirst($LIC["prenom"]) ?>
                                                 </td>
                                                 <td>
