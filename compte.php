@@ -44,6 +44,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                         <div class="account-li-content">
                             <div id="account-infos">
                                 <h1>Mes informations : </h1>
+                                <p>Prenom : <?= $_SESSION["prenom"] ?></p>
                             </div>
                             <div id="account-settings">
                                 <h1>Configurez le site : </h1>

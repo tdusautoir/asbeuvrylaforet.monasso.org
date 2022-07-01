@@ -423,6 +423,7 @@ div.success {
 	margin-top: 20px;
 	border-radius: 4px;
 	font-size: 20px;
+	transition: 1s;
 }
 
 div.error {
@@ -433,4 +434,5 @@ div.error {
 	margin-top: 20px;
 	border-radius: 4px;
 	font-size: 20px;
+	transition: 1s;
 }
