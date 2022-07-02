@@ -33,6 +33,14 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 $mail_licencie = $getinfo["mail"];
                 $sexe_licencie = $getinfo["sexe"];
                 $category_licencie = $getinfo["nomCategorie"];
+
+                $getTel = $db->prepare("SELECT tel.tel FROM tel WHERE tel.idLicencie = ? AND tel.COSU = 0");
+                $getTel->bindValue(1, $idLicencie);
+                $getTel->execute();
+                if ($getTel->rowCount() > 0) :
+                    $result_getTel = $getTel->fetch(PDO::FETCH_ASSOC);
+                    $tel_licencie = $result_getTel["tel"];
+                endif;
             } else {  //licencie is not in db or is deleted
                 header("location: ./licencies.php");
                 create_flash_message("not_found", "Licencié introuvable.", FLASH_ERROR);
@@ -86,6 +94,11 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                             <div class="mail-form-modif-li">
                                 <input value="<?= $mail_licencie ?>" type="mail" class="mail-licencie" name="mail-licencie" placeholder="" maxlength="40">
                             </div>
+                            <?php if (isset($tel_licencie)) : ?>
+                                <div>
+                                    <input value="<?= $tel_licencie ?>" type="tel" class="" name="tel-licencie" placeholder="">
+                                </div>
+                            <?php endif; ?>
                             <input type="hidden" name="idLicencie" value="<?php if (isset($idLicencie)) : echo $idLicencie;
                                                                             endif; ?>">
                             <div class="form-modif-li">

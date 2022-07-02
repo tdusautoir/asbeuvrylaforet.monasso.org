@@ -61,7 +61,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             <i class="fa fa-users"></i>
             <p>Gestion des licenci&eacute;s</p>
           </a>
-          <a>
+          <a href="./cotisations.php">
             <i class="fa fa-euro-sign"></i>
             <p>Suivi des cotisations</p>
           </a>

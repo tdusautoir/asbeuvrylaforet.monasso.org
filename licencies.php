@@ -42,7 +42,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                             <th>Prénom</th>
                                             <th>Naissance</th>
                                             <th>Adresse mail</th>
-                                            <th>Création</th>
+                                            <th>Téléphone</th>
                                             <th>Cotisation</th>
                                             <th></th>
                                             <th></th>
@@ -69,12 +69,18 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                     <?= $LIC["mail"] ?>
                                                 </td>
                                                 <td>
-                                                    <?= $LIC["USRCRE"] ?>
+                                                    <?php $getTel = $db->prepare("SELECT tel.tel FROM tel WHERE tel.idLicencie = ? AND tel.COSU = 0");
+                                                    $getTel->bindValue(1, $LIC['idLicencie']);
+                                                    $getTel->execute();
+                                                    if ($getTel->rowCount() > 0) :
+                                                        $result_getTel = $getTel->fetch(PDO::FETCH_ASSOC);
+                                                        echo wordwrap($result_getTel["tel"], 2, " ", 1); //0000000000 to 00 00 00 00 00
+                                                    endif; ?>
                                                 </td>
                                                 <td>
                                                 </td>
                                                 <td class="action-btns">
-                                                    <?php $getPhoto = $db->prepare("SELECT licencie.idPhoto, photo.imgPath FROM licencie INNER JOIN photo ON licencie.idPhoto = photo.idPhoto WHERE licencie.idLicencie = ?");
+                                                    <?php $getPhoto = $db->prepare("SELECT licencie.idPhoto, photo.imgPath FROM licencie INNER JOIN photo ON licencie.idPhoto = photo.idPhoto WHERE licencie.idLicencie = ? AND photo.COSU = 0");
                                                     $getPhoto->bindValue(1, $LIC['idLicencie']);
                                                     $getPhoto->execute();
                                                     if ($getPhoto->rowCount() > 0) :

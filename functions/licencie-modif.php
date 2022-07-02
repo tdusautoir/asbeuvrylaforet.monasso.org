@@ -22,6 +22,7 @@ if (is_logged()) {
                                     $mail_licencie = $_POST["mail-licencie"];
                                     $categorie_licencie = $_POST["categorie-licencie"];
                                     $sexe_licencie = $_POST["sexe-licencie"];
+                                    $tel_licencie = $_POST["tel-licencie"];
                                     $current_user = $_SESSION["prenom"] . " " . strtoupper($_SESSION["nom"]);
                                     $current_date = date("Y-m-d H:i:s");
                                     $idLicencie = $_POST["idLicencie"];
@@ -40,7 +41,23 @@ if (is_logged()) {
                                         $req->bindValue("idCategorie", $categorie_licencie, PDO::PARAM_INT);
                                         $req->bindValue("DMAJ", $current_date);
                                         $req->bindValue("idLicencie", $idLicencie);
+
+                                        if (isset($_POST["tel-licencie"]) && !empty($_POST["tel-licencie"])) {
+                                            if (preg_match('/^[0-9]{10}+$/', $_POST["tel-licencie"])) {
+                                                $modifTel = $db->prepare("UPDATE tel SET tel = :tel WHERE idLicencie = :idLicencie");
+                                                $modifTel->bindValue("tel", $tel_licencie, PDO::PARAM_STR);
+                                                $modifTel->bindValue("idLicencie", $idLicencie, PDO::PARAM_STR);
+                                                $modifTel->execute();
+                                            } else {
+                                                header("location: ../licencies.php");
+                                                create_flash_message("form_tel_error", "Numéro de téléphone invalide.", FLASH_ERROR);
+                                                exit();
+                                            }
+                                        }
                                         $result = $req->execute();
+
+                                        $modifTel = $db->prepare("UPDATE tel SET tel = :tel WHERE idLicencie = :idLicencie");
+                                        $req->bindValue("tel", $tel_licencie, PDO::PARAM_STR);
                                     } else { //licencie is not bdd or is deleted
                                         header("location: ../licencies.php");
                                         create_flash_message("not_found", "Licencié introuvable.", FLASH_ERROR);
