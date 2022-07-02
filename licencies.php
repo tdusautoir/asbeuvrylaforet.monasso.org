@@ -78,6 +78,13 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                     endif; ?>
                                                 </td>
                                                 <td>
+                                                    <?php $getCotis = $db->prepare("SELECT cotis.prix FROM cotis WHERE cotis.idLicencie = ? AND cotis.COSU = 0");
+                                                    $getCotis->bindValue(1, $LIC['idLicencie']);
+                                                    $getCotis->execute();
+                                                    if ($getCotis->rowCount() > 0) :
+                                                        $result_getCotis = $getCotis->fetch(PDO::FETCH_ASSOC);
+                                                        echo $result_getCotis["prix"] . " €";
+                                                    endif; ?>
                                                 </td>
                                                 <td class="action-btns">
                                                     <?php $getPhoto = $db->prepare("SELECT licencie.idPhoto, photo.imgPath FROM licencie INNER JOIN photo ON licencie.idPhoto = photo.idPhoto WHERE licencie.idLicencie = ? AND photo.COSU = 0");
