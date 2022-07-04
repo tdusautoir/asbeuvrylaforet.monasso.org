@@ -59,7 +59,7 @@ if (isset($_POST["submit"])) {
                             $_SESSION["id"] = $utilisateur_educ["idEduc"];
                             $_SESSION["usermail"] = $utilisateur_educ["mail"];
                             $_SESSION["prenom"] = $utilisateur_educ["prenom"];
-                            $_SESSION["usermail"] = $usermail;
+                            $_SESSION["nom"] = $utilisateur_admin["nom"];
                             $_SESSION["role"] = 2;
                         } else {
                             create_flash_message(

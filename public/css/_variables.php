@@ -11,7 +11,7 @@ $donnees = $sql->fetch(PDO::FETCH_ASSOC);
 
 /* initialisation des couleurs propre à une association */
 :root {
---mainColor: #289a37;
+--mainColor: <?= $donnees['color']; ?>;
 --secondaryColor: black;
 --errorColor: #d20000;
 }

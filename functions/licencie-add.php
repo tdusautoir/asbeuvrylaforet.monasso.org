@@ -118,7 +118,7 @@ if (is_logged()) {
                                             } else {
                                                 //possible attack from file upload
                                                 header("location: ../add-licencie.php");
-                                                create_flash_message("form_picture_error", "1 - Une erreur est survenue, veuillez réessayer", FLASH_ERROR);
+                                                create_flash_message("form_picture_error", "Une erreur est survenue, veuillez réessayer", FLASH_ERROR);
                                                 exit();
                                             }
 

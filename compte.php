@@ -9,6 +9,9 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
     header("location: index.php");
 }
 
+$settings = $db->query("SELECT color, logoPath FROM settings ORDER BY id DESC LIMIT 1");
+$get_settings = $settings->fetch(PDO::FETCH_ASSOC);
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -102,11 +105,20 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                             </div>
                             <div id="account-settings">
                                 <h1>Configurez le site : </h1>
-                                <?php $settings = $db->query("SELECT color, logoPath FROM settings ORDER BY id DESC LIMIT 1");
-                                $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
-                                if ($settings) : ?>
+                                <?php if ($settings) : ?>
                                     <p>Image : <img src="<?= $get_settings["logoPath"] ?>" class="img"></p>
                                     <p>Couleur : <span class="color"></span></p>
+
+                                    <h2>Modification du site (en développement) :</h2>
+                                    <form action="./functions/settings-modif.php" class="modif-settings" method="POST" enctype="multipart/form-data">
+                                        <input type="color" name="color" value="<?= $get_settings['color'] ?>">
+                                        <input type="file" accept="image/*" name="logo" value="<?= $get_settings['logoPath'] ?>">
+                                        <input type="submit" name="submit-settings">
+                                    </form>
+
+                                    <form action="./functions/settings-cancel-modif.php" class="cancel-settings" method="POST">
+                                        <input type="submit" name="cancel-settings" value="Annuler les modifications">
+                                    </form>
                                 <?php endif; ?>
                             </div>
                         </div>
