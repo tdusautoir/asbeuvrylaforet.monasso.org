@@ -269,4 +269,83 @@
     border-image: initial;
 }
 
+.state-indicator{
+    display: inline-block; 
+    width: 10px; 
+    height: 10px; 
+    border-radius: 5px;
+    content:'';
+}
 
+.filter{
+    margin-top: 40px;
+    display: flex;
+}
+
+.filter div{
+    width: 100%;
+}
+
+.filter div:not(:first-child){
+    margin-left: 20px;
+}
+
+.filter label{
+    font-weight: 500;
+    margin-left: 4px;
+}
+
+.filter input[type='search'] {
+    height: 50px;
+    width: 100%;
+    background-color: #F8F8F8;
+    padding-left: 10px;
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    color: #919191;
+    font-size: 16px;
+}
+
+.filter input[type='submit'] {
+    position: absolute;
+    height: 52px;
+    width: 50px;
+    margin-left: -50px;
+    margin-top: -1px;
+    border-radius: 0 6px 6px 0;
+    background-color: var(--mainColor);
+    background-image: url(../images/search-icon-white.png);
+    background-size: 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 0;
+}
+
+.filter select{
+    appearance: none;
+    height: 50px;
+    width: 100%;
+    background-color: #F8F8F8;
+    padding-left: 10px;
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    color: #919191;
+    background-image: url(../images/chevron-bas-gris.png);
+    background-repeat: no-repeat;
+    background-position: right 5px center;
+    background-size: 30px;
+    outline: none;
+    font-size: 16px;
+}
+
+.cancel-filter{
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: fit-content;
+    padding: 10px 20px;
+    background-color: #F8F8F8;
+    font-weight: 500;
+    border: 1px solid #e6e6e6;
+    border-radius: 6px;
+}

@@ -172,6 +172,31 @@ if (is_logged()) {
                                             $addTel->bindValue('USRCRE', $current_user);
                                             $addTel->execute();
 
+
+                                            //get categorie number to define the type of the cotis
+                                            $getCategorieName = $db->prepare("SELECT nomCategorie FROM categorie WHERE idCategorie = :idCategorie");
+                                            $getCategorieName->bindValue('idCategorie', $categorie_licencie);
+                                            $getCategorieName->execute();
+                                            $CategorieName = $getCategorieName->fetch(PDO::FETCH_ASSOC);
+                                            $CategorieExplode = explode("U", $CategorieName['nomCategorie']);
+                                            $CategorieNumber = intval($CategorieExplode[1]);
+
+                                            //add licencie cotisation on database
+                                            $addCotis = $db->prepare("INSERT INTO cotis (idLicencie, type, prix, USRCRE) VALUES (:idLicencie, :type, :prix, :USRCRE);");
+                                            $addCotis->bindValue('idLicencie', $LicencieId);
+                                            if ($CategorieNumber >= 5 && $CategorieNumber <= 9) { //U5 to U9 -> type 1
+                                                $addCotis->bindValue('type', 1);
+                                                $addCotis->bindValue('prix', 50);
+                                            } else if ($CategorieNumber >= 10 && $CategorieNumber <= 16) { //U10 to U16 -> type 2
+                                                $addCotis->bindValue('type', 2);
+                                                $addCotis->bindValue('prix', 100);
+                                            } else {
+                                                $addCotis->bindValue('type', 3); //Seniors -> type 3
+                                                $addCotis->bindValue('prix', 120);
+                                            }
+                                            $addCotis->bindValue('USRCRE', $current_user);
+                                            $addCotis->execute();
+
                                             if ($result) {
                                                 header("location: ../add-licencie.php");
                                                 create_flash_message("add_success", "Licencié ajouté.", FLASH_SUCCESS);

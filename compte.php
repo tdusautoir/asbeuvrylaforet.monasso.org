@@ -58,7 +58,7 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
                                         <p>Nom : <?= $get_account_info["prenom"] ?></p>
                                         <p>Prenom : <?= $get_account_info["nom"] ?></p>
                                         <p>Mail : <?= $get_account_info["mail"] ?></p>
-                                        <p>Date de création : <?= $get_account_info["DCRE"] ?></p>
+                                        <p>Date de création : <?= date('d-m-Y', strtotime($get_account_info["DCRE"])); ?></p>
 
                                     <?php endif; ?>
                                 <?php elseif (is_educ()) : ?>
@@ -98,7 +98,7 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
                                                             } else {
                                                                 echo "non";
                                                             } ?></p>
-                                        <p>Date de création : <?php echo $output = date('d-m-Y', strtotime($get_account_info["DCRE"])); ?></p>
+                                        <p>Date de création : <?php echo date('d-m-Y', strtotime($get_account_info["DCRE"])); ?></p>
 
                                     <?php endif; ?>
                                 <?php endif; ?>

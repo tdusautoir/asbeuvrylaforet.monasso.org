@@ -55,6 +55,9 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                     </td>
                                                     <td>
                                                         <?php if ($COTIS["methode"] == 1) : echo "Chéque";
+                                                        elseif ($COTIS["methode"] == 2) : echo "Espèce";
+                                                        elseif ($COTIS["methode"] == 3) : echo "CB";
+                                                        else : echo "Non définie";
                                                         endif; ?>
                                                     </td>
                                                     <td>

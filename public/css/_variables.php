@@ -125,6 +125,10 @@ content: "\f060";
 padding-right: 5px;
 }
 
+.fa-search:before {
+content: "\f002";
+}
+
 @font-face {
 font-family: 'Font Awesome 5 Pro';
 font-style: normal;
