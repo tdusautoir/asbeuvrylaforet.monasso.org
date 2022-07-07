@@ -36,8 +36,8 @@ if (is_logged()) {
                                 $image_width = $sourceProperties[0]; //get image width
                                 $image_height = $sourceProperties[1]; //get image height
                                 $imageType = $sourceProperties[2]; //get image type
-                                $newImage_width = 200;
-                                $newImage_height = 200;
+                                $newImage_width = $image_width / $image_width * 300; //resize width to 200px
+                                $newImage_height = $image_height / $image_width * 300; //resize height to 200px but keep the same ratio
 
                                 switch ($imageType) {
 

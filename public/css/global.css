@@ -17,8 +17,7 @@ li {
 }
 
 #logo {
-	width: 75px;
-	height: 75px;
+	height: 60px;
 	padding-left: 15px;
 	cursor: pointer;
 }
@@ -81,6 +80,15 @@ nav li:hover::after {
 
 nav li.active::after {
 	width: 100%;
+}
+
+.logo{
+	display: flex;
+}
+
+.logo a{
+	display: flex;
+	align-items: center;
 }
 
 a:link {

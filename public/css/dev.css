@@ -123,6 +123,7 @@
 }
 
 .account-container .account-li li {
+    cursor: pointer;
     font-weight: 500;
     list-style: none;
     display: list-item;
@@ -235,22 +236,6 @@
 }
 
 .modif-settings input[type="submit"] {
-    /* width: fit-content;
-    height: 27px;
-    appearance: auto;
-    user-select: none;
-    white-space: pre;
-    align-items: flex-start;
-    text-align: center;
-    cursor: default;
-    box-sizing: border-box;
-    background-color: buttonface;
-    color: buttontext;
-    padding: 1px 6px;
-    border-width: 2px;
-    border-style: outset;
-    border-color: buttonborder;
-    border-image: initial; */
     width: 200px;
     color: #ffffff !important;
     border: none;
@@ -348,6 +333,7 @@
 }
 
 .filter input[type='submit'] {
+    cursor: pointer;
     position: absolute;
     height: 52px;
     width: 50px;
@@ -363,6 +349,7 @@
 }
 
 .filter select{
+    cursor: pointer;
     appearance: none;
     height: 50px;
     width: 100%;
@@ -380,6 +367,7 @@
 }
 
 .cancel-filter{
+    cursor: pointer;
     display: block;
     margin: 0 auto;
     margin-top: 20px;
