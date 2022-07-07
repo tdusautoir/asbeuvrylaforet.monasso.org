@@ -106,10 +106,8 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
                   <option value="f">Femme</option>
                 </select>
               </div>
-              <div class="mail-form-add">
+              <div class="form-add">
                 <input value="<?php display_info_form("mail-licencie") ?>" type="mail" class="mail-licencie" name="mail-licencie" placeholder="Adresse mail" maxlength="40" <?php if (isset($form_mail_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
-              </div>
-              <div>
                 <input value="<?php display_info_form("tel-licencie") ?>" type="tel" class="tel-licencie" name="tel-licencie" placeholder="Téléphone" <?php if (isset($form_tel_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
               </div>
               <div class="form-add">

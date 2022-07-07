@@ -59,6 +59,9 @@ content: "\f007";
 content: "\f129";
 }
 
+.fa-eye-dropped:before {
+content: "\f1fb"
+}
 .fa-cog:before {
 content: "\f013"
 }

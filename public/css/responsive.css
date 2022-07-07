@@ -31,6 +31,22 @@
 /* -----Tablette----- */
 
 @media screen and (max-width:1150px) {
+    .modif-settings-site label {
+        width: 80%;
+        overflow: hidden;
+        margin: 10px 0;
+    }
+
+    .site-settings-values {
+        padding: 30px 0;
+        flex-direction: column;
+    }
+
+    .modif-settings-site {
+        padding: 30px 0;
+        flex-direction: column;
+    }
+
     .add-short-panel {
         display: none;
     }
