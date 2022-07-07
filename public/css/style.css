@@ -66,20 +66,24 @@
     font-size: 16px;
     margin-top: 20px;
 }
+
 @media screen and (max-width:700px) {
-    .admin-panel{
+    .admin-panel {
         width: 100%;
     }
-    .admin-panel a i{
+
+    .admin-panel a i {
         font-size: 60px;
     }
-    .admin-panel a{
+
+    .admin-panel a {
         width: 45%;
         height: 170px;
         margin: 5px;
     }
-    
+
 }
+
 /* -----Page d'administration Déconnexion----- */
 
 .deconnect {
@@ -113,11 +117,12 @@
 }
 
 /* -----Page d'administration Liste----- */
-section.panel-down{
+section.panel-down {
     display: flex;
     flex-direction: row-reverse;
     margin-bottom: 30px;
 }
+
 .li-admin {
     width: 50%;
 }
@@ -154,33 +159,38 @@ section.panel-down{
 }
 
 .li-admin p span:not(:first-child) {
-    color: #289a37;
+    color: var(--mainColor);
 }
 
-div.chartJS{
+div.chartJS {
     width: 50%;
 }
-.chartJS > div{
+
+.chartJS>div {
     max-width: 550px;
-    margin: 0 auto; 
+    margin: 0 auto;
 }
 
 @media screen and (max-width:747px) {
-    .li-admin{
+    .li-admin {
         width: 100%;
     }
-    div.chartJS{
+
+    div.chartJS {
         width: 100%;
     }
-    section.panel-down{
+
+    section.panel-down {
         flex-direction: column-reverse;
     }
 }
+
 @media screen and (max-width:500px) {
     .chartJS h2 {
         font-size: 16px;
     }
 }
+
 /* 
 --------------------------------------------------
 --------------------PAGE ADDLI--------------------

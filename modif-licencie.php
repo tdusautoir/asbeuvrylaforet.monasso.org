@@ -91,14 +91,12 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                     <option value="f" <?php if ($sexe_licencie == "f") : ?>selected<?php endif; ?>>Femme</option>
                                 </select>
                             </div>
-                            <div class="mail-form-modif-li">
+                            <div class="form-modif-li">
                                 <input value="<?= $mail_licencie ?>" type="mail" class="mail-licencie" name="mail-licencie" placeholder="" maxlength="40">
-                            </div>
-                            <?php if (isset($tel_licencie)) : ?>
-                                <div>
+                                <?php if (isset($tel_licencie)) : ?>
                                     <input value="<?= $tel_licencie ?>" type="tel" class="" name="tel-licencie" placeholder="">
-                                </div>
-                            <?php endif; ?>
+                                <?php endif; ?>
+                            </div>
                             <input type="hidden" name="idLicencie" value="<?php if (isset($idLicencie)) : echo $idLicencie;
                                                                             endif; ?>">
                             <div class="form-modif-li">

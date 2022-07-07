@@ -82,7 +82,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                     </table>
                                 </div>
                             <?php else : ?>
-                                <p> Aucune cotisation n'a encore été récupérer. </p>
+                                <p> Aucune cotisation n'a encore été récupérée. </p>
                             <?php endif;
                             ?>
                         </div>

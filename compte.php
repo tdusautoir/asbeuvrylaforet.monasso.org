@@ -106,14 +106,29 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
                             <div id="account-settings">
                                 <h1>Configurez le site : </h1>
                                 <?php if ($settings) : ?>
-                                    <p>Image : <img src="<?= $get_settings["logoPath"] ?>" class="img"></p>
-                                    <p>Couleur : <span class="color"></span></p>
-
-                                    <h2>Modification du site (en développement) :</h2>
+                                    <div class="site-settings-values">
+                                        <div class="logo-settings">
+                                            <p>Logo du site :</p> <img src="<?= $get_settings["logoPath"] ?>" class="img">
+                                        </div>
+                                        <p>Couleur : <span class="color"></span></p>
+                                    </div>
+                                    <h1>Modification du site (en développement) :</h1>
                                     <form action="./functions/settings-modif.php" class="modif-settings" method="POST" enctype="multipart/form-data">
-                                        <input type="color" name="color" value="<?= $get_settings['color'] ?>">
-                                        <input type="file" accept="image/*" name="logo" value="<?= $get_settings['logoPath'] ?>">
-                                        <input type="submit" name="submit-settings">
+                                        <div class="modif-settings-site">
+                                            <label for="site-logo">
+                                                <i class="fa fa-picture-o"></i> Nouveau logo
+                                                <input id="site-logo" type="file" accept="image/png, image/jpeg" name="logo" value="<?= $get_settings['logoPath'] ?>">
+                                                <span id="nom-photo-logo"></span>
+                                            </label>
+                                            <label for="site-color">
+                                                Nouvelle couleur
+                                                <input id="site-color" type="color" name="color" value="<?= $get_settings['color'] ?>">
+                                            </label>
+
+                                        </div>
+                                        <div class="envoyer-settings-modif">
+                                            <input type="submit" name="submit-settings">
+                                        </div>
                                     </form>
 
                                     <form action="./functions/settings-cancel-modif.php" class="cancel-settings" method="POST">
@@ -129,6 +144,16 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
                 </div>
             </div>
             <?php else : require "./components/form_login.php"; ?><?php endif; ?>
+            <script>
+                let input = document.getElementById("site-logo");
+                let imageName = document.getElementById("nom-photo-logo")
+
+                input.addEventListener("change", () => {
+                    let inputImage = document.querySelector("input[type=file]").files[0];
+
+                    imageName.innerText = inputImage.name;
+                })
+            </script>
             <script>
                 function displayContent(idActive, idOther1, idList, idListOther1) {
                     document.getElementById(idActive).style.display = "flex";
