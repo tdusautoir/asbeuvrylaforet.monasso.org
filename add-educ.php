@@ -105,7 +105,7 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
                                     </div>
                                 </div>
                                 <div class="mail-form-add">
-                                    <input value="<?php display_info_form("mail-educ"); ?>" type="mail" class="mail-licencie" name="mail-educ" placeholder="Adresse mail" maxlength="40" <?php if (isset($form_mail_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
+                                    <input value="<?php display_info_form("mail-educ"); ?>" type="email" class="mail-licencie" name="mail-educ" placeholder="Adresse mail" maxlength="40" <?php if (isset($form_mail_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
                                 </div>
                                 <div class="form-add list-cate-div">
                                     <div class="responsable">

@@ -112,28 +112,30 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
                                         </div>
                                         <p>Couleur : <span class="color"></span></p>
                                     </div>
-                                    <h1>Modification du site (en développement) :</h1>
-                                    <form action="./functions/settings-modif.php" class="modif-settings" method="POST" enctype="multipart/form-data">
-                                        <div class="modif-settings-site">
-                                            <label for="site-logo">
-                                                <i class="fa fa-picture-o"></i> Nouveau logo
-                                                <input id="site-logo" type="file" accept="image/png, image/jpeg" name="logo" value="<?= $get_settings['logoPath'] ?>">
-                                                <span id="nom-photo-logo"></span>
-                                            </label>
-                                            <label for="site-color">
-                                                Nouvelle couleur
-                                                <input id="site-color" type="color" name="color" value="<?= $get_settings['color'] ?>">
-                                            </label>
+                                    <?php if (is_admin()) : ?>
+                                        <h1>Modification du site (en développement) :</h1>
+                                        <form action="./functions/settings-modif.php" class="modif-settings" method="POST" enctype="multipart/form-data">
+                                            <div class="modif-settings-site">
+                                                <label for="site-logo">
+                                                    <i class="fa fa-picture-o"></i> Nouveau logo
+                                                    <input id="site-logo" type="file" accept="image/png, image/jpeg" name="logo" value="<?= $get_settings['logoPath'] ?>">
+                                                    <span id="nom-photo-logo"></span>
+                                                </label>
+                                                <label for="site-color">
+                                                    Nouvelle couleur
+                                                    <input id="site-color" type="color" name="color" value="<?= $get_settings['color'] ?>">
+                                                </label>
 
-                                        </div>
-                                        <div class="envoyer-settings-modif">
-                                            <input type="submit" name="submit-settings">
-                                        </div>
-                                    </form>
+                                            </div>
+                                            <div class="envoyer-settings-modif">
+                                                <input type="submit" name="submit-settings">
+                                            </div>
+                                        </form>
 
-                                    <form action="./functions/settings-cancel-modif.php" class="cancel-settings" method="POST">
-                                        <input type="submit" name="cancel-settings" value="Annuler les modifications">
-                                    </form>
+                                        <form action="./functions/settings-cancel-modif.php" class="cancel-settings" method="POST">
+                                            <input type="submit" name="cancel-settings" value="Annuler les modifications">
+                                        </form>
+                                    <?php endif; ?>
                                 <?php endif; ?>
                             </div>
                         </div>

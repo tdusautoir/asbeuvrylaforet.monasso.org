@@ -143,11 +143,6 @@
     border-radius: 0 0 0 10px;
 }
 
-.account-container .account-li li:hover {
-    cursor: pointer;
-    background-color: #21802e !important;
-    color: white !important;
-}
 
 #account-infos {
     display: flex;
