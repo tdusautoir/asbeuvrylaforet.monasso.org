@@ -58,8 +58,9 @@ if (isset($_POST["submit"])) {
                             exit;
                         }
                     } else { //si personne trouvé en tant qu'admin --> recherche educateur
-                        $rech_educ = $db->prepare("SELECT * FROM educ WHERE mail = ? AND COSU = 0"); //recherche les utilisateurs dans la table educ correspondant au mail entrée
+                        $rech_educ = $db->prepare("SELECT * FROM educ WHERE mail = ? AND pw_recup_token = ? AND COSU = 0"); //recherche les utilisateurs dans la table educ correspondant au mail entrée
                         $rech_educ->bindValue(1, $usermail);
+                        $rech_educ->bindValue(2, $token);
                         $rech_educ->execute();
                         $utilisateur_educ = $rech_educ->fetch(PDO::FETCH_ASSOC);
                         if ($utilisateur_educ) {
