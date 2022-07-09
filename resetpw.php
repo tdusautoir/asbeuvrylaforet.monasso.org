@@ -7,6 +7,9 @@ require_once("./db.php");
 
 date_default_timezone_set("Europe/Paris");
 
+$logo = $db->query("SELECT logoPath FROM settings ORDER BY id DESC LIMIT 1;");
+$get_logo = $logo->fetch(PDO::FETCH_ASSOC);
+
 if (isset($_GET["token"]) && !empty($_GET["token"])) :
     $_SESSION['token'] = $_GET['token'];
 endif;
@@ -24,11 +27,16 @@ endif;
     <!-- Bouton RETOUR -->
     <div class="return_container"><a href="./index.php"><i class="fas fa-arrow-left"></i>Retour</a></div>
     <!-- Fin bouton RETOUR -->
+    <?php if (isset_flash_message_by_type(FLASH_SUCCESS)) : ?>
+        <div class='success abs' id="flash"><?php display_flash_message_by_type(FLASH_SUCCESS); ?></div>
+    <?php elseif (isset_flash_message_by_type(FLASH_WARNING)) : ?>
+        <div class="error abs" id="flash"><?php display_flash_message_by_type(FLASH_WARNING); ?></div>
+    <?php endif; ?>
     <?php if (!isset($_GET["token"]) || empty($_GET["token"])) : ?>
         <section class="formulaire_login">
             <form method="POST" action="./functions/resetpw-sendmail.php" class="form_container">
                 <div class="form_content">
-                    <div class="logo_association"><img draggable="false" src="./public/images/logo-asb.svg" alt=""></div>
+                    <div class="logo_association"><img draggable="false" src="<?= $get_logo['logoPath']; ?>" alt=""></div>
                     <h1>Réinitialisation du mot de passe</h1>
                     <p>Saisissez l'adresse e-mail associée à votre compte et nous vous enverrons un lien pour réinitialiser votre mot de passe.</p>
                     <div class="mail">
@@ -40,15 +48,13 @@ endif;
                         <button class="reverse" type="submit" name="submit">Réinitialiser</button>
                     </div>
                 </div>
-                <?php if (isset_flash_message_by_type(FLASH_SUCCESS)) { ?><p class='success'><?php display_flash_message_by_type(FLASH_SUCCESS); ?></p>
-                <?php } else if (isset_flash_message_by_type(FLASH_WARNING)) { ?><p class='warning'><?php display_flash_message_by_type(FLASH_WARNING); ?></p><?php } ?>
             </form>
         </section>
     <?php else : ?>
         <section class="formulaire_login">
             <form method="POST" action="./functions/resetpw-changepw.php" class="form_container">
                 <div class="form_content">
-                    <div class="logo_association"><img draggable="false" src="./public/images/logo-asb.svg" alt=""></div>
+                    <div class="logo_association"><img draggable="false" src="<?= $get_logo['logoPath']; ?>" alt=""></div>
                     <div class="mail">
                         <label for="mail" class="field_label_top">Adresse mail</label>
                         <input id="mail" type="email" pattern="[^ @]*@[^ @]*" placeholder="Adresse mail" name="email" autocomplete='on' <?php if (isset_flash_message_by_name(ERROR_MAIL)) : ?>style="border-bottom: 2px solid rgb(210, 0, 0);" <?php endif; ?>>
@@ -68,12 +74,21 @@ endif;
                     </div>
                     <button type="submit" name="submit">Changer de mot de passe</button>
                 </div>
-                <?php if (isset_flash_message_by_type(FLASH_SUCCESS)) { ?><p class='success'><?php display_flash_message_by_type(FLASH_SUCCESS); ?></p>
-                <?php } else if (isset_flash_message_by_type(FLASH_WARNING)) { ?><p class='warning'><?php display_flash_message_by_type(FLASH_WARNING); ?></p><?php } ?>
             </form>
         </section>
     <?php endif; ?>
     <script src="/public/js/login.js" type="text/javascript" async></script>
+    <script>
+        flash = document.getElementById("flash");
+        if (flash) {
+            setTimeout(function() {
+                flash.style.transform = "translateY(-140px)"
+                setTimeout(function() {
+                    flash.style.display = "none"
+                }, 400)
+            }, 3000)
+        }
+    </script>
 </body>
 
 </html>

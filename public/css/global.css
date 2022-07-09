@@ -426,22 +426,42 @@ button.reverse:hover {
 
 div.success {
 	background-color: rgba(40, 154, 55, 0.11);
-	color: var(--mainColor);
-	border: 1px solid var(--mainColor);
-	padding: 12px 20px;
-	margin-top: 20px;
-	border-radius: 4px;
-	font-size: 20px;
+    color: #289a37;
+    border: 1px solid #289a37;
+    padding: 12px 20px;
+    margin-top: 20px;
+    border-radius: 4px;
+    font-size: 20px;
 	transition: 1s;
+}
+
+div.success.abs{
+	position: absolute;
+    width: 97%;
+    margin: 0 auto;
+    margin-top: 85px!important;
+    right: 0;
+    left: 0;
+	z-index: -1;
 }
 
 div.error {
 	background-color: rgba(210, 0, 0, 0.11);
-	color: var(--errorColor);
-	border: 1px solid var(--errorColor);
-	padding: 12px 20px;
-	margin-top: 20px;
-	border-radius: 4px;
-	font-size: 20px;
+    color: var(--errorColor);
+    border: 1px solid var(--errorColor);
+    padding: 12px 20px;
+    margin-top: 20px;
+    border-radius: 4px;
+    font-size: 20px;
 	transition: 1s;
+}
+
+div.error.abs{ 
+	position: absolute;
+    width: 97%;
+    margin: 0 auto;
+    margin-top: 85px!important;
+    right: 0;
+    left: 0;
+	z-index: -1;
 }

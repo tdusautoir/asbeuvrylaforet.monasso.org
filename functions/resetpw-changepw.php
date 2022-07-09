@@ -18,7 +18,7 @@ if (isset($_POST["submit"])) {
 
                     $dateToday = time();
 
-                    $rech_admin = $db->prepare("SELECT * FROM admin WHERE mail = ? AND pw_recup_token = ? "); //recherche les utilisateurs dans la table admin correspondant au usermail entrée et au token du lien
+                    $rech_admin = $db->prepare("SELECT * FROM admin WHERE mail = ? AND pw_recup_token = ? AND COSU = 0"); //recherche les utilisateurs dans la table admin correspondant au usermail entrée et au token du lien
                     $rech_admin->bindValue(1, $usermail);
                     $rech_admin->bindValue(2, $token);
                     $rech_admin->execute();
@@ -58,9 +58,7 @@ if (isset($_POST["submit"])) {
                             exit;
                         }
                     } else { //si personne trouvé en tant qu'admin --> recherche educateur
-                        $rech_educ = $db->prepare(
-                            "SELECT * FROM educ WHERE mail = ? AND COSU = 0"
-                        ); //recherche les utilisateurs dans la table educ correspondant au mail entrée
+                        $rech_educ = $db->prepare("SELECT * FROM educ WHERE mail = ? AND COSU = 0"); //recherche les utilisateurs dans la table educ correspondant au mail entrée
                         $rech_educ->bindValue(1, $usermail);
                         $rech_educ->execute();
                         $utilisateur_educ = $rech_educ->fetch(PDO::FETCH_ASSOC);
