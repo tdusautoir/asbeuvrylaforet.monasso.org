@@ -96,7 +96,7 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
                   ?>
                         <option value="<?= $category["idCategorie"] ?>" <?php if (isset_info_form("categorie-licencie")) :
                                                                           if ($_SESSION[FORM]['categorie-licencie'] == $category['nomCategorie']) : ?> selected <?php endif;
-                                                                                                          endif; ?>><?= $category["nomCategorie"] ?></option>
+                                                                                                                                                            endif; ?>><?= $category["nomCategorie"] ?></option>
                         <?php
                       endif;
                     endwhile;
@@ -130,7 +130,7 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
                 <input value="<?php display_info_form("tel-licencie") ?>" type="tel" class="tel-licencie" name="tel-licencie" placeholder="Téléphone" <?php if (isset($form_tel_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
               </div>
               <div class="form-add">
-                <input type="submit" value="Ajouter" name="submit-add" class="bouton-ajouter">
+                <input type="submit" value="Ajouter" name="submit-add" class="bouton-ajouter" onclick="waitLoading()">
               </div>
             </form>
           </div>
@@ -140,27 +140,36 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
         </div>
       </div>
     </div>
-    <?php
-    //if there is form info, delete it
-    unset_info_form();
-    ?>
-    <script>
-      let input = document.getElementById("photo-licencie");
-      let imageName = document.getElementById("nom-photo-licencie")
+    <div id="Modal">
+      <div id="Modal-loading" class="Modal-loading">
+        <img src="/public/images/loading.gif" alt="">
+      </div>
+      <?php
+      //if there is form info, delete it
+      unset_info_form();
+      ?>
+      <script>
+        let input = document.getElementById("photo-licencie");
+        let imageName = document.getElementById("nom-photo-licencie")
 
-      input.addEventListener("change", (e) => {
-        let inputImage = e.target.files[0];
+        input.addEventListener("change", (e) => {
+          let inputImage = e.target.files[0];
 
-        imageName.innerText = inputImage.name;
-      })
-    </script>
-    <script type="text/javascript">
-      function nospaces(input) {
-        input.value = input.value.replace(" ", "");
-        return true;
-      }
-    </script>
-    <?php else : require "./components/form_login.php"; ?><?php endif; ?>
+          imageName.innerText = inputImage.name;
+        })
+      </script>
+      <script type="text/javascript">
+        function nospaces(input) {
+          input.value = input.value.replace(" ", "");
+          return true;
+        }
+      </script>
+      <script>
+        function waitLoading() {
+          await sleep(2000);
+        }
+      </script>
+      <?php else : require "./components/form_login.php"; ?><?php endif; ?>
 </body>
 
 </html>
