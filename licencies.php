@@ -7,7 +7,6 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
     clean_php_session();
     header("location: index.php");
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -30,11 +29,23 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                             <label for="category">Catégorie du licencié</label>
                             <select name='categorie' onChange="submit()" class="filter-category">
                                 <option disabled <?php if (!isset($_GET['categorie']) || empty($_GET['categorie'])) : ?>selected<?php endif; ?>>Categorie</option>
-                                <?php $getCategorie = $db->query("SELECT DISTINCT nomCategorie FROM categorie WHERE COSU = 0");
-                                if ($getCategorie->rowCount() > 0) :
-                                    while ($categorie = $getCategorie->fetch()) : ?>
-                                        <option value="<?= $categorie['nomCategorie']; ?>" <?php if (isset($_GET['categorie']) && $categorie['nomCategorie'] == $_GET['categorie']) : ?>selected<?php endif; ?>><?= $categorie['nomCategorie']; ?></option>
+                                <?php
+                                if (is_admin()) :
+                                    $getCategorie = $db->query("SELECT DISTINCT nomCategorie FROM categorie WHERE COSU = 0");
+                                    if ($getCategorie->rowCount() > 0) :
+                                        while ($categorie = $getCategorie->fetch()) : ?>
+                                            <option value="<?= $categorie['nomCategorie']; ?>" <?php if (isset($_GET['categorie']) && $categorie['nomCategorie'] == $_GET['categorie']) : ?>selected<?php endif; ?>><?= $categorie['nomCategorie']; ?></option>
+                                        <?php endwhile;
+                                    endif;
+                                elseif (is_educ()) :
+                                    $getCategorie = $db->prepare(" SELECT categorie.nomCategorie FROM `categorieeduc` INNER JOIN categorie ON categorieeduc.idCategorie = categorie.idCategorie INNER JOIN educ ON educ.idEduc = categorieeduc.idEduc WHERE educ.idEduc = :idEduc");
+                                    $getCategorie->bindValue("idEduc", $_SESSION['id']);
+                                    $getCategorie->execute();
+                                    if ($getCategorie->rowCount() > 0) :
+                                        while ($categorie = $getCategorie->fetch()) : ?>
+                                            <option value="<?= $categorie['nomCategorie']; ?>" <?php if (isset($_GET['categorie']) && $categorie['nomCategorie'] == $_GET['categorie']) : ?>selected<?php endif; ?>><?= $categorie['nomCategorie']; ?></option>
                                 <?php endwhile;
+                                    endif;
                                 endif;
                                 ?>
                             </select>
@@ -59,22 +70,45 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                             Liste des licenciés :
                         </h2>
                         <?php
-                        if (isset($_GET['q']) && !empty($_GET['q'])) :
-                            $q_ = explode(' ', $_GET['q']); //take only the first word
-                            $q = $q_[0];
-                            $req = $db->prepare("SELECT licencie.idLicencie, categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.dateN, licencie.mail, licencie.USRCRE FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.COSU = 0 AND licencie.nom LIKE '%$q%' ORDER BY licencie.DCRE DESC;"); //licenciés de la bdd selon la recherche q
-                            $req->execute();
-                            $rowCount = $req->rowCount();
-                        elseif (isset($_GET['categorie']) && !empty($_GET['categorie']) && $_GET['categorie'] != '') :
-                            $categorie = $_GET['categorie'];
-                            $req = $db->prepare("SELECT licencie.idLicencie, categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.dateN, licencie.mail, licencie.USRCRE FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.COSU = 0 AND categorie.nomCategorie = :categorie ORDER BY licencie.DCRE DESC;"); //licenciés de la bdd selon la categorie
-                            $req->bindValue('categorie', $categorie);
-                            $req->execute();
-                            $rowCount = $req->rowCount();
-                        else :
-                            $req = $db->prepare("SELECT licencie.idLicencie, categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.dateN, licencie.mail, licencie.USRCRE FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.COSU = 0 ORDER BY licencie.DCRE DESC;"); //licenciés de la bdd classé par date croissant 
-                            $req->execute();
-                            $rowCount = $req->rowCount();
+                        if (is_admin()) :
+                            if (isset($_GET['q']) && !empty($_GET['q'])) :
+                                $q_ = explode(' ', $_GET['q']); //take only the first word
+                                $q = $q_[0];
+                                $req = $db->prepare("SELECT licencie.idLicencie, categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.dateN, licencie.mail, licencie.USRCRE FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.COSU = 0 AND licencie.nom LIKE '%$q%' ORDER BY licencie.DCRE DESC;"); //licenciés de la bdd selon la recherche q
+                                $req->execute();
+                                $rowCount = $req->rowCount();
+                            elseif (isset($_GET['categorie']) && !empty($_GET['categorie']) && $_GET['categorie'] != '') :
+                                $categorie = $_GET['categorie'];
+                                $req = $db->prepare("SELECT licencie.idLicencie, categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.dateN, licencie.mail, licencie.USRCRE FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.COSU = 0 AND categorie.nomCategorie = :categorie ORDER BY licencie.DCRE DESC;"); //licenciés de la bdd selon la categorie
+                                $req->bindValue('categorie', $categorie);
+                                $req->execute();
+                                $rowCount = $req->rowCount();
+                            else :
+                                $req = $db->prepare("SELECT licencie.idLicencie, categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.dateN, licencie.mail, licencie.USRCRE FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.COSU = 0 ORDER BY licencie.DCRE DESC;"); //licenciés de la bdd classé par date croissant 
+                                $req->execute();
+                                $rowCount = $req->rowCount();
+                            endif;
+                        elseif (is_educ()) :
+                            if (isset($_GET['q']) && !empty($_GET['q'])) :
+                                $q_ = explode(' ', $_GET['q']); //take only the first word
+                                $q = $q_[0];
+                                $req = $db->prepare("SELECT licencie.idLicencie, categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.dateN, licencie.mail, licencie.USRCRE FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorieeduc.idCategorie = categorie.idCategorie INNER JOIN educ ON educ.idEduc = categorieeduc.idEduc WHERE licencie.COSU = 0 AND educ.idEduc = :idEduc AND licencie.nom LIKE '%$q%' ORDER BY licencie.DCRE DESC;"); //licenciés de la bdd selon la recherche q et les catégories associés à l'educateur connecté
+                                $req->bindValue('idEduc', $_SESSION['id']);
+                                $req->execute();
+                                $rowCount = $req->rowCount();
+                            elseif (isset($_GET['categorie']) && !empty($_GET['categorie']) && $_GET['categorie'] != '') :
+                                $categorie = $_GET['categorie'];
+                                $req = $db->prepare("SELECT licencie.idLicencie, categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.dateN, licencie.mail, licencie.USRCRE FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorieeduc.idCategorie = categorie.idCategorie INNER JOIN educ ON educ.idEduc = categorieeduc.idEduc WHERE licencie.COSU = 0 AND educ.idEduc = :idEduc AND categorie.nomCategorie = :categorie ORDER BY licencie.DCRE DESC;"); //licenciés de la bdd selon la recherche q et les catégories associés à l'educateur connecté
+                                $req->bindValue('idEduc', $_SESSION['id']);
+                                $req->bindValue('categorie', $categorie);
+                                $req->execute();
+                                $rowCount = $req->rowCount();
+                            else :
+                                $req = $db->prepare("SELECT licencie.idLicencie, categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.dateN, licencie.mail, licencie.USRCRE FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorieeduc.idCategorie = categorie.idCategorie INNER JOIN educ ON educ.idEduc = categorieeduc.idEduc WHERE licencie.COSU = 0 AND educ.idEduc = :idEduc ORDER BY licencie.DCRE DESC;"); //licenciés de la bdd selon les catégories associés à l'educateur connecté 
+                                $req->bindValue('idEduc', $_SESSION['id']);
+                                $req->execute();
+                                $rowCount = $req->rowCount();
+                            endif;
                         endif;
 
                         if ($rowCount > 0) : //si on trouve des licenciés ajoutés on affiche la liste de la requete.

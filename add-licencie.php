@@ -89,15 +89,34 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
                 <select name="categorie-licencie" id="categorie-licencie" <?php if (isset($form_categorie_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
                   <option value="" disabled <?php if (!isset_info_form("categorie-licencie")) : ?> selected <?php endif; ?>>Catégorie</option>
                   <?php
-                  $req_category = $db->query("SELECT idCategorie, nomCategorie FROM categorie");
-                  while ($category = $req_category->fetch()) :
-                    if (isset($category)) :
+                  if (is_admin()) :
+                    $req_category = $db->query("SELECT idCategorie, nomCategorie FROM categorie");
+                    while ($category = $req_category->fetch()) :
+                      if (isset($category)) :
                   ?>
-                      <option value="<?= $category["idCategorie"] ?>" <?php if (isset_info_form("categorie-licencie")) : ?> selected <?php endif; ?>><?= $category["nomCategorie"] ?></option>
+                        <option value="<?= $category["idCategorie"] ?>" <?php if (isset_info_form("categorie-licencie")) :
+                                                                          if ($_SESSION[FORM]['categorie-licencie'] == $category['nomCategorie']) : ?> selected <?php endif;
+                                                                                                          endif; ?>><?= $category["nomCategorie"] ?></option>
+                        <?php
+                      endif;
+                    endwhile;
+                    $req_category->closeCursor();
+                  elseif (is_educ()) :
+                    $req_category = $db->prepare(" SELECT categorie.idCategorie, categorie.nomCategorie FROM `categorieeduc` INNER JOIN categorie ON categorieeduc.idCategorie = categorie.idCategorie INNER JOIN educ ON educ.idEduc = categorieeduc.idEduc WHERE educ.idEduc = :idEduc");
+                    $req_category->bindValue("idEduc", $_SESSION['id']);
+                    $req_category->execute();
+                    if ($req_category->rowCount() > 0) :
+                      while ($category = $req_category->fetch()) :
+                        if (isset($category)) :
+                        ?>
+                          <option value="<?= $category["idCategorie"] ?>" <?php if (isset_info_form("categorie-licencie")) :
+                                                                            if ($_SESSION[FORM]['categorie-licencie'] == $category['nomCategorie']) : ?> selected <?php endif;
+                                                                                                                                                              endif; ?>><?= $category["nomCategorie"] ?></option>
                   <?php
+                        endif;
+                      endwhile;
                     endif;
-                  endwhile;
-                  $req_category->closeCursor();
+                  endif;
                   ?>
                 </select>
                 <select name="sexe-licencie" id="sexe-licencie" <?php if (isset($form_sexe_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>

@@ -29,9 +29,16 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                 Suivi des cotisations :
                             </h2>
                             <?php
-                            $req = $db->prepare("SELECT cotis.methode, cotis.prix, cotis.type, licencie.prenom FROM cotis INNER JOIN licencie ON cotis.idLicencie = licencie.idLicencie WHERE cotis.COSU = 0 ORDER BY cotis.DCRE DESC;"); //Liste des éducateurs classé par date d'ajout
-                            $req->execute();
-                            $rowCount = $req->rowCount();
+                            if (is_admin()) :
+                                $req = $db->prepare("SELECT cotis.methode, cotis.prix, cotis.type, licencie.prenom FROM cotis INNER JOIN licencie ON cotis.idLicencie = licencie.idLicencie WHERE cotis.COSU = 0 ORDER BY cotis.DCRE DESC;"); //Liste des cotisations
+                                $req->execute();
+                                $rowCount = $req->rowCount();
+                            elseif (is_educ()) :
+                                $req = $db->prepare("SELECT cotis.methode, cotis.prix, cotis.type, licencie.prenom FROM cotis INNER JOIN licencie ON cotis.idLicencie = licencie.idLicencie INNER JOIN categorie ON categorie.idCategorie = licencie.idCategorie INNER JOIN categorieeduc ON categorieeduc.idCategorie = categorie.idCategorie INNER JOIN educ ON educ.idEduc = categorieeduc.idEduc WHERE cotis.COSU = 0 AND educ.idEduc = :idEduc ORDER BY cotis.DCRE DESC;"); //Liste des cotisations selon les catégories de l'educateur
+                                $req->bindValue('idEduc', $_SESSION['id']);
+                                $req->execute();
+                                $rowCount = $req->rowCount();
+                            endif;
                             if ($rowCount > 0) : //if there is most than one cotisation
                             ?>
                                 <div>
