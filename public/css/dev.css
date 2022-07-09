@@ -134,6 +134,10 @@
     transition: all 300ms ease 0ms;
 }
 
+.account-container .account-li li:hover {
+    cursor: pointer;
+}
+
 .account-container .account-li li:first-child {
     background: var(--mainColor);
     color: white;
@@ -295,28 +299,28 @@
     color: var(--mainColor);
 }
 
-.state-indicator{
-    display: inline-block; 
-    width: 10px; 
-    height: 10px; 
+.state-indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
     border-radius: 5px;
-    content:'';
+    content: '';
 }
 
-.filter{
+.filter {
     margin-top: 40px;
     display: flex;
 }
 
-.filter div{
+.filter div {
     width: 100%;
 }
 
-.filter div:not(:first-child){
+.filter div:not(:first-child) {
     margin-left: 20px;
 }
 
-.filter label{
+.filter label {
     font-weight: 500;
     margin-left: 4px;
 }
@@ -348,8 +352,7 @@
     padding: 0;
 }
 
-.filter select{
-    cursor: pointer;
+.filter select {
     appearance: none;
     height: 50px;
     width: 100%;
@@ -364,10 +367,12 @@
     background-size: 30px;
     outline: none;
     font-size: 16px;
+    cursor: pointer;
 }
 
-.cancel-filter{
-    cursor: pointer;
+
+
+.cancel-filter {
     display: block;
     margin: 0 auto;
     margin-top: 20px;
@@ -377,6 +382,7 @@
     font-weight: 500;
     border: 1px solid #e6e6e6;
     border-radius: 6px;
+    cursor: pointer;
 }
 
 .modif-settings-site {
