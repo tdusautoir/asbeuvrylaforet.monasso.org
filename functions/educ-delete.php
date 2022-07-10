@@ -22,21 +22,21 @@ if (is_logged()) {
 
                 if ($result) {
                     create_flash_message("delete_success", "L'éducateur « $lastname_Educateur $firstname_Educateur » a bien été supprimé.", FLASH_SUCCESS);
-                    header("location: ../educateurs.php");
+                    header("location:" . $_SERVER['HTTP_REFERER']); //L'adresse de la page qui a conduit le client à la page courante
                     exit();
                 } else {
                     create_flash_message("delete_error", "Une erreur est survenue. Veuillez réessayer.", FLASH_ERROR);
-                    header("location: ../educateurs.php");
+                    header("location:" . $_SERVER['HTTP_REFERER']); //L'adresse de la page qui a conduit le client à la page courante
                     exit();
                 }
             } else {
                 create_flash_message("delete_error", "Une erreur est survenue. Veuillez réessayer.", FLASH_ERROR);
-                header("location: ../educateurs.php");
+                header("location:" . $_SERVER['HTTP_REFERER']); //L'adresse de la page qui a conduit le client à la page courante
                 exit();
             }
         } else {
             create_flash_message("delete_error", "Une erreur est survenue. Veuillez réessayer.", FLASH_ERROR);
-            header("location: ../educateurs.php");
+            header("location:" . $_SERVER['HTTP_REFERER']); //L'adresse de la page qui a conduit le client à la page courante
             exit();
         }
     } else {
