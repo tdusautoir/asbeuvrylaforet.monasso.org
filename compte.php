@@ -55,9 +55,9 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
                                     if ($account_info->rowCount() > 0) :
                                         $get_account_info = $account_info->fetch(PDO::FETCH_ASSOC); ?>
 
-                                        <p>Nom : <?= $get_account_info["prenom"] ?></p>
-                                        <p>Prenom : <?= $get_account_info["nom"] ?></p>
-                                        <p>Mail : <?= $get_account_info["mail"] ?></p>
+                                        <p>Nom : <?= htmlspecialchars($get_account_info["prenom"]) ?></p>
+                                        <p>Prenom : <?= htmlspecialchars($get_account_info["nom"]) ?></p>
+                                        <p>Mail : <?= htmlspecialchars($get_account_info["mail"]) ?></p>
                                         <p>Date de création : <?= date('d-m-Y', strtotime($get_account_info["DCRE"])); ?></p>
 
                                     <?php endif; ?>
@@ -69,9 +69,9 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
                                     if ($account_info->rowCount() > 0) :
                                         $get_account_info = $account_info->fetch(PDO::FETCH_ASSOC); ?>
 
-                                        <p>Nom : <?= $get_account_info["prenom"] ?></p>
-                                        <p>Prenom : <?= $get_account_info["nom"] ?></p>
-                                        <p>Mail : <?= $get_account_info["mail"] ?></p>
+                                        <p>Nom : <?= htmlspecialchars($get_account_info["prenom"]) ?></p>
+                                        <p>Prenom : <?= htmlspecialchars($get_account_info["nom"]) ?></p>
+                                        <p>Mail : <?= htmlspecialchars($get_account_info["mail"]) ?></p>
 
                                         <?php $account_categorie = $db->prepare("SELECT nomCategorie FROM categorie INNER JOIN categorieeduc ON categorie.idCategorie = categorieeduc.idCategorie WHERE idEduc = ?; ");
                                         $account_categorie->bindValue(1, $_SESSION["id"]);

@@ -61,8 +61,8 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                         </h1>
                         <form action="./functions/licencie-modif.php" method="POST">
                             <div class="form-modif-li">
-                                <input value="<?= $lastname_licencie ?>" type="text" class="nom-licencie" placeholder="" name="nom-licencie" maxlength="20">
-                                <input value="<?= $firstname_licencie ?>" type="text" class="prenom-licencie" placeholder="" name="prenom-licencie" maxlength="15">
+                                <input value="<?= htmlspecialchars($lastname_licencie) ?>" type="text" class="nom-licencie" placeholder="" name="nom-licencie" maxlength="20">
+                                <input value="<?= htmlspecialchars($firstname_licencie) ?>" type="text" class="prenom-licencie" placeholder="" name="prenom-licencie" maxlength="15">
                             </div>
                             <div class="form-modif-li">
                                 <label for="photo-licencie">
@@ -92,7 +92,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                 </select>
                             </div>
                             <div class="form-modif-li">
-                                <input value="<?= $mail_licencie ?>" type="mail" class="mail-licencie" name="mail-licencie" placeholder="" maxlength="40">
+                                <input value="<?= htmlspecialchars($mail_licencie) ?>" type="mail" class="mail-licencie" name="mail-licencie" placeholder="" maxlength="40">
                                 <?php if (isset($tel_licencie)) : ?>
                                     <input value="<?= $tel_licencie ?>" type="tel" class="" name="tel-licencie" placeholder="">
                                 <?php endif; ?>

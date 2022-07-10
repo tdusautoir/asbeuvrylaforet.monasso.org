@@ -71,7 +71,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                         <?= $COTIS["type"] ?>
                                                     </td>
                                                     <td>
-                                                        <?= $COTIS["prenom"] ?>
+                                                        <?= htmlspecialchars($COTIS["prenom"]) ?>
                                                     </td>
                                                     <td class="action-btns btns-1">
                                                         <a href="">

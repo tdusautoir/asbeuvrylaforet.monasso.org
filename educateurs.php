@@ -77,13 +77,13 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                             ?>
                                                 <tr>
                                                     <td>
-                                                        <?= strtoupper($EDUC["nom"]) ?>
+                                                        <?= strtoupper(htmlspecialchars($EDUC["nom"])) ?>
                                                     </td>
                                                     <td>
-                                                        <?= ucfirst($EDUC["prenom"]) ?>
+                                                        <?= ucfirst(htmlspecialchars($EDUC["prenom"])) ?>
                                                     </td>
                                                     <td>
-                                                        <?= $EDUC["mail"] ?>
+                                                        <?= htmlspecialchars($EDUC["mail"]) ?>
                                                     </td>
                                                     <td>
                                                         <?php
@@ -113,7 +113,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                         }
                                                         ?>
 
-                                                        <?= $educCat ?>
+                                                        <?= htmlspecialchars($educCat) ?>
                                                     </td>
                                                     <td class="action-btns btns-1">
                                                         <a href="./modif-educ.php?idEduc=<?= $EDUC["idEduc"] ?>">

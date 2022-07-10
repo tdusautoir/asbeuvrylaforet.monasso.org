@@ -85,8 +85,8 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
               <ul>
                 <?php while ($LIC = $req->fetch(PDO::FETCH_ASSOC)) : ?>
                   <li>
-                    <p><?= $LIC["nomCategorie"] ?> - <span><?= $LIC["prenom"] . " " . strtoupper($LIC["nom"]) ?></span>
-                      <?php if (isset($LIC["USRCRE"])) : ?>par <span><?= ($LIC["USRCRE"]) ?> </span></p> <?php endif; ?>
+                    <p><?= htmlspecialchars($LIC["nomCategorie"]) ?> - <span><?= htmlspecialchars($LIC["prenom"]) . " " . strtoupper(htmlspecialchars($LIC["nom"])) ?></span>
+                      <?php if (isset($LIC["USRCRE"])) : ?>par <span><?= htmlspecialchars($LIC["USRCRE"]) ?> </span></p> <?php endif; ?>
                   </li>
                 <?php endwhile; ?>
               </ul>

@@ -135,11 +135,11 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                 <td>
                                                     <?= $LIC["nomCategorie"] ?>
                                                 </td>
-                                                <td title=<?= strtoupper($LIC["nom"]) ?>>
-                                                    <?= strtoupper($LIC["nom"]) ?>
+                                                <td title=<?= strtoupper(htmlspecialchars($LIC["nom"])) ?>>
+                                                    <?= strtoupper(htmlspecialchars($LIC["nom"])) ?>
                                                 </td>
-                                                <td title=<?= ucfirst($LIC["prenom"]) ?>>
-                                                    <?= ucfirst($LIC["prenom"]) ?>
+                                                <td title=<?= ucfirst(htmlspecialchars($LIC["prenom"])) ?>>
+                                                    <?= ucfirst(htmlspecialchars($LIC["prenom"])) ?>
                                                 </td>
                                                 <td>
                                                     <?= strftime('%d-%m-%Y', strtotime($LIC["dateN"])); //Y-m-d format to d-m-Y format 
