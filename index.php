@@ -65,7 +65,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             <i class="fa fa-euro-sign"></i>
             <p>Suivi des cotisations</p>
           </a>
-          <a>
+          <a href="./attestation-generator.php">
             <i class="fa fa-file-invoice"></i>
             <p>G&eacute;n&eacute;rer une attestation</p>
           </a>
