@@ -226,7 +226,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                         ?>
                             <p> Aucun licencié ne correspond à votre recherche. </p>
                         <?php else : ?>
-                            <p> Aucun licencié n'a encore été créé </p>
+                            <p> Aucune statistique enregistrée. </p>
                         <?php endif;
                         $req->closeCursor(); // Ferme le curseur, permettant à la requête d'être de nouveau exécutée 
                         ?>
