@@ -127,7 +127,9 @@ content: "\f070";
 content: "\f060";
 padding-right: 5px;
 }
-
+.fa-file-pdf:before{
+    content: "\f1c1";
+}
 .fa-search:before {
 content: "\f002";
 }

@@ -326,6 +326,7 @@
 }
 
 .filter input[type='search'] {
+    margin-top: 10px;
     height: 50px;
     width: 100%;
     background-color: #F8F8F8;
@@ -337,12 +338,12 @@
 }
 
 .filter input[type='submit'] {
+    margin-top: 9px;
     cursor: pointer;
     position: absolute;
     height: 52px;
     width: 50px;
     margin-left: -50px;
-    margin-top: -1px;
     border-radius: 0 6px 6px 0;
     background-color: var(--mainColor);
     background-image: url(../images/search-icon-white.png);
@@ -354,6 +355,7 @@
 
 .filter select {
     appearance: none;
+    margin-top: 10px;
     height: 50px;
     width: 100%;
     background-color: #F8F8F8;
