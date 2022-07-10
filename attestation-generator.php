@@ -67,7 +67,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 <div class="li-container">
                     <div class="li-li-admin">
                         <h2>
-                            Liste des licenciés :
+                            Générer une attestation :
                         </h2>
                         <?php
                         if (is_admin()) :
@@ -178,7 +178,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
 
                                                 <td class="action-btns btns-2">
                                                     <a href="./attestation-generate.php?idLicencie=<?= $LIC["idLicencie"] ?>">
-                                                        <i class="fa fa-pencil"></i>
+                                                        <i class="fas fa-file-pdf"></i>
                                                     </a>
                                                 </td>
                                             </tr>
