@@ -30,6 +30,7 @@ if (isset($_POST["submit"])) {
                 if ($success) {
                     $link = "https://www.dev-asbeuvrylaforet.monasso.org/resetpw.php?token=" . $token;
                     $to = $usermail;
+                    $email = "noreply@monasso.org";
                     $subject = 'Reinitialisation de votre mot de passe';
                     $mailContent = "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
                     <html xmlns='http://www.w3.org/1999/xhtml' xmlns:v='urn:schemas-microsoft-com:vml' xmlns:o='urn:schemas-microsoft-com:office:office'>
@@ -239,6 +240,7 @@ if (isset($_POST["submit"])) {
 
                     $headers[] = 'MIME-Version: 1.0';
                     $headers[] =  "Content-type: text/html; charset=UTF-8";
+                    $headers[] = "From: $email";
 
                     $send_succ = mail($to, $subject, $mailContent, implode("\r\n", $headers));
 
@@ -274,6 +276,7 @@ if (isset($_POST["submit"])) {
 
                     if ($success) {
                         $link = "https://www.dev-asbeuvrylaforet.monasso.org/resetpw.php?token=" . $token;
+                        $email = "noreply@monasso.org";
                         $to = $usermail;
                         $subject = 'Reinitialisation de votre mot de passe';
                         $mailContent = "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
@@ -483,7 +486,8 @@ if (isset($_POST["submit"])) {
                     </html>";
 
                         $headers[] = 'MIME-Version: 1.0';
-                        $headers[] =  "Content-type: text/html; charset=UTF-8";
+                        $headers[] = "Content-type: text/html; charset=UTF-8";
+                        $headers[] = "From: $email";
 
                         $send_succ = mail($to, $subject, $mailContent, implode("\r\n", $headers));
 
