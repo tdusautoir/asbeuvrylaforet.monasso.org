@@ -197,6 +197,11 @@ if (is_logged()) {
                                             $addCotis->bindValue('USRCRE', $current_user);
                                             $addCotis->execute();
 
+                                            //add licencie statistiques on database
+                                            $addStats = $db->prepare("INSERT INTO statistiques (idLicencie) VALUES (:idLicencie);");
+                                            $addStats->bindValue('idLicencie', $LicencieId);
+                                            $addStats->execute();
+
                                             if ($result) {
                                                 header("location: ../add-licencie.php");
                                                 create_flash_message("add_success", "Licencié ajouté.", FLASH_SUCCESS);

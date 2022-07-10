@@ -133,7 +133,7 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
                 <img src="./public/images/Rolling-1s-200px-gray.svg">
               </div>
               <div class="form-add">
-                <input type="submit" value="Ajouter" name="submit-add" class="bouton-ajouter loading-submit" id="form-submit" onclick="loading()">
+                <input type="submit" value="Ajouter" name="submit-add" class="bouton-ajouter" id="form-submit" onclick="loading()">
               </div>
             </form>
           </div>

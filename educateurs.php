@@ -36,7 +36,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                         <a href="./educateurs.php" class="cancel-filter">Annuler les filtres</a>
                     <?php endif; ?>
                     <div class="edu-container">
-                        <div class="edu-li-admin">
+                        <div class="edu-content">
                             <h2>
                                 Liste des éducateurs :
                             </h2>

@@ -11,9 +11,9 @@ if ($currentpath['basename'] === "index.php" || $currentpath['filename'] === "in
 	$link_active[1] = true;
 } else if ($currentpath['basename'] === "educateurs.php" || $currentpath['filename'] === "educateurs") {
 	$link_active[2] = true;
-} else if ($currentpath['basename'] === "page.php" || $currentpath['filename'] === "page") {
+} else if ($currentpath['basename'] === "statistiques.php" || $currentpath['filename'] === "statistiques") {
 	$link_active[3] = true;
-} else if ($currentpath['basename'] === "page.php" || $currentpath['filename'] === "page") {
+} else if ($currentpath['basename'] === "cotisations.php" || $currentpath['filename'] === "cotisations") {
 	$link_active[4] = true;
 }
 
@@ -50,10 +50,10 @@ $get_logo = $logo->fetch(PDO::FETCH_ASSOC);
 					</li>
 				<?php endif; ?>
 				<li <?php if (isset($link_active[3])) : ?>class="active" <?php endif; ?>>
-					<a href="#">Statistiques</a>
+					<a href="./statistiques.php">Statistiques</a>
 				</li>
 				<li <?php if (isset($link_active[4])) : ?>class="active" <?php endif; ?>>
-					<a href="#">Suivi des cotisations</a>
+					<a href="./cotisations.php">Suivi des cotisations</a>
 				</li>
 			</ul>
 		</nav>

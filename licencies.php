@@ -65,7 +65,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 <?php endif; ?>
 
                 <div class="li-container">
-                    <div class="li-li-admin">
+                    <div class="li-content">
                         <h2>
                             Liste des licenciés :
                         </h2>
