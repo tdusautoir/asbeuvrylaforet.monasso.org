@@ -88,9 +88,10 @@ if (is_logged()) {
                             foreach ($rows as $cat) {
                                 $nom = $cat["nomCategorie"];
                                 if (isset($_POST["$nom-cb"])) {
-                                    $reqLnk = $db->prepare("CALL PRC_CRECATLNK(?,?)");
+                                    $reqLnk = $db->prepare("CALL PRC_CRECATLNK(?,?,?)");
                                     $reqLnk->bindValue(1, $cat["idCategorie"], PDO::PARAM_INT);
                                     $reqLnk->bindValue(2, $educId, PDO::PARAM_INT);
+                                    $reqLnk->bindValue(3, $current_user, PDO::PARAM_STR);
                                     $reqLnk->execute();
                                     $reqLnk->closeCursor();
                                 }

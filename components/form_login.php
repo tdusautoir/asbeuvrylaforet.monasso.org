@@ -1,8 +1,14 @@
+<?php require_once "./db.php";
+$logo = $db->query("SELECT logoPath FROM settings ORDER BY id DESC LIMIT 1;");
+$get_logo = $logo->fetch(PDO::FETCH_ASSOC);
+?>
+
+
 <section class="formulaire_login">
     <form method="POST" action="./functions/login.php" class="form_container">
         <div class="form_content">
             <div class="logo_association">
-                <img draggable="false" src="./public/images/logo-asb.svg" alt="">
+                <img draggable="false" src="<?= $get_logo["logoPath"] ?>" alt="">
             </div>
             <div class="mail">
                 <label for="mail" class="field_label_top">Adresse mail</label>

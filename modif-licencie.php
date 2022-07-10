@@ -33,6 +33,14 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 $mail_licencie = $getinfo["mail"];
                 $sexe_licencie = $getinfo["sexe"];
                 $category_licencie = $getinfo["nomCategorie"];
+
+                $getTel = $db->prepare("SELECT tel.tel FROM tel WHERE tel.idLicencie = ? AND tel.COSU = 0");
+                $getTel->bindValue(1, $idLicencie);
+                $getTel->execute();
+                if ($getTel->rowCount() > 0) :
+                    $result_getTel = $getTel->fetch(PDO::FETCH_ASSOC);
+                    $tel_licencie = $result_getTel["tel"];
+                endif;
             } else {  //licencie is not in db or is deleted
                 header("location: ./licencies.php");
                 create_flash_message("not_found", "Licencié introuvable.", FLASH_ERROR);
@@ -53,8 +61,8 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                         </h1>
                         <form action="./functions/licencie-modif.php" method="POST">
                             <div class="form-modif-li">
-                                <input value="<?= $lastname_licencie ?>" type="text" class="nom-licencie" placeholder="" name="nom-licencie" maxlength="20">
-                                <input value="<?= $firstname_licencie ?>" type="text" class="prenom-licencie" placeholder="" name="prenom-licencie" maxlength="15">
+                                <input value="<?= htmlspecialchars($lastname_licencie) ?>" type="text" class="nom-licencie" placeholder="" name="nom-licencie" maxlength="20">
+                                <input value="<?= htmlspecialchars($firstname_licencie) ?>" type="text" class="prenom-licencie" placeholder="" name="prenom-licencie" maxlength="15">
                             </div>
                             <div class="form-modif-li">
                                 <label for="photo-licencie">
@@ -83,13 +91,19 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                     <option value="f" <?php if ($sexe_licencie == "f") : ?>selected<?php endif; ?>>Femme</option>
                                 </select>
                             </div>
-                            <div class="mail-form-modif-li">
-                                <input value="<?= $mail_licencie ?>" type="mail" class="mail-licencie" name="mail-licencie" placeholder="" maxlength="40">
+                            <div class="form-modif-li">
+                                <input value="<?= htmlspecialchars($mail_licencie) ?>" type="mail" class="mail-licencie" name="mail-licencie" placeholder="" maxlength="40">
+                                <?php if (isset($tel_licencie)) : ?>
+                                    <input value="<?= $tel_licencie ?>" type="tel" class="" name="tel-licencie" placeholder="">
+                                <?php endif; ?>
                             </div>
                             <input type="hidden" name="idLicencie" value="<?php if (isset($idLicencie)) : echo $idLicencie;
                                                                             endif; ?>">
+                            <div class="loading" id='loading'>
+                                <img src="./public/images/Rolling-1s-200px-gray.svg">
+                            </div>
                             <div class="form-modif-li">
-                                <input type="submit" value="Enregistrer" name="submit-modif" class="bouton-ajouter">
+                                <input type="submit" value="Enregistrer" name="submit-modif" class="bouton-ajouter" id="form-submit" onclick="loading()">
                             </div>
                         </form>
                     </div>
@@ -109,6 +123,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 imageName.innerText = inputImage.name;
             })
         </script>
+        <?php require './components/footer.php'; ?>
         <?php else : require "./components/form_login.php"; ?><?php endif; ?>
 </body>
 

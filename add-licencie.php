@@ -24,6 +24,8 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
     $form_sexe_error = true;
   } else if (isset_flash_message_by_name("form_mail_error")) {
     $form_mail_error = true;
+  } else if (isset_flash_message_by_name("form_tel_error")) {
+    $form_tel_error = true;
   }
 }
 
@@ -70,7 +72,7 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
             <h1>
               Ajouter un licencié
             </h1>
-            <form action="./functions/licencie-add.php" method="POST" enctype="multipart/form-data">
+            <form action="./functions/licencie-add.php" method="POST" enctype="multipart/form-data" name="form">
               <div class="form-add">
                 <input value="<?php display_info_form("nom-licencie"); ?>" type="text" class="nom-licencie" placeholder="Nom" name="nom-licencie" maxlength="20" onkeyup="javascript:nospaces(this)" onkeydown="javascript:nospaces(this)" <?php if (isset($form_lastname_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
                 <input value="<?php display_info_form("prenom-licencie"); ?>" type="text" class="prenom-licencie" placeholder="Prénom" name="prenom-licencie" maxlength="15" onkeyup="javascript:nospaces(this)" onkeydown="javascript:nospaces(this)" <?php if (isset($form_firstname_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
@@ -87,15 +89,34 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
                 <select name="categorie-licencie" id="categorie-licencie" <?php if (isset($form_categorie_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
                   <option value="" disabled <?php if (!isset_info_form("categorie-licencie")) : ?> selected <?php endif; ?>>Catégorie</option>
                   <?php
-                  $req_category = $db->query("SELECT idCategorie, nomCategorie FROM categorie");
-                  while ($category = $req_category->fetch()) :
-                    if (isset($category)) :
+                  if (is_admin()) :
+                    $req_category = $db->query("SELECT idCategorie, nomCategorie FROM categorie");
+                    while ($category = $req_category->fetch()) :
+                      if (isset($category)) :
                   ?>
-                      <option value="<?= $category["idCategorie"] ?>" <?php if (isset_info_form("categorie-licencie")) : ?> selected <?php endif; ?>><?= $category["nomCategorie"] ?></option>
+                        <option value="<?= $category["idCategorie"] ?>" <?php if (isset_info_form("categorie-licencie")) :
+                                                                          if ($_SESSION[FORM]['categorie-licencie'] == $category['nomCategorie']) : ?> selected <?php endif;
+                                                                                                                                                            endif; ?>><?= $category["nomCategorie"] ?></option>
+                        <?php
+                      endif;
+                    endwhile;
+                    $req_category->closeCursor();
+                  elseif (is_educ()) :
+                    $req_category = $db->prepare(" SELECT categorie.idCategorie, categorie.nomCategorie FROM `categorieeduc` INNER JOIN categorie ON categorieeduc.idCategorie = categorie.idCategorie INNER JOIN educ ON educ.idEduc = categorieeduc.idEduc WHERE educ.idEduc = :idEduc");
+                    $req_category->bindValue("idEduc", $_SESSION['id']);
+                    $req_category->execute();
+                    if ($req_category->rowCount() > 0) :
+                      while ($category = $req_category->fetch()) :
+                        if (isset($category)) :
+                        ?>
+                          <option value="<?= $category["idCategorie"] ?>" <?php if (isset_info_form("categorie-licencie")) :
+                                                                            if ($_SESSION[FORM]['categorie-licencie'] == $category['nomCategorie']) : ?> selected <?php endif;
+                                                                                                                                                              endif; ?>><?= $category["nomCategorie"] ?></option>
                   <?php
+                        endif;
+                      endwhile;
                     endif;
-                  endwhile;
-                  $req_category->closeCursor();
+                  endif;
                   ?>
                 </select>
                 <select name="sexe-licencie" id="sexe-licencie" <?php if (isset($form_sexe_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
@@ -104,11 +125,15 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
                   <option value="f">Femme</option>
                 </select>
               </div>
-              <div class="mail-form-add">
-                <input value="<?php display_info_form("mail-licencie") ?>" type="mail" class="mail-licencie" name="mail-licencie" placeholder="Adresse mail" maxlength="40" <?php if (isset($form_mail_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
+              <div class="form-add">
+                <input value="<?php display_info_form("mail-licencie") ?>" type="email" class="mail-licencie" name="mail-licencie" placeholder="Adresse mail" maxlength="40" <?php if (isset($form_mail_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
+                <input value="<?php display_info_form("tel-licencie") ?>" type="tel" class="tel-licencie" name="tel-licencie" placeholder="Téléphone" <?php if (isset($form_tel_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
+              </div>
+              <div class="loading" id='loading'>
+                <img src="./public/images/Rolling-1s-200px-gray.svg">
               </div>
               <div class="form-add">
-                <input type="submit" value="Ajouter" name="submit-add" class="bouton-ajouter">
+                <input type="submit" value="Ajouter" name="submit-add" class="bouton-ajouter loading-submit" id="form-submit" onclick="loading()">
               </div>
             </form>
           </div>
@@ -126,8 +151,8 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
       let input = document.getElementById("photo-licencie");
       let imageName = document.getElementById("nom-photo-licencie")
 
-      input.addEventListener("change", () => {
-        let inputImage = document.querySelector("input[type=file]").files[0];
+      input.addEventListener("change", (e) => {
+        let inputImage = e.target.files[0];
 
         imageName.innerText = inputImage.name;
       })
@@ -138,6 +163,7 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
         return true;
       }
     </script>
+    <?php require './components/footer.php'; ?>
     <?php else : require "./components/form_login.php"; ?><?php endif; ?>
 </body>
 

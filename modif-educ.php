@@ -67,8 +67,8 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                         </h1>
                         <form action="./functions/educ-modif.php" method="POST">
                             <div class="form-modif-li">
-                                <input value="<?= $lastname_educ ?>" type="text" class="nom-licencie" placeholder="" name="nom-educ" maxlength="20">
-                                <input value="<?= $firstname_educ ?>" type="text" class="prenom-licencie" placeholder="" name="prenom-educ" maxlength="15">
+                                <input value="<?= htmlspecialchars($lastname_educ) ?>" type="text" class="nom-licencie" placeholder="" name="nom-educ" maxlength="20">
+                                <input value="<?= htmlspecialchars($firstname_educ) ?>" type="text" class="prenom-licencie" placeholder="" name="prenom-educ" maxlength="15">
                             </div>
                             <div class="form-modif-li">
                                 <input type="password" class="password-licencie" name="password-educ" placeholder="••••••••" maxlength="40">
@@ -105,7 +105,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                 </div>
                             </div>
                             <div class="mail-form-modif-li">
-                                <input value="<?= $mail_educ ?>" type="mail" class="mail-licencie" name="mail-educ" placeholder="" maxlength="40">
+                                <input value="<?= htmlspecialchars($mail_educ) ?>" type="mail" class="mail-licencie" name="mail-educ" placeholder="" maxlength="40">
                             </div>
                             <div class="form-add form-modif-li list-cate-div">
                                 <div class="responsable">
@@ -118,8 +118,11 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                             <input type="hidden" name="idEduc" value="<?php if (isset($idEduc)) {
                                                                             echo $idEduc;
                                                                         } ?>">
+                            <div class="loading" id='loading'>
+                                <img src="./public/images/Rolling-1s-200px-gray.svg">
+                            </div>
                             <div class="form-modif-li">
-                                <input type="submit" value="Enregistrer" name="submit-modif" class="bouton-ajouter">
+                                <input type="submit" value="Enregistrer" name="submit-modif" class="bouton-ajouter" id="form-submit" onclick="loading()">
                             </div>
                         </form>
                     </div>
@@ -138,6 +141,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 document.getElementById(idModal).style.display = "none";
             }
         </script>
+        <?php require './components/footer.php'; ?>
         <?php else : require "./components/form_login.php"; ?><?php endif; ?>
 </body>
 

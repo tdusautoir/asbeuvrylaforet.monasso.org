@@ -31,6 +31,7 @@ html {
 .logo_association{
     display: flex;
     justify-content: center;
+    margin-bottom: 20px;
 }
 .logo_association img{
     width: 190px;

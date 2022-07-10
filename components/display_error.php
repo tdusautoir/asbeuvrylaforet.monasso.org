@@ -21,7 +21,7 @@
                 setTimeout(function() {
                     flash.style.display = "none"
                 }, 400)
-            }, 4000)
+            }, 3000)
         }
     </script>
 <?php endif; ?>

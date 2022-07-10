@@ -12,14 +12,9 @@ if (isset($_POST["submit"])) {
                 $usermail = $_POST["email"];
                 $password = $_POST["password"];
 
-                $rech_admin = $db->prepare(
-                    "SELECT * FROM admin WHERE mail = ? "
-                ); //recherche les utilisateurs dans la table admin correspondant au mail entrée
-
+                $rech_admin = $db->prepare("SELECT * FROM admin WHERE mail = ? AND COSU = 0"); //recherche les utilisateurs dans la table admin correspondant au mail entrée
                 $rech_admin->bindValue(1, $usermail);
-
                 $rech_admin->execute();
-
                 $utilisateur_admin = $rech_admin->fetch(PDO::FETCH_ASSOC);
 
                 if ($utilisateur_admin) {
@@ -45,7 +40,7 @@ if (isset($_POST["submit"])) {
                     }
                 } else { //si personne trouvé en tant qu'admin --> recherche educateur
                     $rech_educ = $db->prepare(
-                        "SELECT * FROM educ WHERE mail = ? "
+                        "SELECT * FROM educ WHERE mail = ? AND COSU = 0"
                     ); //recherche les utilisateurs dans la table educ correspondant au mail entrée
                     $rech_educ->bindValue(1, $usermail);
                     $rech_educ->execute();
@@ -59,52 +54,32 @@ if (isset($_POST["submit"])) {
                             $_SESSION["id"] = $utilisateur_educ["idEduc"];
                             $_SESSION["usermail"] = $utilisateur_educ["mail"];
                             $_SESSION["prenom"] = $utilisateur_educ["prenom"];
-                            $_SESSION["usermail"] = $usermail;
+                            $_SESSION["nom"] = $utilisateur_admin["nom"];
                             $_SESSION["role"] = 2;
                         } else {
-                            create_flash_message(
-                                ERROR_PSWD,
-                                "Mot de passe invalide.",
-                                FLASH_ERROR
-                            ); //Mot de passe invalide
+                            create_flash_message(ERROR_PSWD, "Mot de passe invalide.", FLASH_ERROR); //Mot de passe invalide
                             header("location: ../index.php");
                             exit();
                         }
                     } else {
                         //Aucun itilisateur trouvé dans la base de données
-                        create_flash_message(
-                            ERROR_MAIL,
-                            "Identifiants invalides.",
-                            FLASH_ERROR
-                        ); //Identifiants invalides
+                        create_flash_message(ERROR_MAIL, "Identifiants invalides.", FLASH_ERROR); //Identifiants invalides
                         header("location: ../index.php");
                         exit();
                     }
                 }
             } else {
-                create_flash_message(
-                    ERROR_MAIL,
-                    "Email non valide.",
-                    FLASH_ERROR
-                ); //Email non valide
+                create_flash_message(ERROR_MAIL, "Email non valide.", FLASH_ERROR); //Email non valide
                 header("location: ../index.php");
                 exit();
             }
         } else {
-            create_flash_message(
-                ERROR_PSWD,
-                "Saisissez votre mot de passe.",
-                FLASH_ERROR
-            ); //Mot de passe non spécifié
+            create_flash_message(ERROR_PSWD, "Saisissez votre mot de passe.", FLASH_ERROR); //Mot de passe non spécifié
             header("location: ../index.php");
             exit();
         }
     } else {
-        create_flash_message(
-            ERROR_MAIL,
-            "Saisissez votre adresse e-mail.",
-            FLASH_ERROR
-        ); //email non spécifié
+        create_flash_message(ERROR_MAIL, "Saisissez votre adresse e-mail.", FLASH_ERROR); //email non spécifié
         header("location: ../index.php");
         exit();
     }

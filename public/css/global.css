@@ -17,8 +17,7 @@ li {
 }
 
 #logo {
-	width: 75px;
-	height: 75px;
+	height: 60px;
 	padding-left: 15px;
 	cursor: pointer;
 }
@@ -69,7 +68,7 @@ nav li::after {
 	display: block;
 	width: 0;
 	height: 2px;
-	background: #309c34;
+	background: var(--mainColor);
 	transition: width .3s;
 	margin-top: 2px;
 }
@@ -81,6 +80,15 @@ nav li:hover::after {
 
 nav li.active::after {
 	width: 100%;
+}
+
+.logo{
+	display: flex;
+}
+
+.logo a{
+	display: flex;
+	align-items: center;
 }
 
 a:link {
@@ -374,7 +382,7 @@ button {
 	font-family: 'Montserrat', Helvetica, Arial, Lucida, sans-serif;
 	font-weight: 700;
 	text-transform: uppercase;
-	background-color: #289a37;
+	background-color: var(--mainColor);
 	-webkit-transition: all 300ms ease 0ms;
 	-o-transition: all 300ms ease 0ms;
 	transition: all 300ms ease 0ms;
@@ -390,7 +398,7 @@ button.reverse {
 }
 
 button.reverse:hover {
-	background-color: #289a37;
+	background-color: var(--mainColor);
 }
 
 .admin-panel-separator {
@@ -418,22 +426,42 @@ button.reverse:hover {
 
 div.success {
 	background-color: rgba(40, 154, 55, 0.11);
-	color: var(--mainColor);
-	border: 1px solid var(--mainColor);
-	padding: 12px 20px;
-	margin-top: 20px;
-	border-radius: 4px;
-	font-size: 20px;
+    color: #289a37;
+    border: 1px solid #289a37;
+    padding: 12px 20px;
+    margin-top: 20px;
+    border-radius: 4px;
+    font-size: 20px;
 	transition: 1s;
+}
+
+div.success.abs{
+	position: absolute;
+    width: 97%;
+    margin: 0 auto;
+    margin-top: 85px!important;
+    right: 0;
+    left: 0;
+	z-index: -1;
 }
 
 div.error {
 	background-color: rgba(210, 0, 0, 0.11);
-	color: var(--errorColor);
-	border: 1px solid var(--errorColor);
-	padding: 12px 20px;
-	margin-top: 20px;
-	border-radius: 4px;
-	font-size: 20px;
+    color: var(--errorColor);
+    border: 1px solid var(--errorColor);
+    padding: 12px 20px;
+    margin-top: 20px;
+    border-radius: 4px;
+    font-size: 20px;
 	transition: 1s;
+}
+
+div.error.abs{ 
+	position: absolute;
+    width: 97%;
+    margin: 0 auto;
+    margin-top: 85px!important;
+    right: 0;
+    left: 0;
+	z-index: -1;
 }

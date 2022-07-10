@@ -42,6 +42,32 @@ if (is_logged()) {
                             $req->bindValue("idEduc", $idEduc);
                             $result = $req->execute();
 
+                            //Modif his categories:
+
+                            //delete his old categories
+                            $deleteCat = $db->prepare("DELETE FROM categorieeduc WHERE idEduc = :idEduc");
+                            $deleteCat->bindValue('idEduc', $idEduc);
+                            $deleteCat->execute();
+
+                            //add his new categories
+                            $getCat = $db->prepare("CALL PRC_LSTCAT");
+                            $getCat->execute();
+
+                            $cats = $getCat->fetchAll(PDO::FETCH_ASSOC);
+                            $getCat->closeCursor();
+
+                            foreach ($cats as $cat) {
+                                $nameCat = $cat["nomCategorie"];
+                                if (isset($_POST["$nameCat-cb"])) {
+                                    $addCat = $db->prepare("CALL PRC_CRECATLNK(?,?,?)");
+                                    $addCat->bindValue(1, $cat["idCategorie"], PDO::PARAM_INT);
+                                    $addCat->bindValue(2, $idEduc, PDO::PARAM_INT);
+                                    $addCat->bindValue(3, $current_user);
+                                    $addCat->execute();
+                                    $addCat->closeCursor();
+                                }
+                            }
+
                             //change his password only if its not empty
                             if (isset($_POST["password-educ"]) && !empty($_POST["password-educ"])) {
                                 $change_pswd = $db->prepare("UPDATE educ SET password = :password WHERE idEduc = :idEduc");

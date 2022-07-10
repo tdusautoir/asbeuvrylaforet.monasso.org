@@ -23,15 +23,35 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             <div class="container">
                 <div class="container-content">
                     <?php include "./components/display_error.php"; ?>
+                    <div class="filter">
+                        <div>
+                            <form method="GET">
+                                <label for="q">Tapez le nom de l'éducateur</label>
+                                <input type="search" name="q" placeholder="Recherche..." />
+                                <input type="submit" value="" />
+                            </form>
+                        </div>
+                    </div>
+                    <?php if (isset($_GET['q']) && !empty($_GET['q']) && $_GET['q'] != '') : ?>
+                        <a href="./educateurs.php" class="cancel-filter">Annuler les filtres</a>
+                    <?php endif; ?>
                     <div class="edu-container">
                         <div class="edu-li-admin">
                             <h2>
                                 Liste des éducateurs :
                             </h2>
                             <?php
-                            $req = $db->prepare("SELECT educ.idEduc, educ.prenom, educ.nom, educ.mail FROM `educ` WHERE educ.COSU = 0 ORDER BY educ.DCRE DESC;"); //Liste des éducateurs classé par date d'ajout
-                            $req->execute();
-                            $rowCount = $req->rowCount();
+                            if (isset($_GET['q']) && !empty($_GET['q'])) :
+                                $q_ = explode(' ', $_GET['q']); //take only the first word
+                                $q = $q_[0];
+                                $req = $db->prepare("SELECT educ.idEduc, educ.prenom, educ.nom, educ.mail FROM `educ` WHERE educ.COSU = 0 AND educ.nom LIKE '%$q%' ORDER BY educ.DCRE DESC;"); //éducateurs de la bdd selon la recherche q
+                                $req->execute();
+                                $rowCount = $req->rowCount();
+                            else :
+                                $req = $db->prepare("SELECT educ.idEduc, educ.prenom, educ.nom, educ.mail FROM `educ` WHERE educ.COSU = 0 ORDER BY educ.DCRE DESC;"); //Liste des éducateurs classé par date d'ajout
+                                $req->execute();
+                                $rowCount = $req->rowCount();
+                            endif;
                             if ($rowCount > 0) : //si on trouve des educateurs ajoutés on affiche la liste de la requete.
                             ?>
                                 <div class="educateur-tab">
@@ -57,13 +77,13 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                             ?>
                                                 <tr>
                                                     <td>
-                                                        <?= strtoupper($EDUC["nom"]) ?>
+                                                        <?= strtoupper(htmlspecialchars($EDUC["nom"])) ?>
                                                     </td>
                                                     <td>
-                                                        <?= ucfirst($EDUC["prenom"]) ?>
+                                                        <?= ucfirst(htmlspecialchars($EDUC["prenom"])) ?>
                                                     </td>
                                                     <td>
-                                                        <?= $EDUC["mail"] ?>
+                                                        <?= htmlspecialchars($EDUC["mail"]) ?>
                                                     </td>
                                                     <td>
                                                         <?php
@@ -93,7 +113,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                         }
                                                         ?>
 
-                                                        <?= $educCat ?>
+                                                        <?= htmlspecialchars($educCat) ?>
                                                     </td>
                                                     <td class="action-btns btns-1">
                                                         <a href="./modif-educ.php?idEduc=<?= $EDUC["idEduc"] ?>">
@@ -110,10 +130,11 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                         </tbody>
                                     </table>
                                 </div>
+                            <?php elseif (isset($_GET) && !empty($_GET)) : ?>
+                                <p> Aucun éducateur ne correspond à votre recherche. </p>
                             <?php else : ?>
-                                <p> Aucun educateur n'a encore été créé </p>
-                            <?php endif;
-                            ?>
+                                <p> Aucun éducateur n'a encore été créé </p>
+                            <?php endif; ?>
                         </div>
                         <div class="return deconnect">
                             <a href="index.php">Retour</a>
