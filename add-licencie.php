@@ -72,7 +72,7 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
             <h1>
               Ajouter un licencié
             </h1>
-            <form action="./functions/licencie-add.php" method="POST" enctype="multipart/form-data">
+            <form action="./functions/licencie-add.php" method="POST" enctype="multipart/form-data" name="form">
               <div class="form-add">
                 <input value="<?php display_info_form("nom-licencie"); ?>" type="text" class="nom-licencie" placeholder="Nom" name="nom-licencie" maxlength="20" onkeyup="javascript:nospaces(this)" onkeydown="javascript:nospaces(this)" <?php if (isset($form_lastname_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
                 <input value="<?php display_info_form("prenom-licencie"); ?>" type="text" class="prenom-licencie" placeholder="Prénom" name="prenom-licencie" maxlength="15" onkeyup="javascript:nospaces(this)" onkeydown="javascript:nospaces(this)" <?php if (isset($form_firstname_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
@@ -129,8 +129,11 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
                 <input value="<?php display_info_form("mail-licencie") ?>" type="email" class="mail-licencie" name="mail-licencie" placeholder="Adresse mail" maxlength="40" <?php if (isset($form_mail_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
                 <input value="<?php display_info_form("tel-licencie") ?>" type="tel" class="tel-licencie" name="tel-licencie" placeholder="Téléphone" <?php if (isset($form_tel_error)) : ?>style="border: 1px solid red;" <?php endif; ?>>
               </div>
+              <div class="loading" id='loading'>
+                <img src="./public/images/Rolling-1s-200px-gray.svg">
+              </div>
               <div class="form-add">
-                <input type="submit" value="Ajouter" name="submit-add" class="bouton-ajouter" onclick="waitLoading()">
+                <input type="submit" value="Ajouter" name="submit-add" class="bouton-ajouter loading-submit" id="form-submit" onclick="loading()">
               </div>
             </form>
           </div>
@@ -140,36 +143,28 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
         </div>
       </div>
     </div>
-    <div id="Modal">
-      <div id="Modal-loading" class="Modal-loading">
-        <img src="/public/images/loading.gif" alt="">
-      </div>
-      <?php
-      //if there is form info, delete it
-      unset_info_form();
-      ?>
-      <script>
-        let input = document.getElementById("photo-licencie");
-        let imageName = document.getElementById("nom-photo-licencie")
+    <?php
+    //if there is form info, delete it
+    unset_info_form();
+    ?>
+    <script>
+      let input = document.getElementById("photo-licencie");
+      let imageName = document.getElementById("nom-photo-licencie")
 
-        input.addEventListener("change", (e) => {
-          let inputImage = e.target.files[0];
+      input.addEventListener("change", (e) => {
+        let inputImage = e.target.files[0];
 
-          imageName.innerText = inputImage.name;
-        })
-      </script>
-      <script type="text/javascript">
-        function nospaces(input) {
-          input.value = input.value.replace(" ", "");
-          return true;
-        }
-      </script>
-      <script>
-        function waitLoading() {
-          await sleep(2000);
-        }
-      </script>
-      <?php else : require "./components/form_login.php"; ?><?php endif; ?>
+        imageName.innerText = inputImage.name;
+      })
+    </script>
+    <script type="text/javascript">
+      function nospaces(input) {
+        input.value = input.value.replace(" ", "");
+        return true;
+      }
+    </script>
+    <?php require './components/footer.php'; ?>
+    <?php else : require "./components/form_login.php"; ?><?php endif; ?>
 </body>
 
 </html>

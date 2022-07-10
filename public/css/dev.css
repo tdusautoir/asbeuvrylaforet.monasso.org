@@ -413,3 +413,14 @@
     display: flex;
     justify-content: flex-end;
 }
+
+.loading{
+    display: none;
+}
+
+.loading img{
+    width: 40px;
+    margin: 0 auto;
+    display: block;
+    color: var(--mainColor);
+}

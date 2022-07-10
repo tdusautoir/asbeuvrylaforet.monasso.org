@@ -99,8 +99,11 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                             </div>
                             <input type="hidden" name="idLicencie" value="<?php if (isset($idLicencie)) : echo $idLicencie;
                                                                             endif; ?>">
+                            <div class="loading" id='loading'>
+                                <img src="./public/images/Rolling-1s-200px-gray.svg">
+                            </div>
                             <div class="form-modif-li">
-                                <input type="submit" value="Enregistrer" name="submit-modif" class="bouton-ajouter">
+                                <input type="submit" value="Enregistrer" name="submit-modif" class="bouton-ajouter" id="form-submit" onclick="loading()">
                             </div>
                         </form>
                     </div>
@@ -120,6 +123,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 imageName.innerText = inputImage.name;
             })
         </script>
+        <?php require './components/footer.php'; ?>
         <?php else : require "./components/form_login.php"; ?><?php endif; ?>
 </body>
 

@@ -115,8 +115,11 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
                                         <input id="check-resp" type="checkbox" style="margin:0;">
                                     </div>
                                 </div>
+                                <div class="loading" id='loading'>
+                                    <img src="./public/images/Rolling-1s-200px-gray.svg">
+                                </div>
                                 <div class="form-add">
-                                    <input type="submit" value="Ajouter" name="submit-add" class="bouton-ajouter">
+                                    <input type="submit" value="Ajouter" name="submit-add" class="bouton-ajouter" id="form-submit" onclick="loading()">
                                 </div>
                             </form>
                         </div>
@@ -145,6 +148,7 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
                     return true;
                 }
             </script>
+            <?php require './components/footer.php'; ?>
         <?php else :
             create_flash_message(ERROR_PSWD, "Vous ne possédez pas les droits.", FLASH_ERROR); //the user is not admin 
             header("location: ./index.php");

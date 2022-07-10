@@ -127,8 +127,11 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
                                                 </label>
 
                                             </div>
+                                            <div class="loading" id='loading'>
+                                                <img src="./public/images/Rolling-1s-200px-gray-background.svg">
+                                            </div>
                                             <div class="envoyer-settings-modif">
-                                                <input type="submit" name="submit-settings">
+                                                <input type="submit" name="submit-settings" id="form-submit" onclick="loading()">
                                             </div>
                                         </form>
 
@@ -145,6 +148,7 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
                     </div>
                 </div>
             </div>
+            <?php require 'components/footer.php'; ?>
             <?php else : require "./components/form_login.php"; ?><?php endif; ?>
             <script>
                 let input = document.getElementById("site-logo");
