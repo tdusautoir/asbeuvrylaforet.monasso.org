@@ -130,22 +130,22 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                               backgroundColor: ["rgba(97, 186, 200, 1)", "rgba(208, 16, 58, 1)", "rgba(81, 190, 132, 1)"],
                               borderColor: ["rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)"],
                               borderWidth: 3,
-                              hoverOffset: 20,
+                              hoverOffset: 5,
                               hoverBorderWidth: 0,
                           },
                       ],
                   },
                   options: { 
-                    // responsive: !0,
-                    // maintainAspectRatio: !1,
+                    // responsive: true,
+                    // maintainAspectRatio: true,
                     layout: {
-                      padding: 50
+                      padding: 20 
                     }, 
                     plugins: {
                       legend: {
                         position: "bottom",
                         labels: {
-                          padding: 30
+                          padding: 20
                         }
                       }
                     }
