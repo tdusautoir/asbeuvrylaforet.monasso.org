@@ -132,6 +132,14 @@ padding-right: 5px;
 content: "\f002";
 }
 
+.fa-plus:before{
+content: "\f067";
+}
+
+.fa-minus:before{
+content: "\f068";
+}
+
 @font-face {
 font-family: 'Font Awesome 5 Pro';
 font-style: normal;

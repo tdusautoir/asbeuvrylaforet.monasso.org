@@ -165,10 +165,10 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                         <div class="scoreboard">
                                             <h3>Meilleur Buteur :</h3>
                                             <?php $TopScorer = $getTopScorer->fetch(PDO::FETCH_ASSOC); ?>
-                                            <p><?= $TopScorer['nomCategorie'] ?> - <?= $TopScorer['nom'] ?> ( <?= $TopScorer['nbButs'] ?> buts )</p>
+                                            <p><?= $TopScorer['nomCategorie'] ?> - <?= htmlspecialchars($TopScorer['nom']) ?> ( <?= $TopScorer['nbButs'] ?> buts )</p>
                                             <h3>Meilleur Passeur :</h3>
-                                            <?php $TopScorer = $getTopAssister->fetch(PDO::FETCH_ASSOC); ?>
-                                            <p><?= $TopScorer['nomCategorie'] ?> - <?= $TopScorer['nom'] ?> ( <?= $TopScorer['passeD'] ?> pd )
+                                            <?php $TopAssister = $getTopAssister->fetch(PDO::FETCH_ASSOC); ?>
+                                            <p><?= $TopAssister['nomCategorie'] ?> - <?= htmlspecialchars($TopAssister['nom']) ?> ( <?= $TopAssister['passeD'] ?> pd )
                                             <p>
                                         </div>
                                 <?php endif;
@@ -198,11 +198,20 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                         <?= ucfirst(htmlspecialchars($STATS["prenom"])) ?>
                                                     </td>
                                                     <td>
-                                                        <?= $STATS["nbButs"] ?>
+                                                        <form action="./functions/stats-change.php?idStat=<?= $STATS['idStat'] ?>" method="POST">
+                                                            <button type="submit" name="add-goal" value="1" class="stat-btn"><i class="fa fa-plus"></i></button>
+                                                            <?= $STATS["nbButs"] ?>
+                                                            <button type="submit" name="remove-goal" value="1" class="stat-btn"><i class="fa fa-minus"></i></button>
+                                                        </form>
                                                     </td>
                                                     <td>
-                                                        <?= $STATS["passeD"] ?>
+                                                        <form action="./functions/stats-change.phpidStat=<?= $STATS['idStat'] ?>" method="POST">
+                                                            <button type="submit" name="add-pd" value="1" class="stat-btn"><i class="fa fa-plus"></i></button>
+                                                            <?= $STATS["nbButs"] ?>
+                                                            <button type="submit" name="remove-pd" value="1" class="stat-btn"><i class="fa fa-minus"></i></button>
+                                                        </form>
                                                     </td>
+                                                    </form>
                                                 </tr>
                                             <?php endwhile; ?>
                                         </tbody>
