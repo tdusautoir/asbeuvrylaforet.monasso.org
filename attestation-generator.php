@@ -12,7 +12,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
 <html lang="fr">
 
 <head> <?php require("./components/head.php"); ?>
-    <title>Générer un attestation - A.S. BEUVRY LA FORÊT</title>
+    <title>Générer une attestation - A.S. BEUVRY LA FORÊT</title>
 </head>
 
 
@@ -175,26 +175,10 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                         echo $Cotis["prix"] . " €";
                                                     endif; ?>
                                                 </td>
-                                                <td class="action-btns">
-                                                    <?php $getPhoto = $db->prepare("SELECT licencie.idPhoto, photo.imgPath FROM licencie INNER JOIN photo ON licencie.idPhoto = photo.idPhoto WHERE licencie.idLicencie = ? AND photo.COSU = 0");
-                                                    $getPhoto->bindValue(1, $LIC['idLicencie']);
-                                                    $getPhoto->execute();
-                                                    if ($getPhoto->rowCount() > 0) :
-                                                        $result_getPhoto = $getPhoto->fetch(PDO::FETCH_ASSOC);
-                                                        $imgPath = $result_getPhoto["imgPath"]; ?>
-                                                        <a href="#" onclick="displayModalPhoto('<?= $imgPath ?>')">
-                                                            <i class=" fa fa-picture-o"></i>
-                                                        </a>
-                                                    <?php endif; ?>
-                                                </td>
-                                                <td class="action-btns btns-1">
-                                                    <a href="./modif-licencie.php?idLicencie=<?= $LIC["idLicencie"] ?>">
-                                                        <i class="fa fa-pencil"></i>
-                                                    </a>
-                                                </td>
+
                                                 <td class="action-btns btns-2">
-                                                    <a href="#" onclick="displayModalDelete('<?= $LIC['idLicencie']; ?>')">
-                                                        <i class=" fa fa-trash"></i>
+                                                    <a href="./attestation-generate.php?idLicencie=<?= $LIC["idLicencie"] ?>">
+                                                        <i class="fa fa-pencil"></i>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -216,35 +200,6 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 </div>
             </div>
         </div>
-        <div id="Modal">
-            <div id="Modal-photo" class="Modal-photo">
-                <div class="modal-photo-icon-close">
-                    <i class="fa fa-times" onclick="erase()"></i>
-                </div>
-                <div class="Modal-image">
-                    <img id="img-licencie" alt="image de licencie">
-                </div>
-            </div>
-            <div class="Modal-delete" id="Modal-delete">
-                <p>Confirmez la suppression</p>
-                <div class="modal-button">
-                    <a id="valid-btn"><i class="fa fa-check"></i></a>
-                    <a id="erase-btn" onclick="erase()"><i class="fa fa-times"></i></a>
-                </div>
-            </div>
-        </div>
-        <script>
-            let input = document.getElementById("photo-licencie");
-            let imageName = document.getElementById("nom-photo-licencie")
-
-            if (input) {
-                input.addEventListener("change", () => {
-                    let inputImage = document.querySelector("input[type=file]").files[0];
-
-                    imageName.innerText = inputImage.name;
-                })
-            }
-        </script>
         <script>
             var amountPerPage = 12;
             var currentPage = 0;
@@ -316,49 +271,6 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                     totalCounter++;
                 });
             }
-        </script>
-        <script>
-            let Modal = document.getElementById("Modal")
-            let ModalDelete = document.getElementById("Modal-delete");
-            let ModalPhoto = document.getElementById("Modal-photo");
-            let imgLicencie = document.getElementById("img-licencie");
-
-            function displayModalDelete(idLicencie) {
-                let validBtn = document.getElementById("valid-btn");
-
-                document.body.style.overflow = "hidden";
-                Modal.style.display = "block";
-                ModalDelete.style.display = "flex";
-                validBtn.setAttribute("href", "./functions/licencie-delete.php?idLicencie=" + idLicencie);
-            }
-
-            function displayModalPhoto(imgPath) {
-                imgLicencie.setAttribute("src", imgPath);
-                document.body.style.overflow = "hidden";
-                Modal.style.display = "block";
-                ModalPhoto.style.display = "flex";
-            }
-
-            function erase() {
-                document.body.style.overflow = "visible";
-                Modal.style.display = "none";
-                ModalDelete.style.display = "none";
-                ModalPhoto.style.display = "none";
-            }
-
-            //When the user pressed escape close the modal
-            document.onkeydown = function(e) {
-                if (e.key === "Escape" || e.key === "Esc") {
-                    erase();
-                }
-            }
-
-            // When the user clicks anywhere outside of the modal content, close it
-            Modal.addEventListener("click", function(event) {
-                if (event.target != imgLicencie && event.target != ModalDelete) {
-                    erase();
-                }
-            })
         </script>
         <?php else : require "./components/form_login.php"; ?><?php endif; ?>
 </body>
