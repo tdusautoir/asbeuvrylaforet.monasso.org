@@ -163,14 +163,19 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                     <?php if (isset($getTopScorer) && isset($getTopAssister)) : //verif if there are defined
                                         if ($getTopScorer->rowCount() > 0 && $getTopAssister->rowCount() > 0) :  ?>
                                             <!-- if there is info, display scoreboard -->
-                                            <div class="scoreboard">
-                                                <h3>Meilleur buteur :</h3>
-                                                <?php $TopScorer = $getTopScorer->fetch(PDO::FETCH_ASSOC); ?>
-                                                <p>&#x1F947;<strong><?= $TopScorer['nomCategorie'] ?></strong> - <?= htmlspecialchars($TopScorer['nom']) ?> <?= htmlspecialchars($TopScorer['prenom']) ?> (<?= $TopScorer['nbButs'] ?> buts)</p>
-                                                <h3>Meilleur passeur :</h3>
-                                                <?php $TopAssister = $getTopAssister->fetch(PDO::FETCH_ASSOC); ?>
-                                                <p>&#x1F947;<strong><?= $TopAssister['nomCategorie'] ?></strong> - <?= htmlspecialchars($TopAssister['nom']) ?> <?= htmlspecialchars($TopAssister['prenom']) ?> (<?= $TopAssister['passeD'] ?> pd)
-                                                <p>
+                                            <div class="container-scoreboard">
+                                                <div class="scoreboard">
+                                                    <h3>Meilleur buteur :</h3>
+                                                    <?php $TopScorer = $getTopScorer->fetch(PDO::FETCH_ASSOC); ?>
+                                                    <p>&#x1F947;<strong><?= $TopScorer['nomCategorie'] ?></strong> - <?= htmlspecialchars($TopScorer['nom']) ?> <?= htmlspecialchars($TopScorer['prenom']) ?> (<?= $TopScorer['nbButs'] ?> buts)</p>
+                                                    <h3>Meilleur passeur :</h3>
+                                                    <?php $TopAssister = $getTopAssister->fetch(PDO::FETCH_ASSOC); ?>
+                                                    <p>&#x1F947;<strong><?= $TopAssister['nomCategorie'] ?></strong> - <?= htmlspecialchars($TopAssister['nom']) ?> <?= htmlspecialchars($TopAssister['prenom']) ?> (<?= $TopAssister['passeD'] ?> pd)
+                                                    <p>
+                                                </div>
+                                                <div class="download-csv">
+                                                    <a href="./functions/stats-csv.php">Télécharger (.csv)</a><a href="./functions/stats-reset.php">Réinitialiser</a>
+                                                </div>
                                             </div>
                                     <?php endif;
                                     endif; ?>
@@ -221,9 +226,6 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                 <?php endwhile; ?>
                                             </tbody>
                                         </table>
-                                        <div class="download-csv">
-                                            <a href="./functions/stats-csv.php">Télécharger</a><a href="./functions/stats-reset.php">Réinitialiser</a>
-                                        </div>
                                     </div>
                                 </div>
                             <?php elseif (isset($_GET) && !empty($_GET)) : //no data from db but there is a filter
