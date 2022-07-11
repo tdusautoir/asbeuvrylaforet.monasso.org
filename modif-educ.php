@@ -127,9 +127,9 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                         </form>
                     </div>
                 </div>
-                <div class="return deconnect">
+                <!-- <div class="return deconnect">
                     <a href="./educateurs.php">Annuler</a>
-                </div>
+                </div> -->
             </div>
         </div>
         <script>

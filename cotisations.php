@@ -93,9 +93,9 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                             <?php endif;
                             ?>
                         </div>
-                        <div class="return deconnect">
+                        <!-- <div class="return deconnect">
                             <a href="index.php">Retour</a>
-                        </div>
+                        </div> -->
                     </div>
 
                 </div>

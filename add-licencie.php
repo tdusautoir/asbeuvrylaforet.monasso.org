@@ -138,9 +138,9 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
             </form>
           </div>
         </div>
-        <div class="return deconnect">
+        <!-- <div class="return deconnect">
           <a href="index.php">Retour</a>
-        </div>
+        </div> -->
       </div>
     </div>
     <?php

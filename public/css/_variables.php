@@ -146,6 +146,12 @@ content: "\f068";
   content: "\f019";
 }
 
+.fa-paper-plane:before {
+  content: "\f1d8"; }
+
+.fa-sign-out:before {
+  content: "\f08b"; }
+
 @font-face {
 font-family: 'Font Awesome 5 Pro';
 font-style: normal;

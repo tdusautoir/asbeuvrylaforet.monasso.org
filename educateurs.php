@@ -136,9 +136,9 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                 <p> Aucun éducateur n'a encore été créé </p>
                             <?php endif; ?>
                         </div>
-                        <div class="return deconnect">
+                        <!-- <div class="return deconnect">
                             <a href="index.php">Retour</a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

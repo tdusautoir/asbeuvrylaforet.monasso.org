@@ -210,9 +210,9 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                         $req->closeCursor(); // Ferme le curseur, permettant à la requête d'être de nouveau exécutée 
                         ?>
                     </div>
-                    <div class="return deconnect">
+                    <!-- <div class="return deconnect">
                         <a href="index.php">Retour</a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
