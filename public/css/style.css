@@ -462,7 +462,7 @@ tbody tr:hover {
 }
 
 .pagination-div ul{
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 .pagination-div li:not(:last-child) {
