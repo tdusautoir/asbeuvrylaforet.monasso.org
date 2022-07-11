@@ -25,11 +25,11 @@ if (isset($_GET["idLicencie"]) && !empty($_GET["idLicencie"]) && isInteger($_GET
         $category_licencie = $getinfo["nomCategorie"];
         $cotisation_prix = $getinfo["prix"];
         if (isset($getinfo["methode"])) {
-            if ($getinfo["methode" == 1]) {
+            if ($getinfo["methode"] == 1) {
                 $cotisation_methode = "par chèque";
-            } elseif ($getinfo["methode" == 2]) {
+            } elseif ($getinfo["methode"] == 2) {
                 $cotisation_methode = "en espèces";
-            } elseif ($getinfo["methode" == 3]) {
+            } elseif ($getinfo["methode"] == 3) {
                 $cotisation_methode = "par carte bancaire";
             }
         } else {
