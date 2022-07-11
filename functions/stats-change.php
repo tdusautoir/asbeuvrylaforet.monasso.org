@@ -22,7 +22,11 @@ if (is_logged()) {
                     // add goal;
                     $req = $db->query("UPDATE statistiques SET nbButs = nbButs + 1 WHERE idStat = $idStat");
                     if ($req) {
-                        header("location:" . $_SERVER['HTTP_REFERER']); //L'adresse de la page qui a conduit le client à la page courante
+                        if (isset($_SERVER['HTTP_REFERER'])) {
+                            header("location:" . $_SERVER['HTTP_REFERER']); //L'adresse de la page qui a conduit le client à la page courante
+                        } else {
+                            header("location: ../statistiques.php");
+                        }
                         create_flash_message("change-success", "Vous venez d'ajouter un but à " . $info['prenom'], FLASH_SUCCESS);
                         exit();
                     }
@@ -30,7 +34,11 @@ if (is_logged()) {
                     // remove goal;
                     $req = $db->query("UPDATE statistiques SET nbButs = nbButs - 1 WHERE idStat = $idStat");
                     if ($req) {
-                        header("location:" . $_SERVER['HTTP_REFERER']); //L'adresse de la page qui a conduit le client à la page courante
+                        if (isset($_SERVER['HTTP_REFERER'])) {
+                            header("location:" . $_SERVER['HTTP_REFERER']); //L'adresse de la page qui a conduit le client à la page courante
+                        } else {
+                            header("location: ../statistiques.php");
+                        }
                         create_flash_message("change-success", "Vous venez de retirer un but à " . $info['prenom'], FLASH_SUCCESS);
                         exit();
                     }
@@ -38,7 +46,11 @@ if (is_logged()) {
                     // add pd;
                     $req = $db->query("UPDATE statistiques SET passeD = passeD + 1 WHERE idStat = $idStat");
                     if ($req) {
-                        header("location:" . $_SERVER['HTTP_REFERER']); //L'adresse de la page qui a conduit le client à la page courante
+                        if (isset($_SERVER['HTTP_REFERER'])) {
+                            header("location:" . $_SERVER['HTTP_REFERER']); //L'adresse de la page qui a conduit le client à la page courante
+                        } else {
+                            header("location: ../statistiques.php");
+                        }
                         create_flash_message("change-success", "Vous venez d'ajouter une passe décisives à " . $info['prenom'], FLASH_SUCCESS);
                         exit();
                     }
@@ -46,7 +58,11 @@ if (is_logged()) {
                     // remove pd;
                     $req = $db->query("UPDATE statistiques SET passeD = passeD - 1 WHERE idStat = $idStat");
                     if ($req) {
-                        header("location:" . $_SERVER['HTTP_REFERER']); //L'adresse de la page qui a conduit le client à la page courante
+                        if (isset($_SERVER['HTTP_REFERER'])) {
+                            header("location:" . $_SERVER['HTTP_REFERER']); //L'adresse de la page qui a conduit le client à la page courante
+                        } else {
+                            header("location: ../statistiques.php");
+                        }
                         create_flash_message("change-success", "Vous venez de retirer une passe décisives à " . $info['prenom'], FLASH_SUCCESS);
                         exit();
                     }
@@ -65,6 +81,9 @@ if (is_logged()) {
             header("location: ../statistiques.php");
             exit();
         }
+    } else {
+        header("location: ../index.php");
+        exit();
     }
 } else {
     header("location: ../index.php");

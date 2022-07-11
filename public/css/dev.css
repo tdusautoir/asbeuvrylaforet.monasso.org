@@ -475,7 +475,6 @@
     min-width: 800px;
     table-layout: fixed;
     border-collapse: collapse;
-    margin: 0 0 60px 0;
 }
 
 .statistiques-tab table th,
@@ -571,6 +570,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
+    margin-top: 10px;
 }
 
 .download-csv a{
@@ -579,5 +579,5 @@
     border-radius: 5px;
     background-color: #F8F8F8;
     padding: 10px;
-    position: absolute;
+    margin-left: 10px;
 }

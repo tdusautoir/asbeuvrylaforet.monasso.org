@@ -7,11 +7,11 @@ require_once("../db.php");
 
 date_default_timezone_set("Europe/Paris");
 
-$get_settings = $db->query("SELECT color, logoPath FROM settings ORDER BY id DESC LIMIT 1");
-$settings = $get_settings->fetch(PDO::FETCH_ASSOC);
 
 //verification si l'utilisateur est connecté
 if (is_logged()) {
+    $get_settings = $db->query("SELECT color, logoPath FROM settings ORDER BY id DESC LIMIT 1");
+    $settings = $get_settings->fetch(PDO::FETCH_ASSOC);
     //verification before add on database
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if (isset($_POST['submit-settings'])) {

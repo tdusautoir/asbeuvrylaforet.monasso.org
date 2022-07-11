@@ -220,9 +220,9 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                             <?php endwhile; ?>
                                         </tbody>
                                     </table>
-                                </div>
-                                <div class="download-csv">
-                                    <a href="./functions/stats-csv.php">Telecharger statistiques.csv</a>
+                                    <div class="download-csv">
+                                        <a href="./functions/stats-csv.php">Télécharger</a><a href="./functions/stats-reset.php">Réinitialiser</a>
+                                    </div>
                                 </div>
                             </div>
                         <?php elseif (isset($_GET) && !empty($_GET)) : //no data from db but there is a filter

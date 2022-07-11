@@ -7,14 +7,10 @@ require_once("../db.php");
 
 date_default_timezone_set("Europe/Paris");
 
-$get_all_settings = $db->query("SELECT id FROM settings");
-$get_settings = $db->query("SELECT color, logoPath FROM settings ORDER BY id DESC LIMIT 1");
-$settings = $get_settings->fetch(PDO::FETCH_ASSOC);
-
-
 //verification si l'utilisateur est connecté
 if (is_logged()) {
-    //verification before add on database
+    $get_all_settings = $db->query("SELECT id FROM settings");
+    //verification before delete on database
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if (isset($_POST['cancel-settings'])) {
             if ($get_all_settings->rowCount() > 1) {

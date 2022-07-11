@@ -12,9 +12,10 @@ if (is_logged()) {
             $idLicencie = $_GET["idLicencie"];
             if (filter_var($idLicencie, FILTER_VALIDATE_INT)) {
                 $info = $db->prepare("SELECT licencie.nom, licencie.prenom FROM licencie WHERE licencie.idLicencie = $idLicencie");
-                $req = $db->prepare("BEGIN; UPDATE licencie SET licencie.COSU = 1 WHERE licencie.idLicencie = ?; UPDATE cotis SET cotis.COSU = 1 WHERE cotis.idLicencie = ?; COMMIT;");
+                $req = $db->prepare("BEGIN; UPDATE licencie SET licencie.COSU = 1 WHERE licencie.idLicencie = ?; UPDATE cotis SET cotis.COSU = 1 WHERE cotis.idLicencie = ?; UPDATE statistiques SET statistiques.COSU = 1 WHERE statistiques.idLicencie = ?;COMMIT;");
                 $req->bindValue(1, $idLicencie, PDO::PARAM_INT);
                 $req->bindValue(2, $idLicencie, PDO::PARAM_INT);
+                $req->bindValue(3, $idLicencie, PDO::PARAM_INT);
                 $info->execute();
                 $result = $req->execute();
                 $getinfo = $info->fetch(PDO::FETCH_ASSOC);
@@ -23,21 +24,37 @@ if (is_logged()) {
 
                 if ($result) {
                     create_flash_message("delete_success", "Le licencié « $lastname_licencie $firstname_licencie » a bien été supprimé.", FLASH_SUCCESS);
-                    header("location:" . $_SERVER['HTTP_REFERER']); //L'adresse de la page qui a conduit le client à la page courante
+                    if (isset($_SERVER['HTTP_REFERER'])) {
+                        header("location:" . $_SERVER['HTTP_REFERER']); //L'adresse de la page qui a conduit le client à la page courante
+                    } else {
+                        header("location: ../licencies.php");
+                    }
                     exit();
                 } else {
                     create_flash_message("delete_error", "Une erreur est survenue. Veuillez réessayer.", FLASH_ERROR);
-                    header("location:" . $_SERVER['HTTP_REFERER']); //L'adresse de la page qui a conduit le client à la page courante
+                    if (isset($_SERVER['HTTP_REFERER'])) {
+                        header("location:" . $_SERVER['HTTP_REFERER']); //L'adresse de la page qui a conduit le client à la page courante
+                    } else {
+                        header("location: ../licencies.php");
+                    }
                     exit();
                 }
             } else {
                 create_flash_message("delete_error", "Une erreur est survenue. Veuillez réessayer.", FLASH_ERROR);
-                header("location:" . $_SERVER['HTTP_REFERER']); //L'adresse de la page qui a conduit le client à la page courante
+                if (isset($_SERVER['HTTP_REFERER'])) {
+                    header("location:" . $_SERVER['HTTP_REFERER']); //L'adresse de la page qui a conduit le client à la page courante
+                } else {
+                    header("location: ../licencies.php");
+                }
                 exit();
             }
         } else {
             create_flash_message("delete_error", "Une erreur est survenue. Veuillez réessayer.", FLASH_ERROR);
-            header("location:" . $_SERVER['HTTP_REFERER']); //L'adresse de la page qui a conduit le client à la page courante
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                header("location:" . $_SERVER['HTTP_REFERER']); //L'adresse de la page qui a conduit le client à la page courante
+            } else {
+                header("location: ../licencies.php");
+            }
             exit();
         }
     } else {
