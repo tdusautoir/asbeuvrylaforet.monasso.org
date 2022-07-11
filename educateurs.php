@@ -38,7 +38,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                     <div class="edu-container">
                         <div class="edu-content">
                             <h2>
-                                Liste des éducateurs :
+                            &#129489; Liste des éducateurs :
                             </h2>
                             <?php
                             if (isset($_GET['q']) && !empty($_GET['q'])) :

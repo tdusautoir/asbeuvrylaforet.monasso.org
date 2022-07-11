@@ -66,7 +66,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 <div class="stats-container">
                     <div class="stats-content">
                         <h2>
-                            Les statistiques de la saison :
+                            &#127942; Les statistiques de la saison :
                         </h2>
                         <?php
                         if (is_admin()) :

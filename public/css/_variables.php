@@ -142,6 +142,10 @@ content: "\f067";
 content: "\f068";
 }
 
+.fa-download:before {
+  content: "\f019";
+}
+
 @font-face {
 font-family: 'Font Awesome 5 Pro';
 font-style: normal;

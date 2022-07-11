@@ -36,12 +36,12 @@ if (isset($_GET["idLicencie"]) && !empty($_GET["idLicencie"]) && isInteger($_GET
             $cotisation_methode = "";
         }
     } else {  //licencie is not in db or is deleted
-        header("location: ./licencies.php");
+        header("location: ./attestation-generator.php");
         create_flash_message("not_found", "Licencié introuvable.", FLASH_ERROR);
         exit();
     }
 } else {
-    header("location: ./licencies.php");
+    header("location: ./attestation-generator.php");
     create_flash_message("modif_error", "Une erreur est survenue, Veuillez réessayer.", FLASH_ERROR);
     exit();
 } ?>

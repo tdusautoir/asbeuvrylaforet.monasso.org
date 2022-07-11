@@ -67,7 +67,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 <div class="li-container">
                     <div class="li-content">
                         <h2>
-                            Liste des licenciés :
+                        &#x1F3C3; Liste des licenciés :
                         </h2>
                         <?php
                         if (is_admin()) :
