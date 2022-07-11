@@ -581,3 +581,90 @@
     padding: 10px;
     margin-left: 10px;
 }
+
+/** COTISATIONS **/
+
+.cotisations-tab {
+    overflow-x: auto;
+    margin: 30px 0 60px 0;
+    border-radius: 5px;
+}
+
+/* Tableau éducateurs */
+
+.cotis-container {
+    padding: 30px 0;
+}
+
+.cotisations-tab table {
+    width: 1400px;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.cotisations-tab table th,
+.cotisations-tab td {
+    padding: 15px;
+    text-align: left;
+}
+
+.cotisations-tab thead {
+    background-color: var(--mainColor);
+    color: white;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+.cotisations-tab tbody {
+    display: table-header-group;
+    overflow: auto;
+    width: 100%;
+}
+
+.cotisations-tab tbody tr:nth-child(even) {
+    background-color: #dbdbdb;
+}
+
+.cotisations-tab td,
+.cotisations-tab th {
+    overflow-x: hidden;
+    display: inline-block;
+}
+
+/* Taille des colonnes */
+
+.cotisations-tab th:nth-child(1),
+.cotisations-tab td:nth-child(1){
+    width: 10%;
+}
+
+.cotisations-tab th:nth-child(2),
+.cotisations-tab td:nth-child(2){
+    width: 14%;
+}
+
+.cotisations-tab th:nth-child(3),
+.cotisations-tab td:nth-child(3){
+    width: 22%;
+}
+
+.cotisations-tab th:nth-child(4),
+.cotisations-tab td:nth-child(4){
+    width: 24%;
+}
+
+.cotisations-tab th:nth-child(5),
+.cotisations-tab td:nth-child(5){
+    width: 18%;
+}
+
+.cotisations-tab th:nth-child(6),
+.cotisations-tab td:nth-child(6){
+    width: 8%;
+}
+
+.cotisations-tab select{
+    border: none;
+    background: transparent;
+}
+

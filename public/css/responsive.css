@@ -146,6 +146,22 @@
         min-width: 100%;
         margin: 0;
     }
+
+    .filter{
+        flex-direction: column;
+    }
+
+    .filter div{
+        width: 100%;
+    }
+
+    .filter div:not(:first-child){
+        margin-left: 0px;
+    }
+
+    .filter div:not(:first-child){
+        margin-top: 20px;
+    }
 }
 
 /* -----Téléphone----- */
@@ -177,21 +193,5 @@
 
     .account-li li p {
         display: none;
-    }
-
-    .filter{
-        flex-direction: column;
-    }
-
-    .filter div{
-        width: 100%;
-    }
-
-    .filter div:not(:first-child){
-        margin-left: 0px;
-    }
-
-    .filter div:first-child{
-        margin-bottom: 20px;
     }
 }

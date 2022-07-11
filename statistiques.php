@@ -240,6 +240,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 </div>
             </div>
         </div>
+        <script type="text/javascript" src="./public/js/tableau.js"></script>
     <?php else : require "./components/form_login.php"; ?>
 
     <?php endif; ?>
