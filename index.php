@@ -107,6 +107,15 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
           <a href="index.php?action=logout">Deconnexion</a>
         </div> -->
 
+          <?php $get_cotis_r = $db->query("SELECT COUNT(*) FROM cotis WHERE cotis.COSU = 0 AND cotis.etat = 1");
+          $nb_cotis_r = $get_cotis_r->fetch(PDO::FETCH_BOTH);
+          $get_cotis_nr = $db->query("SELECT COUNT(*) FROM cotis WHERE cotis.COSU = 0 AND cotis.etat = 2");
+          $nb_cotis_nr = $get_cotis_nr->fetch(PDO::FETCH_BOTH);
+          $get_cotis_e = $db->query("SELECT COUNT(*) FROM cotis WHERE cotis.COSU = 0 AND cotis.etat = 4");
+          $nb_cotis_e = $get_cotis_e->fetch(PDO::FETCH_BOTH);
+          $data = [intval($nb_cotis_r[0]), intval($nb_cotis_nr[0]), intval($nb_cotis_e[0])];
+          ?>
+
           <script>
             $(document).ready(function() {
               (Chart.defaults.font.size = 14),
@@ -115,19 +124,19 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
               new Chart(F, {
                 type: "pie",
                 data: {
-                  labels: ["Cotisations reçues", "Cotisations non reçues", "Cotisations encaissées"],
+                  labels: ["Cotisations non réglées", "Cotisations réglées", "Cotisations encaissées"],
                   datasets: [{
                     tooltip: {
                       callbacks: {
-                        label: function(e) {
-                          let t = e.label;
-                          return t || (t = ""), t + " : " + (e.formattedValue + "%");
+                        label: function(data) {
+                          const percentage = (data.parsed / data.dataset.data.reduce((a, b) => a + b, 0)) * 100
+                          return `${data.label ?? ''} : ${percentage.toFixed(0)}%`;
                         },
                       },
                     },
                     label: "Aperçu du suivi des cotisations",
-                    data: [100, 50, 30],
-                    backgroundColor: ["rgba(97, 186, 200, 1)", "rgba(208, 16, 58, 1)", "rgba(81, 190, 132, 1)"],
+                    data: <?= json_encode($data); ?>,
+                    backgroundColor: ["rgb(235, 52, 52)", "rgb(235, 110, 52)", "rgba(81, 190, 132, 1)"],
                     borderColor: ["rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)"],
                     borderWidth: 3,
                     hoverOffset: 20,
@@ -146,7 +155,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                       labels: {
                         padding: 20
                       }
-                    }
+                    },
                   }
                 },
               });
