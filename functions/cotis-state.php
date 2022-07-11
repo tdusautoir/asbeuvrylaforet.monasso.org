@@ -86,7 +86,7 @@ if (is_logged()) {
 }
 
 if ($changeState) {
-    create_flash_message("change_state_success", "Etat bien modifié", FLASH_SUCCESS);
+    create_flash_message("change_state_success", "Etat bien modifié.", FLASH_SUCCESS);
     if (isset($_SERVER['HTTP_REFERER'])) {
         header("location:" . $_SERVER['HTTP_REFERER']); //L'adresse de la page qui a conduit le client à la page courante
     } else {
@@ -94,7 +94,7 @@ if ($changeState) {
     }
     exit();
 } elseif ($changeMethod) {
-    create_flash_message("change_method_success", "Methode bien modifiée", FLASH_SUCCESS);
+    create_flash_message("change_method_success", "Methode bien modifiée.", FLASH_SUCCESS);
     if (isset($_SERVER['HTTP_REFERER'])) {
         header("location:" . $_SERVER['HTTP_REFERER']); //L'adresse de la page qui a conduit le client à la page courante
     } else {

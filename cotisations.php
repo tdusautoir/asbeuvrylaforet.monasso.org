@@ -108,6 +108,9 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                             </form>
                         </div>
                     </div>
+                    <?php if (isset($_GET) && !empty($_GET)) : ?>
+                        <a href="./cotisations.php" class="cancel-filter">Annuler les filtres</a>
+                    <?php endif; ?>
                     <div class="cotis-container">
                         <div class="cotis-content">
                             <h2>

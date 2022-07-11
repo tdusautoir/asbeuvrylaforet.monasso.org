@@ -21,15 +21,51 @@ if (is_logged()) {
                 if (isset($_POST['add-goal'])) {
                     // add goal;
                     $req = $db->query("UPDATE statistiques SET nbButs = nbButs + 1 WHERE idStat = $idStat");
+                    if ($req) {
+                        if (isset($_SERVER['HTTP_REFERER'])) {
+                            header("location:" . $_SERVER['HTTP_REFERER']); //L'adresse de la page qui a conduit le client à la page courante
+                        } else {
+                            header("location: ../statistiques.php");
+                        }
+                        create_flash_message("change-success", "Vous venez d'ajouter un but à " . $info['prenom'] . ".", FLASH_SUCCESS);
+                        exit();
+                    }
                 } elseif (isset($_POST['remove-goal'])) {
                     // remove goal;
                     $req = $db->query("UPDATE statistiques SET nbButs = nbButs - 1 WHERE idStat = $idStat");
+                    if ($req) {
+                        if (isset($_SERVER['HTTP_REFERER'])) {
+                            header("location:" . $_SERVER['HTTP_REFERER']); //L'adresse de la page qui a conduit le client à la page courante
+                        } else {
+                            header("location: ../statistiques.php");
+                        }
+                        create_flash_message("change-success", "Vous venez de retirer un but à " . $info['prenom'] . ".", FLASH_SUCCESS);
+                        exit();
+                    }
                 } elseif (isset($_POST['add-pd'])) {
                     // add pd;
                     $req = $db->query("UPDATE statistiques SET passeD = passeD + 1 WHERE idStat = $idStat");
+                    if ($req) {
+                        if (isset($_SERVER['HTTP_REFERER'])) {
+                            header("location:" . $_SERVER['HTTP_REFERER']); //L'adresse de la page qui a conduit le client à la page courante
+                        } else {
+                            header("location: ../statistiques.php");
+                        }
+                        create_flash_message("change-success", "Vous venez d'ajouter une passe dé à " . $info['prenom'] . ".", FLASH_SUCCESS);
+                        exit();
+                    }
                 } elseif (isset($_POST['remove-pd'])) {
                     // remove pd;
                     $req = $db->query("UPDATE statistiques SET passeD = passeD - 1 WHERE idStat = $idStat");
+                    if ($req) {
+                        if (isset($_SERVER['HTTP_REFERER'])) {
+                            header("location:" . $_SERVER['HTTP_REFERER']); //L'adresse de la page qui a conduit le client à la page courante
+                        } else {
+                            header("location: ../statistiques.php");
+                        }
+                        create_flash_message("change-success", "Vous venez de retirer une passe dé à " . $info['prenom'] . ".", FLASH_SUCCESS);
+                        exit();
+                    }
                 } else {
                     header("location: ../statistiques.php");
                     create_flash_message("submit-error", "Une erreur est survenue, Veuillez réessayer.", FLASH_ERROR);
@@ -51,15 +87,5 @@ if (is_logged()) {
     }
 } else {
     header("location: ../index.php");
-    exit();
-}
-
-if ($req) {
-    if (isset($_SERVER['HTTP_REFERER'])) {
-        header("location:" . $_SERVER['HTTP_REFERER']); //L'adresse de la page qui a conduit le client à la page courante
-    } else {
-        header("location: ../statistiques.php");
-    }
-    create_flash_message("change-success", "Vous venez d'ajouter un but à " . $info['prenom'], FLASH_SUCCESS);
     exit();
 }
