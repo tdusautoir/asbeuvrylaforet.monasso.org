@@ -111,9 +111,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
           $nb_cotis_r = $get_cotis_r->fetch(PDO::FETCH_BOTH);
           $get_cotis_nr = $db->query("SELECT COUNT(*) FROM cotis WHERE cotis.COSU = 0 AND cotis.etat = 2");
           $nb_cotis_nr = $get_cotis_nr->fetch(PDO::FETCH_BOTH);
-          $get_cotis_e = $db->query("SELECT COUNT(*) FROM cotis WHERE cotis.COSU = 0 AND cotis.etat = 4");
-          $nb_cotis_e = $get_cotis_e->fetch(PDO::FETCH_BOTH);
-          $data = [intval($nb_cotis_r[0]), intval($nb_cotis_nr[0]), intval($nb_cotis_e[0])];
+          $data = [intval($nb_cotis_r[0]), intval($nb_cotis_nr[0])];
           ?>
 
           <script>
@@ -124,7 +122,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
               new Chart(F, {
                 type: "pie",
                 data: {
-                  labels: ["Cotisations non réglées", "Cotisations réglées", "Cotisations encaissées"],
+                  labels: ["Cotisations non réglées", "Cotisations réglées"],
                   datasets: [{
                     tooltip: {
                       callbacks: {
