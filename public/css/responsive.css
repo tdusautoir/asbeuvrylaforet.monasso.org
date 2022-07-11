@@ -140,7 +140,11 @@
         width: 100%;
         margin-top: 20px;
     }
-
+    .container-scoreboard{
+        width: 100%;
+        min-width: 100%;
+        margin: 0;
+    }
     .scoreboard{
         width: 100%;
         min-width: 100%;
