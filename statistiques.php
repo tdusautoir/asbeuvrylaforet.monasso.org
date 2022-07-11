@@ -66,7 +66,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 <div class="stats-container">
                     <div class="stats-content">
                         <h2>
-                            Les statistiques de la saison :
+                            &#127942; Les statistiques de la saison :
                         </h2>
                         <?php
                         if (is_admin()) :
@@ -78,9 +78,9 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                 $rowCount = $req->rowCount();
 
                                 //get scoreboard
-                                $getTopScorer = $db->prepare("SELECT DISTINCT licencie.nom, statistiques.nbButs, categorie.nomCategorie FROM `licencie` INNER JOIN statistiques ON licencie.idLicencie = statistiques.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.COSU = 0 ORDER BY statistiques.nbButs DESC LIMIT 1;"); //Top scorer
+                                $getTopScorer = $db->prepare("SELECT DISTINCT licencie.nom, licencie.prenom, statistiques.nbButs, categorie.nomCategorie FROM `licencie` INNER JOIN statistiques ON licencie.idLicencie = statistiques.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.COSU = 0 ORDER BY statistiques.nbButs DESC LIMIT 1;"); //Top scorer
                                 $getTopScorer->execute();
-                                $getTopAssister = $db->prepare("SELECT DISTINCT licencie.nom, statistiques.passeD, categorie.nomCategorie FROM `licencie` INNER JOIN statistiques ON licencie.idLicencie = statistiques.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.COSU = 0 ORDER BY statistiques.passeD DESC LIMIT 1;"); //Top assister
+                                $getTopAssister = $db->prepare("SELECT DISTINCT licencie.nom, licencie.prenom, statistiques.passeD, categorie.nomCategorie FROM `licencie` INNER JOIN statistiques ON licencie.idLicencie = statistiques.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.COSU = 0 ORDER BY statistiques.passeD DESC LIMIT 1;"); //Top assister
                                 $getTopAssister->execute();
                             elseif (isset($_GET['categorie']) && !empty($_GET['categorie']) && $_GET['categorie'] != '') :
                                 $categorie = $_GET['categorie'];
@@ -90,10 +90,10 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                 $rowCount = $req->rowCount();
 
                                 //get scoreboard
-                                $getTopScorer = $db->prepare("SELECT DISTINCT licencie.nom, statistiques.nbButs, categorie.nomCategorie FROM `licencie` INNER JOIN statistiques ON licencie.idLicencie = statistiques.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.COSU = 0 AND categorie.nomCategorie = :categorie ORDER BY statistiques.nbButs DESC LIMIT 1;"); //Top scorer
+                                $getTopScorer = $db->prepare("SELECT DISTINCT licencie.nom, licencie.prenom, statistiques.nbButs, categorie.nomCategorie FROM `licencie` INNER JOIN statistiques ON licencie.idLicencie = statistiques.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.COSU = 0 AND categorie.nomCategorie = :categorie ORDER BY statistiques.nbButs DESC LIMIT 1;"); //Top scorer
                                 $getTopScorer->bindValue('categorie', $categorie);
                                 $getTopScorer->execute();
-                                $getTopAssister = $db->prepare("SELECT DISTINCT licencie.nom, statistiques.passeD, categorie.nomCategorie FROM `licencie` INNER JOIN statistiques ON licencie.idLicencie = statistiques.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.COSU = 0 AND categorie.nomCategorie = :categorie ORDER BY statistiques.passeD DESC LIMIT 1;"); //Top assister
+                                $getTopAssister = $db->prepare("SELECT DISTINCT licencie.nom, licencie.prenom, statistiques.passeD, categorie.nomCategorie FROM `licencie` INNER JOIN statistiques ON licencie.idLicencie = statistiques.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.COSU = 0 AND categorie.nomCategorie = :categorie ORDER BY statistiques.passeD DESC LIMIT 1;"); //Top assister
                                 $getTopAssister->bindValue('categorie', $categorie);
                                 $getTopAssister->execute();
                             else :
@@ -102,9 +102,9 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                 $rowCount = $req->rowCount();
 
                                 //get scoreboard
-                                $getTopScorer = $db->prepare("SELECT DISTINCT licencie.nom, statistiques.nbButs, categorie.nomCategorie FROM `licencie` INNER JOIN statistiques ON licencie.idLicencie = statistiques.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.COSU = 0 ORDER BY statistiques.nbButs DESC LIMIT 1;"); //Top scorer
+                                $getTopScorer = $db->prepare("SELECT DISTINCT licencie.nom, licencie.prenom, statistiques.nbButs, categorie.nomCategorie FROM `licencie` INNER JOIN statistiques ON licencie.idLicencie = statistiques.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.COSU = 0 ORDER BY statistiques.nbButs DESC LIMIT 1;"); //Top scorer
                                 $getTopScorer->execute();
-                                $getTopAssister = $db->prepare("SELECT DISTINCT licencie.nom, statistiques.passeD, categorie.nomCategorie FROM `licencie` INNER JOIN statistiques ON licencie.idLicencie = statistiques.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.COSU = 0 ORDER BY statistiques.passeD DESC LIMIT 1;"); //Top assister
+                                $getTopAssister = $db->prepare("SELECT DISTINCT licencie.nom, licencie.prenom, statistiques.passeD, categorie.nomCategorie FROM `licencie` INNER JOIN statistiques ON licencie.idLicencie = statistiques.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.COSU = 0 ORDER BY statistiques.passeD DESC LIMIT 1;"); //Top assister
                                 $getTopAssister->execute();
                             endif;
                         elseif (is_educ()) :
@@ -117,10 +117,10 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                 $rowCount = $req->rowCount();
 
                                 //get scoreboard
-                                $getTopScorer = $db->prepare("SELECT DISTINCT licencie.nom, statistiques.nbButs, categorie.nomCategorie FROM `licencie` INNER JOIN statistiques ON licencie.idLicencie = statistiques.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorieeduc.idCategorie = categorie.idCategorie INNER JOIN educ ON educ.idEduc = categorieeduc.idEduc WHERE licencie.COSU = 0 AND educ.idEduc = :idEduc ORDER BY statistiques.nbButs DESC LIMIT 1;"); //Top scorer
+                                $getTopScorer = $db->prepare("SELECT DISTINCT licencie.nom, licencie.prenom, statistiques.nbButs, categorie.nomCategorie FROM `licencie` INNER JOIN statistiques ON licencie.idLicencie = statistiques.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorieeduc.idCategorie = categorie.idCategorie INNER JOIN educ ON educ.idEduc = categorieeduc.idEduc WHERE licencie.COSU = 0 AND educ.idEduc = :idEduc ORDER BY statistiques.nbButs DESC LIMIT 1;"); //Top scorer
                                 $getTopScorer->bindValue('idEduc', $_SESSION['id']);
                                 $getTopScorer->execute();
-                                $getTopAssister = $db->prepare("SELECT DISTINCT licencie.nom, statistiques.passeD, categorie.nomCategorie FROM `licencie` INNER JOIN statistiques ON licencie.idLicencie = statistiques.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorieeduc.idCategorie = categorie.idCategorie INNER JOIN educ ON educ.idEduc = categorieeduc.idEduc WHERE licencie.COSU = 0 AND educ.idEduc = :idEduc ORDER BY statistiques.passeD DESC LIMIT 1;"); //Top assister
+                                $getTopAssister = $db->prepare("SELECT DISTINCT licencie.nom, licencie.prenom, statistiques.passeD, categorie.nomCategorie FROM `licencie` INNER JOIN statistiques ON licencie.idLicencie = statistiques.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorieeduc.idCategorie = categorie.idCategorie INNER JOIN educ ON educ.idEduc = categorieeduc.idEduc WHERE licencie.COSU = 0 AND educ.idEduc = :idEduc ORDER BY statistiques.passeD DESC LIMIT 1;"); //Top assister
                                 $getTopAssister->bindValue('idEduc', $_SESSION['id']);
                                 $getTopAssister->execute();
                             elseif (isset($_GET['categorie']) && !empty($_GET['categorie']) && $_GET['categorie'] != '') :
@@ -132,11 +132,11 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                 $rowCount = $req->rowCount();
 
                                 //get scoreboard
-                                $getTopScorer = $db->prepare("SELECT DISTINCT licencie.nom, statistiques.nbButs, categorie.nomCategorie FROM `licencie` INNER JOIN statistiques ON licencie.idLicencie = statistiques.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorieeduc.idCategorie = categorie.idCategorie INNER JOIN educ ON educ.idEduc = categorieeduc.idEduc WHERE licencie.COSU = 0 AND educ.idEduc = :idEduc AND categorie.nomCategorie = :categorie ORDER BY statistiques.nbButs DESC LIMIT 1;"); //Top scorer
+                                $getTopScorer = $db->prepare("SELECT DISTINCT licencie.nom, licencie.prenom, statistiques.nbButs, categorie.nomCategorie FROM `licencie` INNER JOIN statistiques ON licencie.idLicencie = statistiques.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorieeduc.idCategorie = categorie.idCategorie INNER JOIN educ ON educ.idEduc = categorieeduc.idEduc WHERE licencie.COSU = 0 AND educ.idEduc = :idEduc AND categorie.nomCategorie = :categorie ORDER BY statistiques.nbButs DESC LIMIT 1;"); //Top scorer
                                 $getTopScorer->bindValue('idEduc', $_SESSION['id']);
                                 $getTopScorer->bindValue('categorie', $categorie);
                                 $getTopScorer->execute();
-                                $getTopAssister = $db->prepare("SELECT DISTINCT licencie.nom, statistiques.passeD, categorie.nomCategorie FROM `licencie` INNER JOIN statistiques ON licencie.idLicencie = statistiques.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorieeduc.idCategorie = categorie.idCategorie INNER JOIN educ ON educ.idEduc = categorieeduc.idEduc WHERE licencie.COSU = 0 AND educ.idEduc = :idEduc AND categorie.nomCategorie = :categorie ORDER BY statistiques.passeD DESC LIMIT 1;"); //Top assister
+                                $getTopAssister = $db->prepare("SELECT DISTINCT licencie.nom, licencie.prenom, statistiques.passeD, categorie.nomCategorie FROM `licencie` INNER JOIN statistiques ON licencie.idLicencie = statistiques.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorieeduc.idCategorie = categorie.idCategorie INNER JOIN educ ON educ.idEduc = categorieeduc.idEduc WHERE licencie.COSU = 0 AND educ.idEduc = :idEduc AND categorie.nomCategorie = :categorie ORDER BY statistiques.passeD DESC LIMIT 1;"); //Top assister
                                 $getTopAssister->bindValue('idEduc', $_SESSION['id']);
                                 $getTopAssister->bindValue('categorie', $categorie);
                                 $getTopAssister->execute();
@@ -147,10 +147,10 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                 $rowCount = $req->rowCount();
 
                                 //get scoreboard
-                                $getTopScorer = $db->prepare("SELECT DISTINCT licencie.nom, statistiques.nbButs, categorie.nomCategorie FROM `licencie` INNER JOIN statistiques ON licencie.idLicencie = statistiques.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorieeduc.idCategorie = categorie.idCategorie INNER JOIN educ ON educ.idEduc = categorieeduc.idEduc WHERE licencie.COSU = 0 AND educ.idEduc = :idEduc ORDER BY statistiques.nbButs DESC LIMIT 1;"); //Top scorer
+                                $getTopScorer = $db->prepare("SELECT DISTINCT licencie.nom, licencie.prenom, statistiques.nbButs, categorie.nomCategorie FROM `licencie` INNER JOIN statistiques ON licencie.idLicencie = statistiques.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorieeduc.idCategorie = categorie.idCategorie INNER JOIN educ ON educ.idEduc = categorieeduc.idEduc WHERE licencie.COSU = 0 AND educ.idEduc = :idEduc ORDER BY statistiques.nbButs DESC LIMIT 1;"); //Top scorer
                                 $getTopScorer->bindValue('idEduc', $_SESSION['id']);
                                 $getTopScorer->execute();
-                                $getTopAssister = $db->prepare("SELECT DISTINCT licencie.nom, statistiques.passeD, categorie.nomCategorie FROM `licencie` INNER JOIN statistiques ON licencie.idLicencie = statistiques.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorieeduc.idCategorie = categorie.idCategorie INNER JOIN educ ON educ.idEduc = categorieeduc.idEduc WHERE licencie.COSU = 0 AND educ.idEduc = :idEduc ORDER BY statistiques.passeD DESC LIMIT 1;"); //Top assister
+                                $getTopAssister = $db->prepare("SELECT DISTINCT licencie.nom, licencie.prenom, statistiques.passeD, categorie.nomCategorie FROM `licencie` INNER JOIN statistiques ON licencie.idLicencie = statistiques.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorieeduc.idCategorie = categorie.idCategorie INNER JOIN educ ON educ.idEduc = categorieeduc.idEduc WHERE licencie.COSU = 0 AND educ.idEduc = :idEduc ORDER BY statistiques.passeD DESC LIMIT 1;"); //Top assister
                                 $getTopAssister->bindValue('idEduc', $_SESSION['id']);
                                 $getTopAssister->execute();
                             endif;
@@ -165,10 +165,10 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                         <div class="scoreboard">
                                             <h3>Meilleur buteur :</h3>
                                             <?php $TopScorer = $getTopScorer->fetch(PDO::FETCH_ASSOC); ?>
-                                            <p><?= $TopScorer['nomCategorie'] ?> - <?= htmlspecialchars($TopScorer['nom']) ?> ( <?= $TopScorer['nbButs'] ?> buts )</p>
+                                            <p>&#x1F947;<strong><?= $TopScorer['nomCategorie'] ?></strong> - <?= htmlspecialchars($TopScorer['nom']) ?> <?= htmlspecialchars($TopScorer['prenom']) ?> (<?= $TopScorer['nbButs'] ?> buts)</p>
                                             <h3>Meilleur passeur :</h3>
                                             <?php $TopAssister = $getTopAssister->fetch(PDO::FETCH_ASSOC); ?>
-                                            <p><?= $TopAssister['nomCategorie'] ?> - <?= htmlspecialchars($TopAssister['nom']) ?> ( <?= $TopAssister['passeD'] ?> pd )
+                                            <p>&#x1F947;<strong><?= $TopAssister['nomCategorie'] ?></strong> - <?= htmlspecialchars($TopAssister['nom']) ?> <?= htmlspecialchars($TopAssister['prenom']) ?> (<?= $TopAssister['passeD'] ?> pd)
                                             <p>
                                         </div>
                                 <?php endif;
@@ -235,9 +235,9 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                         ?>
                     </div>
                 </div>
-                <div class=" return deconnect">
+                <!-- <div class=" return deconnect">
                     <a href="index.php">Retour</a>
-                </div>
+                </div> -->
             </div>
         </div>
         <script type="text/javascript" src="./public/js/tableau.js"></script>

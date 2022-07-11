@@ -102,9 +102,9 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             </div>
           </div>
         </section>
-        <div class="deconnect">
+        <!-- <div class="deconnect">
           <a href="index.php?action=logout">Deconnexion</a>
-        </div>
+        </div> -->
 
         <script>
           $(document).ready(function() {

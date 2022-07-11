@@ -465,3 +465,53 @@ div.error.abs{
     left: 0;
 	z-index: -1;
 }
+
+/* gestion du footer */
+.footer-separator{
+	border-bottom: 1px solid #e6e6e6;
+}
+.footer-second-part, .footer-first-part{
+	display: flex;
+}
+.footer-first-part > div {
+	margin: 10px 0px;
+	width: 33%;
+}
+.footer-second-part > div {
+	margin: 15px 0px;
+	width: 33%;
+}
+div.copyright a{
+    font-size: 12px;
+	display: flex;
+	justify-content: center;
+}
+
+div.links-cgv {
+	font-size: 12px;
+	display: flex;
+	justify-content: right;
+}
+
+.links-footer.right{
+	font-size: 14px;
+	display: flex;
+	justify-content: right;
+}
+
+.links-footer.center{
+	font-size: 14px;
+	display: flex;
+	justify-content: center;
+}
+
+.links-footer.left{
+	font-size: 14px;
+	display: flex;
+	justify-content: left;
+}
+
+.links-cgv a:hover, .links-footer a:hover {
+    font-weight: bold;
+    transition: font-weight .3s;
+}

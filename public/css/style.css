@@ -338,7 +338,7 @@ div.chartJS {
 }
 
 .licencie-tab thead {
-    background-color: var(--mainColor);
+    background-color: #000000c9;
     color: white;
     text-transform: uppercase;
     font-size: 20px;
@@ -450,7 +450,7 @@ tbody tr:hover {
     display: flex;
     width: 30px;
     height: 30px;
-    background-color: var(--mainColor);
+    background-color: #000000c9;
     color: white;
     align-items: center;
     justify-content: center;
@@ -462,7 +462,7 @@ tbody tr:hover {
 }
 
 .pagination-div ul{
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 .pagination-div li:not(:last-child) {
@@ -471,7 +471,7 @@ tbody tr:hover {
 
 .pagination-div li a:hover {
     letter-spacing: 1px;
-    background-color: black;
+    background-color: #00000063;
 }
 
 .pagination {

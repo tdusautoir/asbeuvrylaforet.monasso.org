@@ -61,7 +61,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 </div>
 
                 <?php if (isset($_GET) && !empty($_GET)) : ?>
-                    <a href="./licencies.php" class="cancel-filter">Annuler les filtres</a>
+                    <a href="./attestation-generator.php" class="cancel-filter">Annuler les filtres</a>
                 <?php endif; ?>
 
                 <div class="li-container">
@@ -176,11 +176,14 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                     endif; ?>
                                                 </td>
                                                 <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td class="action-btns btns-2">
+                                                <td class="action-btns btns-1">
                                                     <a href="./attestation-generate.php?idLicencie=<?= $LIC["idLicencie"] ?>">
                                                         <i class="fas fa-file-pdf"></i>
+                                                    </a>
+                                                </td>
+                                                <td class="action-btns btns-2">
+                                                    <a href="./attestation-generate.php?idLicencie=<?= $LIC["idLicencie"] ?>">
+                                                        <i class="fas fa-download"></i>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -196,9 +199,9 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                         $req->closeCursor(); // Ferme le curseur, permettant à la requête d'être de nouveau exécutée 
                         ?>
                     </div>
-                    <div class="return deconnect">
+                    <!-- <div class="return deconnect">
                         <a href="index.php">Retour</a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

@@ -38,7 +38,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                     <div class="edu-container">
                         <div class="edu-content">
                             <h2>
-                                Liste des éducateurs :
+                            &#129489; Liste des éducateurs :
                             </h2>
                             <?php
                             if (isset($_GET['q']) && !empty($_GET['q'])) :
@@ -136,9 +136,9 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                 <p> Aucun éducateur n'a encore été créé </p>
                             <?php endif; ?>
                         </div>
-                        <div class="return deconnect">
+                        <!-- <div class="return deconnect">
                             <a href="index.php">Retour</a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
