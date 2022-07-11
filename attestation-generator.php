@@ -175,7 +175,9 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                         echo $Cotis["prix"] . " €";
                                                     endif; ?>
                                                 </td>
-
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
                                                 <td class="action-btns btns-2">
                                                     <a href="./attestation-generate.php?idLicencie=<?= $LIC["idLicencie"] ?>">
                                                         <i class="fas fa-file-pdf"></i>

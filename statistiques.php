@@ -221,6 +221,9 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                         </tbody>
                                     </table>
                                 </div>
+                                <div class="download-csv">
+                                    <a href="./functions/stats-csv.php">Telecharger statistiques.csv</a>
+                                </div>
                             </div>
                         <?php elseif (isset($_GET) && !empty($_GET)) : //no data from db but there is a filter
                         ?>
@@ -232,7 +235,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                         ?>
                     </div>
                 </div>
-                <div class="return deconnect">
+                <div class=" return deconnect">
                     <a href="index.php">Retour</a>
                 </div>
             </div>
