@@ -609,7 +609,7 @@
 }
 
 .cotisations-tab thead {
-    background-color: var(--mainColor);
+    background-color: #000000c9;
     color: white;
     text-transform: uppercase;
     font-size: 20px;
