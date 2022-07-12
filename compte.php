@@ -164,6 +164,7 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
                                                             <div class="site-settings-tab1">
                                                                 <div class="site-settings-head">
                                                                     <h1>Informations de l'association</h1>
+                                                                    <i class="fa fa-pencil" onclick="displayModif('site-settings-tab2')"></i>
                                                                 </div>
                                                                 <div class="site-settings-name">
                                                                     <p>Nom de l'association</p>
@@ -179,7 +180,7 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
                                                                 </div>
                                                             </div>
                                                             <?php if (is_admin()) : ?>
-                                                                <div class="site-settings-tab2">
+                                                                <div class="site-settings-tab2" id="site-settings-tab2">
                                                                     <div class="site-settings-head">
                                                                         <h1>Modification des informations</h1>
                                                                     </div>
@@ -197,16 +198,18 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
                                                                         </div>
                                                                         <div class="site-settings-color">
                                                                             <p>Nouvelle couleur</p>
-                                                                            <input id="site-color" type="color" name="color" value="<?= $get_settings['color'] ?>">
+                                                                            <label for="site-color" class="site-color-label">
+                                                                                <input id="site-color" type="color" name="color" value="<?= $get_settings['color'] ?>">
+                                                                            </label>
                                                                         </div>
                                                                         <div class="site-settings-save">
-                                                                            <input type="submit" name="submit-settings">
+                                                                            <input type="submit" name="submit-settings" value="Modifier">
                                                                         </div>
                                                                     </form>
+                                                                    <form action="./functions/settings-cancel-modif.php" class="cancel-settings" method="POST">
+                                                                        <input type="submit" name="cancel-settings" value="Annuler les modifications">
+                                                                    </form>
                                                                 </div>
-                                                                <form action="./functions/settings-cancel-modif.php" class="cancel-settings" method="POST">
-                                                                    <input type="submit" name="cancel-settings" value="Annuler les modifications">
-                                                                </form>
                                                             <?php endif; ?>
                                                         </div>
                                                     <?php endif; ?>
@@ -227,6 +230,11 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
                 document.getElementById(idOther1).style.display = "none";
                 document.getElementById(idListOther1).style.background = "white";
                 document.getElementById(idListOther1).style.color = "black";
+            }
+        </script>
+        <script>
+            function displayModif(idDiv) {
+                document.getElementById(idDiv).style.display = "unset";
             }
         </script>
         <?php require 'components/footer.php'; ?>

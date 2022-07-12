@@ -263,9 +263,12 @@
 }
 
 .color {
+    padding: unset;
     display: inline-block;
-    width: 80px;
-    height: 26px;
+    border: 1px solid rgba(240, 240, 240, 0.933);
+    border-radius: 100px;
+    width: 30px;
+    height: 30px;
     background-color: var(--mainColor);
 }
 
