@@ -291,8 +291,27 @@
     cursor: pointer;
 }
 
+.info-settings-modif input{
+    height: fit-content;
+    font-size: 17px;
+    padding: 0;
+    margin: 0;
+    outline: none;
+}
 
+.info-settings-modif form{
+    display: flex;
+    align-items: center;
+}
 
+.info-settings-modif button{
+    padding: 0;
+    background: none;
+}
+
+.info-settings-modif input, .info-settings-modif button{
+    display: none;
+}
 
 
 .filter {

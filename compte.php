@@ -62,22 +62,37 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
                                             <div class="info-settings-value">
                                                 <p>Nom</p>
                                                 <div class="info-settings-modif">
-                                                    <p><?= htmlspecialchars($get_account_info["nom"]) ?></p>
-                                                    <i class="fa fa-pencil"></i>
+                                                    <p id="text1"><?= htmlspecialchars($get_account_info["nom"]) ?></p>
+                                                    <form action="./functions/settings-modif-info.php" method="POST">
+                                                        <input type="hidden" value="<?= $_SESSION["id"] ?>" name="id">
+                                                        <input type="text" value="<?= htmlspecialchars($get_account_info["nom"]) ?>" id="inputText1" name="nom"></input>
+                                                        <i onclick="displayInput(1)" id="pencil1" class="fa fa-pencil"></i>
+                                                        <button type="submit" onclick="form.submit()" id="validate1"><i class="fa fa-check"></i></button>
+                                                    </form>
                                                 </div>
                                             </div>
                                             <div class="info-settings-value">
                                                 <p>Prénom</p>
                                                 <div class="info-settings-modif">
-                                                    <p><?= htmlspecialchars($get_account_info["prenom"]) ?></p>
-                                                    <i class="fa fa-pencil"></i>
+                                                    <p id="text2"><?= htmlspecialchars($get_account_info["prenom"]) ?></p>
+                                                    <form action="./functions/settings-modif-info.php" method="POST">
+                                                        <input type="hidden" value="<?= $_SESSION["id"] ?>" name="id">
+                                                        <input type=" text" value="<?= htmlspecialchars($get_account_info["prenom"]) ?>" id="inputText2" name="prenom"></input>
+                                                        <i onclick="displayInput(2)" id="pencil2" class="fa fa-pencil"></i>
+                                                        <button type="submit" onclick="form.submit()" id="validate2"><i class="fa fa-check"></i></button>
+                                                    </form>
                                                 </div>
                                             </div>
                                             <div class="info-settings-value">
                                                 <p>Mail</p>
                                                 <div class="info-settings-modif">
-                                                    <p><?= htmlspecialchars($get_account_info["mail"]) ?></p>
-                                                    <i class="fa fa-pencil"></i>
+                                                    <p id="text3"><?= htmlspecialchars($get_account_info["mail"]) ?></p>
+                                                    <form action="./functions/settings-modif-info.php" method="POST">
+                                                        <input type="hidden" value="<?= $_SESSION["id"] ?>" name="id">
+                                                        <input type="text" value="<?= htmlspecialchars($get_account_info["mail"]) ?>" id="inputText3" name="mail"></input>
+                                                        <i onclick="displayInput(3)" id="pencil3" class="fa fa-pencil"></i>
+                                                        <button type="submit" onclick="form.submit()" id="validate3"><i class="fa fa-check"></i></button>
+                                                    </form>
                                                 </div>
                                             </div>
                                             <div class="info-settings-value site-settings-footer">
@@ -219,6 +234,35 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
             </div>
         </div>
         </div>
+        <script>
+            function displayInput(index) {
+                document.getElementById('inputText' + index).style.display = "block";
+                document.getElementById('pencil' + index).style.display = "none";
+                document.getElementById('validate' + index).style.display = "block";
+                document.getElementById('text' + index).style.display = "none";
+            }
+
+            let input1 = document.getElementById('inputText1'); // get the input element
+            input1.addEventListener('input', resizeInput); // bind the "resizeInput" callback on "input" event
+            let input2 = document.getElementById('inputText2'); // get the input element
+            input2.addEventListener('input', resizeInput); // bind the "resizeInput" callback on "input" event
+            let input3 = document.getElementById('inputText3'); // get the input element
+            input3.addEventListener('input', resizeInput); // bind the "resizeInput" callback on "input" event
+            if (input1) {
+                resizeInput.call(input1); // immediately call the function
+            }
+            if (input2) {
+                resizeInput.call(input2); // immediately call the function
+            }
+            if (input3) {
+                resizeInput.call(input3); // immediately call the function
+            }
+
+            function resizeInput() {
+                let inputValue = this.value.length * 10;
+                this.style.width = (inputValue + 10) + "px";
+            }
+        </script>
         <script>
             function displayContent(idActive, idOther1, idList, idListOther1) {
                 document.getElementById(idActive).style.display = "flex";
