@@ -39,6 +39,10 @@ line-height: 1;
 content: "\f015";
 }
 
+.fa-upload:before {
+content: "\f093"
+}
+
 .fa-plus:before {
 content: "\f067";
 }

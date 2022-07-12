@@ -103,76 +103,81 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
 
                                         <?php endif; ?>
                                     <?php endif; ?>
+                                <?php endif; ?>
                                 </div>
                                 <div id="account-settings">
-                                    <h1>Configurez le site : </h1>
                                     <?php if ($settings) : ?>
-                                        <div class="site-settings-values">
-                                            <div class="logo-settings">
-                                                <p>Logo du site :</p> <img src="<?= $get_settings["logoPath"] ?>" class="img">
+                                        <div class="site-settings">
+                                            <div class="site-settings-tab1">
+                                                <div class="site-settings-head">
+                                                    <h1>Profil de l'association</h1>
+                                                </div>
+                                                <div class="site-settings-name">
+                                                    <p>Nom de l'association</p>
+                                                    <p>AS BEUVRY-LA-FORÊT</p>
+                                                </div>
+                                                <div class="site-settings-logo">
+                                                    <p>Logo du site</p>
+                                                    <img src="<?= $get_settings["logoPath"] ?>" class="img">
+                                                </div>
+                                                <div class="site-settings-color">
+                                                    <p>Couleur principale</p>
+                                                    <span class="color"></span>
+                                                </div>
                                             </div>
-                                            <p>Couleur : <span class="color"></span></p>
+                                            <?php if (is_admin()) : ?>
+                                                <div class="site-settings-tab2">
+                                                    <div class="site-settings-head">
+                                                        <h1>Modification des informations</h1>
+                                                    </div>
+                                                    <form action="./functions/settings-modif.php" class="modif-settings" method="POST" enctype="multipart/form-data">
+                                                        <div class="site-settings-logo">
+                                                            <div class="site-settings-logo1">
+                                                                <p>Nouveau logo</p>
+                                                            </div>
+                                                            <div class="site-settings-logo2">
+                                                                <label for="site-logo">
+                                                                    <i class="fa fa-upload"></i>
+                                                                    <input id="site-logo" type="file" accept="image/png, image/jpeg" name="logo" value="<?= $get_settings['logoPath'] ?>">
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="site-settings-color">
+                                                            <p>Nouvelle couleur</p>
+                                                            <input id="site-color" type="color" name="color" value="<?= $get_settings['color'] ?>">
+                                                        </div>
+                                                        <div class="site-settings-save">
+                                                            <input type="submit" name="submit-settings">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <form action="./functions/settings-cancel-modif.php" class="cancel-settings" method="POST">
+                                                    <input type="submit" name="cancel-settings" value="Annuler les modifications">
+                                                </form>
+                                            <?php endif; ?>
                                         </div>
-                                        <?php if (is_admin()) : ?>
-                                            <h1>Modification du site (en développement) :</h1>
-                                            <form action="./functions/settings-modif.php" class="modif-settings" method="POST" enctype="multipart/form-data">
-                                                <div class="modif-settings-site">
-                                                    <label for="site-logo">
-                                                        <i class="fa fa-picture-o"></i> Nouveau logo
-                                                        <input id="site-logo" type="file" accept="image/png, image/jpeg" name="logo" value="<?= $get_settings['logoPath'] ?>">
-                                                        <span id="nom-photo-logo"></span>
-                                                    </label>
-                                                    <label for="site-color">
-                                                        Nouvelle couleur
-                                                        <input id="site-color" type="color" name="color" value="<?= $get_settings['color'] ?>">
-                                                    </label>
-
-                                                </div>
-                                                <div class="loading" id='loading'>
-                                                    <img src="./public/images/Rolling-1s-200px-gray-background.svg">
-                                                </div>
-                                                <div class="envoyer-settings-modif">
-                                                    <input type="submit" name="submit-settings" id="form-submit" onclick="loading()">
-                                                </div>
-                                            </form>
-
-                                            <form action="./functions/settings-cancel-modif.php" class="cancel-settings" method="POST">
-                                                <input type="submit" name="cancel-settings" value="Annuler les modifications">
-                                            </form>
-                                        <?php endif; ?>
                                     <?php endif; ?>
                                 </div>
                             </div>
-                        </div>
-                        <!-- <div class="return deconnect">
+                            <!-- <div class="return deconnect">
                         <a href="index.php">Retour</a>
                     </div> -->
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <?php require 'components/footer.php'; ?>
-        <?php else : require "./components/form_login.php"; ?><?php endif; ?>
-        <script>
-            let input = document.getElementById("site-logo");
-            let imageName = document.getElementById("nom-photo-logo")
-
-            input.addEventListener("change", () => {
-                let inputImage = document.querySelector("input[type=file]").files[0];
-
-                imageName.innerText = inputImage.name;
-            })
-        </script>
-        <script>
-            function displayContent(idActive, idOther1, idList, idListOther1) {
-                document.getElementById(idActive).style.display = "flex";
-                document.getElementById(idList).style.background = "var(--mainColor)";
-                document.getElementById(idList).style.color = "white";
-                document.getElementById(idOther1).style.display = "none";
-                document.getElementById(idListOther1).style.background = "white";
-                document.getElementById(idListOther1).style.color = "black";
-            }
-        </script>
+            <?php require 'components/footer.php'; ?>
+            <?php /*else : require "./components/form_login.php"; ?><?php endif;*/ ?>
+            <script>
+                function displayContent(idActive, idOther1, idList, idListOther1) {
+                    document.getElementById(idActive).style.display = "flex";
+                    document.getElementById(idList).style.background = "var(--mainColor)";
+                    document.getElementById(idList).style.color = "white";
+                    document.getElementById(idOther1).style.display = "none";
+                    document.getElementById(idListOther1).style.background = "white";
+                    document.getElementById(idListOther1).style.color = "black";
+                }
+            </script>
 </body>
 
 </html>

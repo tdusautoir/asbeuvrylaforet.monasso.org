@@ -132,39 +132,48 @@
         font-size: 15px !important;
     }
 
-    .tab-and-scoreboard{
+    .tab-and-scoreboard {
         flex-direction: column;
     }
 
-    .statistiques-tab{
+    .statistiques-tab {
         width: 100%;
         margin-top: 20px;
     }
-    .container-scoreboard{
-        width: 100%;
-        min-width: 100%;
-        margin: 0;
-    }
-    .scoreboard{
+
+    .container-scoreboard {
         width: 100%;
         min-width: 100%;
         margin: 0;
     }
 
-    .filter{
+    .scoreboard {
+        width: 100%;
+        min-width: 100%;
+        margin: 0;
+    }
+
+    .filter {
         flex-direction: column;
     }
 
-    .filter div{
+    .filter div {
         width: 100%;
     }
 
-    .filter div:not(:first-child){
+    .filter div:not(:first-child) {
         margin-left: 0px;
     }
 
-    .filter div:not(:first-child){
+    .filter div:not(:first-child) {
         margin-top: 20px;
+    }
+
+    .site-settings-head,
+    .site-settings-logo,
+    .site-settings-color,
+    .site-settings-name {
+        font-size: 14px;
     }
 }
 
@@ -197,5 +206,21 @@
 
     .account-li li p {
         display: none;
+    }
+
+    .filter {
+        flex-direction: column;
+    }
+
+    .filter div {
+        width: 100%;
+    }
+
+    .filter div:not(:first-child) {
+        margin-left: 0px;
+    }
+
+    .filter div:first-child {
+        margin-bottom: 20px;
     }
 }
