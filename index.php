@@ -108,19 +108,55 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             <div class="chartJS">
               <h2>Aperçu du suivi des cotisations :</h2>
               <?php
-              $cotis = $db->query("SELECT * FROM cotis WHERE cotis.COSU = 0");
-              if ($cotis->rowCount() > 0) :
-                $cotis_exist = true;
-              else :
-                $cotis_exist = false;
-              endif;
-              if ($cotis_exist) : ?>
-                <div>
-                  <canvas id="myChart" width="975" height="160"></canvas>
-                </div>
-              <?php else : ?>
-                <p>Aucune cotisation n'a encore été enregistrée</p>
-              <?php endif; ?>
+              if (is_admin()) :
+                $cotis = $db->query("SELECT * FROM cotis WHERE cotis.COSU = 0");
+                if ($cotis->rowCount() > 0) :
+                  $cotis_exist = true;
+                else :
+                  $cotis_exist = false;
+                endif;
+                $has_category = true;
+                $cotis->closeCursor();
+                if ($cotis_exist) : ?>
+                  <div>
+                    <canvas id="myChart" width="975" height="160"></canvas>
+                  </div>
+                <?php else : ?>
+                  <p>Aucune cotisation n'a encore été récupérée.</p>
+                <?php endif; ?>
+                <?php elseif (is_educ()) :
+                $get_cat = $db->prepare('CALL PRC_GETEDUCAT(?)');
+                $get_cat->bindValue(1, $_SESSION['id']);
+                $get_cat->execute();
+                if ($get_cat->rowCount()) {
+                  $has_category = true;
+                } else {
+                  $has_category = false;
+                  $cotis_exist = false;
+                }
+                $get_cat->closeCursor();
+                if ($has_category) :
+                  $cotis = $db->prepare("SELECT DISTINCT categorie.nomCategorie FROM cotis INNER JOIN licencie ON cotis.idLicencie = licencie.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorie.idCategorie = categorieeduc.idCategorie INNER JOIN educ ON educ.idEduc = categorieeduc.idEduc WHERE cotis.COSU = 0 AND categorieeduc.idEduc = :idEduc;");
+                  $cotis->bindValue(':idEduc', $_SESSION['id']);
+                  $cotis->execute();
+                  if ($cotis->rowCount() > 0) : //he has cotis in his categories
+                    $cotis_exist = true;
+                  else :
+                    $cotis_exist = false;
+                  endif;
+                  $cotis->closeCursor();
+                  if ($cotis_exist) : ?>
+                    <div>
+                      <canvas id="myChart" width="975" height="160"></canvas>
+                    </div>
+                  <?php else : ?>
+                    <p>Aucune cotisation dans vos catégories.</p>
+                  <?php endif;
+                else :
+                  $has_category = false; ?>
+                  <p>Vous n'appartenez à aucune catégorie.</p>
+              <?php endif;
+              endif; ?>
             </div>
           </section>
           <!-- <div class="deconnect">
@@ -128,7 +164,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
         </div> -->
 
           <?php
-          if ($cotis_exist) :
+          if ($cotis_exist && $has_category) :
             if (is_admin()) :
               $get_cotis_r = $db->query("SELECT COUNT(*) FROM cotis WHERE cotis.COSU = 0 AND cotis.etat = 1");
               $nb_cotis_r = $get_cotis_r->fetch(PDO::FETCH_BOTH);
