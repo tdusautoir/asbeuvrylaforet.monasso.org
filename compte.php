@@ -167,10 +167,8 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
                                                 </div>
                                             <?php else : ?>
                                                 <div class="info-settings-value">
-                                                    <div class="info-settings-value">
-                                                        <p>Categorie</p>
-                                                        <p>Aucune catégorie</p>
-                                                    </div>
+                                                    <p>Categorie</p>
+                                                    <p>Aucune catégorie</p>
                                                 </div>
                                             <?php endif; ?>
                                             <div class="info-settings-value">
