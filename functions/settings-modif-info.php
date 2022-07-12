@@ -10,7 +10,7 @@ if (isset($_POST)) {
         if (is_admin()) {
             if (isset($_POST["prenom"]) && !empty($_POST["prenom"])) {
                 $req = $db->prepare("UPDATE admin SET prenom = :prenom WHERE idAdmin = :idAdmin");
-                $req->bindValue(':idAdmin', $_SESSIONT['id']);
+                $req->bindValue(':idAdmin', $_SESSION['id']);
                 $req->bindValue(':prenom', $_POST['prenom']);
                 $req->execute();
                 if ($req) {
@@ -24,7 +24,7 @@ if (isset($_POST)) {
                 }
             } elseif (isset($_POST["nom"]) && !empty($_POST["nom"])) {
                 $req = $db->prepare("UPDATE admin SET nom = :nom WHERE idAdmin = :idAdmin");
-                $req->bindValue(':idAdmin', $_SESSIONT['id']);
+                $req->bindValue(':idAdmin', $_SESSION['id']);
                 $req->bindValue(':nom', $_POST['nom']);
                 $req->execute();
                 if ($req) {
@@ -39,7 +39,7 @@ if (isset($_POST)) {
             } elseif (isset($_POST["mail"]) && !empty($_POST["mail"])) {
                 if (filter_var($_POST["mail"], FILTER_VALIDATE_EMAIL)) {
                     $req = $db->prepare("UPDATE admin SET mail = :mail WHERE idAdmin = :idAdmin");
-                    $req->bindValue(':idAdmin', $_SESSIONT['id']);
+                    $req->bindValue(':idAdmin', $_SESSION['id']);
                     $req->bindValue(':mail', $_POST['mail']);
                     $req->execute();
                     if ($req) {
@@ -64,7 +64,7 @@ if (isset($_POST)) {
         } elseif (is_educ()) {
             if (isset($_POST["prenom"]) && !empty($_POST["prenom"])) {
                 $req = $db->prepare("UPDATE educ SET prenom = :prenom WHERE idEduc = :idEduc");
-                $req->bindValue(':idEduc', $_SESSIONT['id']);
+                $req->bindValue(':idEduc', $_SESSION['id']);
                 $req->bindValue(':prenom', $_POST['prenom']);
                 $req->execute();
                 if ($req) {
@@ -78,7 +78,7 @@ if (isset($_POST)) {
                 }
             } elseif (isset($_POST["nom"]) && !empty($_POST["nom"])) {
                 $req = $db->prepare("UPDATE educ SET nom = :nom WHERE idEduc = :idEduc");
-                $req->bindValue(':idEduc', $_SESSIONT['id']);
+                $req->bindValue(':idEduc', $_SESSION['id']);
                 $req->bindValue(':nom', $_POST['nom']);
                 $req->execute();
                 if ($req) {
@@ -93,7 +93,7 @@ if (isset($_POST)) {
             } elseif (isset($_POST["mail"]) && !empty($_POST["mail"])) {
                 if (filter_var($_POST["mail"], FILTER_VALIDATE_EMAIL)) {
                     $req = $db->prepare("UPDATE educ SET mail = :mail WHERE idEduc = :idEduc");
-                    $req->bindValue(':idEduc', $_SESSIONT['id']);
+                    $req->bindValue(':idEduc', $_SESSION['id']);
                     $req->bindValue(':mail', $_POST['mail']);
                     $req->execute();
                     if ($req) {

@@ -75,17 +75,17 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                 if (isset($_GET['q']) && !empty($_GET['q'])) :
                                     $q_ = explode(' ', $_GET['q']); //take only the first word
                                     $q = $q_[0];
-                                    $req = $db->prepare("SELECT licencie.idLicencie, categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.dateN, licencie.mail, licencie.USRCRE FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.COSU = 0 AND licencie.nom LIKE '%$q%' ORDER BY licencie.DCRE DESC;"); //licenciés de la bdd selon la recherche q
+                                    $req = $db->prepare("SELECT licencie.idLicencie, categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.dateN, licencie.mail, licencie.USRCRE FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN cotis ON licencie.idLicencie = cotis.idLicencie WHERE licencie.COSU = 0 AND licencie.nom AND cotis.etat != 1 LIKE '%$q%' ORDER BY licencie.DCRE DESC;"); //licenciés de la bdd selon la recherche q
                                     $req->execute();
                                     $rowCount = $req->rowCount();
                                 elseif (isset($_GET['categorie']) && !empty($_GET['categorie']) && $_GET['categorie'] != '') :
                                     $categorie = $_GET['categorie'];
-                                    $req = $db->prepare("SELECT licencie.idLicencie, categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.dateN, licencie.mail, licencie.USRCRE FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.COSU = 0 AND categorie.nomCategorie = :categorie ORDER BY licencie.DCRE DESC;"); //licenciés de la bdd selon la categorie
+                                    $req = $db->prepare("SELECT licencie.idLicencie, categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.dateN, licencie.mail, licencie.USRCRE FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN cotis ON licencie.idLicencie = cotis.idLicencie WHERE licencie.COSU = 0 AND categorie.nomCategorie = :categorie AND cotis.etat != 1 ORDER BY licencie.DCRE DESC;"); //licenciés de la bdd selon la categorie
                                     $req->bindValue('categorie', $categorie);
                                     $req->execute();
                                     $rowCount = $req->rowCount();
                                 else :
-                                    $req = $db->prepare("SELECT licencie.idLicencie, categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.dateN, licencie.mail, licencie.USRCRE FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.COSU = 0 ORDER BY licencie.DCRE DESC;"); //licenciés de la bdd classé par date croissant 
+                                    $req = $db->prepare("SELECT licencie.idLicencie, categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.dateN, licencie.mail, licencie.USRCRE FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN cotis ON licencie.idLicencie = cotis.idLicencie WHERE licencie.COSU = 0 AND cotis.etat != 1 ORDER BY licencie.DCRE DESC;"); //licenciés de la bdd classé par date croissant 
                                     $req->execute();
                                     $rowCount = $req->rowCount();
                                 endif;
@@ -93,19 +93,19 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                 if (isset($_GET['q']) && !empty($_GET['q'])) :
                                     $q_ = explode(' ', $_GET['q']); //take only the first word
                                     $q = $q_[0];
-                                    $req = $db->prepare("SELECT licencie.idLicencie, categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.dateN, licencie.mail, licencie.USRCRE FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorieeduc.idCategorie = categorie.idCategorie INNER JOIN educ ON educ.idEduc = categorieeduc.idEduc WHERE licencie.COSU = 0 AND educ.idEduc = :idEduc AND licencie.nom LIKE '%$q%' ORDER BY licencie.DCRE DESC;"); //licenciés de la bdd selon la recherche q et les catégories associés à l'educateur connecté
+                                    $req = $db->prepare("SELECT licencie.idLicencie, categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.dateN, licencie.mail, licencie.USRCRE FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorieeduc.idCategorie = categorie.idCategorie INNER JOIN educ ON educ.idEduc = categorieeduc.idEduc INNER JOIN cotis ON licencie.idLicencie = cotis.idLicencie WHERE licencie.COSU = 0 AND educ.idEduc = :idEduc AND licencie.nom AND cotis.etat != 1 LIKE '%$q%' ORDER BY licencie.DCRE DESC;"); //licenciés de la bdd selon la recherche q et les catégories associés à l'educateur connecté
                                     $req->bindValue('idEduc', $_SESSION['id']);
                                     $req->execute();
                                     $rowCount = $req->rowCount();
                                 elseif (isset($_GET['categorie']) && !empty($_GET['categorie']) && $_GET['categorie'] != '') :
                                     $categorie = $_GET['categorie'];
-                                    $req = $db->prepare("SELECT licencie.idLicencie, categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.dateN, licencie.mail, licencie.USRCRE FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorieeduc.idCategorie = categorie.idCategorie INNER JOIN educ ON educ.idEduc = categorieeduc.idEduc WHERE licencie.COSU = 0 AND educ.idEduc = :idEduc AND categorie.nomCategorie = :categorie ORDER BY licencie.DCRE DESC;"); //licenciés de la bdd selon la recherche q et les catégories associés à l'educateur connecté
+                                    $req = $db->prepare("SELECT licencie.idLicencie, categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.dateN, licencie.mail, licencie.USRCRE FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorieeduc.idCategorie = categorie.idCategorie INNER JOIN educ ON educ.idEduc = categorieeduc.idEduc INNER JOIN cotis ON licencie.idLicencie = cotis.idLicencie WHERE licencie.COSU = 0 AND educ.idEduc = :idEduc AND categorie.nomCategorie = :categorie AND cotis.etat != 1 ORDER BY licencie.DCRE DESC;"); //licenciés de la bdd selon la recherche q et les catégories associés à l'educateur connecté
                                     $req->bindValue('idEduc', $_SESSION['id']);
                                     $req->bindValue('categorie', $categorie);
                                     $req->execute();
                                     $rowCount = $req->rowCount();
                                 else :
-                                    $req = $db->prepare("SELECT licencie.idLicencie, categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.dateN, licencie.mail, licencie.USRCRE FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorieeduc.idCategorie = categorie.idCategorie INNER JOIN educ ON educ.idEduc = categorieeduc.idEduc WHERE licencie.COSU = 0 AND educ.idEduc = :idEduc ORDER BY licencie.DCRE DESC;"); //licenciés de la bdd selon les catégories associés à l'educateur connecté 
+                                    $req = $db->prepare("SELECT licencie.idLicencie, categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.dateN, licencie.mail, licencie.USRCRE FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorieeduc.idCategorie = categorie.idCategorie INNER JOIN educ ON educ.idEduc = categorieeduc.idEduc INNER JOIN cotis ON licencie.idLicencie = cotis.idLicencie WHERE licencie.COSU = 0 AND educ.idEduc = :idEduc AND cotis.etat != 1 ORDER BY licencie.DCRE DESC;"); //licenciés de la bdd selon les catégories associés à l'educateur connecté 
                                     $req->bindValue('idEduc', $_SESSION['id']);
                                     $req->execute();
                                     $rowCount = $req->rowCount();
