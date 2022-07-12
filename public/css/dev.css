@@ -177,7 +177,8 @@
 .site-settings-head,
 .site-settings-logo,
 .site-settings-color,
-.site-settings-name {
+.site-settings-name,
+.info-settings-value {
     font-weight: 600;
     font-size: 17px;
     display: flex;
@@ -192,7 +193,20 @@
     border-bottom: none;
 }
 
-.site-settings-color {
+.info-settings-modif {
+    display: flex;
+    align-items: baseline;
+}
+
+.info-settings-modif i {
+    color: var(--mainColor);
+    font-size: 12px;
+    font-weight: 500;
+    margin-left: 5px;
+}
+
+.site-settings-color,
+.site-settings-footer {
     border-bottom: 1px solid #e6e6e6;
     border-radius: 0 0 5px 5px;
 }
@@ -273,8 +287,13 @@
 }
 
 .site-settings input {
+    width: auto;
     cursor: pointer;
 }
+
+
+
+
 
 .filter {
     margin-top: 40px;

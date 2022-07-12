@@ -39,6 +39,10 @@ line-height: 1;
 content: "\f015";
 }
 
+.fa-address-card {
+content='\f2bb'
+}
+
 .fa-upload:before {
 content: "\f093"
 }
@@ -132,7 +136,7 @@ content: "\f060";
 padding-right: 5px;
 }
 .fa-file-pdf:before{
-    content: "\f1c1";
+content: "\f1c1";
 }
 .fa-search:before {
 content: "\f002";
@@ -147,14 +151,14 @@ content: "\f068";
 }
 
 .fa-download:before {
-  content: "\f019";
+content: "\f019";
 }
 
 .fa-paper-plane:before {
-  content: "\f1d8"; }
+content: "\f1d8"; }
 
 .fa-sign-out:before {
-  content: "\f08b"; }
+content: "\f08b"; }
 
 @font-face {
 font-family: 'Font Awesome 5 Pro';
