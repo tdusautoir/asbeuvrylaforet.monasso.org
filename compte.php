@@ -77,7 +77,7 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
                                                     <p id="text2"><?= htmlspecialchars($get_account_info["prenom"]) ?></p>
                                                     <form action="./functions/settings-modif-info.php" method="POST">
                                                         <input type="hidden" value="<?= $_SESSION["id"] ?>" name="id">
-                                                        <input type=" text" value="<?= htmlspecialchars($get_account_info["prenom"]) ?>" id="inputText2" name="prenom"></input>
+                                                        <input type="text" value="<?= htmlspecialchars($get_account_info["prenom"]) ?>" id="inputText2" name="prenom"></input>
                                                         <i onclick="displayInput(2)" id="pencil2" class="fa fa-pencil"></i>
                                                         <button type="submit" onclick="form.submit()" id="validate2"><i class="fa fa-check"></i></button>
                                                     </form>
@@ -111,22 +111,37 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
                                             <div class="info-settings-value">
                                                 <p>Nom</p>
                                                 <div class="info-settings-modif">
-                                                    <p><?= htmlspecialchars($get_account_info["nom"]) ?></p>
-                                                    <i class="fa fa-pencil"></i>
+                                                    <p id="text1"><?= htmlspecialchars($get_account_info["nom"]) ?></p>
+                                                    <form action="./functions/settings-modif-info.php" method="POST">
+                                                        <input type="hidden" value="<?= $_SESSION["id"] ?>" name="id">
+                                                        <input type="text" value="<?= htmlspecialchars($get_account_info["nom"]) ?>" id="inputText1" name="prenom"></input>
+                                                        <i onclick="displayInput(1)" id="pencil1" class="fa fa-pencil"></i>
+                                                        <button type="submit" onclick="form.submit()" id="validate1"><i class="fa fa-check"></i></button>
+                                                    </form>
                                                 </div>
                                             </div>
                                             <div class="info-settings-value">
                                                 <p>Prénom</p>
                                                 <div class="info-settings-modif">
-                                                    <p><?= htmlspecialchars($get_account_info["prenom"]) ?></p>
-                                                    <i class="fa fa-pencil"></i>
+                                                    <p id="text2"><?= htmlspecialchars($get_account_info["prenom"]) ?></p>
+                                                    <form action="./functions/settings-modif-info.php" method="POST">
+                                                        <input type="hidden" value="<?= $_SESSION["id"] ?>" name="id">
+                                                        <input type="text" value="<?= htmlspecialchars($get_account_info["prenom"]) ?>" id="inputText2" name="prenom"></input>
+                                                        <i onclick="displayInput(2)" id="pencil2" class="fa fa-pencil"></i>
+                                                        <button type="submit" onclick="form.submit()" id="validate2"><i class="fa fa-check"></i></button>
+                                                    </form>
                                                 </div>
                                             </div>
                                             <div class="info-settings-value">
                                                 <p>Mail</p>
                                                 <div class="info-settings-modif">
-                                                    <p><?= htmlspecialchars($get_account_info["mail"]) ?></p>
-                                                    <i class="fa fa-pencil"></i>
+                                                    <p id="text3"><?= htmlspecialchars($get_account_info["mail"]) ?></p>
+                                                    <form action="./functions/settings-modif-info.php" method="POST">
+                                                        <input type="hidden" value="<?= $_SESSION["id"] ?>" name="id">
+                                                        <input type="text" value="<?= htmlspecialchars($get_account_info["mail"]) ?>" id="inputText3" name="prenom"></input>
+                                                        <i onclick="displayInput(3)" id="pencil3" class="fa fa-pencil"></i>
+                                                        <button type="submit" onclick="form.submit()" id="validate3"><i class="fa fa-check"></i></button>
+                                                    </form>
                                                 </div>
                                             </div>
 
@@ -157,6 +172,7 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
                                                         <p>Aucune catégorie</p>
                                                     </div>
                                                 <?php endif; ?>
+                                                </div>
                                                 <div class="info-settings-value">
                                                     <p>Responsable</p>
                                                     <p><?php if ($get_account_info["responsable"] == 1) {
@@ -172,70 +188,65 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
                                                 </div>
                                             <?php endif; ?>
                                         <?php endif; ?>
+                                </div>
+                                <div id="account-settings">
+                                    <?php if ($settings) : ?>
+                                        <div class="site-settings">
+                                            <div class="site-settings-tab1">
+                                                <div class="site-settings-head">
+                                                    <h1>Informations de l'association</h1>
                                                 </div>
-                                                <div id="account-settings">
-                                                    <?php if ($settings) : ?>
-                                                        <div class="site-settings">
-                                                            <div class="site-settings-tab1">
-                                                                <div class="site-settings-head">
-                                                                    <h1>Informations de l'association</h1>
-                                                                    <i class="fa fa-pencil" onclick="displayModif('site-settings-tab2')"></i>
-                                                                </div>
-                                                                <div class="site-settings-name">
-                                                                    <p>Nom de l'association</p>
-                                                                    <p>AS BEUVRY-LA-FORÊT</p>
-                                                                </div>
-                                                                <div class="site-settings-logo">
-                                                                    <p>Logo du site</p>
-                                                                    <img src="<?= $get_settings["logoPath"] ?>" class="img">
-                                                                </div>
-                                                                <div class="site-settings-color">
-                                                                    <p>Couleur principale</p>
-                                                                    <span class="color"></span>
-                                                                </div>
+                                                <div class="site-settings-name">
+                                                    <p>Nom de l'association</p>
+                                                    <p>AS BEUVRY-LA-FORÊT</p>
+                                                </div>
+                                                <div class="site-settings-logo">
+                                                    <p>Logo du site</p>
+                                                    <img src="<?= $get_settings["logoPath"] ?>" class="img">
+                                                </div>
+                                                <div class="site-settings-color">
+                                                    <p>Couleur principale</p>
+                                                    <span class="color"></span>
+                                                </div>
+                                            </div>
+                                            <?php if (is_admin()) : ?>
+                                                <div class="site-settings-tab2">
+                                                    <div class="site-settings-head">
+                                                        <h1>Modification des informations</h1>
+                                                    </div>
+                                                    <form action="./functions/settings-modif.php" class="modif-settings" method="POST" enctype="multipart/form-data">
+                                                        <div class="site-settings-logo">
+                                                            <div class="site-settings-logo1">
+                                                                <p>Nouveau logo</p>
                                                             </div>
-                                                            <?php if (is_admin()) : ?>
-                                                                <div class="site-settings-tab2" id="site-settings-tab2">
-                                                                    <div class="site-settings-head">
-                                                                        <h1>Modification des informations</h1>
-                                                                    </div>
-                                                                    <form action="./functions/settings-modif.php" class="modif-settings" method="POST" enctype="multipart/form-data">
-                                                                        <div class="site-settings-logo">
-                                                                            <div class="site-settings-logo1">
-                                                                                <p>Nouveau logo</p>
-                                                                            </div>
-                                                                            <div class="site-settings-logo2">
-                                                                                <label for="site-logo">
-                                                                                    <i class="fa fa-upload"></i>
-                                                                                    <input id="site-logo" type="file" accept="image/png, image/jpeg" name="logo" value="<?= $get_settings['logoPath'] ?>">
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="site-settings-color">
-                                                                            <p>Nouvelle couleur</p>
-                                                                            <label for="site-color" class="site-color-label">
-                                                                                <input id="site-color" type="color" name="color" value="<?= $get_settings['color'] ?>">
-                                                                            </label>
-                                                                        </div>
-                                                                        <div class="site-settings-save">
-                                                                            <input type="submit" name="submit-settings" value="Modifier">
-                                                                        </div>
-                                                                    </form>
-                                                                    <form action="./functions/settings-cancel-modif.php" class="cancel-settings" method="POST">
-                                                                        <input type="submit" name="cancel-settings" value="Annuler les modifications">
-                                                                    </form>
-                                                                </div>
-                                                            <?php endif; ?>
+                                                            <div class="site-settings-logo2">
+                                                                <label for="site-logo">
+                                                                    <i class="fa fa-upload"></i>
+                                                                    <input id="site-logo" type="file" accept="image/png, image/jpeg" name="logo" value="<?= $get_settings['logoPath'] ?>">
+                                                                </label>
+                                                            </div>
                                                         </div>
-                                                    <?php endif; ?>
+                                                        <div class="site-settings-color">
+                                                            <p>Nouvelle couleur</p>
+                                                            <input id="site-color" type="color" name="color" value="<?= $get_settings['color'] ?>">
+                                                        </div>
+                                                        <div class="site-settings-save">
+                                                            <input type="submit" name="submit-settings">
+                                                        </div>
+                                                    </form>
                                                 </div>
+                                                <form action="./functions/settings-cancel-modif.php" class="cancel-settings" method="POST">
+                                                    <input type="submit" name="cancel-settings" value="Annuler les modifications">
+                                                </form>
+                                            <?php endif; ?>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
         <script>
             function displayInput(index) {
@@ -262,8 +273,8 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
             }
 
             function resizeInput() {
-                let inputValue = this.value.length * 10;
-                this.style.width = (inputValue + 10) + "px";
+                let inputValue = this.value.length;
+                this.style.width = (inputValue + 2) + "ch";
             }
         </script>
         <script>
@@ -274,11 +285,6 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
                 document.getElementById(idOther1).style.display = "none";
                 document.getElementById(idListOther1).style.background = "white";
                 document.getElementById(idListOther1).style.color = "black";
-            }
-        </script>
-        <script>
-            function displayModif(idDiv) {
-                document.getElementById(idDiv).style.display = "unset";
             }
         </script>
         <?php require 'components/footer.php'; ?>

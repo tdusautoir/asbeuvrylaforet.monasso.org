@@ -35,7 +35,7 @@ if (isset($_POST)) {
                     exit();
                 }
             } elseif (isset($_POST["mail"]) && !empty($_POST["mail"])) {
-                if (filter_var($_POST["mail-licencie"], FILTER_VALIDATE_EMAIL)) {
+                if (filter_var($_POST["mail"], FILTER_VALIDATE_EMAIL)) {
                     $req = $db->prepare("UPDATE admin SET mail = :mail");
                     $req->bindValue(':mail', $_POST['mail']);
                     $req->execute();
@@ -86,7 +86,7 @@ if (isset($_POST)) {
                     exit();
                 }
             } elseif (isset($_POST["mail"]) && !empty($_POST["mail"])) {
-                if (filter_var($_POST["mail-licencie"], FILTER_VALIDATE_EMAIL)) {
+                if (filter_var($_POST["mail"], FILTER_VALIDATE_EMAIL)) {
                     $req = $db->prepare("UPDATE educ SET mail = :mail");
                     $req->bindValue(':mail', $_POST['mail']);
                     $req->execute();
