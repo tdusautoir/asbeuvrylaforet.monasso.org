@@ -138,20 +138,14 @@ section.panel-down {
     font-size: 18px;
 }
 
-.li-admin li::before {
-    content: "";
-    background: #D20001;
-    border-radius: 100%;
-    width: 10px;
-    height: 10px;
-    margin-right: 10px;
-    align-self: center;
-    display: inline-block;
-}
-
 .li-admin li {
     display: flex;
+    align-items: center;
     margin-top: 5px;
+}
+
+.li-admin .state-indicator{
+    margin-right: 10px;
 }
 
 .li-admin p span:first-child {

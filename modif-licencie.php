@@ -60,7 +60,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                             <h1>
                                 Modifier un licencié
                             </h1>
-                            <form action="./functions/licencie-modif.php" method="POST">
+                            <form action="./functions/licencie-modif.php" enctype="multipart/form-data" method="POST">
                                 <div class="form-modif-li">
                                     <input value="<?= htmlspecialchars($lastname_licencie) ?>" type="text" class="nom-licencie" placeholder="" name="nom-licencie" maxlength="20">
                                     <input value="<?= htmlspecialchars($firstname_licencie) ?>" type="text" class="prenom-licencie" placeholder="" name="prenom-licencie" maxlength="15">
@@ -69,7 +69,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                     <label for="photo-licencie">
                                         <i class="fa fa-picture-o"></i>
                                         Photo
-                                        <input id="photo-licencie" type="file" accept="image/png, image/jpeg" />
+                                        <input id="photo-licencie" type="file" name="photo-licencie" accept="image/png, image/jpeg" />
                                         <span id="nom-photo-licencie"></span>
                                     </label>
                                     <input value="<?= $dateN_licencie ?>" type="date" placeholder="Date de naissance" name="dateN-licencie">

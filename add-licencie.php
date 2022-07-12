@@ -58,6 +58,15 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
                 <ul>
                   <?php while ($LIC = $req->fetch(PDO::FETCH_ASSOC)) : ?>
                     <li>
+                      <?php if ($LIC["etat"] == 1) : ?>
+                        <span title="non réglée" class="state-indicator" style="background-color: red;"></span>
+                      <?php elseif ($LIC["etat"] == 2) : ?>
+                        <span title="réglée" class="state-indicator" style="background-color: orange;"></span>
+                      <?php elseif ($LIC["etat"] == 3) : ?>
+                        <span title="non encaissée" class="state-indicator" style="background-color: white; border: 1px solid green;"></span>
+                      <?php elseif ($LIC["etat"] == 4) : ?>
+                        <span title="encaissée" class="state-indicator" style="background-color: green;"></span>
+                      <?php endif; ?>
                       <p><?= $LIC["nomCategorie"] ?> - <span><?= $LIC["prenom"] . " " . strtoupper($LIC["nom"]) ?></span>
                         <?php if (isset($LIC["USRCRE"])) : ?>par <span><?= $LIC["USRCRE"]; ?> </span></p> <?php endif; ?>
                     </li>

@@ -86,6 +86,15 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 <ul>
                   <?php while ($LIC = $req->fetch(PDO::FETCH_ASSOC)) : ?>
                     <li>
+                      <?php if ($LIC["etat"] == 1) : ?>
+                        <span title="non réglée" class="state-indicator" style="background-color: red;"></span>
+                      <?php elseif ($LIC["etat"] == 2) : ?>
+                        <span title="réglée" class="state-indicator" style="background-color: orange;"></span>
+                      <?php elseif ($LIC["etat"] == 3) : ?>
+                        <span title="non encaissée" class="state-indicator" style="background-color: white; border: 1px solid green;"></span>
+                      <?php elseif ($LIC["etat"] == 4) : ?>
+                        <span title="encaissée" class="state-indicator" style="background-color: green;"></span>
+                      <?php endif; ?>
                       <p><?= htmlspecialchars($LIC["nomCategorie"]) ?> - <span><?= htmlspecialchars($LIC["prenom"]) . " " . strtoupper(htmlspecialchars($LIC["nom"])) ?></span>
                         <?php if (isset($LIC["USRCRE"])) : ?>par <span><?= htmlspecialchars($LIC["USRCRE"]) ?> </span></p> <?php endif; ?>
                     </li>
@@ -98,71 +107,104 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             </div>
             <div class="chartJS">
               <h2>Aperçu du suivi des cotisations :</h2>
-              <div>
-                <canvas id="myChart" width="975" height="160"></canvas>
-              </div>
+              <?php
+              $cotis = $db->query("SELECT * FROM cotis WHERE cotis.COSU = 0");
+              if ($cotis->rowCount() > 0) :
+                $cotis_exist = true;
+              else :
+                $cotis_exist = false;
+              endif;
+              if ($cotis_exist) : ?>
+                <div>
+                  <canvas id="myChart" width="975" height="160"></canvas>
+                </div>
+              <?php else : ?>
+                <p>Aucune cotisation n'a encore été enregistrée</p>
+              <?php endif; ?>
             </div>
           </section>
           <!-- <div class="deconnect">
           <a href="index.php?action=logout">Deconnexion</a>
         </div> -->
 
-          <?php $get_cotis_r = $db->query("SELECT COUNT(*) FROM cotis WHERE cotis.COSU = 0 AND cotis.etat = 1");
-          $nb_cotis_r = $get_cotis_r->fetch(PDO::FETCH_BOTH);
-          $get_cotis_nr = $db->query("SELECT COUNT(*) FROM cotis WHERE cotis.COSU = 0 AND cotis.etat = 2");
-          $nb_cotis_nr = $get_cotis_nr->fetch(PDO::FETCH_BOTH);
-          $get_cotis_ne = $db->query("SELECT COUNT(*) FROM cotis WHERE cotis.COSU = 0 AND cotis.etat = 3");
-          $nb_cotis_ne = $get_cotis_ne->fetch(PDO::FETCH_BOTH);
-          $get_cotis_e = $db->query("SELECT COUNT(*) FROM cotis WHERE cotis.COSU = 0 AND cotis.etat = 4");
-          $nb_cotis_e = $get_cotis_e->fetch(PDO::FETCH_BOTH);
-          $data = [intval($nb_cotis_r[0]), intval($nb_cotis_nr[0]) + intval($nb_cotis_ne[0]) + intval($nb_cotis_e[0])];
+          <?php
+          if ($cotis_exist) :
+            if (is_admin()) :
+              $get_cotis_r = $db->query("SELECT COUNT(*) FROM cotis WHERE cotis.COSU = 0 AND cotis.etat = 1");
+              $nb_cotis_r = $get_cotis_r->fetch(PDO::FETCH_BOTH);
+              $get_cotis_nr = $db->query("SELECT COUNT(*) FROM cotis WHERE cotis.COSU = 0 AND cotis.etat = 2");
+              $nb_cotis_nr = $get_cotis_nr->fetch(PDO::FETCH_BOTH);
+              $get_cotis_ne = $db->query("SELECT COUNT(*) FROM cotis WHERE cotis.COSU = 0 AND cotis.etat = 3");
+              $nb_cotis_ne = $get_cotis_ne->fetch(PDO::FETCH_BOTH);
+              $get_cotis_e = $db->query("SELECT COUNT(*) FROM cotis WHERE cotis.COSU = 0 AND cotis.etat = 4");
+              $nb_cotis_e = $get_cotis_e->fetch(PDO::FETCH_BOTH);
+            elseif (is_educ()) :
+              $get_cotis_r = $db->prepare("SELECT COUNT(*) FROM cotis INNER JOIN licencie ON cotis.idLicencie = licencie.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorie.idCategorie = categorieeduc.idCategorie WHERE cotis.COSU = 0 AND cotis.etat = 1 AND categorieeduc.idEduc = :idEduc");
+              $get_cotis_r->bindValue('idEduc', $_SESSION['id']);
+              $get_cotis_r->execute();
+              $nb_cotis_r = $get_cotis_r->fetch(PDO::FETCH_BOTH);
+              $get_cotis_nr = $db->prepare("SELECT COUNT(*) FROM cotis INNER JOIN licencie ON cotis.idLicencie = licencie.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorie.idCategorie = categorieeduc.idCategorie WHERE cotis.COSU = 0 AND cotis.etat = 2 AND categorieeduc.idEduc = :idEduc");
+              $get_cotis_nr->bindValue('idEduc', $_SESSION['id']);
+              $get_cotis_nr->execute();
+              $nb_cotis_nr = $get_cotis_nr->fetch(PDO::FETCH_BOTH);
+              $get_cotis_ne = $db->prepare("SELECT COUNT(*) FROM cotis INNER JOIN licencie ON cotis.idLicencie = licencie.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorie.idCategorie = categorieeduc.idCategorie WHERE cotis.COSU = 0 AND cotis.etat = 3 AND categorieeduc.idEduc = :idEduc");
+              $get_cotis_ne->bindValue('idEduc', $_SESSION['id']);
+              $get_cotis_ne->execute();
+              $nb_cotis_ne = $get_cotis_ne->fetch(PDO::FETCH_BOTH);
+              $get_cotis_e = $db->prepare("SELECT COUNT(*) FROM cotis INNER JOIN licencie ON cotis.idLicencie = licencie.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorie.idCategorie = categorieeduc.idCategorie WHERE cotis.COSU = 0 AND cotis.etat = 4 AND categorieeduc.idEduc = :idEduc");
+              $get_cotis_e->bindValue('idEduc', $_SESSION['id']);
+              $get_cotis_e->execute();
+              $nb_cotis_e = $get_cotis_e->fetch(PDO::FETCH_BOTH);
+            endif;
+            $data = [intval($nb_cotis_r[0]), intval($nb_cotis_nr[0]) + intval($nb_cotis_ne[0]) + intval($nb_cotis_e[0])];
           ?>
 
-          <script>
-            $(document).ready(function() {
-              (Chart.defaults.font.size = 14),
-              (Chart.defaults.font.family = "Montserrat");
-              const F = document.getElementById("myChart").getContext("2d");
-              new Chart(F, {
-                type: "pie",
-                data: {
-                  labels: ["Cotisations non reçues", "Cotisations reçues"],
-                  datasets: [{
-                    tooltip: {
-                      callbacks: {
-                        label: function(data) {
-                          const percentage = (data.parsed / data.dataset.data.reduce((a, b) => a + b, 0)) * 100
-                          return `${data.label ?? ''} : ${percentage.toFixed(0)}%`;
+            <script>
+              $(document).ready(function() {
+                (Chart.defaults.font.size = 14),
+                (Chart.defaults.font.family = "Montserrat");
+                const F = document.getElementById("myChart").getContext("2d");
+                new Chart(F, {
+                  type: "pie",
+                  data: {
+                    labels: ["Cotisations non reçues", "Cotisations reçues"],
+                    datasets: [{
+                      tooltip: {
+                        callbacks: {
+                          label: function(data) {
+                            const percentage = (data.parsed / data.dataset.data.reduce((a, b) => a + b, 0)) * 100
+                            return `${data.label ?? ''} : ${percentage.toFixed(0)}%`;
+                          },
                         },
                       },
-                    },
-                    label: "Aperçu du suivi des cotisations",
-                    data: <?= json_encode($data); ?>,
-                    backgroundColor: ["rgb(235, 52, 52)", "rgb(235, 110, 52)", "rgba(81, 190, 132, 1)"],
-                    borderColor: ["rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)"],
-                    borderWidth: 3,
-                    hoverOffset: 20,
-                    hoverBorderWidth: 0,
-                  }, ],
-                },
-                options: {
-                  // responsive: !0,
-                  // maintainAspectRatio: !1,
-                  layout: {
-                    padding: 25
+                      label: "Aperçu du suivi des cotisations",
+                      data: <?= json_encode($data); ?>,
+                      backgroundColor: ["rgb(235, 52, 52)", "rgb(235, 110, 52)", "rgba(81, 190, 132, 1)"],
+                      borderColor: ["rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)"],
+                      borderWidth: 3,
+                      hoverOffset: 20,
+                      hoverBorderWidth: 0,
+                    }, ],
                   },
-                  plugins: {
-                    legend: {
-                      position: "bottom",
-                      labels: {
-                        padding: 20
-                      }
+                  options: {
+                    // responsive: !0,
+                    // maintainAspectRatio: !1,
+                    layout: {
+                      padding: 25
                     },
-                  }
-                },
+                    plugins: {
+                      legend: {
+                        position: "bottom",
+                        labels: {
+                          padding: 20
+                        }
+                      },
+                    }
+                  },
+                });
               });
-            });
-          </script>
+            </script>
+          <?php endif; ?>
         </div>
       </div>
     </div>

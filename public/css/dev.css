@@ -340,6 +340,18 @@
     font-size: 16px;
 }
 
+.cancel-filter {
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: fit-content;
+    padding: 10px 20px;
+    background-color: #F8F8F8;
+    font-weight: 500;
+    border: 1px solid #e6e6e6;
+    border-radius: 6px;
+}
+
 .site-settings-logo img {
     width: 50px;
 }

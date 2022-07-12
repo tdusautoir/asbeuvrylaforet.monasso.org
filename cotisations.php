@@ -32,7 +32,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                         <option disabled <?php if (!isset($_GET['method']) || empty($_GET['method'])) : ?>selected<?php endif; ?>>Methode</option>
                                         <?php
                                         if (is_admin()) :
-                                            $getMethod = $db->query("SELECT DISTINCT cotis.methode FROM cotis WHERE COSU = 0 ORDER BY cotis.methode ASC");
+                                            $getMethod = $db->query("SELECT DISTINCT cotis.methode FROM cotis WHERE cotis.COSU = 0 ORDER BY cotis.methode ASC");
                                             if ($getMethod->rowCount() > 0) :
                                                 while ($method = $getMethod->fetch()) : ?>
                                                     <?php if (isset($method['methode'])) : ?>
@@ -45,10 +45,10 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                 <?php endwhile;
                                             endif;
                                         elseif (is_educ()) :
-                                            $getMethod = $db->prepare("SELECT DISTINCT cotis.methode FROM cotis INNER JOIN licencie ON cotis.idLicencie = licencie.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorie.idCategorie = categorieeduc.idCategorie WHERE COSU = 0 AND categorieeduc.idEduc = :idEduc ORDER BY cotis.methode ASC");
+                                            $getMethod = $db->prepare("SELECT DISTINCT cotis.methode FROM cotis INNER JOIN licencie ON cotis.idLicencie = licencie.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorie.idCategorie = categorieeduc.idCategorie WHERE cotis.COSU = 0 AND categorieeduc.idEduc = :idEduc ORDER BY cotis.methode ASC");
+                                            $getMethod->bindValue("idEduc", $_SESSION['id']);
+                                            $getMethod->execute();
                                             if ($getMethod->rowCount() > 0) :
-                                                $getMethod->bindValue("idEduc", $_SESSION['id']);
-                                                $getMethod->execute();
                                                 while ($method = $getMethod->fetch()) : ?>
                                                     <?php if (isset($method['methode'])) : ?>
                                                         <option value="<?= $method['methode']; ?>" <?php if (isset($_GET['method']) && $method['methode'] == $_GET['method']) : ?>selected<?php endif; ?>>
@@ -88,7 +88,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                             $getState->execute();
                                             if ($getState->rowCount() > 0) :
                                                 while ($state = $getState->fetch()) : ?>
-                                                    <option value="<?= $state['etat']; ?>" <?php if (isset($_GET['state']) && $state['state'] == $_GET['state']) : ?>selected<?php endif; ?>>
+                                                    <option value="<?= $state['etat']; ?>" <?php if (isset($_GET['state']) && $state['etat'] == $_GET['state']) : ?>selected<?php endif; ?>>
                                                         <?php if ($state['etat'] == 1) : ?> Non réglée <?php endif; ?>
                                                         <?php if ($state['etat'] == 2) : ?> Réglée <?php endif; ?>
                                                         <?php if ($state['etat'] == 3) : ?> Non encaissée <?php endif; ?>
@@ -146,13 +146,14 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                     if (isset($_GET['q']) && !empty($_GET['q'])) :
                                         $q_ = explode(' ', $_GET['q']); //take only the first word
                                         $q = $q_[0];
-                                        $req = $db->prepare("SELECT cotis.idCotis, cotis.methode, cotis.prix, cotis.type, cotis.etat, licencie.prenom, licencie.nom FROM cotis INNER JOIN licencie ON cotis.idLicencie = licencie.idLicencie INNER JOIN categorie ON categorie.idCategorie = licencie.idCategorie INNER JOIN categorieeduc ON categorieeduc.idCategorie = categorie.idCategorie WHERE cotis.COSU = 0 AND categorieeduc.idEduc = :idEduc AND categorie.nomCategorie = :categorie AND licencie.nom LIKE '%$q%' ORDER BY cotis.DCRE DESC;"); //Liste des cotisations selon les catégories de l'educateur
+                                        $req = $db->prepare("SELECT cotis.idCotis, cotis.methode, cotis.prix, cotis.type, cotis.etat, licencie.prenom, licencie.nom FROM cotis INNER JOIN licencie ON cotis.idLicencie = licencie.idLicencie INNER JOIN categorie ON categorie.idCategorie = licencie.idCategorie INNER JOIN categorieeduc ON categorieeduc.idCategorie = categorie.idCategorie WHERE cotis.COSU = 0 AND categorieeduc.idEduc = :idEduc AND licencie.nom LIKE '%$q%' ORDER BY cotis.DCRE DESC;"); //Liste des cotisations selon les catégories de l'educateur
                                         $req->bindValue('idEduc', $_SESSION['id']);
                                         $req->execute();
                                         $rowCount = $req->rowCount();
                                     elseif (isset($_GET['method']) && !empty($_GET['method']) && $_GET['method'] != '') :
                                         $method = $_GET['method'];
                                         $req = $db->prepare("SELECT cotis.idCotis, cotis.methode, cotis.prix, cotis.type, cotis.etat, licencie.prenom, licencie.nom FROM cotis INNER JOIN licencie ON cotis.idLicencie = licencie.idLicencie INNER JOIN categorie ON categorie.idCategorie = licencie.idCategorie INNER JOIN categorieeduc ON categorieeduc.idCategorie = categorie.idCategorie WHERE cotis.COSU = 0 AND cotis.methode = :methode AND categorieeduc.idEduc = :idEduc ORDER BY cotis.DCRE DESC;"); //Liste des cotisations
+                                        $req->bindValue('idEduc', $_SESSION['id']);
                                         $req->bindValue('methode', $method);
                                         $req->execute();
                                         $rowCount = $req->rowCount();
@@ -248,7 +249,6 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 </div>
             </div>
             <script type="text/javascript" src="./public/js/tableau.js"></script>
-            <script type="text/javascript" src="./public/js/modal.js"></script>
             <?php require './components/footer.php'; ?>
         <?php else :
             create_flash_message(ERROR_PSWD, "Vous ne possédez pas les droits.", FLASH_ERROR); //the user is not admin or educ

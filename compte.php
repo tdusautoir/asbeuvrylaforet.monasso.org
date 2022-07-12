@@ -103,7 +103,6 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
 
                                         <?php endif; ?>
                                     <?php endif; ?>
-                                <?php endif; ?>
                                 </div>
                                 <div id="account-settings">
                                     <?php if ($settings) : ?>
@@ -166,18 +165,20 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
                     </div>
                 </div>
             </div>
-            <?php require 'components/footer.php'; ?>
-            <?php /*else : require "./components/form_login.php"; ?><?php endif;*/ ?>
-            <script>
-                function displayContent(idActive, idOther1, idList, idListOther1) {
-                    document.getElementById(idActive).style.display = "flex";
-                    document.getElementById(idList).style.background = "var(--mainColor)";
-                    document.getElementById(idList).style.color = "white";
-                    document.getElementById(idOther1).style.display = "none";
-                    document.getElementById(idListOther1).style.background = "white";
-                    document.getElementById(idListOther1).style.color = "black";
-                }
-            </script>
+        </div>
+        <script>
+            function displayContent(idActive, idOther1, idList, idListOther1) {
+                document.getElementById(idActive).style.display = "flex";
+                document.getElementById(idList).style.background = "var(--mainColor)";
+                document.getElementById(idList).style.color = "white";
+                document.getElementById(idOther1).style.display = "none";
+                document.getElementById(idListOther1).style.background = "white";
+                document.getElementById(idListOther1).style.color = "black";
+            }
+        </script>
+        <?php require 'components/footer.php'; ?>
+    <?php else : require "./components/form_login.php";
+    endif; ?>
 </body>
 
 </html>
