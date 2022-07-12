@@ -1,4 +1,10 @@
 <?php
+
+session_start();
+
+require_once("../function.php");
+require_once("../db.php");
+
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $config = SendinBlue\Client\Configuration::getDefaultConfiguration()->setApiKey('api-key', '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');

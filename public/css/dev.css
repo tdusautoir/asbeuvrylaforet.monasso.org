@@ -694,3 +694,14 @@
     border: none;
     background: transparent;
 }
+/* page SMS */
+div.sms-container{
+    display: flex;
+    padding: 30px 0;
+}
+div.sms-left-part{
+    width: 50%;
+}
+div.sms-right-part{
+    width: 50%;
+}
