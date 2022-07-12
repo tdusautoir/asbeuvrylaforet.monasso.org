@@ -114,7 +114,7 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
                                                     <p id="text1"><?= htmlspecialchars($get_account_info["nom"]) ?></p>
                                                     <form action="./functions/settings-modif-info.php" method="POST">
                                                         <input type="hidden" value="<?= $_SESSION["id"] ?>" name="id">
-                                                        <input type="text" value="<?= htmlspecialchars($get_account_info["nom"]) ?>" id="inputText1" name="prenom"></input>
+                                                        <input type="text" value="<?= htmlspecialchars($get_account_info["nom"]) ?>" id="inputText1" name="nom"></input>
                                                         <i onclick="displayInput(1)" id="pencil1" class="fa fa-pencil"></i>
                                                         <button type="submit" onclick="form.submit()" id="validate1"><i class="fa fa-check"></i></button>
                                                     </form>
@@ -138,7 +138,7 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
                                                     <p id="text3"><?= htmlspecialchars($get_account_info["mail"]) ?></p>
                                                     <form action="./functions/settings-modif-info.php" method="POST">
                                                         <input type="hidden" value="<?= $_SESSION["id"] ?>" name="id">
-                                                        <input type="text" value="<?= htmlspecialchars($get_account_info["mail"]) ?>" id="inputText3" name="prenom"></input>
+                                                        <input type="text" value="<?= htmlspecialchars($get_account_info["mail"]) ?>" id="inputText3" name="mail"></input>
                                                         <i onclick="displayInput(3)" id="pencil3" class="fa fa-pencil"></i>
                                                         <button type="submit" onclick="form.submit()" id="validate3"><i class="fa fa-check"></i></button>
                                                     </form>
