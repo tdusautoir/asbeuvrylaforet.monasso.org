@@ -165,29 +165,29 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
                                                         ?>
                                                     </p>
                                                 </div>
+                                            <?php else : ?>
                                                 <div class="info-settings-value">
-                                                <?php else : ?>
                                                     <div class="info-settings-value">
                                                         <p>Categorie</p>
                                                         <p>Aucune catégorie</p>
                                                     </div>
-                                                <?php endif; ?>
-                                                </div>
-                                                <div class="info-settings-value">
-                                                    <p>Responsable</p>
-                                                    <p><?php if ($get_account_info["responsable"] == 1) {
-                                                            echo "OUI";
-                                                        } else {
-                                                            echo "NON";
-                                                        } ?>
-                                                    </p>
-                                                </div>
-                                                <div class="info-settings-value site-settings-footer">
-                                                    <p>Date de création</p>
-                                                    <p><?php echo date('d-m-Y', strtotime($get_account_info["DCRE"])); ?></p>
                                                 </div>
                                             <?php endif; ?>
+                                            <div class="info-settings-value">
+                                                <p>Responsable</p>
+                                                <p><?php if ($get_account_info["responsable"] == 1) {
+                                                        echo "OUI";
+                                                    } else {
+                                                        echo "NON";
+                                                    } ?>
+                                                </p>
+                                            </div>
+                                            <div class="info-settings-value site-settings-footer">
+                                                <p>Date de création</p>
+                                                <p><?php echo date('d-m-Y', strtotime($get_account_info["DCRE"])); ?></p>
+                                            </div>
                                         <?php endif; ?>
+                                    <?php endif; ?>
                                 </div>
                                 <div id="account-settings">
                                     <?php if ($settings) : ?>
