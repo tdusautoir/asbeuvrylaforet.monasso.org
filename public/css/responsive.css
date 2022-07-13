@@ -105,9 +105,36 @@
     .account-container .account-li li:last-child {
         border-radius: 0 10px 0 0;
     }
+
+    .profil-content,
+    .profil-img {
+        width: 100%;
+    }
+
+    .profil-img {
+        margin-top: 20px;
+    }
+
+    .profil-content-tab-button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .profil-container-part1 {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column-reverse;
+    }
 }
 
 @media screen and (max-width:800px) {
+    .info-settings-modif {
+        display: flex;
+        align-items: baseline;
+        max-width: 50%;
+        overflow: auto;
+    }
+
     .welcome-admin h1 {
         font-size: 20px;
     }

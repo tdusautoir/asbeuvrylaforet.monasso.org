@@ -713,7 +713,7 @@ div.sms-right-part {
 /* PAGE PROFIL LICENCIE */
 
 .profil-container {
-    margin-top: 20px;
+    margin: 20px 0;
 }
 
 .profil-container-part1 {
@@ -767,6 +767,11 @@ div.sms-right-part {
     border-bottom: none;
 }
 
+.profil-content-tab-ligne p:last-child {
+    max-width: 65%;
+    overflow: hidden;
+}
+
 .profil-content-tab-ligne-head {
     border-radius: 5px 5px 0 0;
     padding: 15px 24px;
@@ -802,7 +807,7 @@ div.sms-right-part {
     margin-top: 10px;
 }
 
-.profil-content-tab-button button {
+.profil-content-tab-button a {
     font-weight: 400;
     width: auto;
     height: auto;
@@ -872,7 +877,8 @@ div.sms-right-part {
 }
 
 
-.profil-container-part1.modif input, .profil-container-part1.modif select{
+.profil-container-part1.modif input,
+.profil-container-part1.modif select {
     padding: 0;
     height: fit-content;
     border: 1px solid #e6e6e6;

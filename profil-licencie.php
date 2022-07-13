@@ -84,7 +84,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                             <div class="profil-content">
                                 <div class="profil-content-head">
                                     <h1>&#x1F3C3; Profil du licencié :</h1>
-                                    <div class="welcome-separator" style="width: 80%;"></div>
+                                    <div class="welcome-separator" style="width: 15%;"></div>
                                 </div>
                                 <div class="profil-content-tab" id="profil-content-tab">
                                     <div class="profil-content-tab-ligne profil-content-tab-ligne-head">
@@ -93,7 +93,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                     </div>
                                     <div class="profil-content-tab-ligne">
                                         <p>Nom complet</p>
-                                        <p><?= $firstname_licencie ?> <?= $lastname_licencie ?></p>
+                                        <p title="<?= $firstname_licencie ?> <?= $lastname_licencie ?>"><?= $firstname_licencie ?> <?= $lastname_licencie ?></p>
                                     </div>
                                     <div class="profil-content-tab-ligne">
                                         <p>Date de naissance</p>
@@ -121,7 +121,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                     </div>
                                     <div class="profil-content-tab-ligne profil-content-tab-ligne-foot">
                                         <p>Mail</p>
-                                        <p><?= htmlspecialchars($mail_licencie) ?></p>
+                                        <p title="<?= htmlspecialchars($mail_licencie) ?>"><?= htmlspecialchars($mail_licencie) ?></p>
                                     </div>
                                 </div>
                             </div>
@@ -141,7 +141,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                 <div class="profil-content">
                                     <div class="profil-content-head">
                                         <h1>&#x1F3C3; Profil du licencié :</h1>
-                                        <div class="welcome-separator" style="width: 80%;"></div>
+                                        <div class="welcome-separator" style="width: 15%;"></div>
                                     </div>
                                     <div class="profil-content-tab">
                                         <div class="profil-content-tab-ligne profil-content-tab-ligne-head">
@@ -149,7 +149,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                         </div>
                                         <div class="profil-content-tab-ligne">
                                             <p>Nom complet</p>
-                                            <input id="inputName" type="text" value="<?= htmlspecialchars($lastname_licencie) . " " . htmlspecialchars($firstname_licencie) ?>" name="name-licencie" value="">
+                                            <input id="inputName" type="text" value="<?= htmlspecialchars($lastname_licencie) . " " . htmlspecialchars($firstname_licencie) ?>" title="<?= htmlspecialchars($lastname_licencie) . " " . htmlspecialchars($firstname_licencie) ?>" name="name-licencie" value="">
                                         </div>
                                         <div class="profil-content-tab-ligne">
                                             <p>Date de naissance</p>
@@ -194,7 +194,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                         </div>
                                         <div class="profil-content-tab-ligne profil-content-tab-ligne-foot">
                                             <p>Mail</p>
-                                            <input id="inputMail" type="text" name="mail-licencie" value="<?= htmlspecialchars($mail_licencie) ?>">
+                                            <input id="inputMail" type="text" name="mail-licencie" value="<?= htmlspecialchars($mail_licencie) ?>" title="<?= htmlspecialchars($mail_licencie) ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -203,7 +203,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                 <input type="hidden" name="idLicencie" value="<?php if (isset($idLicencie)) : echo $idLicencie;
                                                                                 endif; ?>">
                                 <input type="submit" name="submit-modif" value="Modifier">
-                                <button onclick="hideEdit()">Annuler</button>
+                                <a href="" onclick="hideEdit()">Annuler</a>
                             </div>
                         </form>
                     </div>
