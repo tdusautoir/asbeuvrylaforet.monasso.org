@@ -735,7 +735,6 @@ div.sms-right-part {
 
 .profil-img img {
     width: 400px;
-    height: 400px;
     border-radius: 10px;
 }
 
@@ -870,4 +869,12 @@ div.sms-right-part {
     padding: 0 5px;
     border: 1px solid rgb(196, 196, 196);
     border-radius: 3px;
+}
+
+
+.profil-container-part1.modif input, .profil-container-part1.modif select{
+    padding: 0;
+    height: fit-content;
+    border: 1px solid #e6e6e6;
+    font-weight: 500;
 }

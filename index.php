@@ -95,7 +95,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                       <?php elseif ($LIC["etat"] == 4) : ?>
                         <span title="encaissée" class="state-indicator" style="background-color: green;"></span>
                       <?php endif; ?>
-                      <p><?= htmlspecialchars($LIC["nomCategorie"]) ?> - <span><?= htmlspecialchars($LIC["prenom"]) . " " . strtoupper(htmlspecialchars($LIC["nom"])) ?></span>
+                      <p><?= htmlspecialchars($LIC["nomCategorie"]) ?> - <a href="./profil-licencie.php?idLicencie=<?= $LIC['idLicencie']; ?>"><?= htmlspecialchars($LIC["prenom"]) . " " . strtoupper(htmlspecialchars($LIC["nom"])) ?></a>
                         <?php if (isset($LIC["USRCRE"])) : ?>par <span><?= htmlspecialchars($LIC["USRCRE"]) ?> </span></p> <?php endif; ?>
                     </li>
                   <?php endwhile; ?>
@@ -109,13 +109,13 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
               <h2>Aperçu du suivi des cotisations :</h2>
               <?php
               if (is_admin()) :
+                $has_category = true;
                 $cotis = $db->query("SELECT * FROM cotis WHERE cotis.COSU = 0");
                 if ($cotis->rowCount() > 0) :
                   $cotis_exist = true;
                 else :
                   $cotis_exist = false;
                 endif;
-                $has_category = true;
                 $cotis->closeCursor();
                 if ($cotis_exist) : ?>
                   <div>

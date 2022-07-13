@@ -148,11 +148,11 @@ section.panel-down {
     margin-right: 10px;
 }
 
-.li-admin p span:first-child {
+.li-admin p a:first-child {
     text-decoration: underline;
 }
 
-.li-admin p span:not(:first-child) {
+.li-admin p span {
     color: var(--mainColor);
 }
 

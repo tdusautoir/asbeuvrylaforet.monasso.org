@@ -23,8 +23,14 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             <?php include('./components/header.php');
             if (isset($_GET["idLicencie"]) && !empty($_GET["idLicencie"]) && isInteger($_GET["idLicencie"])) {
                 $idLicencie = $_GET["idLicencie"];
-                $info = $db->prepare("SELECT licencie.nom, licencie.prenom, licencie.dateN, licencie.mail, licencie.sexe, categorie.nomCategorie FROM licencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.idLicencie = ? AND licencie.COSU = 0");
-                $info->bindValue(1, $idLicencie);
+                if (is_admin()) :
+                    $info = $db->prepare("SELECT licencie.nom, licencie.prenom, licencie.dateN, licencie.mail, licencie.sexe, categorie.nomCategorie FROM licencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.idLicencie = ? AND licencie.COSU = 0");
+                    $info->bindValue(1, $idLicencie);
+                else :
+                    $info = $db->prepare("SELECT licencie.nom, licencie.prenom, licencie.dateN, licencie.mail, licencie.sexe, categorie.nomCategorie FROM licencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorie.idCategorie = categorieeduc.idCategorie WHERE licencie.idLicencie = ? AND categorieeduc.idEduc = ? AND licencie.COSU = 0");
+                    $info->bindValue(1, $idLicencie);
+                    $info->bindValue(2, $_SESSION['id']);
+                endif;
                 $info->execute();
                 if ($info->rowCount() > 0) { //search and check if the licencie is in db and not deleted
                     $getinfo = $info->fetch(PDO::FETCH_ASSOC);
@@ -42,10 +48,25 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                         $result_getTel = $getTel->fetch(PDO::FETCH_ASSOC);
                         $tel_licencie = $result_getTel["tel"];
                     endif;
-                } else {  //licencie is not in db or is deleted
-                    header("location: ./licencies.php");
-                    create_flash_message("not_found", "Licencié introuvable.", FLASH_ERROR);
-                    exit();
+
+
+                    $getPhoto = $db->prepare("SELECT photo.imgPath FROM photo INNER JOIN licencie ON licencie.idPhoto = Photo.idPhoto WHERE licencie.idLicencie = ? AND photo.cosu = 0");
+                    $getPhoto->bindValue(1, $idLicencie);
+                    $getPhoto->execute();
+                    if ($getPhoto->rowCount() > 0) :
+                        $result_getPhoto = $getPhoto->fetch(PDO::FETCH_ASSOC);
+                        $url_photo = $result_getPhoto["imgPath"];
+                    endif;
+                } else {  //licencie is not in db or is deleted 
+                    if (is_educ()) { //licencie is not in his categories, in db or is deleted
+                        header("location: ./licencies.php");
+                        create_flash_message("not_found", "Licencié introuvable dans vos catégories.", FLASH_ERROR);
+                        exit();
+                    } else {
+                        header("location: ./licencies.php");
+                        create_flash_message("not_found", "Licencié introuvable.", FLASH_ERROR);
+                        exit();
+                    }
                 }
             } else {
                 header("location: ./licencies.php");
@@ -58,7 +79,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                     <div class="profil-container">
                         <div class="profil-container-part1" id="profil-container-part1">
                             <div class="profil-img">
-                                <img src="./public/profiles/david_vincent_20220712_resize.png" draggable="false" alt="">
+                                <img src="<?= $url_photo ?>" draggable="false" alt="">
                             </div>
                             <div class="profil-content">
                                 <div class="profil-content-head">
@@ -80,13 +101,16 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                     </div>
                                     <div class="profil-content-tab-ligne">
                                         <p>Catégorie</p>
-                                        <p>U10</p>
+                                        <p><?= $category_licencie ?></p>
                                     </div>
                                     <div class="profil-content-tab-ligne">
                                         <p>Sexe</p>
                                         <p>
-                                            <!-- <?= htmlspecialchars($sexe_licencie) ?> -->
-                                            Homme
+                                            <?php if ($sexe_licencie == 'f') : ?>
+                                                Femme
+                                            <?php else : ?>
+                                                Homme
+                                            <?php endif; ?>
                                         </p>
                                     </div>
                                     <div class="profil-content-tab-ligne">
@@ -102,122 +126,87 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                 </div>
                             </div>
                         </div>
-                        <div class="profil-container-part1" id="profil-container-part1-edit">
-                            <div class="profil-img">
-                                <label for="photo-li-modif">
-                                    <div class="profil-img-import">
-                                        <i class="fa fa-picture-o"></i>
-                                        <p>Importez une image</p>
-                                        <span id="nom-photo-li-modif"></span>
-                                    </div>
-                                    <input id="photo-li-modif" type="file" accept="image/png, image/jpeg" name="logo" value="<?= $get_settings['logoPath'] ?>">
-                                </label>
-                            </div>
-                            <div class="profil-content">
-                                <div class="profil-content-head">
-                                    <h1>&#x1F3C3; Profil du licencié :</h1>
-                                    <div class="welcome-separator" style="width: 80%;"></div>
-                                </div>
-                                <div class="profil-content-tab">
-                                    <div class="profil-content-tab-ligne profil-content-tab-ligne-head">
-                                        <p>Informations</p>
-                                    </div>
-                                    <div class="profil-content-tab-ligne">
-                                        <p>Nom complet</p>
-                                        <p contenteditable="true" class="profil-editable"><?= $firstname_licencie ?> <?= $lastname_licencie ?></p>
-                                    </div>
-                                    <div class="profil-content-tab-ligne">
-                                        <p>Date de naissance</p>
-                                        <p><?= $dateN_licencie ?></p>
-                                    </div>
-                                    <div class="profil-content-tab-ligne">
-                                        <p>Catégorie</p>
-                                        <p>U10</p>
-                                    </div>
-                                    <div class="profil-content-tab-ligne">
-                                        <p>Sexe</p>
-                                        <p>
-                                            <!-- <?= htmlspecialchars($sexe_licencie) ?> -->
-                                            Homme
-                                        </p>
-                                    </div>
-                                    <div class="profil-content-tab-ligne">
-                                        <p>Téléphone</p>
-                                        <p contenteditable="true" class="profil-editable"><?= htmlspecialchars($tel_licencie) ?></p>
-                                    </div>
-                                    <div class="profil-content-tab-ligne profil-content-tab-ligne-foot">
-                                        <p>Mail</p>
-                                        <p contenteditable="true" class="profil-editable"><?= htmlspecialchars($mail_licencie) ?></p>
-                                    </div>
-                                    <!-- <div class="profil-content-tab-ligne profil-content-tab-ligne-foot">
-                                        <p>Importer une photo</p>
-                                        <label for="photo-li-modif">
-                                            <i class="fa fa-upload"></i>
-                                            <input id="photo-li-modif" type="file" accept="image/png, image/jpeg" name="logo" value="<?= $get_settings['logoPath'] ?>">
-                                        </label>
-                                    </div> -->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="profil-content-tab-button" id="profil-content-tab-button">
-                            <input type="submit" name="submit-settings" value="Modifier">
-                            <button onclick="hideEdit()">Annuler</button>
-                        </div>
-                    </div>
-                    <!-- <div class="modif-li-container">
-                        <div class="modif-li-panel">
-                            <h1>
-                                Profil du
-                            </h1>
-                            <form action="./functions/licencie-modif.php" enctype="multipart/form-data" method="POST">
-                                <div class="form-modif-li">
-                                    <input value="<?= htmlspecialchars($lastname_licencie) ?>" type="text" class="nom-licencie" placeholder="" name="nom-licencie" maxlength="20">
-                                    <input value="<?= htmlspecialchars($firstname_licencie) ?>" type="text" class="prenom-licencie" placeholder="" name="prenom-licencie" maxlength="15">
-                                </div>
-                                <div class="form-modif-li">
-                                    <label for="photo-licencie">
-                                        <i class="fa fa-picture-o"></i>
-                                        Photo
-                                        <input id="photo-licencie" type="file" name="photo-licencie" accept="image/png, image/jpeg" />
-                                        <span id="nom-photo-licencie"></span>
+                        <form action="./functions/licencie-modif.php" method="POST" enctype="multipart/form-data">
+                            <div class="profil-container-part1 modif" id="profil-container-part1-edit">
+                                <div class="profil-img">
+                                    <label for="photo-li-modif">
+                                        <div class="profil-img-import">
+                                            <i class="fa fa-picture-o"></i>
+                                            <p>Importez une image</p>
+                                            <span id="nom-photo-li-modif"></span>
+                                        </div>
+                                        <input id="photo-li-modif" type="file" accept="image/png, image/jpeg" name="photo-licencie" value="test">
                                     </label>
-                                    <input value="<?= $dateN_licencie ?>" type="date" placeholder="Date de naissance" name="dateN-licencie">
                                 </div>
-                                <div class="form-modif-li">
-                                    <select name="categorie-licencie" id="categorie-licencie">
-                                        <?php
-                                        $req_category = $db->query("SELECT idCategorie, nomCategorie FROM categorie");
-                                        while ($category = $req_category->fetch()) :
-                                            if (isset($category)) :
-                                        ?>
-                                                <option value="<?= $category["idCategorie"]; ?>" <?php if ($category_licencie == $category["nomCategorie"]) : ?> selected <?php endif; ?>><?= $category["nomCategorie"] ?></option>
-                                        <?php
-                                            endif;
-                                        endwhile;
-                                        $req_category->closeCursor(); ?>
-                                    </select>
-                                    <select name="sexe-licencie" id="sexe-licencie">
-                                        <option value="m" <?php if ($sexe_licencie == "m") : ?>selected<?php endif; ?>>Homme</option>
-                                        <option value="f" <?php if ($sexe_licencie == "f") : ?>selected<?php endif; ?>>Femme</option>
-                                    </select>
+                                <div class="profil-content">
+                                    <div class="profil-content-head">
+                                        <h1>&#x1F3C3; Profil du licencié :</h1>
+                                        <div class="welcome-separator" style="width: 80%;"></div>
+                                    </div>
+                                    <div class="profil-content-tab">
+                                        <div class="profil-content-tab-ligne profil-content-tab-ligne-head">
+                                            <p>Informations</p>
+                                        </div>
+                                        <div class="profil-content-tab-ligne">
+                                            <p>Nom complet</p>
+                                            <input id="inputName" type="text" value="<?= htmlspecialchars($lastname_licencie) . " " . htmlspecialchars($firstname_licencie) ?>" name="name-licencie" value="">
+                                        </div>
+                                        <div class="profil-content-tab-ligne">
+                                            <p>Date de naissance</p>
+                                            <input id="inputDate" value="<?= $dateN_licencie ?>" type="date" placeholder="Date de naissance" name="dateN-licencie">
+                                        </div>
+                                        <div class="profil-content-tab-ligne">
+                                            <p>Catégorie</p>
+                                            <select name="categorie-licencie">
+                                                <?php
+                                                if (is_admin()) :
+                                                    $req_category = $db->query("SELECT idCategorie, nomCategorie FROM categorie");
+                                                    while ($category = $req_category->fetch()) :
+                                                        if (isset($category)) : ?>
+                                                            <option value="<?= $category["idCategorie"]; ?>" <?php if ($category_licencie == $category["nomCategorie"]) : ?> selected <?php endif; ?>><?= $category["nomCategorie"] ?></option>
+                                                    <?php endif;
+                                                    endwhile;
+                                                    $req_category->closeCursor(); ?>
+                                                    <?php elseif (is_educ()) :
+                                                    $req_category = $db->prepare("SELECT idCategorie, nomCategorie FROM categorie INNER JOIN categorieeduc ON categorie.idCategorie = categorieeduc.idCategorie WHERE categorieeduc.idEduc = :idEduc");
+                                                    $req_category->bindValue(':idEduc', $_SESSION['id']);
+                                                    $req_category->execute();
+                                                    while ($category = $req_category->fetch()) :
+                                                        if (isset($category)) : ?>
+                                                            <option value="<?= $category["idCategorie"]; ?>" <?php if ($category_licencie == $category["nomCategorie"]) : ?> selected <?php endif; ?>><?= $category["nomCategorie"] ?></option>
+                                                <?php endif;
+                                                    endwhile;
+                                                endif ?>
+                                            </select>
+                                        </div>
+                                        <div class="profil-content-tab-ligne">
+                                            <p>Sexe</p>
+                                            <p>
+                                                <select name="sexe-licencie" id="sexe-licencie">
+                                                    <option value="m" <?php if ($sexe_licencie == "m") : ?>selected<?php endif; ?>>Homme</option>
+                                                    <option value="f" <?php if ($sexe_licencie == "f") : ?>selected<?php endif; ?>>Femme</option>
+                                                </select>
+                                            </p>
+                                        </div>
+                                        <div class="profil-content-tab-ligne">
+                                            <p>Téléphone</p>
+                                            <input id="inputTel" type="text" name="tel-licencie" value="<?= htmlspecialchars($tel_licencie) ?>">
+                                        </div>
+                                        <div class="profil-content-tab-ligne profil-content-tab-ligne-foot">
+                                            <p>Mail</p>
+                                            <input id="inputMail" type="text" name="mail-licencie" value="<?= htmlspecialchars($mail_licencie) ?>">
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-modif-li">
-                                    <input value="<?= htmlspecialchars($mail_licencie) ?>" type="mail" class="mail-licencie" name="mail-licencie" placeholder="" maxlength="40">
-                                    <?php if (isset($tel_licencie)) : ?>
-                                        <input value="<?= $tel_licencie ?>" type="tel" class="" name="tel-licencie" placeholder="">
-                                    <?php endif; ?>
-                                </div>
+                            </div>
+                            <div class="profil-content-tab-button" id="profil-content-tab-button">
                                 <input type="hidden" name="idLicencie" value="<?php if (isset($idLicencie)) : echo $idLicencie;
                                                                                 endif; ?>">
-                                <div class="loading" id='loading'>
-                                    <img src="./public/images/Rolling-1s-200px-gray.svg">
-                                </div>
-                                <div class="form-modif-li">
-                                    <input type="submit" value="Enregistrer" name="submit-modif" class="bouton-ajouter" id="form-submit" onclick="loading()">
-                                </div>
-                            </form>
-                        </div>
-                    </div> -->
+                                <input type="submit" name="submit-modif" value="Modifier">
+                                <button onclick="hideEdit()">Annuler</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -242,6 +231,32 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 document.getElementById("profil-container-part1-edit").style.display = "none";
                 document.getElementById("profil-content-tab-button").style.display = "none";
                 document.getElementById("profil-container-part1").style.display = "flex";
+            }
+
+            let name = document.getElementById('inputName'); // get the input element
+            name.addEventListener('input', resizeInput); // bind the "resizeInput" callback on "input" event
+            let tel = document.getElementById('inputTel'); // get the input element
+            tel.addEventListener('input', resizeInput); // bind the "resizeInput" callback on "input" event
+            let dateN = document.getElementById('inputDate'); // get the input element
+            dateN.addEventListener('input', resizeInput); // bind the "resizeInput" callback on "input" event
+            let mail = document.getElementById('inputMail'); // get the input element
+            mail.addEventListener('input', resizeInput); // bind the "resizeInput" callback on "input" event
+            if (name) {
+                resizeInput.call(name); // immediately call the function
+            }
+            if (tel) {
+                resizeInput.call(tel); // immediately call the function
+            }
+            if (dateN) {
+                resizeInput.call(dateN); // immediately call the function
+            }
+            if (mail) {
+                resizeInput.call(mail); // immediately call the function
+            }
+
+            function resizeInput() {
+                let inputValue = this.value.length;
+                this.style.width = (inputValue + 2) + "ch";
             }
         </script>
         <script>
