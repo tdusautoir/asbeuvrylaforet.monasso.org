@@ -294,7 +294,7 @@
     cursor: pointer;
 }
 
-.info-settings-modif input{
+.info-settings-modif input {
     height: fit-content;
     font-size: 17px;
     padding: 0;
@@ -302,17 +302,18 @@
     outline: none;
 }
 
-.info-settings-modif form{
+.info-settings-modif form {
     display: flex;
     align-items: center;
 }
 
-.info-settings-modif button{
+.info-settings-modif button {
     padding: 0;
     background: none;
 }
 
-.info-settings-modif input, .info-settings-modif button{
+.info-settings-modif input,
+.info-settings-modif button {
     display: none;
 }
 
@@ -694,14 +695,179 @@
     border: none;
     background: transparent;
 }
+
 /* page SMS */
-div.sms-container{
+div.sms-container {
     display: flex;
     padding: 30px 0;
 }
-div.sms-left-part{
+
+div.sms-left-part {
     width: 50%;
 }
-div.sms-right-part{
+
+div.sms-right-part {
     width: 50%;
+}
+
+/* PAGE PROFIL LICENCIE */
+
+.profil-container {
+    margin-top: 20px;
+}
+
+.profil-container-part1 {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+}
+
+.profil-img {
+    display: flex;
+    width: 40%;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.profil-content {
+    width: 60%;
+}
+
+.profil-img img {
+    width: 400px;
+    height: 400px;
+    border-radius: 10px;
+}
+
+.profil-content-head {
+    display: inline-block;
+}
+
+.profil-content-tab {
+    margin-top: 30px;
+    width: 100%;
+}
+
+#profil-content-tab-edit {
+    display: none;
+}
+
+.profil-content-tab-ligne {
+    display: flex;
+    font-weight: 700;
+    font-size: 17px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding: 10px 24px;
+    min-height: 48px;
+    background: white;
+    border: 1px solid #e6e6e6;
+    border-bottom: none;
+}
+
+.profil-content-tab-ligne-head {
+    border-radius: 5px 5px 0 0;
+    padding: 15px 24px;
+    text-transform: uppercase;
+}
+
+.profil-content-tab-ligne-head p {
+    font-size: 20px;
+}
+
+.profil-content-tab-ligne-head i {
+    font-weight: 300;
+    color: var(--mainColor);
+    cursor: pointer;
+}
+
+.profil-content-tab-ligne-head i.fa-times {
+    font-weight: 800;
+    color: var(--mainColor);
+    cursor: pointer;
+}
+
+.profil-content-tab-ligne-foot {
+    border-radius: 0 0 5px 5px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.profil-content-tab-button {
+    width: 60%;
+    display: none;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.profil-content-tab-button button {
+    font-weight: 400;
+    width: auto;
+    height: auto;
+    background: #fff;
+    color: #1a1a1a;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+    padding: 10px 30px;
+    font-size: 16px;
+    outline: none;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.profil-content-tab-button input {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 15px;
+    color: white;
+    padding: 10px;
+    width: auto;
+    height: auto;
+    background-color: var(--mainColor);
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.profil-img input {
+    display: none;
+}
+
+.profil-img i {
+    color: rgb(196, 196, 196);
+    font-size: 200px;
+}
+
+.profil-img label {
+    cursor: pointer;
+}
+
+#profil-container-part1-edit {
+    display: none;
+}
+
+.profil-img-import {
+    display: flex;
+    width: 400px;
+    height: 400px;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed rgb(196, 196, 196);
+    border-radius: 5px;
+    flex-direction: column;
+}
+
+.profil-img-import span {
+    max-width: 90%;
+    max-height: 50px;
+    color: var(--mainColor);
+    overflow: hidden;
+}
+
+.profil-editable {
+    padding: 0 5px;
+    border: 1px solid rgb(196, 196, 196);
+    border-radius: 3px;
 }

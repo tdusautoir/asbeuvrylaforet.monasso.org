@@ -170,7 +170,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                     <p>&#x1F947;<strong><?= $TopScorer['nomCategorie'] ?></strong> - <?= htmlspecialchars($TopScorer['nom']) ?> <?= htmlspecialchars($TopScorer['prenom']) ?> (<?= $TopScorer['nbButs'] ?> buts)</p>
                                                     <h3>Meilleur passeur :</h3>
                                                     <?php $TopAssister = $getTopAssister->fetch(PDO::FETCH_ASSOC); ?>
-                                                    <p>&#x1F947;<strong><?= $TopAssister['nomCategorie'] ?></strong> - <?= htmlspecialchars($TopAssister['nom']) ?> <?= htmlspecialchars($TopAssister['prenom']) ?> (<?= $TopAssister['passeD'] ?> pd)
+                                                    <p>&#x1F947;<strong><?= $TopAssister['nomCategorie'] ?></strong> - <?= htmlspecialchars($TopAssister['nom']) ?> <?= htmlspecialchars($TopAssister['prenom']) ?> (<?= $TopAssister['passeD'] ?> passes décisives)
                                                     <p>
                                                 </div>
                                                 <div class="download-csv">

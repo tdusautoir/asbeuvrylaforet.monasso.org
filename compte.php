@@ -95,6 +95,15 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
                                                     </form>
                                                 </div>
                                             </div>
+                                            <div class="info-settings-value">
+                                                <p>Mot de passe</p>
+                                                <div class="info-settings-modif">
+                                                    <p>••••••••</p>
+                                                    <a href="./resetpw.php">
+                                                        <i id="pencil2" class="fa fa-pencil"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
                                             <div class="info-settings-value site-settings-footer">
                                                 <p>Date de création</p>
                                                 <p><?= date('d-m-Y', strtotime($get_account_info["DCRE"])); ?></p>
@@ -130,6 +139,15 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
                                                         <i onclick="displayInput(2)" id="pencil2" class="fa fa-pencil"></i>
                                                         <button type="submit" onclick="form.submit()" id="validate2"><i class="fa fa-check"></i></button>
                                                     </form>
+                                                </div>
+                                            </div>
+                                            <div class="info-settings-value">
+                                                <p>Mot de passe</p>
+                                                <div class="info-settings-modif">
+                                                    <p>••••••••</p>
+                                                    <a href="./resetpw.php">
+                                                        <i id="pencil2" class="fa fa-pencil"></i>
+                                                    </a>
                                                 </div>
                                             </div>
                                             <div class="info-settings-value">
@@ -229,7 +247,7 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
                                                             <input id="site-color" type="color" name="color" value="<?= $get_settings['color'] ?>">
                                                         </div>
                                                         <div class="site-settings-save">
-                                                            <input type="submit" name="submit-settings">
+                                                            <input type="submit" name="submit-settings" value="Modifier">
                                                         </div>
                                                     </form>
                                                 </div>
