@@ -39,34 +39,6 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
                     <div class="container-content">
                         <?php include "./components/display_error.php"; ?>
                         <div class="add-container">
-                            <div class="li-admin">
-                                <h2>
-                                    Derniers éducateurs ajoutés :
-                                </h2>
-                                <?php
-                                //TODO : Procédure
-                                $req = $db->prepare("CALL PRC_TENEDUC()"); //Derniers educateurs ajoutés classé par date croissant et limités à 10. 
-                                $req->execute();
-                                $rowCount = $req->rowCount();
-                                if ($rowCount > 0) : //si on trouve des educateurs ajoutés on affiche la liste de la requete.
-                                ?>
-                                    <ul>
-                                        <?php while ($LIC = $req->fetch(PDO::FETCH_ASSOC)) : ?>
-                                            <li>
-                                                <p>
-                                                    <span><?= $LIC["prenom"] . " " . strtoupper($LIC["nom"]) ?></span>
-                                                    <?php if (isset($LIC["USRCRE"])) : ?>par
-                                                    <span><?= $LIC["USRCRE"]; ?> </span>
-                                                </p> <?php endif; ?>
-                                            </li>
-                                        <?php endwhile; ?>
-                                    </ul>
-                                <?php else : ?>
-                                    <p> Aucun éducateurs n'a encore été créé </p>
-                                <?php endif;
-                                $req->closeCursor(); ?>
-                                <div class="add-panel-separator"></div>
-                            </div>
                             <div class="add-panel" id="fade-in">
                                 <h1>
                                     Ajouter un éducateur

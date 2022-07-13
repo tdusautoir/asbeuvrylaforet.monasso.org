@@ -139,12 +139,14 @@ section.panel-down {
 }
 
 .li-admin li {
+    max-width: 100%;
+    overflow: auto;
     display: flex;
     align-items: center;
     margin-top: 5px;
 }
 
-.li-admin .state-indicator{
+.li-admin .state-indicator {
     margin-right: 10px;
 }
 
@@ -193,9 +195,10 @@ div.chartJS {
 
 .add-container {
     display: flex;
-    justify-content: space-between;
     margin-top: 20px;
     margin-bottom: 60px;
+    align-items: center;
+    justify-content: center;
 }
 
 /* -----Page d'ajout Liste----- */
@@ -204,7 +207,7 @@ div.chartJS {
     padding: 20px;
     flex-basis: 50%;
     background: white;
-    box-shadow: 3px 3px 30px #d6d6d6, -3px -3px 30px #ffffff;
+    /* box-shadow: 3px 3px 30px #d6d6d6, -3px -3px 30px #ffffff; */
     border-radius: 20px;
     height: auto;
 }
@@ -455,7 +458,7 @@ tbody tr:hover {
     transition: all 300ms ease 0ms;
 }
 
-.pagination-div ul{
+.pagination-div ul {
     margin-top: 20px;
 }
 
