@@ -16,8 +16,8 @@ if (is_logged()) {
                         if (isset($_POST["idLicencie"]) && !empty($_POST["idLicencie"])) {
                             if (isset($_POST["mail-licencie"]) && !empty($_POST["mail-licencie"]) && filter_var($_POST["mail-licencie"], FILTER_VALIDATE_EMAIL)) {
                                 $name_licencie = explode(" ", $_POST['name-licencie']);
-                                $nom_licencie = strtoupper($name_licencie[0]);
-                                $prenom_licencie = ucfirst($name_licencie[1]);
+                                $nom_licencie = strtoupper($name_licencie[1]);
+                                $prenom_licencie = ucfirst($name_licencie[0]);
                                 $dateN_licencie = $_POST["dateN-licencie"];
                                 $mail_licencie = $_POST["mail-licencie"];
                                 $categorie_licencie = $_POST["categorie-licencie"];
@@ -106,13 +106,18 @@ if (is_logged()) {
                                 $rech_licencie->bindValue(1, $idLicencie);
                                 $rech_licencie->execute();
                                 if ($rech_licencie->rowCount() > 0) { //licencie is not bdd or is deleted
-                                    $req = $db->prepare("UPDATE licencie SET prenom = :prenom, nom = :nom, sexe = :sexe, dateN = :dateN, mail = :mail, idCategorie = :idCategorie, idPhoto = :idPhoto, DMAJ = :DMAJ WHERE idLicencie = :idLicencie");
+                                    $req = $db->prepare("UPDATE licencie SET prenom = :prenom, nom = :nom, sexe = :sexe, dateN = :dateN, mail = :mail, idCategorie = :idCategorie, idTaille = :idTaille, idPhoto = :idPhoto, DMAJ = :DMAJ WHERE idLicencie = :idLicencie");
                                     $req->bindValue("prenom", $prenom_licencie, PDO::PARAM_STR);
                                     $req->bindValue("nom", $nom_licencie, PDO::PARAM_STR);
                                     $req->bindValue("sexe", $sexe_licencie, PDO::PARAM_STR);
                                     $req->bindValue("dateN", $dateN_licencie, PDO::PARAM_STR);
                                     $req->bindValue("mail", $mail_licencie, PDO::PARAM_STR);
                                     $req->bindValue("idCategorie", $categorie_licencie, PDO::PARAM_INT);
+                                    if (isset($_POST["taille-licencie"]) && !empty($_POST["taille-licencie"])) {
+                                        $req->bindValue("idTaille", $_POST["taille-licencie"]);
+                                    } else {
+                                        $req->bindValue("idTaille", NULL);
+                                    }
                                     $req->bindValue("DMAJ", $current_date);
                                     $req->bindValue("idLicencie", $idLicencie);
 

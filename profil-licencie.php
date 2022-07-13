@@ -49,6 +49,13 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                         $tel_licencie = $result_getTel["tel"];
                     endif;
 
+                    $getTaille = $db->prepare("SELECT taille.nom FROM taille INNER JOIN licencie ON licencie.idTaille = taille.idTaille WHERE licencie.idLicencie = ? AND licencie.COSU = 0");
+                    $getTaille->bindValue(1, $idLicencie);
+                    $getTaille->execute();
+                    if ($getTaille->rowCount() > 0) :
+                        $result_getTaille = $getTaille->fetch(PDO::FETCH_ASSOC);
+                        $taille_licencie = $result_getTaille["nom"];
+                    endif;
 
                     $getPhoto = $db->prepare("SELECT photo.imgPath FROM photo INNER JOIN licencie ON licencie.idPhoto = Photo.idPhoto WHERE licencie.idLicencie = ? AND photo.cosu = 0");
                     $getPhoto->bindValue(1, $idLicencie);
@@ -123,6 +130,14 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                         <p>Mail</p>
                                         <p><?= htmlspecialchars($mail_licencie) ?></p>
                                     </div>
+                                    <div class="profil-content-tab-ligne profil-content-tab-ligne-foot">
+                                        <p>Taille</p>
+                                        <?php if (isset($taille_licencie)) : ?>
+                                            <p><?= htmlspecialchars($taille_licencie) ?></p>
+                                        <?php else : ?>
+                                            <p> non définie </p>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -149,7 +164,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                         </div>
                                         <div class="profil-content-tab-ligne">
                                             <p>Nom complet</p>
-                                            <input id="inputName" type="text" value="<?= htmlspecialchars($lastname_licencie) . " " . htmlspecialchars($firstname_licencie) ?>" name="name-licencie" value="">
+                                            <input id="inputName" type="text" value="<?= htmlspecialchars($firstname_licencie) . " " . htmlspecialchars($lastname_licencie) ?>" name="name-licencie" value="">
                                         </div>
                                         <div class="profil-content-tab-ligne">
                                             <p>Date de naissance</p>
@@ -195,6 +210,24 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                         <div class="profil-content-tab-ligne profil-content-tab-ligne-foot">
                                             <p>Mail</p>
                                             <input id="inputMail" type="text" name="mail-licencie" value="<?= htmlspecialchars($mail_licencie) ?>">
+                                        </div>
+                                        <div class="profil-content-tab-ligne profil-content-tab-ligne-foot">
+                                            <p>Taille</p>
+                                            <select name="taille-licencie" id="taille-licencie">
+                                                <?php if (!isset($taille_licencie)) : ?>
+                                                    <option disabled selected>Taille</option>
+                                                <?php endif; ?>
+                                                <?php $req_taille = $db->query("SELECT idTaille, nom FROM taille");
+                                                while ($taille = $req_taille->fetch()) :
+                                                    if (isset($taille)) :
+                                                        if (isset($taille_licencie)) : ?>
+                                                            <option value="<?= $taille["idTaille"]; ?>" <?php if ($taille_licencie == $taille["nom"]) : ?> selected <?php endif; ?>><?= $taille["nom"] ?></option>
+                                                        <?php else : ?>
+                                                            <option value="<?= $taille["idTaille"]; ?>"><?= $taille["nom"] ?></option>
+                                                        <?php endif; ?>
+                                                <?php endif;
+                                                endwhile; ?>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
