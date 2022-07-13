@@ -10,7 +10,7 @@ date_default_timezone_set("Europe/Paris");
 //verification si l'utilisateur est connecté
 if (is_logged()) {
 
-    //recup info from formulaire to display it if there is an error
+    //recuperer les infos du formulaire en cas d'erreur pour les afficher
     if (isset($_POST["submit-add"])) {
         if (isset($_POST["nom-licencie"]) && !empty($_POST["nom-licencie"])) {
             add_info_form("nom-licencie", $_POST["nom-licencie"]);
@@ -38,7 +38,6 @@ if (is_logged()) {
         }
     }
 
-    //verification before add on database
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if (isset($_POST["submit-add"])) {
             if (isset($_POST["nom-licencie"]) && !empty($_POST["nom-licencie"])) {
@@ -50,7 +49,7 @@ if (is_logged()) {
                                     if (isset($_POST["mail-licencie"]) && !empty($_POST["mail-licencie"]) && filter_var($_POST["mail-licencie"], FILTER_VALIDATE_EMAIL)) {
                                         if (isset($_POST["tel-licencie"]) && !empty($_POST["tel-licencie"]) && preg_match('/^[0-9]{10}+$/', $_POST["tel-licencie"])) {
 
-                                            //recup info from $_POST
+                                            //recuperer les infos de la variables $_POST
                                             $nom_licencie = strtoupper(htmlspecialchars($_POST["nom-licencie"]));
                                             $prenom_licencie = ucfirst(htmlspecialchars($_POST["prenom-licencie"]));
                                             $dateN_licencie = $_POST["dateN-licencie"];
@@ -62,21 +61,21 @@ if (is_logged()) {
 
                                             $current_user = $_SESSION["prenom"] . " " . strtoupper($_SESSION["nom"]);
 
-                                            //upload picture from $_FILES
+                                            //telecharger l'image via $_FILES
                                             if (is_uploaded_file($_FILES['photo-licencie']['tmp_name'])) {
-                                                //file is valid
+                                                //le fichier est valide
                                                 if ($_FILES['photo-licencie']['size'] < 2000000) {
-                                                    //file is inferior to 2 mo
+                                                    //fichier est inferieur a 2mo
                                                     $uploadfile = $_FILES['photo-licencie']['tmp_name'];
                                                     $sourceProperties = getimagesize($uploadfile);
                                                     $newFileName = mb_strtolower($nom_licencie) . "_" . mb_strtolower($prenom_licencie) . "_" . date("Ymd"); //filename = Nom_prenom_date
                                                     $uploaddir = dirname(__FILE__) . "/../public/profiles/";
-                                                    $ext = pathinfo($_FILES['photo-licencie']['name'], PATHINFO_EXTENSION); //get extension
-                                                    $image_width = $sourceProperties[0]; //get image width
-                                                    $image_height = $sourceProperties[1]; //get image height
-                                                    $imageType = $sourceProperties[2]; //get image type
-                                                    $newImage_width = $image_width / $image_height * 500; //resize height to 500px and keep the same ratio
-                                                    $newImage_height = $image_height / $image_height * 500; //resize height to 500px
+                                                    $ext = pathinfo($_FILES['photo-licencie']['name'], PATHINFO_EXTENSION);  //recuperer l'extension de l'image
+                                                    $image_width = $sourceProperties[0]; //recuperer la largeur de l'image
+                                                    $image_height = $sourceProperties[1];  //recuperer la hauteur de l'image
+                                                    $imageType = $sourceProperties[2];  //recuperer le type de l'image
+                                                    $newImage_width = $image_width / $image_height * 500; //initialiser la nouvelle largeur a 500px
+                                                    $newImage_height = $image_height / $image_height * 500; //initialiser la hauteur selon la largeur a 500px pour garder le meme ratio
 
                                                     switch ($imageType) {
 
@@ -105,24 +104,24 @@ if (is_logged()) {
                                                             break;
                                                     }
 
-                                                    // image upload sucessfuly.
+                                                    // image telechargé
 
-                                                    // if you want to download the original file :
+                                                    // si vous voulez telecharger le fichier non copié ni redimensionné 
                                                     // move_uploaded_file($uploadfile, $uploaddir . $newFileName . "." . $ext); 
                                                 } else {
-                                                    //file size is too big
+                                                    //fichier est trop lourd
                                                     header("location: ../add-licencie.php");
                                                     create_flash_message("form_picture_error", "La photo doit être inférieure à 2Mo.", FLASH_ERROR);
                                                     exit();
                                                 }
                                             } else {
-                                                //possible attack from file upload
+                                                //attaque possible via fichier
                                                 header("location: ../add-licencie.php");
                                                 create_flash_message("form_picture_error", "Une erreur est survenue, veuillez réessayer", FLASH_ERROR);
                                                 exit();
                                             }
 
-                                            //add photo on database
+                                            //inserer le chemin de l'img dans la bdd
                                             $imgPath = "./public/profiles/" . $newFileName . "_resize." . $ext;
                                             $addPhoto = $db->prepare("INSERT INTO photo (imgPath, USRCRE) VALUES (?, ?);");
                                             $addPhoto->bindValue(1, $imgPath);
@@ -135,7 +134,7 @@ if (is_logged()) {
                                                 exit();
                                             }
 
-                                            //get the last idPhoto
+                                            //recuperer l'id de la photo inserer
                                             $getLastPhotoId = $db->prepare("SELECT photo.idPhoto FROM photo ORDER BY photo.idPhoto DESC LIMIT 1");
                                             $getLastPhotoId->execute();
                                             if (!$getLastPhotoId) {
@@ -146,7 +145,7 @@ if (is_logged()) {
                                             $result_getLastId = $getLastPhotoId->fetch();
                                             $PhotoId = $result_getLastId["idPhoto"];
 
-                                            //add a licencie on database
+                                            //ajouter le licencie dans la bdd
                                             $req = $db->prepare("INSERT INTO licencie (prenom, nom, sexe, dateN, mail, idCategorie, idPhoto, USRCRE) VALUES (:prenom, :nom, :sexe, :dateN, :mail, :idCategorie, :idPhoto, :USRCRE);");
                                             $req->bindValue('prenom', $prenom_licencie, PDO::PARAM_STR);
                                             $req->bindValue('nom', $nom_licencie, PDO::PARAM_STR);
@@ -159,21 +158,20 @@ if (is_logged()) {
                                             $result = $req->execute();
 
 
-                                            //get licencie id to add his tel
+                                            //recuperer l'id du licencie inserer
                                             $getLastLicencieId = $db->prepare("SELECT licencie.idLicencie FROM licencie ORDER BY licencie.idLicencie DESC LIMIT 1");
                                             $getLastLicencieId->execute();
                                             $result_getIdLicencie = $getLastLicencieId->fetch();
                                             $LicencieId = $result_getIdLicencie["idLicencie"];
 
-                                            //add licencie tel on database
+                                            //ajouter le tel dans la bdd
                                             $addTel = $db->prepare("INSERT INTO tel (idLicencie, tel, USRCRE) VALUES (:idLicencie, :tel, :USRCRE);");
                                             $addTel->bindValue('idLicencie', $LicencieId);
                                             $addTel->bindValue('tel', $tel_licencie);
                                             $addTel->bindValue('USRCRE', $current_user);
                                             $addTel->execute();
 
-
-                                            //get categorie number to define the type of the cotis
+                                            //recuperer la categorie pour définir le type de cotis
                                             $getCategorieName = $db->prepare("SELECT nomCategorie FROM categorie WHERE idCategorie = :idCategorie");
                                             $getCategorieName->bindValue('idCategorie', $categorie_licencie);
                                             $getCategorieName->execute();
@@ -181,7 +179,7 @@ if (is_logged()) {
                                             $CategorieExplode = explode("U", $CategorieName['nomCategorie']);
                                             $CategorieNumber = intval($CategorieExplode[1]);
 
-                                            //add licencie cotisation on database
+                                            //ajouter la cotis dans la bdd
                                             $addCotis = $db->prepare("INSERT INTO cotis (idLicencie, type, prix, USRCRE) VALUES (:idLicencie, :type, :prix, :USRCRE);");
                                             $addCotis->bindValue('idLicencie', $LicencieId);
                                             if ($CategorieNumber >= 5 && $CategorieNumber <= 9) { //U5 to U9 -> type 1

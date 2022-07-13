@@ -21,6 +21,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
     <?php if (is_logged()) : ?>
         <div class="content">
             <?php include('./components/header.php');
+            //verifier si l'id est défini dans l'url pour afficher le licencie en question et si c'est bien un entier
             if (isset($_GET["idLicencie"]) && !empty($_GET["idLicencie"]) && isInteger($_GET["idLicencie"])) {
                 $idLicencie = $_GET["idLicencie"];
                 if (is_admin()) :
@@ -32,7 +33,9 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                     $info->bindValue(2, $_SESSION['id']);
                 endif;
                 $info->execute();
-                if ($info->rowCount() > 0) { //search and check if the licencie is in db and not deleted
+                if ($info->rowCount() > 0) { //Verifier si la requete de recupération des infos nous renvoient les infos.
+
+                    //recuperation des infos
                     $getinfo = $info->fetch(PDO::FETCH_ASSOC);
                     $firstname_licencie = $getinfo["prenom"];
                     $lastname_licencie = $getinfo["nom"];
@@ -41,6 +44,8 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                     $sexe_licencie = $getinfo["sexe"];
                     $category_licencie = $getinfo["nomCategorie"];
 
+
+                    //recuperer le telephone
                     $getTel = $db->prepare("SELECT tel.tel FROM tel WHERE tel.idLicencie = ? AND tel.COSU = 0");
                     $getTel->bindValue(1, $idLicencie);
                     $getTel->execute();
@@ -49,6 +54,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                         $tel_licencie = $result_getTel["tel"];
                     endif;
 
+                    //recuperer la taille
                     $getTaille = $db->prepare("SELECT taille.nom FROM taille INNER JOIN licencie ON licencie.idTaille = taille.idTaille WHERE licencie.idLicencie = ? AND licencie.COSU = 0");
                     $getTaille->bindValue(1, $idLicencie);
                     $getTaille->execute();
@@ -57,6 +63,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                         $taille_licencie = $result_getTaille["nom"];
                     endif;
 
+                    //recupérer le lien de la photo
                     $getPhoto = $db->prepare("SELECT photo.imgPath FROM photo INNER JOIN licencie ON licencie.idPhoto = Photo.idPhoto WHERE licencie.idLicencie = ? AND photo.cosu = 0");
                     $getPhoto->bindValue(1, $idLicencie);
                     $getPhoto->execute();
@@ -64,8 +71,8 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                         $result_getPhoto = $getPhoto->fetch(PDO::FETCH_ASSOC);
                         $url_photo = $result_getPhoto["imgPath"];
                     endif;
-                } else {  //licencie is not in db or is deleted 
-                    if (is_educ()) { //licencie is not in his categories, in db or is deleted
+                } else {
+                    if (is_educ()) { //Aucun licenciés trouvés dans sa/ses catégories.
                         header("location: ./licencies.php");
                         create_flash_message("not_found", "Licencié introuvable dans vos catégories.", FLASH_ERROR);
                         exit();
@@ -214,7 +221,9 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                         <div class="profil-content-tab-ligne profil-content-tab-ligne-foot">
                                             <p>Taille</p>
                                             <select name="taille-licencie" id="taille-licencie">
-                                                <?php if (!isset($taille_licencie)) : ?>
+                                                <?php if (!isset($taille_licencie)) :
+                                                    //si aucune taille défini afficher Taille 
+                                                ?>
                                                     <option disabled selected>Taille</option>
                                                 <?php endif; ?>
                                                 <?php $req_taille = $db->query("SELECT idTaille, nom FROM taille");
@@ -266,28 +275,28 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 document.getElementById("profil-container-part1").style.display = "flex";
             }
 
-            let name = document.getElementById('inputName'); // get the input element
-            name.addEventListener('input', resizeInput); // bind the "resizeInput" callback on "input" event
-            let tel = document.getElementById('inputTel'); // get the input element
-            tel.addEventListener('input', resizeInput); // bind the "resizeInput" callback on "input" event
-            let dateN = document.getElementById('inputDate'); // get the input element
-            dateN.addEventListener('input', resizeInput); // bind the "resizeInput" callback on "input" event
-            let mail = document.getElementById('inputMail'); // get the input element
-            mail.addEventListener('input', resizeInput); // bind the "resizeInput" callback on "input" event
+            let name = document.getElementById('inputName'); // récuperer les input
+            name.addEventListener('input', resizeInput); // A la modification de l'input, appeler la fonction de redimensionnement
+            let tel = document.getElementById('inputTel'); // récuperer les input
+            tel.addEventListener('input', resizeInput); // A la modification de l'input, appeler la fonction de redimensionnement
+            let dateN = document.getElementById('inputDate'); // récuperer les input
+            dateN.addEventListener('input', resizeInput); // A la modification de l'input, appeler la fonction de redimensionnement
+            let mail = document.getElementById('inputMail'); // récuperer les input
+            mail.addEventListener('input', resizeInput); // A la modification de l'input, appeler la fonction de redimensionnement
             if (name) {
-                resizeInput.call(name); // immediately call the function
+                resizeInput.call(name); //Appeler la fonction
             }
             if (tel) {
-                resizeInput.call(tel); // immediately call the function
+                resizeInput.call(tel); //Appeler la fonction
             }
             if (dateN) {
-                resizeInput.call(dateN); // immediately call the function
+                resizeInput.call(dateN); //Appeler la fonction
             }
             if (mail) {
-                resizeInput.call(mail); // immediately call the function
+                resizeInput.call(mail); //Appeler la fonction
             }
 
-            function resizeInput() {
+            function resizeInput() { //redimensionner les input
                 let inputValue = this.value.length;
                 this.style.width = (inputValue + 2) + "ch";
             }

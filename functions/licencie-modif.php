@@ -28,21 +28,21 @@ if (is_logged()) {
                                 $idLicencie = $_POST["idLicencie"];
 
                                 if ($_FILES['photo-licencie']['error'] != 4) : //photo renseignée
-                                    //upload picture from $_FILES
+                                    //telecharger le logo via $_FILES
                                     if (is_uploaded_file($_FILES['photo-licencie']['tmp_name'])) {
-                                        //file is valid
+                                        //le fichier est valide
                                         if ($_FILES['photo-licencie']['size'] < 2000000) {
-                                            //file is inferior to 2 mo
+                                            //fichier est inferieur a 2mo
                                             $uploadfile = $_FILES['photo-licencie']['tmp_name'];
                                             $sourceProperties = getimagesize($uploadfile);
                                             $newFileName = mb_strtolower($nom_licencie) . "_" . mb_strtolower($prenom_licencie) . "_" . date("Ymd"); //filename = Nom_prenom_date
                                             $uploaddir = dirname(__FILE__) . "/../public/profiles/";
-                                            $ext = pathinfo($_FILES['photo-licencie']['name'], PATHINFO_EXTENSION); //get extension
-                                            $image_width = $sourceProperties[0]; //get image width
-                                            $image_height = $sourceProperties[1]; //get image height
-                                            $imageType = $sourceProperties[2]; //get image type
-                                            $newImage_width = $image_width / $image_height * 500; //resize height to 500px and keep the same ratio
-                                            $newImage_height = $image_height / $image_height * 500; //resize height to 500px
+                                            $ext = pathinfo($_FILES['photo-licencie']['name'], PATHINFO_EXTENSION); //recup extension
+                                            $image_width = $sourceProperties[0]; // recup la largeur de l'image
+                                            $image_height = $sourceProperties[1]; //recuper la hauteur de l'image
+                                            $imageType = $sourceProperties[2]; //recuperer le type de l'image
+                                            $newImage_width = $image_width / $image_height * 500; //initialiser la nouvelle largeur a 500px
+                                            $newImage_height = $image_height / $image_height * 500; //initialiser la hauteur selon la largeur a 500px pour garder le meme ratio
 
                                             switch ($imageType) {
 
@@ -75,12 +75,12 @@ if (is_logged()) {
                                                     break;
                                             }
 
-                                            // image upload sucessfuly.
+                                            // image telechargé
 
-                                            // if you want to download the original file :
+                                            // si vous voulez telecharger le fichier non copié ni redimensionné 
                                             // move_uploaded_file($uploadfile, $uploaddir . $newFileName . "." . $ext); 
                                         } else {
-                                            //file size is too big
+                                            //fichier trop lourd
                                             if (isset($_SERVER['HTTP_REFERER'])) {
                                                 header("location:" . $_SERVER['HTTP_REFERER']); //L'adresse de la page qui a conduit le client à la page courante
                                             } else {
@@ -90,7 +90,7 @@ if (is_logged()) {
                                             exit();
                                         }
                                     } else {
-                                        //possible attack from file upload
+                                        //attaque possible via fichier
                                         if (isset($_SERVER['HTTP_REFERER'])) {
                                             header("location:" . $_SERVER['HTTP_REFERER']); //L'adresse de la page qui a conduit le client à la page courante
                                         } else {

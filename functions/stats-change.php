@@ -10,16 +10,15 @@ date_default_timezone_set("Europe/Paris");
 
 //verification si l'utilisateur est connecté
 if (is_logged()) {
-    //verification before add on database
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if (isset($_GET["idStat"]) && !empty($_GET["idStat"])) {
             $idStat = $_GET["idStat"];
             if (filter_var($idStat, FILTER_VALIDATE_INT)) {
-                //get User info form idStat
+                //recuperer les infos utilisateeurs via idStat
                 $getInfo = $db->query("SELECT licencie.prenom FROM licencie INNER JOIN statistiques ON licencie.idLicencie = statistiques.idLicencie WHERE statistiques.idStat = $idStat");
                 $info = $getInfo->fetch(PDO::FETCH_ASSOC);
                 if (isset($_POST['add-goal'])) {
-                    // add goal;
+                    // ajouter un but;
                     $req = $db->query("UPDATE statistiques SET nbButs = nbButs + 1 WHERE idStat = $idStat");
                     if ($req) {
                         if (isset($_SERVER['HTTP_REFERER'])) {
@@ -31,7 +30,7 @@ if (is_logged()) {
                         exit();
                     }
                 } elseif (isset($_POST['remove-goal'])) {
-                    // remove goal;
+                    // supprimer un but;
                     $req = $db->query("UPDATE statistiques SET nbButs = nbButs - 1 WHERE idStat = $idStat");
                     if ($req) {
                         if (isset($_SERVER['HTTP_REFERER'])) {
@@ -43,7 +42,7 @@ if (is_logged()) {
                         exit();
                     }
                 } elseif (isset($_POST['add-pd'])) {
-                    // add pd;
+                    // ajouter une passe décisvies
                     $req = $db->query("UPDATE statistiques SET passeD = passeD + 1 WHERE idStat = $idStat");
                     if ($req) {
                         if (isset($_SERVER['HTTP_REFERER'])) {
@@ -55,7 +54,7 @@ if (is_logged()) {
                         exit();
                     }
                 } elseif (isset($_POST['remove-pd'])) {
-                    // remove pd;
+                    // supprimer une passe décisives
                     $req = $db->query("UPDATE statistiques SET passeD = passeD - 1 WHERE idStat = $idStat");
                     if ($req) {
                         if (isset($_SERVER['HTTP_REFERER'])) {

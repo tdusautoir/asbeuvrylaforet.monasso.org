@@ -6,7 +6,7 @@ require_once("../db.php");
 require_once("../function.php");
 
 if (isset($_POST)) {
-    if ($_POST['id'] == $_SESSION['id']) { //if not, you're trying to modify other account
+    if ($_POST['id'] == $_SESSION['id']) { //si non, vous essayer de modifier un autre compte que le votre
         if (is_admin()) {
             if (isset($_POST["prenom"]) && !empty($_POST["prenom"])) {
                 $req = $db->prepare("UPDATE admin SET prenom = :prenom WHERE idAdmin = :idAdmin");

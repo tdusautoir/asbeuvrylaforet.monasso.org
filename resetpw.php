@@ -27,12 +27,17 @@ endif;
     <!-- Bouton RETOUR -->
     <div class="return_container"><a href="./index.php"><i class="fas fa-arrow-left"></i>Retour</a></div>
     <!-- Fin bouton RETOUR -->
+
+    <!-- afficher les messages d'erreurs ou de succéss -->
     <?php if (isset_flash_message_by_type(FLASH_SUCCESS)) : ?>
         <div class='success abs' id="flash"><?php display_flash_message_by_type(FLASH_SUCCESS); ?></div>
     <?php elseif (isset_flash_message_by_type(FLASH_WARNING)) : ?>
         <div class="error abs" id="flash"><?php display_flash_message_by_type(FLASH_WARNING); ?></div>
     <?php endif; ?>
-    <?php if (!isset($_GET["token"]) || empty($_GET["token"])) : ?>
+
+    <?php if (!isset($_GET["token"]) || empty($_GET["token"])) :
+        //verifier si un token est présent dans l'url, si oui, afficher le formulaire de modification de mot de passe
+    ?>
         <section class="formulaire_login">
             <form method="POST" action="./functions/resetpw-sendmail.php" class="form_container">
                 <div class="form_content">
@@ -50,7 +55,9 @@ endif;
                 </div>
             </form>
         </section>
-    <?php else : ?>
+    <?php else :
+        //afficher le formulaire d'envoie de lien de recupéreation de mot de passe 
+    ?>
         <section class="formulaire_login">
             <form method="POST" action="./functions/resetpw-changepw.php" class="form_container">
                 <div class="form_content">

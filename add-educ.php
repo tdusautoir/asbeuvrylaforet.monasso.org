@@ -104,7 +104,7 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
                 </div>
             </div>
             <?php
-            //if there is form info, delete it
+            //si des infos de formulaire sont présents dans la session, les supprimer
             unset_info_form();
             ?>
             <script>
@@ -124,7 +124,7 @@ if (isset_flash_message_by_type(FLASH_ERROR)) {
             </script>
             <?php require './components/footer.php'; ?>
         <?php else :
-            create_flash_message("no_rights", "Vous ne possédez pas les droits.", FLASH_ERROR); //the user is not admin 
+            create_flash_message("no_rights", "Vous ne possédez pas les droits.", FLASH_ERROR);
             header("location: ./index.php");
             exit();
         endif;

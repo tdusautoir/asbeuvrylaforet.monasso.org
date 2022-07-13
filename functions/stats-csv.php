@@ -1,4 +1,5 @@
-<?php header('Content-type: text/csv');
+<?php
+header('Content-type: text/csv');
 header('Content-Disposition: attachment; filename="statistiques.csv"');
 
 session_start();
@@ -12,7 +13,7 @@ if (is_educ()) {
 } elseif (is_admin()) {
     $req = $db->query('SELECT categorie.nomCategorie, licencie.nom, licencie.prenom, statistiques.nbButs, statistiques.passeD FROM statistiques INNER JOIN licencie ON statistiques.idLicencie = licencie.idLicencie INNER JOIN categorie ON categorie.idCategorie = licencie.idCategorie WHERE licencie.COSU = 0 ORDER BY categorie.idCategorie');
 } else {
-    create_flash_message("no_rights", "Vous ne possédez pas les droits.", FLASH_ERROR); //the user is not admin or educ
+    create_flash_message("no_rights", "Vous ne possédez pas les droits.", FLASH_ERROR);
     header("location: ../statistiques.php");
     exit();
 }

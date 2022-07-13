@@ -10,9 +10,9 @@ date_default_timezone_set("Europe/Paris");
 
 //verification si l'utilisateur est connecté
 if (is_logged()) {
-    if (is_admin() || is_educ()) { //verif if he has the rights
+    if (is_admin() || is_educ()) { //verification si il a les droits
 
-        //reset all of goals and assists to 0
+        //reinitialiser tous les buts et les passeD pour 0
         $req = $db->query("UPDATE statistiques SET nbButs = 0, passeD = 0;");
         if ($req) {
             create_flash_message("success-reset", "Les statistiques ont bien été reinitialisées.", FLASH_SUCCESS);
@@ -24,7 +24,6 @@ if (is_logged()) {
         header("location: ../statistiques.php");
         exit();
     }
-    //verification before add on database
 } else {
     header("location: ../index.php");
     exit();

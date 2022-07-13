@@ -120,7 +120,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                 <?php
                                 if (is_admin()) :
                                     if (isset($_GET['q']) && !empty($_GET['q'])) :
-                                        $q_ = explode(' ', $_GET['q']); //take only the first word
+                                        $q_ = explode(' ', $_GET['q']);
                                         $q = $q_[0];
                                         $req = $db->prepare("SELECT cotis.idCotis, cotis.methode, cotis.prix, cotis.type, cotis.etat, licencie.prenom, licencie.nom FROM cotis INNER JOIN licencie ON cotis.idLicencie = licencie.idLicencie WHERE cotis.COSU = 0 AND licencie.nom LIKE '%$q%' ORDER BY cotis.DCRE DESC;"); //Liste des cotisations
                                         $req->execute();
@@ -144,7 +144,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                     endif;
                                 elseif (is_educ()) :
                                     if (isset($_GET['q']) && !empty($_GET['q'])) :
-                                        $q_ = explode(' ', $_GET['q']); //take only the first word
+                                        $q_ = explode(' ', $_GET['q']);
                                         $q = $q_[0];
                                         $req = $db->prepare("SELECT cotis.idCotis, cotis.methode, cotis.prix, cotis.type, cotis.etat, licencie.prenom, licencie.nom FROM cotis INNER JOIN licencie ON cotis.idLicencie = licencie.idLicencie INNER JOIN categorie ON categorie.idCategorie = licencie.idCategorie INNER JOIN categorieeduc ON categorieeduc.idCategorie = categorie.idCategorie WHERE cotis.COSU = 0 AND categorieeduc.idEduc = :idEduc AND licencie.nom LIKE '%$q%' ORDER BY cotis.DCRE DESC;"); //Liste des cotisations selon les catégories de l'educateur
                                         $req->bindValue('idEduc', $_SESSION['id']);
@@ -171,7 +171,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                         $rowCount = $req->rowCount();
                                     endif;
                                 endif;
-                                if ($rowCount > 0) : //if there is most than one cotisation
+                                if ($rowCount > 0) :
                                 ?>
                                     <div class="cotisations-tab">
                                         <table class="table table-striped">
@@ -251,7 +251,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             <script type="text/javascript" src="./public/js/tableau.js"></script>
             <?php require './components/footer.php'; ?>
         <?php else :
-            create_flash_message(ERROR_PSWD, "Vous ne possédez pas les droits.", FLASH_ERROR); //the user is not admin or educ
+            create_flash_message(ERROR_PSWD, "Vous ne possédez pas les droits.", FLASH_ERROR);
             header("location: ./index.php");
             exit();
         endif;

@@ -7,7 +7,7 @@ require_once("../db.php");
 
 date_default_timezone_set("Europe/Paris");
 
-//recup info from formulaire to display it if there is an error
+//recuperer les infos du formulaire pour les afficher en cas d'erreur 
 if (isset($_POST["submit-add"])) {
     if (isset($_POST["nom-educ"]) && !empty($_POST["nom-educ"])) {
         add_info_form("nom-educ", $_POST["nom-educ"]);

@@ -5,6 +5,7 @@ require_once("../../function.php");
 
 $sql = $db->query("SELECT color FROM settings ORDER BY id DESC LIMIT 1");
 $donnees = $sql->fetch(PDO::FETCH_ASSOC);
+//recuperer la couleur dans la base de données pour l'associés à la variable mainColor
 
 //#289a37;
 ?>

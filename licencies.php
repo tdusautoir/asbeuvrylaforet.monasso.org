@@ -73,7 +73,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                             <?php
                             if (is_admin()) :
                                 if (isset($_GET['q']) && !empty($_GET['q'])) :
-                                    $q_ = explode(' ', $_GET['q']); //take only the first word
+                                    $q_ = explode(' ', $_GET['q']);
                                     $q = $q_[0];
                                     $req = $db->prepare("SELECT licencie.idLicencie, categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.dateN, licencie.mail, licencie.USRCRE FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.COSU = 0 AND licencie.nom LIKE '%$q%' ORDER BY licencie.DCRE DESC;"); //licenciés de la bdd selon la recherche q
                                     $req->execute();
@@ -91,7 +91,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                 endif;
                             elseif (is_educ()) :
                                 if (isset($_GET['q']) && !empty($_GET['q'])) :
-                                    $q_ = explode(' ', $_GET['q']); //take only the first word
+                                    $q_ = explode(' ', $_GET['q']);
                                     $q = $q_[0];
                                     $req = $db->prepare("SELECT licencie.idLicencie, categorie.nomCategorie, licencie.prenom, licencie.nom, licencie.dateN, licencie.mail, licencie.USRCRE FROM `licencie` INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorieeduc.idCategorie = categorie.idCategorie INNER JOIN educ ON educ.idEduc = categorieeduc.idEduc WHERE licencie.COSU = 0 AND educ.idEduc = :idEduc AND licencie.nom LIKE '%$q%' ORDER BY licencie.DCRE DESC;"); //licenciés de la bdd selon la recherche q et les catégories associés à l'educateur connecté
                                     $req->bindValue('idEduc', $_SESSION['id']);

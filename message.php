@@ -9,8 +9,30 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
     header("location: index.php");
 }
 
-$settings = $db->query("SELECT color, logoPath FROM settings ORDER BY id DESC LIMIT 1");
-$get_settings = $settings->fetch(PDO::FETCH_ASSOC);
+//Recuper les infos du licenciés :
+
+//verifier si l'id est passé dans l'url et verifier si c'est un entier
+if (isset($_GET["idLicencie"]) && !empty($_GET["idLicencie"]) && isInteger($_GET["idLicencie"])) {
+    $idLicencie = $_GET["idLicencie"];
+    // recupérer l'id
+    $info = $db->prepare("SELECT licencie.nom, licencie.prenom, licencie.dateN, licencie.mail, licencie.sexe, categorie.nomCategorie FROM licencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.idLicencie = ? AND licencie.COSU = 0");
+    // recuperer les infos selon l'id
+    $info->bindValue(1, $idLicencie);
+    $info->execute();
+    if ($info->rowCount() > 0) { //verifier si la requete nous renvoies des infos, sinon : le licenciés est supprimé ou n'existe pas
+        $getinfo = $info->fetch(PDO::FETCH_ASSOC);
+        $firstname_licencie = $getinfo["prenom"];
+        $lastname_licencie = $getinfo["nom"];
+        $dateN_licencie = $getinfo["dateN"];
+        $mail_licencie = $getinfo["mail"];
+        $sexe_licencie = $getinfo["sexe"];
+        $category_licencie = $getinfo["nomCategorie"];
+    } else {
+        header("location: ./licencies.php");
+        create_flash_message("not_found", "Licencié introuvable.", FLASH_ERROR);
+        exit();
+    }
+}
 
 ?>
 <!DOCTYPE html>

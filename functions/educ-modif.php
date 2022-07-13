@@ -21,7 +21,7 @@ if (is_logged()) {
                         $idEduc = $_POST["idEduc"];
 
 
-                        //search and check if the educ is in db and not deleted
+                        //verifier si l'educ est dans la base de données
                         $rech_educ = $db->prepare("SELECT idEduc FROM educ WHERE idEduc = ? AND COSU = 0");
                         $rech_educ->bindValue(1, $idEduc);
                         $rech_educ->execute();
@@ -42,20 +42,18 @@ if (is_logged()) {
                             $req->bindValue("idEduc", $idEduc);
                             $result = $req->execute();
 
-                            //Modif his categories:
+                            //Modifier ses categories
 
-                            //delete his old categories
+                            //supprimer ses anciennes categories
                             $deleteCat = $db->prepare("DELETE FROM categorieeduc WHERE idEduc = :idEduc");
                             $deleteCat->bindValue('idEduc', $idEduc);
                             $deleteCat->execute();
 
-                            //add his new categories
+                            //ajouter les nouvelles categories
                             $getCat = $db->prepare("CALL PRC_LSTCAT");
                             $getCat->execute();
-
                             $cats = $getCat->fetchAll(PDO::FETCH_ASSOC);
                             $getCat->closeCursor();
-
                             foreach ($cats as $cat) {
                                 $nameCat = $cat["nomCategorie"];
                                 if (isset($_POST["$nameCat-cb"])) {
@@ -68,7 +66,7 @@ if (is_logged()) {
                                 }
                             }
 
-                            //change his password only if its not empty
+                            //changeait le password si l'admin l'a spécifié
                             if (isset($_POST["password-educ"]) && !empty($_POST["password-educ"])) {
                                 $change_pswd = $db->prepare("UPDATE educ SET password = :password WHERE idEduc = :idEduc");
                                 $password_hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
@@ -76,7 +74,7 @@ if (is_logged()) {
                                 $change_pswd->bindValue("idEduc", $idEduc);
                                 $change_pswd->execute();
                             }
-                        } else { //educ is in db or is deleted
+                        } else { //educ introubable
                             header("location: ../educateurs.php");
                             create_flash_message("not_found", "Éducateur introuvable.", FLASH_ERROR);
                             exit();

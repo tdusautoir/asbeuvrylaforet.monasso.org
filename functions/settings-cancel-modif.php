@@ -10,10 +10,10 @@ date_default_timezone_set("Europe/Paris");
 //verification si l'utilisateur est connecté
 if (is_logged()) {
     $get_all_settings = $db->query("SELECT id FROM settings");
-    //verification before delete on database
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if (isset($_POST['cancel-settings'])) {
             if ($get_all_settings->rowCount() > 1) {
+                //supprimer les anciennes données 
                 $result = $db->query("DELETE FROM settings ORDER BY id DESC LIMIT 1");
                 if ($result) {
                     header("location: ../compte.php");

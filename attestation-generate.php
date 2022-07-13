@@ -15,7 +15,7 @@ if (isset($_GET["idLicencie"]) && !empty($_GET["idLicencie"]) && isInteger($_GET
     $info = $db->prepare("SELECT licencie.nom, licencie.prenom, licencie.dateN, licencie.mail, licencie.sexe, categorie.nomCategorie, cotis.prix, cotis.methode FROM licencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN cotis ON cotis.idLicencie = licencie.idLicencie WHERE licencie.idLicencie = ? AND licencie.COSU = 0");
     $info->bindValue(1, $idLicencie);
     $info->execute();
-    if ($info->rowCount() > 0) { //search and check if the licencie is in db and not deleted
+    if ($info->rowCount() > 0) {
         $getinfo = $info->fetch(PDO::FETCH_ASSOC);
         $firstname_licencie = $getinfo["prenom"];
         $lastname_licencie = $getinfo["nom"];
@@ -24,7 +24,7 @@ if (isset($_GET["idLicencie"]) && !empty($_GET["idLicencie"]) && isInteger($_GET
         $sexe_licencie = $getinfo["sexe"];
         $category_licencie = $getinfo["nomCategorie"];
         $cotisation_prix = $getinfo["prix"];
-        
+
         if (isset($getinfo["methode"])) {
             if ($getinfo["methode"] == 1) {
                 $cotisation_methode = "par chèque";

@@ -272,20 +272,20 @@ $get_settings = $settings->fetch(PDO::FETCH_ASSOC);
                 document.getElementById('text' + index).style.display = "none";
             }
 
-            let input1 = document.getElementById('inputText1'); // get the input element
-            input1.addEventListener('input', resizeInput); // bind the "resizeInput" callback on "input" event
-            let input2 = document.getElementById('inputText2'); // get the input element
-            input2.addEventListener('input', resizeInput); // bind the "resizeInput" callback on "input" event
-            let input3 = document.getElementById('inputText3'); // get the input element
-            input3.addEventListener('input', resizeInput); // bind the "resizeInput" callback on "input" event
+            let input1 = document.getElementById('inputText1');
+            input1.addEventListener('input', resizeInput);
+            let input2 = document.getElementById('inputText2');
+            input2.addEventListener('input', resizeInput);
+            let input3 = document.getElementById('inputText3');
+            input3.addEventListener('input', resizeInput);
             if (input1) {
-                resizeInput.call(input1); // immediately call the function
+                resizeInput.call(input1);
             }
             if (input2) {
-                resizeInput.call(input2); // immediately call the function
+                resizeInput.call(input2);
             }
             if (input3) {
-                resizeInput.call(input3); // immediately call the function
+                resizeInput.call(input3);
             }
 
             function resizeInput() {

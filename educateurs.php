@@ -43,7 +43,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                 </h2>
                                 <?php
                                 if (isset($_GET['q']) && !empty($_GET['q'])) :
-                                    $q_ = explode(' ', $_GET['q']); //take only the first word
+                                    $q_ = explode(' ', $_GET['q']);
                                     $q = $q_[0];
                                     $req = $db->prepare("SELECT educ.idEduc, educ.prenom, educ.nom, educ.mail FROM `educ` WHERE educ.COSU = 0 AND educ.nom LIKE '%$q%' ORDER BY educ.DCRE DESC;"); //éducateurs de la bdd selon la recherche q
                                     $req->execute();

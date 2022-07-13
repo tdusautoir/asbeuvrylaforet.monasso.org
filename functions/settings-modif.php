@@ -12,7 +12,6 @@ date_default_timezone_set("Europe/Paris");
 if (is_logged()) {
     $get_settings = $db->query("SELECT color, logoPath FROM settings ORDER BY id DESC LIMIT 1");
     $settings = $get_settings->fetch(PDO::FETCH_ASSOC);
-    //verification before add on database
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if (isset($_POST['submit-settings'])) {
             if (isset($_POST['color'])) {
@@ -23,21 +22,21 @@ if (is_logged()) {
                         $req->bindValue("logoPath", $settings['logoPath']);
                         $result = $req->execute();
                     } else {
-                        //upload picture from $_FILES
+                        //telecharger le logo via $_FILES
                         if (is_uploaded_file($_FILES['logo']['tmp_name'])) {
-                            //file is valid
+                            //le fichier est valide
                             if ($_FILES['logo']['size'] < 2000000) {
-                                //file is inferior to 2 mo
+                                //fichier est inferieur a 2mo
                                 $uploadfile = $_FILES['logo']['tmp_name'];
                                 $sourceProperties = getimagesize($uploadfile);
                                 $newFileName = "logo_" . $_FILES['logo']['name'];
                                 $uploaddir = dirname(__FILE__) . "/../public/logo/";
-                                $ext = pathinfo($_FILES['logo']['name'], PATHINFO_EXTENSION); //get extension
-                                $image_width = $sourceProperties[0]; //get image width
-                                $image_height = $sourceProperties[1]; //get image height
-                                $imageType = $sourceProperties[2]; //get image type
-                                $newImage_width = $image_width / $image_width * 300; //resize width to 200px
-                                $newImage_height = $image_height / $image_width * 300; //resize height to 200px but keep the same ratio
+                                $ext = pathinfo($_FILES['logo']['name'], PATHINFO_EXTENSION); //recup extensio 
+                                $image_width = $sourceProperties[0]; // recup la largeur de l'image
+                                $image_height = $sourceProperties[1]; //recuper la hauteur de l'image
+                                $imageType = $sourceProperties[2]; //recuperer le type de l'image
+                                $newImage_width = $image_width / $image_width * 300; //initialiser la nouvelle largeur a 300px
+                                $newImage_height = $image_height / $image_width * 300; //initialiser la hauteur selon la largeur a 300px pour garder le meme ratio
 
                                 switch ($imageType) {
 
@@ -66,23 +65,25 @@ if (is_logged()) {
                                         break;
                                 }
 
-                                // image upload sucessfuly.
+                                // image telecharger 
                                 $imgPath = "./public/logo/" . $newFileName;
+
+                                //inserer en base les nouvelles informations
                                 $req = $db->prepare("INSERT INTO settings (color, logoPath) VALUES (:color, :logoPath)");
                                 $req->bindValue("color", $_POST['color']);
                                 $req->bindValue("logoPath", $imgPath);
                                 $result = $req->execute();
 
-                                // if you want to download the original file :
+                                // Pour telecharger le fichier original sans copie et redimensionnement
                                 // move_uploaded_file($uploadfile, $uploaddir . $newFileName . "." . $ext); 
                             } else {
-                                //file size is too big
+                                //ficher est trop lourd
                                 header("location: ../compte.php");
                                 create_flash_message("form_picture_size_error", "La photo doit être inférieure à 2Mo.", FLASH_ERROR);
                                 exit();
                             }
                         } else {
-                            //possible attack from file upload
+                            //attaque possible via fichier
                             header("location: ../compte.php");
                             create_flash_message("form_picture_error", "Une erreur est survenue, veuillez réessayer", FLASH_ERROR);
                             exit();

@@ -24,18 +24,18 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             if (isset($_GET["idEduc"]) && !empty($_GET["idEduc"]) && isInteger($_GET["idEduc"])) {
                 $idEduc = $_GET["idEduc"];
 
-                //get the educ info from idEduc
+                //recupérer les infos selon l'id educateur
                 $info = $db->prepare("SELECT educ.nom, educ.prenom, educ.mail, educ.responsable FROM educ WHERE educ.idEduc = ? AND educ.COSU = 0");
                 $info->bindValue(1, $idEduc);
                 $info->execute();
-                if ($info->rowCount() > 0) { //search and check if the educ is in db and not deleted
+                if ($info->rowCount() > 0) {
                     $getinfo = $info->fetch(PDO::FETCH_ASSOC);
                     $firstname_educ = $getinfo["prenom"];
                     $lastname_educ = $getinfo["nom"];
                     $mail_educ = $getinfo["mail"];
                     $resp_educ = $getinfo["responsable"];
 
-                    //get the educ categories from idEduc
+                    //recuperer les categories selon l'id educateur
                     $info_categories = $db->prepare("SELECT categorieeduc.idCategorie FROM educ INNER JOIN categorieeduc ON categorieeduc.idEduc = educ.idEduc WHERE educ.idEduc = $idEduc");
                     $info_categories->execute();
                     if ($info_categories->rowCount() > 0) { //if the educ is associate with categorie(s), get the name of the categorie(s)
@@ -48,7 +48,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                             $categories_educ[] = $getinfo_categorie["nomCategorie"];
                         }
                     }
-                } else { //educ is not in db or is deleted
+                } else { //Educateur est introuvable
                     header("location: ./educateurs.php");
                     create_flash_message("not_found", "Éducateur introuvable.", FLASH_ERROR);
                     exit();

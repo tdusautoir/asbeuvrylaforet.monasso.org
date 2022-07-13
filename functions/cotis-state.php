@@ -10,11 +10,10 @@ date_default_timezone_set("Europe/Paris");
 
 //verification si l'utilisateur est connecté
 if (is_logged()) {
-    //verification before change on database
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
-        if (isset($_GET['idCotis'])) { //verif if idCotis is define
+        if (isset($_GET['idCotis'])) { //verifier si l'id est defini dans l'url
             $idCotis = $_GET["idCotis"];
-            if (filter_var($idCotis, FILTER_VALIDATE_INT)) { //verif if this is an int
+            if (filter_var($idCotis, FILTER_VALIDATE_INT)) { //verifier si c'est un entier
                 if (isset($_POST["etat"])) {
                     if ($_POST["etat"] == 1) {
                         $changeState = $db->query("UPDATE cotis SET cotis.etat = 1 WHERE idCotis = $idCotis");
