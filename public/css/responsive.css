@@ -234,9 +234,11 @@
     .account-li li p {
         display: none;
     }
+
     .profil-img img {
         width: 100%;
     }
+
     .filter {
         flex-direction: column;
     }

@@ -203,6 +203,7 @@
     font-size: 12px;
     font-weight: 500;
     margin-left: 5px;
+    cursor: pointer;
 }
 
 .site-settings-color,
@@ -883,4 +884,49 @@ div.sms-right-part {
     height: fit-content;
     border: 1px solid #e6e6e6;
     font-weight: 500;
+}
+
+/* Page de messagerie */
+
+.msg-container {
+    margin-top: 20px;
+}
+
+.msg-container-head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.msg-txtarea textarea {
+    resize: none;
+    width: 100%;
+    background: #fff;
+    color: #1a1a1a;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+    padding: 15px;
+    font-size: 16px;
+    outline: none;
+    color: #8A7575;
+    margin: 0 5%;
+}
+
+.msg-content-button {
+    margin: 20px 0;
+}
+
+.msg-content-button input {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 15px;
+    color: white !important;
+    padding: 10px 20px;
+    width: auto;
+    height: auto;
+    background-color: var(--mainColor);
+    width: auto;
+    cursor: pointer;
+    min-width: unset !important;
+    margin: 0 !important;
 }

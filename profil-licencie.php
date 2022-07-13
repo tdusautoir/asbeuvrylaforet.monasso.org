@@ -126,7 +126,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                             <?= htmlspecialchars($tel_licencie) ?>
                                         </p>
                                     </div>
-                                    <div class="profil-content-tab-ligne profil-content-tab-ligne-foot">
+                                    <div class="profil-content-tab-ligne">
                                         <p>Mail</p>
                                         <p title="<?= htmlspecialchars($mail_licencie) ?>"><?= htmlspecialchars($mail_licencie) ?></p>
                                     </div>
@@ -135,7 +135,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                         <?php if (isset($taille_licencie)) : ?>
                                             <p><?= htmlspecialchars($taille_licencie) ?></p>
                                         <?php else : ?>
-                                            <p> non définie </p>
+                                            <p> Non définie </p>
                                         <?php endif; ?>
                                     </div>
                                 </div>
@@ -207,7 +207,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                             <p>Téléphone</p>
                                             <input id="inputTel" type="text" name="tel-licencie" value="<?= htmlspecialchars($tel_licencie) ?>">
                                         </div>
-                                        <div class="profil-content-tab-ligne profil-content-tab-ligne-foot">
+                                        <div class="profil-content-tab-ligne">
                                             <p>Mail</p>
                                             <input id="inputMail" type="text" name="mail-licencie" value="<?= htmlspecialchars($mail_licencie) ?>" title="<?= htmlspecialchars($mail_licencie) ?>">
                                         </div>

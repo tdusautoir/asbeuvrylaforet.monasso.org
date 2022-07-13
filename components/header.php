@@ -55,6 +55,9 @@ $get_logo = $logo->fetch(PDO::FETCH_ASSOC);
 				<li <?php if (isset($link_active[4])) : ?>class="active" <?php endif; ?>>
 					<a href="./cotisations.php">Suivi des cotisations</a>
 				</li>
+				<li <?php if (isset($link_active[5])) : ?>class="active" <?php endif; ?>>
+					<a href="./message.php"><i class="fa fa-paper-plane"></i></a>
+				</li>
 			</ul>
 		</nav>
 	</div>
