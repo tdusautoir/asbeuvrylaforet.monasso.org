@@ -196,7 +196,6 @@ div.chartJS {
 .add-container {
     display: flex;
     margin-top: 20px;
-    margin-bottom: 60px;
     align-items: center;
     justify-content: center;
 }
@@ -204,12 +203,8 @@ div.chartJS {
 /* -----Page d'ajout Liste----- */
 
 .add-panel {
-    padding: 20px;
     flex-basis: 50%;
-    background: white;
     /* box-shadow: 3px 3px 30px #d6d6d6, -3px -3px 30px #ffffff; */
-    border-radius: 20px;
-    height: auto;
 }
 
 .add-panel h1 {

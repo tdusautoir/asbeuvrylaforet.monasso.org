@@ -39,6 +39,9 @@ line-height: 1;
 content: "\f015";
 }
 
+.fa-paper-plane:before {
+content:"\f1d8"
+}
 .fa-address-card {
 content='\f2bb'
 }
