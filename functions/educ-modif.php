@@ -69,7 +69,7 @@ if (is_logged()) {
                             //changeait le password si l'admin l'a spécifié
                             if (isset($_POST["password-educ"]) && !empty($_POST["password-educ"])) {
                                 $change_pswd = $db->prepare("UPDATE educ SET password = :password WHERE idEduc = :idEduc");
-                                $password_hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
+                                $password_hash = password_hash($_POST["password-educ"], PASSWORD_DEFAULT);
                                 $change_pswd->bindValue("password", $password_hash);
                                 $change_pswd->bindValue("idEduc", $idEduc);
                                 $change_pswd->execute();

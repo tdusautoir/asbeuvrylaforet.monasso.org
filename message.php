@@ -18,7 +18,7 @@ if (isset($_GET["idLicencie"]) && !empty($_GET["idLicencie"]) && isInteger($_GET
     $idLicencie = $_GET["idLicencie"];
 
     // recuperer les infos selon l'id
-    $info = $db->prepare("SELECT licencie.nom, licencie.prenom, tel.tel FROM licencie INNER JOIN tel ON licencie.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.idLicencie = ? AND licencie.COSU = 0");
+    $info = $db->prepare("SELECT licencie.nom, licencie.prenom, tel.tel FROM licencie INNER JOIN tel ON licencie.idLicencie = tel.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.idLicencie = ? AND licencie.COSU = 0");
     $info->bindValue(1, $idLicencie);
     $info->execute();
     if ($info->rowCount() > 0) { //verifier si la requete nous renvoies des infos, sinon : le licenciés est supprimé ou n'existe pas
