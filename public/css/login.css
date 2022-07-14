@@ -5,7 +5,8 @@
 html {
     height: -webkit-fill-available;
 }
-.formulaire_login{
+
+.formulaire_login {
     width: 100%;
     height: 100vh;
     height: var(--app-height);
@@ -13,7 +14,8 @@ html {
     justify-content: center;
     align-items: center;
 }
-.form_container{
+
+.form_container {
     max-width: 500px;
     width: 100%;
     margin: 0 auto;
@@ -22,24 +24,37 @@ html {
     box-shadow: 0 0 7px rgb(0 0 0 / 44%);
     border-radius: 4px;
 }
-.form_content{
+
+.form_content {
+    text-align: center;
     max-width: 450px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
-.logo_association{
+
+.form_content p {
+    margin-bottom: 20px;
+}
+
+.logo_association {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
 }
-.logo_association img{
+
+.logo_association img {
     width: 190px;
 }
-div.mail, div.password, div.submit{
+
+div.mail,
+div.password,
+div.submit {
     margin: 0 0 20px;
     position: relative;
 }
+
 input {
     width: 100%;
     background: #fff;
@@ -54,14 +69,16 @@ input {
     font-size: 16px;
     outline: none;
 }
+
 input#password {
     padding-right: 50px;
 }
-.field_label_top{
+
+.field_label_top {
     position: absolute;
-    -webkit-transition-property: top,left,opacity;
-    -o-transition-property: top,left,opacity;
-    transition-property: top,left,opacity;
+    -webkit-transition-property: top, left, opacity;
+    -o-transition-property: top, left, opacity;
+    transition-property: top, left, opacity;
     -webkit-transition-duration: .5s;
     -o-transition-duration: .5s;
     transition-duration: .5s;
@@ -72,7 +89,9 @@ input#password {
     left: 15px;
     pointer-events: none;
 }
-.field_label_top_focused .field_label_top, .field_label_top_filled .field_label_top{
+
+.field_label_top_focused .field_label_top,
+.field_label_top_filled .field_label_top {
     background: #fff;
     font-size: 12px;
     line-height: 12px;
@@ -81,49 +100,57 @@ input#password {
     left: 12px;
     opacity: 1;
 }
-.field_label_top_focused::placeholder{
-    -webkit-transition-property: top,left,opacity;
-    -o-transition-property: top,left,opacity;
-    transition-property: top,left,opacity;
+
+.field_label_top_focused::placeholder {
+    -webkit-transition-property: top, left, opacity;
+    -o-transition-property: top, left, opacity;
+    transition-property: top, left, opacity;
     -webkit-transition-duration: .5s;
     -o-transition-duration: .5s;
     transition-duration: .5s;
     opacity: 0;
 }
-.form_field_error_password{
+
+.form_field_error_password {
     text-align: left;
     color: var(--errorColor);
     font-size: 12px;
     margin-top: 6px;
     display: none;
 }
-.form_field_error_mail{
+
+.form_field_error_mail {
     text-align: left;
     color: var(--errorColor);
     font-size: 12px;
     margin-top: 6px;
     display: none;
 }
-input::placeholder{
+
+input::placeholder {
     opacity: 1;
 }
-.forgot_pwd{
+
+.forgot_pwd {
     font-size: 12px;
     margin-top: 8px;
     float: right;
 }
-.submit{
+
+.submit {
     display: flex;
     justify-content: center;
 }
+
 a.view_password_link {
     position: absolute;
     right: 18px;
     top: 17px;
     color: #1a1a1a;
 }
-@media screen and (max-width:800px){
-    .form_container{
+
+@media screen and (max-width:800px) {
+    .form_container {
         box-shadow: none;
     }
 }
