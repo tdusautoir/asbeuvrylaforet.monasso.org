@@ -182,7 +182,6 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                     <th>Méthode</th>
                                                     <th>Licencié</th>
                                                     <th>Etat</th>
-                                                    <th></th>
                                                 </tr>
                                             </thead>
 
@@ -223,12 +222,6 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                                     <option <?php if ($COTIS['etat'] == 4) : ?> selected <?php endif; ?> value="4">Encaissée</option>
                                                                 </select>
                                                             </form>
-                                                        </td>
-                                                        <td></td>
-                                                        <td class="action-btns btns-2">
-                                                            <a href="">
-                                                                <i class="fa fa-pencil"></i>
-                                                            </a>
                                                         </td>
                                                     </tr>
                                                 <?php endwhile; ?>

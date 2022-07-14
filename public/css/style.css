@@ -1509,27 +1509,17 @@ td i.fa.fa-picture-o:hover {
 
 .cotisations-tab th:nth-child(2),
 .cotisations-tab td:nth-child(2) {
-    width: 14%;
+    width: 16%;
 }
 
 .cotisations-tab th:nth-child(3),
 .cotisations-tab td:nth-child(3) {
-    width: 22%;
+    width: 24%;
 }
 
 .cotisations-tab th:nth-child(4),
 .cotisations-tab td:nth-child(4) {
-    width: 24%;
-}
-
-.cotisations-tab th:nth-child(5),
-.cotisations-tab td:nth-child(5) {
-    width: 18%;
-}
-
-.cotisations-tab th:nth-child(6),
-.cotisations-tab td:nth-child(6) {
-    width: 8%;
+    width: 26%;
 }
 
 .cotisations-tab select {

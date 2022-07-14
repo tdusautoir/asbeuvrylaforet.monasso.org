@@ -127,6 +127,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                 <th>Cotisation</th>
                                                 <th></th>
                                                 <th></th>
+                                                <th></th>
                                             </tr>
                                         </thead>
 
@@ -177,16 +178,9 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                         endif; ?>
                                                     </td>
                                                     <td class="action-btns">
-                                                        <?php $getPhoto = $db->prepare("SELECT licencie.idPhoto, photo.imgPath FROM licencie INNER JOIN photo ON licencie.idPhoto = photo.idPhoto WHERE licencie.idLicencie = ? AND photo.COSU = 0");
-                                                        $getPhoto->bindValue(1, $LIC['idLicencie']);
-                                                        $getPhoto->execute();
-                                                        if ($getPhoto->rowCount() > 0) :
-                                                            $result_getPhoto = $getPhoto->fetch(PDO::FETCH_ASSOC);
-                                                            $imgPath = $result_getPhoto["imgPath"]; ?>
-                                                            <a href="#" onclick="displayModalPhoto('<?= $imgPath ?>')">
-                                                                <i class=" fa fa-picture-o"></i>
-                                                            </a>
-                                                        <?php endif; ?>
+                                                        <a href="#" onclick="">
+                                                            <i class=" fa fa-phone"></i>
+                                                        </a>
                                                     </td>
                                                     <td class="action-btns btns-1">
                                                         <a href="./profil-licencie.php?idLicencie=<?= $LIC["idLicencie"] ?>">

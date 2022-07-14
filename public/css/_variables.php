@@ -40,6 +40,10 @@ line-height: 1;
 content: "\f015";
 }
 
+.fa-phone:before {
+content:"\f095"
+}
+
 .fa-paper-plane:before {
 content:"\f1d8"
 }
