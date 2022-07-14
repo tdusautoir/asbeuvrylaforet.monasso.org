@@ -244,7 +244,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                       },
                       label: "Aperçu du suivi des cotisations",
                       data: <?= json_encode($data); ?>,
-                      backgroundColor: ["rgb(17 172 38 / 77%)", "rgb(255 31 31 / 88%);"],
+                      backgroundColor: ["#dfdfdf", "rgb(47 191 47 / 78%)"],
                       borderColor: ["rgba(255, 255, 255, 1)", "rgba(255, 255, 255, 1)"],
                       borderWidth: 3,
                       hoverOffset: 20,
