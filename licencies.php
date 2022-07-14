@@ -248,7 +248,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             }
         </script>
         <script type="text/javascript" src="./public/js/tableau.js"></script>
-        <script type="text/javascript" src="./public/js/modal.js"></script>
+        <script type="text/javascript" src="./public/js/modal-licencie.js"></script>
         <?php require './components/footer.php'; ?>
         <?php else : require "./components/form_login.php"; ?><?php endif; ?>
 </body>

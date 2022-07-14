@@ -64,7 +64,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                     endif;
 
                     //recupérer le lien de la photo
-                    $getPhoto = $db->prepare("SELECT photo.imgPath FROM photo INNER JOIN licencie ON licencie.idPhoto = Photo.idPhoto WHERE licencie.idLicencie = ? AND photo.cosu = 0");
+                    $getPhoto = $db->prepare("SELECT photo.imgPath FROM photo INNER JOIN licencie ON licencie.idPhoto = photo.idPhoto WHERE licencie.idLicencie = ? AND photo.cosu = 0");
                     $getPhoto->bindValue(1, $idLicencie);
                     $getPhoto->execute();
                     if ($getPhoto->rowCount() > 0) :
@@ -244,7 +244,10 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                             <div class="profil-content-tab-button" id="profil-content-tab-button">
                                 <input type="hidden" name="idLicencie" value="<?php if (isset($idLicencie)) : echo $idLicencie;
                                                                                 endif; ?>">
-                                <input type="submit" name="submit-modif" value="Modifier">
+                                <div class="loading" id="loading">
+                                    <img src="./public/images/Rolling-1s-200px-gray.svg">
+                                </div>
+                                <input type="submit" onclick="loading()" name="submit-modif" id="form-submit" value="Modifier">
                                 <a href="" onclick="hideEdit()">Annuler</a>
                             </div>
                         </form>
@@ -300,16 +303,6 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 let inputValue = this.value.length;
                 this.style.width = (inputValue + 2) + "ch";
             }
-        </script>
-        <script>
-            let input = document.getElementById("photo-licencie");
-            let imageName = document.getElementById("nom-photo-licencie")
-
-            input.addEventListener("change", () => {
-                let inputImage = document.querySelector("input[type=file]").files[0];
-
-                imageName.innerText = inputImage.name;
-            })
         </script>
         <?php require './components/footer.php'; ?>
         <?php else : require "./components/form_login.php"; ?><?php endif; ?>

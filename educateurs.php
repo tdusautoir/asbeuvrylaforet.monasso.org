@@ -154,7 +154,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                 </div>
             </div>
             <script type="text/javascript" src="./public/js/tableau.js"></script>
-            <script type="text/javascript" src="./public/js/modal.js"></script>
+            <script type="text/javascript" src="./public/js/modal-educ.js"></script>
             <?php require './components/footer.php'; ?>
 
         <?php else :
