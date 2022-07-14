@@ -7,9 +7,8 @@ require_once("./db.php");
 if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "logout") {
     clean_php_session();
     header("location: index.php");
-} ?>
+}
 
-<?php
 if (isset($_GET["idLicencie"]) && !empty($_GET["idLicencie"]) && isInteger($_GET["idLicencie"])) {
     $idLicencie = $_GET["idLicencie"];
     $info = $db->prepare("SELECT licencie.nom, licencie.prenom, licencie.dateN, licencie.mail, licencie.sexe, categorie.nomCategorie, cotis.prix, cotis.methode FROM licencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN cotis ON cotis.idLicencie = licencie.idLicencie WHERE licencie.idLicencie = ? AND licencie.COSU = 0");
@@ -45,9 +44,8 @@ if (isset($_GET["idLicencie"]) && !empty($_GET["idLicencie"]) && isInteger($_GET
     header("location: ./attestation-generator.php");
     create_flash_message("modif_error", "Une erreur est survenue, Veuillez réessayer.", FLASH_ERROR);
     exit();
-} ?>
+}
 
-<?php
 // initialistation de la variable date du jour
 $today = date('j/m/\2\0y');
 
@@ -128,5 +126,3 @@ $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
 
 $dompdf->stream("Attestation_$firstname_licencie" . "_$lastname_licencie", array("Attachment" => 0));
-
-?>
