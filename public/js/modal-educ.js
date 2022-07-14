@@ -1,7 +1,5 @@
 let Modal = document.getElementById("Modal");
 let ModalDelete = document.getElementById("Modal-delete");
-let ModalPhoto = document.getElementById("Modal-photo");
-let imgLicencie = document.getElementById("img-licencie");
 
 function displayModalDelete(idEduc) {
   let validBtn = document.getElementById("valid-btn");
@@ -10,13 +8,6 @@ function displayModalDelete(idEduc) {
   Modal.style.display = "block";
   ModalDelete.style.display = "flex";
   validBtn.setAttribute("href", "./functions/educ-delete.php?idEduc=" + idEduc);
-}
-
-function displayModalPhoto(imgPath) {
-  imgLicencie.setAttribute("src", imgPath);
-  document.body.style.overflow = "hidden";
-  Modal.style.display = "block";
-  ModalPhoto.style.display = "flex";
 }
 
 function erase() {

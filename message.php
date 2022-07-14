@@ -18,15 +18,16 @@ if (isset($_GET["idLicencie"]) && !empty($_GET["idLicencie"]) && isInteger($_GET
     $idLicencie = $_GET["idLicencie"];
 
     // recuperer les infos selon l'id
-    $info = $db->prepare("SELECT licencie.nom FROM licencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.idLicencie = ? AND licencie.COSU = 0");
+    $info = $db->prepare("SELECT licencie.nom, licencie.prenom, tel.tel FROM licencie INNER JOIN tel ON licencie.idLicencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.idLicencie = ? AND licencie.COSU = 0");
     $info->bindValue(1, $idLicencie);
     $info->execute();
     if ($info->rowCount() > 0) { //verifier si la requete nous renvoies des infos, sinon : le licenciés est supprimé ou n'existe pas
         $getinfo = $info->fetch(PDO::FETCH_ASSOC);
-        $lastname_licencie = $getinfo["nom"];
+        $tel_licencie = $getinfo["tel"];
+        $firstname_licencie = $getinfo["prenom"];
     } else {
-        header("location: ./licencies.php");
-        create_flash_message("not_found", "Licencié introuvable.", FLASH_ERROR);
+        header("location: ./message.php");
+        create_flash_message("not_found", "Numéro associé à aucun licencié.", FLASH_ERROR);
         exit();
     }
 }
@@ -53,10 +54,10 @@ if (isset($_GET["idLicencie"]) && !empty($_GET["idLicencie"]) && isInteger($_GET
                         <div class="msg-content">
                             <form action="./functions/send-msg.php" method="POST">
                                 <div class="form-add">
-                                    <input name="msg-name" type="text" placeholder="Nom du licencie" <?php if (isset($lastname_licencie)) : echo "value='$lastname_licencie'";
+                                    <input name="msg-tel-licencie" type="text" placeholder="Téléphone" <?php if (isset($tel_licencie)) : echo "value='$tel_licencie'";
                                                                                                         endif; ?> maxlength="10" onkeyup="javascript:nospaces(this)" onkeydown="javascript:nospaces(this)">
 
-                                    <?php if (!isset($lastname_licencie)) : ?>
+                                    <?php if (!isset($tel_licencie)) : ?>
                                         <select name="msg-categorie" id="categorie-licencie">
                                             <option disabled selected>Catégorie</option>
                                             <?php
@@ -89,7 +90,8 @@ if (isset($_GET["idLicencie"]) && !empty($_GET["idLicencie"]) && isInteger($_GET
                                     <?php endif; ?>
                                 </div>
                                 <div class="form-add msg-txtarea">
-                                    <textarea name="msg-content" id="" cols="300" rows="15" placeholder="Message...">Bonjour,&#13;&#10;Cordialement, <?= htmlspecialchars($_SESSION['prenom']); ?> <?= htmlspecialchars($_SESSION['nom']); ?></textarea>
+                                    <textarea name="msg-content" id="" cols="300" rows="15" placeholder="Message...">Bonjour<?php if (isset($tel_licencie)) : echo " " . $firstname_licencie;
+                                                                                                                            endif; ?>,&#13;&#10;&#13;&#10;Cordialement, <?= htmlspecialchars($_SESSION['prenom']); ?> <?= htmlspecialchars($_SESSION['nom']); ?></textarea>
                                 </div>
                                 <div class="form-add msg-content-button">
                                     <?php if (isset($idLicencie)) : ?>

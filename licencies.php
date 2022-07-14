@@ -178,8 +178,8 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                                                         endif; ?>
                                                     </td>
                                                     <td class="action-btns">
-                                                        <a href="#" onclick="">
-                                                            <i class=" fa fa-phone"></i>
+                                                        <a href="./message.php?idLicencie=<?= $LIC["idLicencie"] ?>">
+                                                            <i class="fa fa-phone"></i>
                                                         </a>
                                                     </td>
                                                     <td class="action-btns btns-1">
