@@ -611,7 +611,6 @@ tbody tr:hover {
     padding: 20px;
     width: 50%;
     background: white;
-    box-shadow: 3px 3px 30px #d6d6d6, -3px -3px 30px #ffffff;
     border-radius: 20px;
     height: auto;
 }
