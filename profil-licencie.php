@@ -9,6 +9,73 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
     header("location: index.php");
 }
 
+//verifier si l'id est défini dans l'url pour afficher le licencie en question et si c'est bien un entier
+if (isset($_GET["idLicencie"]) && !empty($_GET["idLicencie"]) && isInteger($_GET["idLicencie"])) {
+    $idLicencie = $_GET["idLicencie"];
+    if (is_admin()) :
+        $info = $db->prepare("SELECT licencie.nom, licencie.prenom, licencie.dateN, licencie.mail, licencie.sexe, categorie.nomCategorie FROM licencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.idLicencie = ? AND licencie.COSU = 0");
+        $info->bindValue(1, $idLicencie);
+    else :
+        $info = $db->prepare("SELECT licencie.nom, licencie.prenom, licencie.dateN, licencie.mail, licencie.sexe, categorie.nomCategorie FROM licencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorie.idCategorie = categorieeduc.idCategorie WHERE licencie.idLicencie = ? AND categorieeduc.idEduc = ? AND licencie.COSU = 0");
+        $info->bindValue(1, $idLicencie);
+        $info->bindValue(2, $_SESSION['id']);
+    endif;
+    $info->execute();
+    if ($info->rowCount() > 0) { //Verifier si la requete de recupération des infos nous renvoient les infos.
+
+        //recuperation des infos
+        $getinfo = $info->fetch(PDO::FETCH_ASSOC);
+        $firstname_licencie = $getinfo["prenom"];
+        $lastname_licencie = $getinfo["nom"];
+        $dateN_licencie = $getinfo["dateN"];
+        $mail_licencie = $getinfo["mail"];
+        $sexe_licencie = $getinfo["sexe"];
+        $category_licencie = $getinfo["nomCategorie"];
+
+
+        //recuperer le telephone
+        $getTel = $db->prepare("SELECT tel.tel FROM tel WHERE tel.idLicencie = ? AND tel.COSU = 0");
+        $getTel->bindValue(1, $idLicencie);
+        $getTel->execute();
+        if ($getTel->rowCount() > 0) :
+            $result_getTel = $getTel->fetch(PDO::FETCH_ASSOC);
+            $tel_licencie = $result_getTel["tel"];
+        endif;
+
+        //recuperer la taille
+        $getTaille = $db->prepare("SELECT taille.nom FROM taille INNER JOIN licencie ON licencie.idTaille = taille.idTaille WHERE licencie.idLicencie = ? AND licencie.COSU = 0");
+        $getTaille->bindValue(1, $idLicencie);
+        $getTaille->execute();
+        if ($getTaille->rowCount() > 0) :
+            $result_getTaille = $getTaille->fetch(PDO::FETCH_ASSOC);
+            $taille_licencie = $result_getTaille["nom"];
+        endif;
+
+        //recupérer le lien de la photo
+        $getPhoto = $db->prepare("SELECT photo.imgPath FROM photo INNER JOIN licencie ON licencie.idPhoto = photo.idPhoto WHERE licencie.idLicencie = ? AND photo.cosu = 0");
+        $getPhoto->bindValue(1, $idLicencie);
+        $getPhoto->execute();
+        if ($getPhoto->rowCount() > 0) :
+            $result_getPhoto = $getPhoto->fetch(PDO::FETCH_ASSOC);
+            $url_photo = $result_getPhoto["imgPath"];
+        endif;
+    } else {
+        if (is_educ()) { //Aucun licenciés trouvés dans sa/ses catégories.
+            header("location: ./licencies.php");
+            create_flash_message("not_found", "Licencié introuvable dans vos catégories.", FLASH_ERROR);
+            exit();
+        } else {
+            header("location: ./licencies.php");
+            create_flash_message("not_found", "Licencié introuvable.", FLASH_ERROR);
+            exit();
+        }
+    }
+} else {
+    header("location: ./licencies.php");
+    create_flash_message("modif_error", "Une erreur est survenue, Veuillez réessayer.", FLASH_ERROR);
+    exit();
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -20,73 +87,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
 <body>
     <?php if (is_logged()) : ?>
         <div class="content">
-            <?php include('./components/header.php');
-            //verifier si l'id est défini dans l'url pour afficher le licencie en question et si c'est bien un entier
-            if (isset($_GET["idLicencie"]) && !empty($_GET["idLicencie"]) && isInteger($_GET["idLicencie"])) {
-                $idLicencie = $_GET["idLicencie"];
-                if (is_admin()) :
-                    $info = $db->prepare("SELECT licencie.nom, licencie.prenom, licencie.dateN, licencie.mail, licencie.sexe, categorie.nomCategorie FROM licencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie WHERE licencie.idLicencie = ? AND licencie.COSU = 0");
-                    $info->bindValue(1, $idLicencie);
-                else :
-                    $info = $db->prepare("SELECT licencie.nom, licencie.prenom, licencie.dateN, licencie.mail, licencie.sexe, categorie.nomCategorie FROM licencie INNER JOIN categorie ON licencie.idCategorie = categorie.idCategorie INNER JOIN categorieeduc ON categorie.idCategorie = categorieeduc.idCategorie WHERE licencie.idLicencie = ? AND categorieeduc.idEduc = ? AND licencie.COSU = 0");
-                    $info->bindValue(1, $idLicencie);
-                    $info->bindValue(2, $_SESSION['id']);
-                endif;
-                $info->execute();
-                if ($info->rowCount() > 0) { //Verifier si la requete de recupération des infos nous renvoient les infos.
-
-                    //recuperation des infos
-                    $getinfo = $info->fetch(PDO::FETCH_ASSOC);
-                    $firstname_licencie = $getinfo["prenom"];
-                    $lastname_licencie = $getinfo["nom"];
-                    $dateN_licencie = $getinfo["dateN"];
-                    $mail_licencie = $getinfo["mail"];
-                    $sexe_licencie = $getinfo["sexe"];
-                    $category_licencie = $getinfo["nomCategorie"];
-
-
-                    //recuperer le telephone
-                    $getTel = $db->prepare("SELECT tel.tel FROM tel WHERE tel.idLicencie = ? AND tel.COSU = 0");
-                    $getTel->bindValue(1, $idLicencie);
-                    $getTel->execute();
-                    if ($getTel->rowCount() > 0) :
-                        $result_getTel = $getTel->fetch(PDO::FETCH_ASSOC);
-                        $tel_licencie = $result_getTel["tel"];
-                    endif;
-
-                    //recuperer la taille
-                    $getTaille = $db->prepare("SELECT taille.nom FROM taille INNER JOIN licencie ON licencie.idTaille = taille.idTaille WHERE licencie.idLicencie = ? AND licencie.COSU = 0");
-                    $getTaille->bindValue(1, $idLicencie);
-                    $getTaille->execute();
-                    if ($getTaille->rowCount() > 0) :
-                        $result_getTaille = $getTaille->fetch(PDO::FETCH_ASSOC);
-                        $taille_licencie = $result_getTaille["nom"];
-                    endif;
-
-                    //recupérer le lien de la photo
-                    $getPhoto = $db->prepare("SELECT photo.imgPath FROM photo INNER JOIN licencie ON licencie.idPhoto = photo.idPhoto WHERE licencie.idLicencie = ? AND photo.cosu = 0");
-                    $getPhoto->bindValue(1, $idLicencie);
-                    $getPhoto->execute();
-                    if ($getPhoto->rowCount() > 0) :
-                        $result_getPhoto = $getPhoto->fetch(PDO::FETCH_ASSOC);
-                        $url_photo = $result_getPhoto["imgPath"];
-                    endif;
-                } else {
-                    if (is_educ()) { //Aucun licenciés trouvés dans sa/ses catégories.
-                        header("location: ./licencies.php");
-                        create_flash_message("not_found", "Licencié introuvable dans vos catégories.", FLASH_ERROR);
-                        exit();
-                    } else {
-                        header("location: ./licencies.php");
-                        create_flash_message("not_found", "Licencié introuvable.", FLASH_ERROR);
-                        exit();
-                    }
-                }
-            } else {
-                header("location: ./licencies.php");
-                create_flash_message("modif_error", "Une erreur est survenue, Veuillez réessayer.", FLASH_ERROR);
-                exit();
-            } ?>
+            <?php include('./components/header.php'); ?>
             <div class="container">
                 <div class="container-content">
                     <?php include "./components/display_error.php"; ?>
