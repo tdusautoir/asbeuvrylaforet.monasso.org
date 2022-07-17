@@ -57,8 +57,6 @@
 
     .add-panel {
         width: 100%;
-        margin-bottom: 30px;
-        box-shadow: none;
     }
 
     .modif-li-short-panel {
@@ -141,12 +139,6 @@
 
     .welcome-admin p {
         font-size: 15px;
-    }
-
-    .add-panel input,
-    .add-panel label,
-    .add-panel select {
-        font-size: 13px;
     }
 
     .modif-li-panel input,
