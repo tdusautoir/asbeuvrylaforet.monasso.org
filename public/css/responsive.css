@@ -213,13 +213,6 @@
 }
 
 @media screen and (max-width:500px) {
-    .li-admin h2 {
-        font-size: 16px;
-    }
-
-    .li-admin li p {
-        font-size: 12px;
-    }
 
     .account-li li {
         text-align: center;

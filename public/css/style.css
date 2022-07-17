@@ -3,26 +3,32 @@
     padding: 0;
 }
 
-/* 
---------------------------------------------------
---------------------PAGE ADMIN--------------------
--------------------------------------------------- 
-*/
+/* -----PAGE ADMINISTRATEUR----- */
 
-/* -----Page administateur Welcome----- */
+/* -----Page administateur Bonjour----- */
 
-.welcome-admin {
+.head-admin {
     margin-top: 20px;
 }
 
-.welcome-admin h1 {
+.head-admin h1 {
     font-size: 25px;
 }
 
-.welcome-admin p {
+.head-admin p {
     font-size: 20px;
     margin-top: 10px;
     padding: 0;
+}
+
+.head-separator {
+    content: '';
+    background: var(--mainColor);
+    width: 50px;
+    height: 8px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 /* -----Page administateur Panel de cases----- */
@@ -62,9 +68,18 @@
 }
 
 .admin-panel a p {
-    font-family: "Montserrat", sans-serif;
     font-size: 16px;
     margin-top: 20px;
+}
+
+.admin-panel-separator {
+    background: var(--mainColor);
+    width: 100px;
+    height: 12px;
+    border-radius: 100px;
+    margin: 0 auto;
+    margin-top: 40px;
+    margin-bottom: 60px;
 }
 
 @media screen and (max-width:700px) {
@@ -84,42 +99,10 @@
 
 }
 
-/* -----Page d'administration Déconnexion----- */
-
-.deconnect {
-    display: flex;
-    justify-content: center;
-    padding-bottom: 30px;
-    width: 100%;
-}
-
-.deconnect a {
-    color: #ffffff !important;
-    border: none;
-    border-radius: 98px;
-    cursor: pointer;
-    letter-spacing: 1px;
-    text-align: center;
-    padding: 16px;
-    font-size: 16px;
-    font-family: "Montserrat", Helvetica, Arial, Lucida, sans-serif;
-    font-weight: 700;
-    text-transform: uppercase;
-    background-color: var(--mainColor);
-    -webkit-transition: all 300ms ease 0ms;
-    -o-transition: all 300ms ease 0ms;
-    transition: all 300ms ease 0ms;
-}
-
-.deconnect a:hover {
-    letter-spacing: 1px;
-    background-color: #000000;
-}
-
 /* -----Page d'administration Liste----- */
-section.panel-down {
+
+.panel-down {
     display: flex;
-    flex-direction: row-reverse;
     margin-bottom: 30px;
 }
 
@@ -127,23 +110,31 @@ section.panel-down {
     width: 50%;
 }
 
-.li-admin h2 {
+.li-admin h2,
+.chartJS h2 {
     font-size: 25px;
 }
 
 .li-admin ul {
-    padding: 1em 2em;
-    list-style: none;
+    padding: 10px 25px;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 20px;
+    height: 100%;
+    overflow-y: auto;
 }
 
 .li-admin li {
-    max-width: 100%;
-    overflow: auto;
     display: flex;
     align-items: center;
-    margin-top: 5px;
+    margin-top: 10px;
+}
+
+.state-indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    content: '';
 }
 
 .li-admin .state-indicator {
@@ -167,7 +158,7 @@ div.chartJS {
     margin: 0 auto;
 }
 
-@media screen and (max-width:747px) {
+@media screen and (max-width:1150px) {
     .li-admin {
         width: 100%;
     }
@@ -176,22 +167,24 @@ div.chartJS {
         width: 100%;
     }
 
-    section.panel-down {
-        flex-direction: column-reverse;
+    div.panel-down {
+        flex-direction: column;
     }
 }
 
 @media screen and (max-width:500px) {
-    .chartJS h2 {
-        font-size: 16px;
+
+    .chartJS h2,
+    .li-admin h2 {
+        font-size: 18px;
+    }
+
+    .li-admin li {
+        font-size: 14px;
     }
 }
 
-/* 
---------------------------------------------------
---------------------PAGE ADDLI--------------------
--------------------------------------------------- 
-*/
+/* -----PAGE AJOUT DE LICECNCIÉ----- */
 
 .add-container {
     display: flex;
@@ -200,11 +193,8 @@ div.chartJS {
     justify-content: center;
 }
 
-/* -----Page d'ajout Liste----- */
-
 .add-panel {
     flex-basis: 50%;
-    /* box-shadow: 3px 3px 30px #d6d6d6, -3px -3px 30px #ffffff; */
 }
 
 .add-panel h1 {
@@ -1089,15 +1079,6 @@ td i.fa.fa-phone:hover {
 #nom-photo-logo {
     color: var(--mainColor);
 }
-
-.state-indicator {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 5px;
-    content: '';
-}
-
 
 #site-logo {
     display: none;

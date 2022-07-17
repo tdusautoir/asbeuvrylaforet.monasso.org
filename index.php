@@ -23,7 +23,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
       <div class="container">
         <div class="container-content">
           <?php include "./components/display_error.php"; ?>
-          <div class="welcome-admin">
+          <div class="head-admin">
             <h1>Bonjour <?= htmlspecialchars($_SESSION['prenom']); ?>,
               <?php if (is_admin()) : ?>
                 <p>Tu es sur l'espace d'administration</p>
@@ -32,7 +32,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
               <?php endif; ?>
             </h1>
           </div>
-          <div class="welcome-separator"></div>
+          <div class="head-separator"></div>
           <div class="admin-panel">
             <?php if (is_admin()) : ?>
               <!-- Afficher ce bouton que si l'utilisateur est admin  -->
@@ -74,48 +74,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             </a>
           </div>
           <div class="admin-panel-separator"></div>
-          <section class="panel-down">
-            <div class="li-admin">
-              <h2>
-                Derniers licenciés ajoutés :
-              </h2>
-              <?php
-              //Appel de la procédure pour lister les 10 derniers licenciés
-              $req = $db->prepare("CALL PRC_TENLIC()");
-              $req->execute();
-              $rowCount = $req->rowCount(); //Compte le nom de ligne retourné par la requête 
-              if ($rowCount > 0) : //S'il y a une ligne donc des licenciés, afficher la liste
-              ?>
-                <ul>
-                  <?php while ($LIC = $req->fetch(PDO::FETCH_ASSOC)) : //Tant qu'il y a des lignes d'informations : les afficher
-                  ?>
-                    <li>
-                      <?php
-                      //Verifier l'etat de la cotisation du licencié afin de déterminer la couleur et le titre
-                      if ($LIC["etat"] == 1) : ?>
-                        <span title="non réglée" class="state-indicator" style="background-color: red;"></span>
-                      <?php elseif ($LIC["etat"] == 2) : ?>
-                        <span title="réglée" class="state-indicator" style="background-color: orange;"></span>
-                      <?php elseif ($LIC["etat"] == 3) : ?>
-                        <span title="non encaissée" class="state-indicator" style="background-color: white; border: 1px solid green;"></span>
-                      <?php elseif ($LIC["etat"] == 4) : ?>
-                        <span title="encaissée" class="state-indicator" style="background-color: green;"></span>
-                      <?php endif;
-                      //Afficher les infomations du licencié ajoutés tout en échappant les données 
-                      ?>
-                      <p><?= htmlspecialchars($LIC["nomCategorie"]) ?> - <a href="./profil-licencie.php?idLicencie=<?= $LIC['idLicencie']; ?>"><?= htmlspecialchars($LIC["prenom"]) . " " . strtoupper(htmlspecialchars($LIC["nom"])) ?></a>
-                        <?php if (isset($LIC["USRCRE"])) : ?>par <span><?= htmlspecialchars($LIC["USRCRE"]) ?> </span></p> <?php endif; ?>
-                    </li>
-                  <?php endwhile; ?>
-                </ul>
-              <?php else :
-                // il n'y a pas d'informations 
-              ?>
-                <p> Aucun licencié n'a encore été créé </p>
-              <?php endif;
-              //Ferme le curseur, permettant à la requête d'être de nouveau exécutée
-              $req->closeCursor(); ?>
-            </div>
+          <div class="panel-down">
             <div class="chartJS">
               <h2>Aperçu du suivi des cotisations :</h2>
               <?php
@@ -185,7 +144,48 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
               <?php endif;
               endif; ?>
             </div>
-          </section>
+            <div class="li-admin">
+              <h2>
+                Derniers licenciés ajoutés :
+              </h2>
+              <?php
+              //Appel de la procédure pour lister les 10 derniers licenciés
+              $req = $db->prepare("CALL PRC_TENLIC()");
+              $req->execute();
+              $rowCount = $req->rowCount(); //Compte le nom de ligne retourné par la requête 
+              if ($rowCount > 0) : //S'il y a une ligne donc des licenciés, afficher la liste
+              ?>
+                <ul>
+                  <?php while ($LIC = $req->fetch(PDO::FETCH_ASSOC)) : //Tant qu'il y a des lignes d'informations : les afficher
+                  ?>
+                    <li>
+                      <?php
+                      //Verifier l'etat de la cotisation du licencié afin de déterminer la couleur et le titre
+                      if ($LIC["etat"] == 1) : ?>
+                        <span title="non réglée" class="state-indicator" style="background-color: red;"></span>
+                      <?php elseif ($LIC["etat"] == 2) : ?>
+                        <span title="réglée" class="state-indicator" style="background-color: orange;"></span>
+                      <?php elseif ($LIC["etat"] == 3) : ?>
+                        <span title="non encaissée" class="state-indicator" style="background-color: white; border: 1px solid green;"></span>
+                      <?php elseif ($LIC["etat"] == 4) : ?>
+                        <span title="encaissée" class="state-indicator" style="background-color: green;"></span>
+                      <?php endif;
+                      //Afficher les infomations du licencié ajoutés tout en échappant les données 
+                      ?>
+                      <p><?= htmlspecialchars($LIC["nomCategorie"]) ?> - <a href="./profil-licencie.php?idLicencie=<?= $LIC['idLicencie']; ?>"><?= htmlspecialchars($LIC["prenom"]) . " " . strtoupper(htmlspecialchars($LIC["nom"])) ?></a>
+                        <?php if (isset($LIC["USRCRE"])) : ?>par <span><?= htmlspecialchars($LIC["USRCRE"]) ?> </span></p> <?php endif; ?>
+                    </li>
+                  <?php endwhile; ?>
+                </ul>
+              <?php else :
+                // il n'y a pas d'informations 
+              ?>
+                <p> Aucun licencié n'a encore été créé </p>
+              <?php endif;
+              //Ferme le curseur, permettant à la requête d'être de nouveau exécutée
+              $req->closeCursor(); ?>
+            </div>
+          </div>
 
           <?php
           //si des cotisations existent et que l'admin ou l'educ sont associés à des catégories : inialisation du camembert
