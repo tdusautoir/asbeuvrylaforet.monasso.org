@@ -36,42 +36,58 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
           <div class="admin-panel">
             <?php if (is_admin()) : ?>
               <!-- Afficher ce bouton que si l'utilisateur est admin  -->
-              <a href="./add-educ.php">
-                <i class="fa fa-plus"></i>
-                <p>Ajouter un &eacute;ducateur</p>
-              </a>
+              <div class="admin-button-hover">
+                <a href="./add-educ.php">
+                  <i class="fa fa-plus"></i>
+                  <p>Ajouter un &eacute;ducateur</p>
+                </a>
+              </div>
             <?php endif; ?>
-            <a href="./add-licencie.php">
-              <i class="fa fa-user-plus"></i>
-              <p>Ajouter un licenci&eacute;</p>
-            </a>
-            <a href="./statistiques.php">
-              <i class="fa fa-bar-chart"></i>
-              <p>Statistiques de la saison</p>
-            </a>
-            <a href="./compte.php">
-              <i class="fa fa-cogs"></i>
-              <p>Mon compte</p>
-            </a>
+            <div class="admin-button-hover">
+              <a href="./add-licencie.php">
+                <i class="fa fa-user-plus"></i>
+                <p>Ajouter un licenci&eacute;</p>
+              </a>
+            </div>
+            <div class="admin-button-hover">
+              <a href="./statistiques.php">
+                <i class="fa fa-bar-chart"></i>
+                <p>Statistiques de la saison</p>
+              </a>
+            </div>
+            <div class="admin-button-hover">
+              <a href="./compte.php">
+                <i class="fa fa-cogs"></i>
+                <p>Mon compte</p>
+              </a>
+            </div>
             <?php if (is_admin()) : ?>
               <!-- Afficher ce bouton que si l'utilisateur est admin  -->
-              <a href="./educateurs.php">
-                <i class="fa fa-user"></i>
-                <p>Gestion des &eacute;ducateurs</p>
-              </a>
+              <div class="admin-button-hover">
+                <a href="./educateurs.php">
+                  <i class="fa fa-user"></i>
+                  <p>Gestion des &eacute;ducateurs</p>
+                </a>
+              </div>
             <?php endif; ?>
-            <a href="./licencies.php">
-              <i class="fa fa-users"></i>
-              <p>Gestion des licenci&eacute;s</p>
-            </a>
-            <a href="./cotisations.php">
-              <i class="fa fa-euro-sign"></i>
-              <p>Suivi des cotisations</p>
-            </a>
-            <a href="./attestation-generator.php">
-              <i class="fa fa-file-invoice"></i>
-              <p>G&eacute;n&eacute;rer une attestation</p>
-            </a>
+            <div class="admin-button-hover">
+              <a href="./licencies.php">
+                <i class="fa fa-users"></i>
+                <p>Gestion des licenci&eacute;s</p>
+              </a>
+            </div>
+            <div class="admin-button-hover">
+              <a href="./cotisations.php">
+                <i class="fa fa-euro-sign"></i>
+                <p>Suivi des cotisations</p>
+              </a>
+            </div>
+            <div class="admin-button-hover">
+              <a href="./attestation-generator.php">
+                <i class="fa fa-file-invoice"></i>
+                <p>G&eacute;n&eacute;rer une attestation</p>
+              </a>
+            </div>
           </div>
           <div class="admin-panel-separator"></div>
           <div class="panel-down">
