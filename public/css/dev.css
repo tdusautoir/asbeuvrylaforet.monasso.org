@@ -22,10 +22,27 @@
   }
 }
 
+@keyframes slideinButton {
+  from {
+    transform: translateX(30%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(O);
+    opacity: 1;
+  }
+}
+
 .stat-btn i {
   transition: 300ms;
 }
 
 .stat-btn:active i {
   transform: rotate(20deg) scale(125%);
+}
+
+.profil-content-tab-button {
+  animation-name: slideinButtons;
+  animation-duration: 2000ms;
+  animation-fill-mode: both;
 }
