@@ -23,7 +23,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
             <div class="container">
                 <div class="container-content">
                     <?php include "./components/display_error.php"; ?>
-
+                    <div class="liste-licencies">
                     <div class="filter">
                         <div>
                             <form method="GET">
@@ -208,6 +208,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
                         <!-- <div class="return deconnect">
                         <a href="index.php">Retour</a>
                     </div> -->
+                    </div>
                     </div>
                 </div>
             </div>

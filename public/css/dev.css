@@ -1,0 +1,48 @@
+.admin-button-hover:hover {
+  transform: translateY(-8px);
+}
+
+.admin-button-hover {
+  transition: 300ms;
+}
+
+.admin-panel {
+  animation-name: fadeinD;
+  animation-duration: 900ms;
+}
+
+@keyframes fadeinD {
+  from {
+    transform: translateY(30%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(O);
+    opacity: 1;
+  }
+}
+
+@keyframes slideinButton {
+  from {
+    transform: translateX(30%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(O);
+    opacity: 1;
+  }
+}
+
+.stat-btn i {
+  transition: 300ms;
+}
+
+.stat-btn:active i {
+  transform: rotate(20deg) scale(125%);
+}
+
+.profil-content-tab-button {
+  animation-name: slideinButtons;
+  animation-duration: 2000ms;
+  animation-fill-mode: both;
+}

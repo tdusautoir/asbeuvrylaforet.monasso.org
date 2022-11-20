@@ -57,8 +57,6 @@
 
     .add-panel {
         width: 100%;
-        margin-bottom: 30px;
-        box-shadow: none;
     }
 
     .modif-li-short-panel {
@@ -143,12 +141,6 @@
         font-size: 15px;
     }
 
-    .add-panel input,
-    .add-panel label,
-    .add-panel select {
-        font-size: 13px;
-    }
-
     .modif-li-panel input,
     .modif-li-panel label,
     .modif-li-panel select {
@@ -213,13 +205,6 @@
 }
 
 @media screen and (max-width:500px) {
-    .li-admin h2 {
-        font-size: 16px;
-    }
-
-    .li-admin li p {
-        font-size: 12px;
-    }
 
     .account-li li {
         text-align: center;

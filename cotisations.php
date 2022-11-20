@@ -8,7 +8,7 @@ if (isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "log
     header("location: index.php");
 }
 
-if (!is_educ() || !is_admin()) {
+if (!(is_educ() || is_admin())) {
     create_flash_message(ERROR_PSWD, "Vous ne possédez pas les droits.", FLASH_ERROR);
     header("location: ./index.php");
     exit();
